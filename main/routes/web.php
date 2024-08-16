@@ -7,8 +7,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 
+//home routing
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
+});
+
+//lgu login route
+Route::get('/lgu-login', function () {
+    return view('login.login-form');
 });
 
 Route::get('/dashboard', function () {
