@@ -80,6 +80,9 @@
         .login-form a:hover {
             background-color: #2563eb;
         }
+        .selection {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -91,19 +94,16 @@
             <a href="/" class="ml-4">Barangay Information Management System</a>
         </div>
         <div class="relative">
-            <button class="text-black font-semibold py-2 px-4 rounded inline-flex items-center">
-                <select name="barangay_id" class="rounded" onchange="redirectToLogin(this)">
+            <button class="text-white py-2 px-4 rounded inline-flex items-center">
+                <select name="barangay_id" class="selection rounded bg-blue-500" onchange="redirectToLogin(this)">
                     <option value="" selected disabled>Barangays</option>
                     @foreach($barangays as $barangay)
                         <option value="{{ url('/barangay-login/'.$barangay->id) }}">{{ $barangay->barangay_name }}</option>
                     @endforeach
                 </select>
             </button>
-            
-
         </div>
     </div>
-
     <div class="content">
         @yield('content')
     </div>
