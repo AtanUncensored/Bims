@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Barangay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,6 +17,12 @@ class BarangayController extends Controller
     public function createUserForm()
     {
         return view('barangay.create_resident');
+    }
+
+    public function showLoginPage($id)
+    {
+        $barangay = Barangay::findOrFail($id);
+        return view('login.barangay-login', compact('barangay'));
     }
 
     public function storeUser(Request $request)

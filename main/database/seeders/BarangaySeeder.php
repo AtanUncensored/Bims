@@ -14,26 +14,11 @@ class BarangaySeeder extends Seeder
     public function run(): void
     {
         DB::table('barangays')->insert([
-            [
-                'logo' => 'logo na',
-                'barangay_name' => 'Bosongon',
-            ],
-            [
-                'logo' => 'logo na',
-                'barangay_name' => 'Talenseras',
-            ],
-            [
-                'logo' => 'logo na',
-                'barangay_name' => 'Cabulijan',
-            ],
-            [
-                'logo' => 'logo na',
-                'barangay_name' => 'Tinangnan',
-            ],
-            [
-                'logo' => 'logo na',
-                'barangay_name' => 'Macaas',
-            ]
+            ['barangay_name' => 'Bosongon', 'background_image' => 'bosongon.jpg', 'logo' => 'bosongon-logo.jpg'],
+            ['barangay_name' => 'Talenseras', 'background_image' => 'talenseras.jpg', 'logo' => 'talenseras-logo.jpg'],
+            ['barangay_name' => 'Cabulijan', 'background_image' => 'Cabulijan.png', 'logo' => 'cabulijan-logo.jpg'],
+            ['barangay_name' => 'Tinangnan', 'background_image' => 'tinangnan.jpg', 'logo' => 'tinangnan-logo.jpg'],
+            ['barangay_name' => 'Macaas', 'background_image' => 'macaas.jpg', 'logo' => 'macaas-logo.jpg']
         ]);
     }
 }

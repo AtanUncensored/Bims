@@ -91,19 +91,16 @@
             <a href="/" class="ml-4">Barangay Information Management System</a>
         </div>
         <div class="relative">
-            <button class="hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                <span>Barangay</span>
-                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
+            <button class="text-black font-semibold py-2 px-4 rounded inline-flex items-center">
+                <select name="barangay_id" class="rounded" onchange="redirectToLogin(this)">
+                    <option value="" selected disabled>Barangays</option>
+                    @foreach($barangays as $barangay)
+                        <option value="{{ url('/barangay-login/'.$barangay->id) }}">{{ $barangay->barangay_name }}</option>
+                    @endforeach
+                </select>
             </button>
-            <ul class="dropdown-menu absolute right-0 hidden text-gray-700 pt-1 bg-white shadow-lg rounded w-full">
-                {{-- <li><a class="rounded-t bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="/cabulijan-login">Cabulijan</a></li>
-                <li><a class="bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="/bosongon-login">Bosongon</a></li>
-                <li><a class="rounded-b bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#">Tinangnan</a></li>
-                <li><a class="bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#">Macaas</a></li>
-                <li><a class="rounded-b bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#">Talenceras</a></li> --}}
-            </ul>
+            
+
         </div>
     </div>
 
@@ -123,6 +120,13 @@
                 dropdown.classList.toggle('show');
             });
         });
+
+        function redirectToLogin(select) {
+        var url = select.value;
+        if (url) {
+            window.location.href = url;
+        }
+     }
     </script>
 </body>
 </html>

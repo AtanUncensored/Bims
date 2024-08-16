@@ -17,6 +17,13 @@ Route::get('/lgu-login', function () {
     return view('login.login-form');
 });
 
+Route::get('/barangay-login', function () {
+    return view('login.barangay-login');
+});
+
+Route::get('/barangay-login/{id}', [BarangayController::class, 'showLoginPage'])->name('barangay.login');
+
+
 Route::get('/dashboard', function () {
     return view('lgu.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
