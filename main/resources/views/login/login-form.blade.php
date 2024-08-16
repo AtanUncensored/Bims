@@ -70,11 +70,22 @@
             border-radius: 15px;
             background-color: rgba(255, 255, 255, 0.8);
         }
-        .login-form label {
-            display: block;
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
             font-size: 1rem;
-            margin-bottom: 10px;
             font-weight: bold;
+            width: 100px;
+            margin-right: 10px;
+        }
+        .form-group input {
+            flex: 1;
+            padding: 4px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
         }
         .login-form a {
             display: block;
@@ -109,16 +120,16 @@
         <div class="login-form">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="mt-4 flex items-center">
-                    <label for="email" class="text-sm font-bold text-start text-gray-700 mb-1">Email:</label>
-                    <input id="email" class="block w-full border-gray-300 dark:border-gray-700 text-black py-1 px-2 shadow-sm" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" />
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" />
                     @error('email')
                         <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="mt-4 flex items-center">
-                    <label for="password" class="text-sm font-bold text-start text-gray-700 mb-1">Password:</label>
-                    <input id="password" class="block w-full border-gray-300 dark:border-gray-700 text-black py-1 px-2 shadow-sm" type="password" name="password" required autocomplete="current-password" />
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" name="password" required autocomplete="current-password" />
                     @error('password')
                         <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
                     @enderror
