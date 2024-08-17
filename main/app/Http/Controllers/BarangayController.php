@@ -13,7 +13,6 @@ class BarangayController extends Controller
     {
         return view('barangay.index');
     }
-
     public function createUserForm()
     {
         return view('barangay.create_resident');
@@ -23,6 +22,7 @@ class BarangayController extends Controller
     {
         $barangay = Barangay::findOrFail($id);
         return view('login.barangay-login', compact('barangay'));
+
     }
 
     public function storeUser(Request $request)

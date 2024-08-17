@@ -26,10 +26,25 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        // Determine if barangay_id is required based on the email domain or user role
+        $rules = [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
         ];
+
+        // Check if the email belongs to a superadmin or not
+        // You can adjust this check according to your actual logic or data source
+        $user = \App\Models\User::where('email', $this->input('email'))->first();
+        
+        if ($user && $user->hasRole('superAdmin')) {
+            // Skip barangay_id validation for superadmin
+            return $rules;
+        }
+
+        // Add barangay_id validation for non-superadmin users
+        $rules['barangay_id'] = ['required', 'exists:barangays,id'];
+        
+        return $rules;
     }
 
     /**

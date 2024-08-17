@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Barangay Dashboard</h1>
+<h1>Barangay</h1>
 <div>
     <a href="{{ route('barangay.create-user') }}" class="barangay-button">Add Resident</a>
 </div>
