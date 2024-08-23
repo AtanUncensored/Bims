@@ -24,8 +24,9 @@ Route::get('/barangay-login', function () {
 Route::get('/barangay-login/{id}', [BarangayController::class, 'showLoginPage'])->name('barangay.login');
 
 
+//Dashboard access dere
 Route::get('/dashboard', function () {
-    return view('lgu.index');
+    return view('lgu.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -39,7 +40,9 @@ Route::middleware('auth')->group(function () {
 
     // LGU (superAdmin) Routes
     Route::middleware(['role:superAdmin'])->group(function () {
-        Route::get('/lgu', [LguController::class, 'index'])->name('lgu.index');
+        Route::get('/lgu', [LguController::class, 'index'])->name('lgu.dashboard');
+        Route::get('/barangays', [LguController::class, 'barangaysList'])->name('lgu.barangays-list');
+        Route::get('/admins', [LguController::class, 'admins'])->name('lgu.admins');
         Route::get('/lgu/create-barangay', [LguController::class, 'createBarangayForm'])->name('lgu.create-barangay');
         Route::post('/lgu/store-barangay', [LguController::class, 'storeBarangay'])->name('lgu.store-barangay');
     });

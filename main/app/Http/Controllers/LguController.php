@@ -11,7 +11,15 @@ class LguController extends Controller
 {
     public function index()
     {
-        return view('lgu.index');
+        return view('lgu.dashboard');
+    }
+    public function barangaysList()
+    {
+        return view('lgu.barangays-list');
+    }
+    public function admins()
+    {
+        return view('lgu.admins');
     }
 
     public function createBarangayForm()

@@ -1,4 +1,10 @@
-@extends('layout')
+@extends('lgu.lgu-template.navigation-bar')
+
+@section('icon')
+    <i class="fas fa-user-shield fa-2x text-black mr-3"></i>
+@endsection
+
+@section('title', 'Barangay Admins')
 
 @section('content')
 <div class="container">
