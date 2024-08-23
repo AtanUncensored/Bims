@@ -30,6 +30,7 @@
             padding: 60px 20px 20px;
             gap: 20px;
             justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
         }
         .logo {
             flex: 1;
@@ -111,9 +112,9 @@
         .login-form a:hover {
             background-color: #2563eb;
         }
-        /* Admin Notice Style */
+    
         .admin-notice {
-            background-color: #e53e3e; /* Red background */
+            background-color: #e96a6a; 
             color: white;
             padding: 10px;
             text-align: center;
