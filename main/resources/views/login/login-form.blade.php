@@ -15,8 +15,6 @@
             font-family: Arial, sans-serif;
         }
         .top-nav {
-            background-color: #f1f5f9;
-            color: #1d4ed8;
             padding: 10px 20px;
             text-align: center;
             font-size: 1.5rem;
@@ -116,7 +114,7 @@
     </style>
 </head>
 <body>
-<div class="top-nav">
+<div class="top-nav bg-blue-500 text-white">
     <a href="/" class="ml-4 text-center">Barangay Information Management System</a>
 </div>
 <div class="content">
@@ -124,12 +122,6 @@
         <img src="{{ asset('images/tubigon-logo.png') }}" alt="LGU logo">
     </div>
     <div class="info-login">
-        <div class="bims">
-            <header>B<span class="text-3xl">ARANGAY</span></header>
-            <header>I<span class="text-3xl">NFORMATION AND</span></header>
-            <header>M<span class="text-3xl">ANAGEMENT</span></header>
-            <header>S<span class="text-3xl">YSTEM</span></header>
-        </div>
         <div class="login-form">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
