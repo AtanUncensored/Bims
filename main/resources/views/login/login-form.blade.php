@@ -111,6 +111,16 @@
         .login-form a:hover {
             background-color: #2563eb;
         }
+        /* Admin Notice Style */
+        .admin-notice {
+            background-color: #e53e3e; /* Red background */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -122,6 +132,10 @@
         <img src="{{ asset('images/tubigon-logo.png') }}" alt="LGU logo">
     </div>
     <div class="info-login">
+        <!-- Admin Notice -->
+        <div class="admin-notice">
+            NOTICE: This is an Admin Login
+        </div>
         <div class="login-form">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
