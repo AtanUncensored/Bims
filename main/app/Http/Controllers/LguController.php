@@ -11,7 +11,13 @@ class LguController extends Controller
 {
     public function index()
     {
-        return view('lgu.dashboard');
+        $barangays = [
+            'Bosongon' => User::where('barangay_id', 1)->count(),
+            'Tinangnan' => User::where('barangay_id', 4)->count(),
+            'Cabulijan' => User::where('barangay_id', 3)->count(),
+        ];
+        
+        return view('lgu.dashboard', compact('barangays'));
     }
     public function barangaysList()
     {

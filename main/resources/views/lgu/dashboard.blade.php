@@ -23,7 +23,7 @@
                 </div>
                 <div class="border-t-2 border-gray-300 my-4"></div>
                 <p class="text-gray-600"> <i class="fas fa-house fa-lg text-blue-800"></i> No. of Residents</p>
-                <header class="flex justify-end text-green-600 text-xl">600</header>
+                <header class="flex justify-end text-green-600 text-xl">{{ $barangays['Bosongon'] }}</header>
             </div>
         </div>
         <div class="w-full md:w-1/3 px-4 mb-4">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="border-t-2 border-gray-300 my-4"></div>
                 <p class="text-gray-600"> <i class="fas fa-house fa-lg text-blue-800"></i> No. of Residents</p>
-                <header class="flex justify-end text-green-600 text-xl">751</header>
+                <header class="flex justify-end text-green-600 text-xl">{{ $barangays['Tinangnan'] }}</header>
             </div>
         </div>
         <div class="w-full md:w-1/3 px-4 mb-4">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="border-t-2 border-gray-300 my-4"></div>
                 <p class="text-gray-600"> <i class="fas fa-house fa-lg text-blue-800"></i> No. of Residents</p>
-                <header class="flex justify-end text-green-600 text-xl">895</header>
+                <header class="flex justify-end text-green-600 text-xl">{{ $barangays['Tinangnan'] }}</header>
             </div>
         </div>
     </div>
