@@ -20,5 +20,37 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('superadmin123')
         ])->assignRole('superAdmin');
+
+        //barangay admin account
+        User::create([
+            'name' => 'bosongon',
+            'email' => 'bosongon@gmail.com',
+            'barangay_id' => 1,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789')
+        ])->assignRole('admin');
+        User::create([
+            'name' => 'cabulijan',
+            'email' => 'cabulijan@gmail.com',
+            'barangay_id' => 3,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789')
+        ])->assignRole('admin');
+
+        //barangay user account
+        User::create([
+            'name' => 'bosongonuser',
+            'email' => 'bosongonuser@gmail.com',
+            'barangay_id' => 1,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789')
+        ])->assignRole('user');
+        User::create([
+            'name' => 'cabulijanuser',
+            'email' => 'cabulijanuser@gmail.com',
+            'barangay_id' => 3,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789')
+        ])->assignRole('user');
     }
 }

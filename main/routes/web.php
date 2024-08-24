@@ -24,10 +24,10 @@ Route::get('/barangay-login', function () {
 Route::get('/barangay-login/{id}', [BarangayController::class, 'showLoginPage'])->name('barangay.login');
 
 
-// //Dashboard access dere
-// Route::get('/dashboard', function () {
-//     return view('lgu.dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+//Dashboard access dere
+Route::get('/dashboard', function () {
+    return view('lgu.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
