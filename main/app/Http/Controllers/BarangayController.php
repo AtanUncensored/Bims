@@ -15,7 +15,7 @@ class BarangayController extends Controller
     }
     public function createUserForm()
     {
-        return view('barangay.create_resident');
+        return view('barangay.crud.create_user_account');
     }
 
     public function showLoginPage($id)

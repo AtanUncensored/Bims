@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('middle_name');
             $table->string('purok');
-            $table->integer('age');
             $table->date('birth_date');
             $table->string('place_of_birth');
             $table->string('gender');
