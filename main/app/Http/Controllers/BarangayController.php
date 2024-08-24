@@ -18,12 +18,15 @@ class BarangayController extends Controller
         return view('barangay.crud.create_user_account');
     }
 
-    public function showLoginPage($id)
+    public function showLoginPage($barangay_name)
     {
-        $barangay = Barangay::findOrFail($id);
+        // Retrieve the barangay by name
+        $barangay = Barangay::where('barangay_name', $barangay_name)->firstOrFail();
+    
+        // Pass the barangay data to the view
         return view('login.barangay-login', compact('barangay'));
-
     }
+    
 
     public function storeUser(Request $request)
     {

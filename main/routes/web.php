@@ -21,7 +21,8 @@ Route::get('/barangay-login', function () {
     return view('login.barangay-login');
 });
 
-Route::get('/barangay-login/{id}', [BarangayController::class, 'showLoginPage'])->name('barangay.login');
+Route::get('/login/{barangay_name}', [BarangayController::class, 'showLoginPage'])->name('barangay.login');
+
 
 
 //Dashboard access dere

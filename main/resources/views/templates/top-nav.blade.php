@@ -98,7 +98,7 @@
                 <select name="barangay_id" class="selection rounded bg-blue-500" onchange="redirectToLogin(this)">
                     <option value="" selected disabled>Barangays</option>
                     @foreach($barangays as $barangay)
-                        <option value="{{ url('/barangay-login/'.$barangay->id) }}">{{ $barangay->barangay_name }}</option>
+                        <option value="{{ url('/login/'.$barangay->barangay_name) }}">{{ $barangay->barangay_name }}</option>
                     @endforeach
                 </select>
             </button>

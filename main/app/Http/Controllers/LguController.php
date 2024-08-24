@@ -11,14 +11,14 @@ class LguController extends Controller
 {
     public function index()
     {
-        $barangays = [
+        // $barangays = [
 
-            'Bosongon' => User::where('barangay_id', 1)->count(),
-            'Tinangnan' => User::where('barangay_id', 4)->count(),
-            'Cabulijan' => User::where('barangay_id', 3)->count(),
-        ];
-        
-        return view('lgu.dashboard', compact('barangays'));
+        //     'Bosongon' => User::where('barangay_id', 1)->count(),
+        //     'Tinangnan' => User::where('barangay_id', 4)->count(),
+        //     'Cabulijan' => User::where('barangay_id', 3)->count(),
+        // ];
+        // return view('lgu.dashboard', compact('barangays'));
+        return view('lgu.dashboard');
     }
     public function barangaysList()
     {
