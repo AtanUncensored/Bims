@@ -12,6 +12,7 @@ class LguController extends Controller
     public function index()
     {
         $barangays = [
+
             'Bosongon' => User::where('barangay_id', 1)->count(),
             'Tinangnan' => User::where('barangay_id', 4)->count(),
             'Cabulijan' => User::where('barangay_id', 3)->count(),
@@ -21,6 +22,8 @@ class LguController extends Controller
     }
     public function barangaysList()
     {
+        $barangays = Barangay::all();
+        
         return view('lgu.barangays-list');
     }
     public function admins()
