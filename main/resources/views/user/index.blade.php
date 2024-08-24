@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('lgu.lgu-template.navigation-bar')
 
 @section('content')
 
