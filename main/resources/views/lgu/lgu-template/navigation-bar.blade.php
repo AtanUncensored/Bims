@@ -30,7 +30,7 @@
     
                 <nav id="main-nav" class="mt-6 space-y-2">
                     <hr class="border-t-2 ml-4 mr-4 border-gray-300">
-                    <a href="{{ url('/dashboard') }}" class="flex items-center space-x-2 text-white px-4 py-2 hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ url('/lgu') }}" class="flex items-center space-x-2 text-white px-4 py-2 hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-house fa-lg text-blue-800"></i>
                         <span>Dashboard</span>
                     </a>
