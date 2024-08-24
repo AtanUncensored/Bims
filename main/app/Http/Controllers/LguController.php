@@ -26,6 +26,52 @@ class LguController extends Controller
         
         return view('lgu.barangays-list');
     }
+
+    public function show(Barangay $barangay)
+    {
+        return view('lgu.barangays-show', compact('barangay'));
+    }
+
+    public function edit(Barangay $barangay) {
+        return view('lgu.barangay-edit', compact('barangay'));
+    }
+
+    public function update(Barangay $barangay, Request $request)
+    {
+        $request->validate([
+            'logo'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'barangay_name'       => 'required|string|max:255',
+            'background_image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+    
+        // Handle file uploads
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('public/images');
+            $barangay->logo = basename($logoPath);
+        }
+    
+        if ($request->hasFile('background_image')) {
+            $backgroundImagePath = $request->file('background_image')->store('public/images');
+            $barangay->background_image = basename($backgroundImagePath);
+        }
+    
+        // Update other fields
+        $barangay->barangay_name = $request->input('barangay_name');
+        
+        $barangay->save();
+    
+        return redirect()->route('lgu.barangays-list')->with('success', 'Barangay updated successfully!');
+    }
+
+    public function destroy(Barangay $barangay)
+    {
+        $barangay->delete();
+
+        return redirect()->route('lgu.barangays-list')->with('success', 'Barangay deleted successfully.');
+    }
+    
+    
+    
     public function admins()
     {
         return view('lgu.admins');

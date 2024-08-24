@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:superAdmin'])->group(function () {
         Route::get('/lgu', [LguController::class, 'index'])->name('lgu.dashboard');
         Route::get('/barangays', [LguController::class, 'barangaysList'])->name('lgu.barangays-list');
+        Route::get('/barangays/{barangay}', [LguController::class, 'show'])->name('lgu.barangays-show');
+        Route::get('/barangays/{barangay}/edit', [LguController::class, 'edit'])->name('lgu.barangays-edit');
+        Route::put('/barangays/{barangay}', [LguController::class, 'update'])->name('lgu.barangays-update');
+        Route::delete('/barangays/{barangay}', [LguController::class, 'destroy'])->name('lgu.barangays-delete');
         Route::get('/admins', [LguController::class, 'admins'])->name('lgu.admins');
         Route::get('/lgu/create-barangay', [LguController::class, 'createBarangayForm'])->name('lgu.create-barangay');
         Route::post('/lgu/store-barangay', [LguController::class, 'storeBarangay'])->name('lgu.store-barangay');
