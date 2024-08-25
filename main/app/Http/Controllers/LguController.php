@@ -41,6 +41,7 @@ class LguController extends Controller
         $request->validate([
             'logo'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'barangay_name'       => 'required|string|max:255',
+            'address'             => 'required|string|max:255',
             'background_image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
     
@@ -57,6 +58,7 @@ class LguController extends Controller
     
         // Update other fields
         $barangay->barangay_name = $request->input('barangay_name');
+        $barangay->address = $request->input('address');
         
         $barangay->save();
     

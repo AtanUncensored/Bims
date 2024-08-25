@@ -14,11 +14,10 @@ class BarangaySeeder extends Seeder
     public function run(): void
     {
         DB::table('barangays')->insert([
-            ['barangay_name' => 'Bosongon', 'background_image' => 'bosongon.jpg', 'logo' => 'bosongon-logo.jpg'],
-            ['barangay_name' => 'Talenceras', 'background_image' => 'talenceras.jpg', 'logo' => 'talenceras-logo.jpg'],
-            ['barangay_name' => 'Cabulijan', 'background_image' => 'Cabulijan.png', 'logo' => 'cabulijan-logo.jpg'],
-            ['barangay_name' => 'Tinangnan', 'background_image' => 'tinangnan.jpg', 'logo' => 'tinangnan-logo.jpg'],
-            ['barangay_name' => 'Macaas', 'background_image' => 'macaas.jpg', 'logo' => 'macaas-logo.jpg']
+            ['barangay_name' => 'Bosongon', 'background_image' => 'bosongon.jpg', 'address' => 'Brgy. Bosongon, Tubigon, Bohol' ,'logo' => 'bosongon-logo.jpg'],
+            ['barangay_name' => 'Talenceras', 'background_image' => 'talenceras.jpg', 'address' => 'Brgy. Talenceras, Tubigon, Bohol', 'logo' => 'talenceras-logo.jpg'],
+            ['barangay_name' => 'Cabulijan', 'background_image' => 'Cabulijan.png', 'address' => 'Brgy. Cabulijan, Tubigon, Bohol' , 'logo' => 'cabulijan-logo.jpg'],
+            ['barangay_name' => 'Tinangnan', 'background_image' => 'tinangnan.jpg', 'address' => 'Brgy. Tinangnan, Tubigon, Bohol', 'logo' => 'tinangnan-logo.jpg'],
         ]);
     }
 }
