@@ -18,7 +18,8 @@
             <div class="w-full md:w-1/3 px-4 mb-4">
                 <div class="bg-white shadow-lg rounded-lg p-6">
                     <div class="flex items-center mb-4">
-                        <!-- Dynamic icon color based on index or other logic -->
+
+                        <!-- para ni sa icon anang dashboard -->
                         @php
                             $iconColors = [
                                 'text-blue-500', 'text-green-500', 'text-red-500', 
@@ -28,12 +29,13 @@
                             ];
                             $iconColor = $iconColors[$loop->index % count($iconColors)];
                         @endphp
+
                         <i class="fas fa-map-marker-alt {{ $iconColor }} text-3xl mr-3"></i>
                         <h2 class="text-xl font-semibold text-gray-800">{{ $barangay->barangay_name }}</h2>
                     </div>
                     <div class="border-t-2 border-gray-300 my-4"></div>
                     <p class="text-gray-600"><i class="fas fa-house fa-lg text-blue-800"></i> No. of Residents</p>
-                    <header class="flex justify-end text-green-600 text-xl">{{ $barangay->users_count }}</header>
+                    <header class="flex justify-end text-green-600 font-bold text-xl">{{ $barangay->users_count }}</header>
                 </div>
             </div>
         @endforeach

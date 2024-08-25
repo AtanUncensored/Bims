@@ -53,6 +53,7 @@
         </div>
 
         <div class="flex-1 flex flex-col">
+
             <!-- para sa Top Navigation Bar  -->
             <nav id="top-nav" class="flex justify-end items-center bg-white shadow-md h-[60px] px-4">
                 @yield('icon')
@@ -62,24 +63,25 @@
                 <div class="flex items-center ml-auto">
                     <h1 class="mr-2 text-2xl font-bold transform scale-y-130">|</h1>    
                 
-                    <div id="user-dropdown" class="relative bg-gray-100 px-4 py-2 rounded-lg shadow-lg flex items-center">
+                    <div id="user-dropdown" class="relative px-4 py-2 rounded-lg flex items-center">
                         <button onclick="toggleDropdown()" class="flex items-center focus:outline-none">
                             <span class="text-gray-600 font-semibold mr-3">{{ Auth::user()->name }}</span>
-                            <img src="https://th.bing.com/th/id/OIP.YWD1p0rXyMKt4EH8DcigCwHaG1?w=196&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="rounded-full w-10 h-10" alt="User Avatar">
+                            <div class="py-1 px-2 bg-black text-white rounded-full">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            
                         </button>
                 
-                        <div id="dropdown-content" class="hidden absolute right-0 mt-20 w-48 bg-white rounded-lg shadow-lg z-10">
+                        <div id="dropdown-content" class="hidden absolute right-0 mt-20 w-[100%] bg-white rounded-lg shadow-lg z-10">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <button type="submit" class="w-full text-left px-4 py-2 text-red-700 hover:bg-gray-100 rounded-lg">
                                     {{ __('Log Out') }}
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
-                
-                            
             </nav>
 
             <!-- Main Content ni dere -->

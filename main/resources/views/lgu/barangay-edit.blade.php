@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="p-6">
-    <h2 class="text-2xl font-bold mb-4">Edit Barangay Details</h2>
+    <h2 class="text-2xl font-bold text-blue-700 mb-4">Edit Barangay Details</h2>
     
     <!-- Edit Form -->
     <form action="{{ route('lgu.barangays-update', $barangay->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6">
@@ -55,7 +55,7 @@
         <!-- Route pa balik sa barangay -->
 
         <div class="mt-6">
-            <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-gray-500 hover:bg-blue-400 py-2 px-4 rounded font-semibold transition">
+            <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-gray-600 hover:bg-gray-500 py-2 px-4 rounded font-semibold transition">
                 Back to List
             </a>
         </div>

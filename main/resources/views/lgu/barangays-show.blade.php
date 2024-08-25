@@ -72,7 +72,7 @@
     <!-- Route pa balik sa barangay -->
 
     <div class="mt-6">
-        <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-gray-500 hover:bg-blue-400 py-2 px-4 rounded font-semibold transition">
+        <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-gray-600 hover:bg-gray-500 py-2 px-4 rounded font-semibold transition">
             Back to List
         </a>
     </div>

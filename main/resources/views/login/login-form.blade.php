@@ -141,6 +141,7 @@
         <img src="{{ asset('images/tubigon-logo.png') }}" alt="LGU logo">
     </div>
     <div class="info-login">
+
         <!-- Admin Notice -->
         <div class="admin-notice">
             NOTICE: This is an Admin Login
@@ -181,6 +182,8 @@
     </div>
 </div>
 @include('templates.footer')
+
+<!-- Password hidden script ni para sa mga d kamao mo type kaayo -->
 
 <script>
     function togglePasswordVisibility() {

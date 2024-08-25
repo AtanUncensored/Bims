@@ -8,17 +8,18 @@
         background-position: center;
     }
     .error-alert {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24; /* Dark red text */
+        background-color: #f8d7da; 
+        color: #721c24; 
         padding: 10px;
         border-radius: 5px;
         margin-bottom: 20px;
-        border: 1px solid #f5c6cb; /* Border color */
+        border: 1px solid #f5c6cb; 
     }
 </style>
 <div class="flex items-center justify-center mt-[100px]">
     <div class="bg-gray-300 p-4 rounded-lg shadow-lg bg-opacity-60 w-full max-w-md">
-        <!-- Display error messages at the top -->
+
+        <!-- Error message ni dere -->
         @if ($errors->any())
             <div class="error-alert">
                 @foreach ($errors->all() as $error)
@@ -51,7 +52,9 @@
                     <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
                 @enderror
             </div>
-            <!-- Hidden input to pass barangay_id -->
+
+            <!-- Login sud sa tagsa tagsang barangay -->
+            
             <input type="hidden" name="barangay_id" value="{{ $barangay->id }}">
             <div class="flex items-center justify-center mt-6">
                 <button type="submit" class="inline-flex items-center font-bold px-4 py-2 bg-blue-600 rounded">
