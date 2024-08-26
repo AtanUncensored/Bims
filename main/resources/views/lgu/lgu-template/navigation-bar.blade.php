@@ -54,14 +54,24 @@
                 <h1 class="text-xl text-gray-600">@yield('title', 'Dashboard')</h1>
     
                 <!--mau nig Logout Form -->
-                <div id="logout-form" class="ml-auto">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="text-blue-500 hover:text-blue-700">
-                            {{ __('Log Out') }}
-                        </button>
-                    </form>
+                <div id="user-dropdown" class="relative ml-auto">
+
+                    <button onclick="toggleDropdown()" class="flex items-center focus:outline-none">
+                        <h1 class="mr-5">|</h1>
+                        <span class="text-gray-600 font-semibold mr-3">{{ Auth::user()->name }}</span>
+                        <img src="https://th.bing.com/th/id/OIP.YWD1p0rXyMKt4EH8DcigCwHaG1?w=196&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7"  class="rounded-full w-10 h-10" alt="User Avatar">
+                    </button>
+                
+                    <div id="dropdown-content" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-10">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                                {{ __('Log Out') }}
+                            </button>
+                        </form>
+                    </div>
                 </div>
+                            
             </nav>
 
             <!-- Main Content ni dere -->
@@ -76,3 +86,11 @@
     </div>
 </body>
 </html>
+
+<script>
+    function toggleDropdown() {
+    var dropdownContent = document.getElementById('dropdown-content');
+    dropdownContent.classList.toggle('hidden');
+}
+
+</script>
