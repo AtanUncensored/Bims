@@ -18,7 +18,8 @@ class LguController extends Controller
         //     'Cabulijan' => User::where('barangay_id', 3)->count(),
         // ];
         // return view('lgu.dashboard', compact('barangays'));
-        return view('lgu.dashboard');
+        $barangays = Barangay::withCount('users')->get();
+        return view('lgu.dashboard', compact('barangays'));
     }
     public function barangaysList()
     {

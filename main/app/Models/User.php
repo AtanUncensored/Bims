@@ -47,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function barangay()
+        {
+            return $this->belongsTo(Barangay::class);
+        }
 }
