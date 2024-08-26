@@ -11,13 +11,6 @@ class LguController extends Controller
 {
     public function index()
     {
-        // $barangays = [
-
-        //     'Bosongon' => User::where('barangay_id', 1)->count(),
-        //     'Tinangnan' => User::where('barangay_id', 4)->count(),
-        //     'Cabulijan' => User::where('barangay_id', 3)->count(),
-        // ];
-        // return view('lgu.dashboard', compact('barangays'));
         $barangays = Barangay::withCount('users')->get();
         return view('lgu.dashboard', compact('barangays'));
     }
@@ -77,7 +70,8 @@ class LguController extends Controller
     
     public function admins()
     {
-        return view('lgu.admins');
+        $adminUsers = User::role('admin')->get();
+        return view('lgu.admins', compact('adminUsers'));
     }
 
     public function createBarangayForm()

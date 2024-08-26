@@ -113,15 +113,23 @@
             background-color: #2563eb;
         }
     
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         .admin-notice {
-            background-color: #e96a6a; 
+            background-color: #e96a6a;
             color: white;
             padding: 10px;
             text-align: center;
             font-weight: bold;
             border-radius: 8px;
             margin-bottom: 15px;
+            animation: blink 1s infinite; 
         }
+
     </style>
 </head>
 <body>
