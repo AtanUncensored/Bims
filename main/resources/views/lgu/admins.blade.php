@@ -31,6 +31,7 @@
                     <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Name</th>
                     <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Email</th>
                     <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Assigned Barangay</th>
+                    <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,15 @@
                     <td class="py-2 px-4 font-semibold border-b border-gray-200">{{ $admin->name }}</td>
                     <td class="py-2 px-4 font-semibold border-b border-gray-200">{{ $admin->email }}</td>
                     <td class="py-2 px-4 font-semibold border-b border-gray-200">{{ $admin->barangay ? $admin->barangay->barangay_name : 'N/A' }}</td>
+                    <td class="py-2 px-4 font-semibold border-b border-gray-200">
+                        <a href="{{ route('lgu.admins-crud.edit-barangay-admin', $admin->id) }}" class="text-black py-1 px-3 bg-blue-500 rounded hover:text-blue-700 hover:bg-gray-400"><i class="fa-solid fa-pen"></i></a>
+
+                        <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"class="text-black py-1 px-3 bg-red-500 rounded hover:text-red-700 hover:bg-gray-400" onclick="return confirm('Are you sure you want to delete this admin?')"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

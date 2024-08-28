@@ -74,6 +74,32 @@ class LguController extends Controller
         return view('lgu.admins', compact('adminUsers'));
     }
 
+    public function editAdmin(User $adminUser)
+    {
+        return view('lgu.admins-crud.edit-barangay-admin', compact('adminUser'));
+    }
+
+    public function updateAdmin(Request $request, User $adminUser)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $adminUser->id,
+            'barangay_id' => 'nullable|exists:barangays,id',
+        ]);
+
+        $adminUser->update($request->all());
+
+        return redirect()->route('lgu.admins')->with('success', 'Barangay Admin updated successfully.');
+    }
+
+    public function destroyAdmin(User $admin)
+    {
+        // Delete the admin user
+        $admin->delete();
+
+        return redirect()->route('lgu.admins')->with('success', 'Barangay Admin deleted successfully.');
+    }
+
     public function createBarangayForm()
     {   
         $barangays = Barangay::all();

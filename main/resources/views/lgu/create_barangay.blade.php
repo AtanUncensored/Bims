@@ -61,17 +61,19 @@
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
-
-        <div class="mb-4">
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Create Barangay</button>
+        <div class="flex justify-between">
+            <div class="mb-4">
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Create Barangay</button>
+            </div>
+            <div class="mb-4">
+                <a href="{{ route('lgu.admins') }}" class="inline-block text-blue-600 hover:bg-blue-200 py-2 px-4 rounded font-semibold transition">
+                    Back to Admins
+                </a>
+            </div>
         </div>
     </form>
 
     <!-- Route back to Barangay admin -->
-    <div class="mt-6">
-        <a href="{{ route('lgu.admins') }}" class="inline-block text-white bg-gray-600 hover:bg-gray-500 py-2 px-4 rounded font-semibold transition">
-            Back to Admins
-        </a>
-    </div>
+
 </div>
 @endsection
