@@ -30,7 +30,6 @@ Route::get('/dashboard', function () {
     return view('lgu.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -41,19 +40,25 @@ Route::middleware('auth')->group(function () {
 
     // LGU (superAdmin) Routes
     Route::middleware(['role:superAdmin'])->group(function () {
+
+        //routes
         Route::get('/lgu', [LguController::class, 'index'])->name('lgu.dashboard');
-        Route::get('/barangays', [LguController::class, 'barangaysList'])->name('lgu.barangays-list');
-        Route::get('/barangays/{barangay}', [LguController::class, 'show'])->name('lgu.barangays-show');
-        Route::get('/barangays/{barangay}/edit', [LguController::class, 'edit'])->name('lgu.barangays-edit');
-        Route::put('/barangays/{barangay}', [LguController::class, 'update'])->name('lgu.barangays-update');
+        Route::put('/barangays/{barangay}', [LguController::class, 'update'])->name('lgu.barangays-update');//route to show edit
+        Route::get('/barangays', [LguController::class, 'barangaysList'])->name('lgu.barangays-list');//route to show barangays
+        Route::get('/barangays/{barangay}', [LguController::class, 'show'])->name('lgu.barangays-show');//route to show baranagay info
+        Route::get('/admins', [LguController::class, 'admins'])->name('lgu.admins');//route to show admins of barangay
+        Route::get('/lgu/create-barangay', [LguController::class, 'createBarangayForm'])->name('lgu.create-barangay');//rotue to show /lgu/store-barangay 
+
+
+        //crud
+        Route::get('/barangays/{barangay}/edit', [LguController::class, 'edit'])->name('lgu.barangays-edit');//edit barangay information
+        Route::post('/lgu/store-barangay-admin', [LguController::class, 'storeBarangayAdmin'])->name('lgu.store-barangay-admin');//create barangay admin
         Route::delete('/barangays/{barangay}', [LguController::class, 'destroy'])->name('lgu.barangays-delete');
-        Route::get('/admins', [LguController::class, 'admins'])->name('lgu.admins');
-        Route::get('/lgu/create-barangay', [LguController::class, 'createBarangayForm'])->name('lgu.create-barangay');
-        Route::post('/lgu/store-barangay', [LguController::class, 'storeBarangay'])->name('lgu.store-barangay');
     });
 
     // Barangay (admin) Routes
     Route::middleware(['role:admin'])->group(function () {
+        Route::get('/barangay-dashboard', [BarangayController::class, 'index'])->name('barangay.dashboard');
         Route::get('/barangay', [BarangayController::class, 'index'])->name('barangay.index');
         Route::get('/barangay/create-user', [BarangayController::class, 'createUserForm'])->name('barangay.create-user');
         Route::post('/barangay/store-user', [BarangayController::class, 'storeUser'])->name('barangay.store-user');

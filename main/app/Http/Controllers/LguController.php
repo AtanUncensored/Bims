@@ -81,7 +81,7 @@ class LguController extends Controller
     }
 
 
-    public function storeBarangay(Request $request)
+    public function storeBarangayAdmin(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:users',

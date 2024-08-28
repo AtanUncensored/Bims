@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="p-4">
-    <h2 class="text-2xl text-green-700 font-bold mb-4">Create Barangay</h2>
+    <h2 class="text-2xl text-green-700 font-bold mb-4">Create Barangay Admin</h2>
     
     <!-- Success message ni dere -->
     @if(session('success'))
@@ -18,7 +18,7 @@
     @endif
 
     <!-- Create Form para sa admin sa kada barangay -->
-    <form method="POST" action="{{ route('lgu.store-barangay') }}" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-4 w-full">
+    <form method="POST" action="{{ route('lgu.store-barangay-admin') }}" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-4 w-full">
         @csrf
 
         <div class="mb-4">

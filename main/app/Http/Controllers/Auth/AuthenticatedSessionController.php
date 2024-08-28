@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
             if ($user->hasRole('superAdmin')) {
                 return redirect()->route('lgu.dashboard');
             } elseif ($user->hasRole('admin')) {
-                return redirect()->route('barangay.index');
+                return redirect()->route('barangay.dashboard');
             } elseif ($user->hasRole('user')) {
                 return redirect()->route('user.index');
             }

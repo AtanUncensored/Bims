@@ -11,7 +11,7 @@ class BarangayController extends Controller
 {
     public function index()
     {
-        return view('barangay.index');
+        return view('barangay.dashboard');
     }
     public function createUserForm()
     {
