@@ -27,8 +27,13 @@
                     <img class="w-[70px] h-[70px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
                     {{-- <h1 class="new-amsterdam-regular text-white text-4xl">BIMS-{{ Auth::user()->barangay_id }}</h1> --}}
                     <div class="flex flex-col">
-                        <h1 class="new-amsterdam-regular text-white text-center text-4xl">BIMS</h1>
-                            <header class="new-amsterdam-regular text-white text-center text-4xl">{{ Auth::user()->barangay->barangay_name }}</header>
+                        <h1 class="text-center text-4xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(232, 232, 232, 0.4); background: linear-gradient(180deg, #e0e0e0, #999999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            BIMS
+                        </h1>
+                        <header class="text-center text-3xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(232, 232, 232, 0.4); background: linear-gradient(180deg, #e0e0e0, #999999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            {{ Auth::user()->barangay->barangay_name }}
+                        </header>
+                        
                     </div>
                 </div>
     

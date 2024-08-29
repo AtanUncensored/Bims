@@ -25,9 +25,7 @@
                 <!-- title ug logo -->
                 <div id="branding" class="flex items-center py-6 space-x-4 ml-4">
                     <img class="w-[70px] h-[70px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
-                    {{-- <h1 class="new-amsterdam-regular text-white text-4xl">BIMS-{{ Auth::user()->barangay_id }}</h1> --}}
-                    {{-- <h1 class="new-amsterdam-regular text-white text-4xl">BIMS-{{ Auth::user()->barangay->barangay_name }}</h1> --}}
-                    <h1 class="new-amsterdam-regular text-white text-4xl">
+                    <h1 class="text-center text-3xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(232, 232, 232, 0.4); background: linear-gradient(180deg, #e0e0e0, #d5d4d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                         BIMS-{{ Auth::user()->barangay ? Auth::user()->barangay->name : 'LGU' }}
                     </h1>
                     
