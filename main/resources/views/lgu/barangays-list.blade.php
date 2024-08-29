@@ -21,7 +21,6 @@
                 <tr>
                     <th class="py-3 px-6 border-b text-center border-gray-300 text-left">Logo</th>
                     <th class="py-3 px-6 border-b text-center border-gray-300 text-left">Barangay Name</th>
-                    <th class="py-3 px-6 border-b text-center border-gray-300 text-left">Address</th>
                     <th class="py-3 px-6 border-b text-center border-gray-300 text-left">Action</th>
                 </tr>
             </thead>
@@ -39,7 +38,6 @@
                     <!-- crud sa barangay -->
                     
                     <td class="py-3 px-6 text-gray-700 font-bold">{{ $barangay->barangay_name }}</td>
-                    <td class="py-3 px-6 text-gray-700 font-semibold">{{ $barangay->address }}</td>
                     <td class="text-gray-700 flex justify-center space-x-2 items-center">
                         <a href="{{ route('lgu.barangays-show', $barangay->id) }}" class="text-white py-1 px-3 bg-gray-600 rounded hover:text-black hover:bg-gray-400"><i class="fa-regular fa-eye"></i></a>
                         <a href="{{ route('lgu.barangays-edit', $barangay->id) }}" class="text-black py-1 px-3 bg-blue-500 rounded hover:text-blue-700 hover:bg-gray-400"><i class="fa-solid fa-pen"></i></a>

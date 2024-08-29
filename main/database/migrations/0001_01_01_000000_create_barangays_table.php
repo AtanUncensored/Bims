@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('barangay_name');
             $table->string('background_image')->nullable();
-            $table->string('address');
             $table->string('logo')->nullable();
             $table->timestamps();
         });
