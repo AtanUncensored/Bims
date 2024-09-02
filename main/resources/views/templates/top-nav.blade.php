@@ -89,7 +89,7 @@
     <div class="top-nav bg-blue-500 text-white py-2 px-4 text-xl flex items-center justify-between">
         <div class="flex items-center">
             <div class="img-logo">
-                <img class="w-[60px] h-[60px] rounded-full" src="{{ asset('images/tubigon-logo.png') }}" alt="LGU logo">
+                <img class="w-[60px] h-[60px] rounded-full" src="{{ asset('images/bims-logo.png') }}" alt="LGU logo">
             </div>
             <a href="/" class="ml-4">Barangay Information Management System</a>
         </div>
