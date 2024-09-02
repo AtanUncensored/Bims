@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barangay Information Management System</title>
     <script src="{{ asset('/js/tailwind.min.js') }}"></script>
-    <link rel="icon" href="{{ asset('images/tubigon-logo.png') }}">
+    <link rel="icon" href="{{ asset('images/bims-logo.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
     
@@ -16,160 +16,134 @@
             font-weight: 400;
             font-style: normal;
         }
-        
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-
-header nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-header nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.important-title {
-    color: #ff3d00; 
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.post-event {
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-
-.post-event a {
-    color: #007bff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.post-event-icon {
-    margin-left: 5px;
-    width: 24px;
-    height: 24px;
-}
-
-.recently-announced {
-    font-size: 14px;
-    margin-bottom: 20px;
-    font-style: italic;
-    color: #888;
-    text-align: center;
-}
-
-.announcements-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.announcement-card {
-    display: flex;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: #f0f0f0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.announcement-image img {
-    width: 200px;
-    height: auto;
-    object-fit: cover;
-}
-
-.announcement-details {
-    padding: 15px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
-    color: #fff;
-}
-
-.announcement-details h3 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.btn-details {
-    align-self: flex-end;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    text-decoration: none;
-    margin-top: 10px;
-}
-
-.btn-details:hover {
-    background-color: #0056b3;
-}
-
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-control,
-.form-control-file {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .important-title {
+            color: #ff3d00; 
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .post-event {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .post-event a {
+            color: #007bff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .post-event-icon {
+            margin-left: 5px;
+            width: 24px;
+            height: 24px;
+        }
+        .recently-announced {
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #888;
+            text-align: center;
+        }
+        .announcements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .announcement-card {
+            display: flex;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .announcement-image img {
+            width: 200px;
+            height: auto;
+            object-fit: cover;
+        }
+        .announcement-details {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        .announcement-details h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .btn-details {
+            align-self: flex-end;
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .btn-details:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-control,
+        .form-control-file {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 
     </style>
 </head>
@@ -181,15 +155,10 @@ header nav ul li a {
                 <!-- title ug logo -->
                 <div id="branding" class="flex items-center py-6 space-x-4 ml-4">
                     <img class="w-[70px] h-[70px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
-                    {{-- <h1 class="new-amsterdam-regular text-white text-4xl">BIMS-{{ Auth::user()->barangay_id }}</h1> --}}
                     <div class="flex flex-col">
-                        <h1 class="text-center text-4xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(232, 232, 232, 0.4); background: linear-gradient(180deg, #e0e0e0, #999999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        <h1 class="text-center text-4xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
                             BIMS
                         </h1>
-                        <header class="text-center text-3xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white; text-shadow: 2px 2px 4px rgba(232, 232, 232, 0.4); background: linear-gradient(180deg, #e0e0e0, #999999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                            {{ Auth::user()->barangay->barangay_name }}
-                        </header>
-                        
                     </div>
                 </div>
     
@@ -200,29 +169,29 @@ header nav ul li a {
                         <span>Dashboard</span>
                     </a>
                     <hr class="border-t-2 ml-4 mr-4 border-gray-300">
-                    <a href="{{ route('announcements.index') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangays*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-users fa-lg text-blue-800"></i>
+                    <a href="{{ route('announcements.index') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-bullhorn text-blue-800"></i>
                         <span>Announcements</span>
                     </a>
                     
-                    <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
+                    <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residents') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span>Residents</span>
                     </a>
-                    <a href="{{ url('/complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
+                    <a href="{{ url('/complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('complaints') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-regular fa-newspaper text-blue-800 font-bold"></i>
                         <span>Complaints</span>
                     </a>
-                    <a href="{{ url('/logs') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
+                    <a href="{{ url('/logs') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('logs') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-list text-blue-800 font-bold"></i>
                         <span>Logs</span>
                     </a>
-                    <a href="{{ url('/reports') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
+                    <a href="{{ url('/reports') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('reports') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-file-lines text-blue-800"></i>
                         <span>Budget Reports</span>
                     </a>
-                    <a href="{{ url('/certificates') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
+                    <a href="{{ url('/certificates') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-certificate text-blue-800"></i>
                         <span>Certificates</span>
                     </a>
                     <button class="text-white py-2 px-4 rounded inline-flex items-center">
@@ -243,7 +212,7 @@ header nav ul li a {
             <!-- para sa Top Navigation Bar  -->
             <nav id="top-nav" class="flex justify-end items-center bg-white shadow-md h-[60px] px-4">
                 @yield('icon')
-                <h1 class="text-xl text-gray-600">@yield('title', 'Dashboard')</h1>
+                <h1 class="text-xl ml-2 text-gray-600"> @yield('title', 'Dashboard')</h1>
     
                 <!--mau nig Logout Form -->
                 <div class="flex items-center ml-auto">

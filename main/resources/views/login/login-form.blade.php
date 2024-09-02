@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LGU Login</title>
-    <link rel="icon" href="{{ asset('images/tubigon-logo.png') }}">
+    <link rel="icon" href="{{ asset('images/bims-logo.png') }}">
     <script src="{{ asset('/js/tailwind.min.js') }}"></script>
     <style>
         body {
