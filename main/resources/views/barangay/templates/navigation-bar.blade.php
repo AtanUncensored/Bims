@@ -9,12 +9,168 @@
     <link rel="icon" href="{{ asset('images/tubigon-logo.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
+    
     <style>
         .new-amsterdam-regular {
             font-family: "New Amsterdam", sans-serif;
             font-weight: 400;
             font-style: normal;
         }
+        
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.important-title {
+    color: #ff3d00; 
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.post-event {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.post-event a {
+    color: #007bff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.post-event-icon {
+    margin-left: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.recently-announced {
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #888;
+    text-align: center;
+}
+
+.announcements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.announcement-card {
+    display: flex;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.announcement-image img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+}
+
+.announcement-details {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+    color: #fff;
+}
+
+.announcement-details h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.btn-details {
+    align-self: flex-end;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.btn-details:hover {
+    background-color: #0056b3;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control,
+.form-control-file {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body class="bg-gray-100">
@@ -44,10 +200,11 @@
                         <span>Dashboard</span>
                     </a>
                     <hr class="border-t-2 ml-4 mr-4 border-gray-300">
-                    <a href="{{ url('/announcements') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangays*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ route('announcements.index') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangays*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span>Announcements</span>
                     </a>
+                    
                     <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-user-shield fa-lg text-blue-800"></i>
                         <span>Residents</span>

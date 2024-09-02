@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LguController;
 use App\Http\Controllers\BarangayController;
@@ -64,6 +65,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/barangay', [BarangayController::class, 'index'])->name('barangay.index');
         Route::get('/barangay/create-user', [BarangayController::class, 'createUserForm'])->name('barangay.create-user');
         Route::post('/barangay/store-user', [BarangayController::class, 'storeUser'])->name('barangay.store-user');
+
+        Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+        Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
+        Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcements.store');
     });
 
     // User Routes
