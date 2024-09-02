@@ -15,13 +15,26 @@
             font-family: Arial, sans-serif;
         }
         .top-nav {
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 1.5rem;
+            padding: 7px 16px;
+            font-size: 1.23rem;
             position: fixed;
             width: 100%;
-            top: 0;
-            left: 0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .top-nav .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .top-nav .title a {
+            color: white;
+            list-style: none;
+            text-decoration: none;
+            margin-left: 14px;
         }
         .content {
             display: flex;
@@ -31,18 +44,6 @@
             gap: 20px;
             justify-content: center;
             background-color: rgba(0, 0, 0, 0.5);
-        }
-        .logo {
-            flex: 1;
-            max-width: 300px;
-            display: flex;
-            justify-content: center;
-        }
-        .logo img {
-            width: 100%;
-            height: auto;
-            max-height: 300px;
-            border-radius: 50%;
         }
         .info-login {
             flex: 2;
@@ -133,12 +134,17 @@
     </style>
 </head>
 <body>
-<div class="top-nav bg-blue-500 text-white">
-    <a href="/" class="ml-4 text-center">Barangay Information Management System</a>
-</div>
+    <div class="top-nav bg-blue-500">
+        <div class="logo">
+            <img src="{{ asset('images/bims-logo.png') }}" alt="BIMS logo">
+        </div>
+        <div class="title">
+            <a href="/">Barangay Information Management System</a>
+        </div>
+    </div>    
 <div class="content">
     <div class="logo">
-        <img src="{{ asset('images/tubigon-logo.png') }}" alt="LGU logo">
+        <img class="rounded-full" src="{{ asset('images/tubigon-logo.png') }}" alt="LGU logo">
     </div>
     <div class="info-login">
 

@@ -8,8 +8,8 @@
 
 @section('content')
 <div class="barangay-admins py-2 px-4">
-    <div id="title" class="py-2 px-4 mt-[15px]">
-        <h1 class="text-2xl font-bold text-blue-600 text-center">Barangay Administrators</h1>
+    <div id="title" class="py-2 px-2 mt-[10px]">
+        <h1 class="text-2xl font-bold text-blue-600">BARANGAY ADMINISTRATORS:</h1>
     </div>
 
     <!-- Separator -->
@@ -28,10 +28,10 @@
         <table class="min-w-full bg-white">
             <thead>
                 <tr>
-                    <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Name</th>
-                    <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Email</th>
-                    <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Assigned Barangay</th>
-                    <th class="py-2 px-4 bg-gray-600 text-white font-bold uppercase text-sm text-left">Actions</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Name</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Email</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Assigned Barangay</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>

@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="barangay-list p-6">
-    <label class="text-2xl font-bold mb-4 block text-gray-600">Barangay List:</label>
+    <label class="text-2xl font-bold mb-4 block text-gray-600">BARANGAY RECORD:</label>
 
     <hr class="border-t-2 border-gray-300">
     <br>
@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @foreach ($barangays as $barangay)
-                <tr class="hover:bg-gray-100 transition duration-300 ease-in-out">
+                <tr class="hover:bg-gray-300 transition duration-300 ease-in-out">
                     <td class="py-3 px-6 flex justify-center text-gray-700">
                         @if ($barangay->logo)
                             <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-12 h-12 object-cover rounded-full">
