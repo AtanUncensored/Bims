@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Budget extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'barangay_id',
+        'item',
+        'cost',
+        'period_from',
+        'period_to',
+    ];
 }
