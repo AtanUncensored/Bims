@@ -2,12 +2,17 @@
 @extends('barangay.templates.navigation-bar')
 
 @section('icon')
-<i class="fa-solid fa-bullhorn"></i>
+<i class="fas fa-users fa-xl"></i>
 @endsection
 
-@section('title', 'Announcements')
+@section('title', 'Residents')
 
 @section('content')
+
+<div class="add-button py-2 px-4 bg-blue-500 text-white rounded">
+    <a href="{{ route('barangay.create-user') }}" class="barangay-button">Add Resident</a>
+</div>
+
 <div class="container">
     <h1>Residents of {{ Auth::user()->barangay->name }}</h1>
 
