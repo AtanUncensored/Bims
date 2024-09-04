@@ -44,7 +44,14 @@
         </div>
     </div>
 
-    <div class="table-responsive mt-[70px]">
+    <hr class="border-t-2 mt-3 mb-4 mr-4 border-gray-300">
+
+    <div class="flex items-center justify-between mt-[20px] mb-4">
+        <h1 class="text-2xl font-bold text-gray-800">Barangay Officials</h1>
+        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">Add Official</a>
+    </div>
+
+    <div class="table-responsive">
         <table class="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden">
             <thead class="bg-gray-100 text-gray-700">
                 <tr>
