@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Barangay;
+use App\Models\Resident;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class BarangayController extends Controller
@@ -30,21 +32,33 @@ class BarangayController extends Controller
 
     public function storeUser(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+        // Validate the request data
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'purok' => 'nullable|string|max:255',
+            'birth_date' => 'nullable|date',
+            'place_of_birth' => 'nullable|string|max:255',
+            'gender' => 'nullable|string|max:255',
+            'civil_status' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
+            'citizenship' => 'nullable|string|max:255',
+            'nickname' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255|unique:residents,email',
+            'current_address' => 'nullable|string|max:255',
+            'permanent_address' => 'nullable|string|max:255',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // Get the currently logged-in user's barangay
+        $userBarangayId = Auth::user()->barangay_id;
 
-        $user->assignRole('user'); // Assigning the 'user' role to the created Resident
+        // Create a new resident and associate it with the user's barangay
+        $resident = new Resident($validatedData);
+        $resident->barangay_id = $userBarangayId;
+        $resident->save();
 
-        return redirect()->route('barangay.create-user')->with('success', 'Resident created successfully.');
+        return back()->with('success', 'Resident added successfully.');
     }
 }
 
