@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LguController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BarangayController;
 use App\Http\Controllers\ResidentController;
@@ -69,15 +70,21 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');
 
+        Route::get('/reports', [BudgetController::class, 'index'])->name('barangay.budget-report.index');
+        Route::get('/barangay/create-budgetReport', [BudgetController::class, 'createBudgetReport'])->name('barangay.create-budgetReport');
+        Route::post('/barangay/store-budgetReport', [BudgetController::class, 'storeBudgetReport'])->name('barangay.store-budgetReport');
+        
 
-        Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+
+
+        Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
         Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
-        Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcements.store');
+        Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
     });
 
     // User Routes
     Route::middleware(['role:user'])->group(function () {
-        Route::get('/user', [UserController::class, 'index'])->name('user.index');
+        Route::get('/user', [UserController::class, 'showBudgetReports'])->name('user.index');
     });
 });
 
