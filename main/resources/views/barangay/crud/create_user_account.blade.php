@@ -1,4 +1,4 @@
-@extends('lgu.lgu-template.navigation-bar')
+@extends('barangay.templates.navigation-bar')
 
 @section('content')
 <div class="container">
