@@ -8,13 +8,11 @@
 
 @section('content')
 <div class="barangay-admins py-2 px-4">
-    <div id="title" class="py-2 px-2 mt-[10px]">
+    <div id="title">
         <h1 class="text-2xl font-bold text-blue-600">BARANGAY ADMINISTRATORS:</h1>
     </div>
-
-    <!-- Separator -->
-    <div class="my-4">
-        <hr class="border-t-2 m-[15px] border-gray-300">
+    <div class="my-6">
+        <hr class="border-t-2 border-gray-300">
     </div>
 
     <!-- Create -->

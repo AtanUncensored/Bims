@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="title" class="py-2 px-4 mt-[15px]">
+<div id="title" class="py-2 px-4">
     <h1 class="text-2xl font-bold text-green-600">AVAILABLE BARANGAYS:</h1>
 </div>
 

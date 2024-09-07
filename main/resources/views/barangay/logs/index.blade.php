@@ -10,7 +10,7 @@
     <div class="py-2 px-4">
         <h2 class="text-2xl font-semibold text-green-600">Activity Logs</h2>
 
-        <hr class="border-t-2 mt-3 mb-6 mr-4 border-gray-300">
+        <hr class="border-t-2 mt-3 mb-6 border-gray-300">
 
         <h2 class="text-center text-gray-500 mt-8 text-lg">-Recent Activities-</h2>
     </div>

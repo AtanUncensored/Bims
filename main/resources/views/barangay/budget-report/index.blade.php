@@ -12,7 +12,7 @@
 
     <h2 class="text-2xl font-semibold text-blue-600">Budget Logs</h2>
 
-    <hr class="border-t-2 mt-3 mb-4 mr-4 border-gray-300">
+    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
     <div class="flex justify-between">
         <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>

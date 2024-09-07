@@ -91,7 +91,7 @@
             <div class="img-logo">
                 <img class="w-[60px] h-[60px] rounded-full" src="{{ asset('images/bims-logo.png') }}" alt="LGU logo">
             </div>
-            <a href="/" class="ml-4">Barangay Information Management System</a>
+            <a href="/" class="ml-4 font-bold gap-2 text-3xl">BIMS</a>
         </div>
         <div class="relative">
             <button class="text-white py-2 px-4 rounded inline-flex items-center">

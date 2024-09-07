@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LGU Login</title>
+    <title>Barangay Information Management System</title>
     <link rel="icon" href="{{ asset('images/bims-logo.png') }}">
     <script src="{{ asset('/js/tailwind.min.js') }}"></script>
     <style>
@@ -27,7 +27,7 @@
         }
         .top-nav .logo img {
             width: 60px;
-            height: 60px;
+            height: 61px;
             border-radius: 50%;
         }
         .top-nav .title a {

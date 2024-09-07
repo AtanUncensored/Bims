@@ -9,7 +9,7 @@
 <div class="records py-2 px-4">
     <h1 class="text-2xl font-bold text-gray-800">Barangay Records</h1>
 
-    <hr class="border-t-2 mt-3 mb-4 mr-4 border-gray-300">
+    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
     <div class="flex justify-between mb-4">
      

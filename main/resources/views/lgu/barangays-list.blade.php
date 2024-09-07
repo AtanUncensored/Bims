@@ -7,8 +7,8 @@
 @section('title', 'Barangays')
 
 @section('content')
-<div class="barangay-list p-6">
-    <label class="text-2xl font-bold mb-4 block text-gray-600">BARANGAY RECORD:</label>
+<div class="barangay-list py-2 px-4">
+    <label class="text-2xl font-bold mb-6 block text-gray-600">BARANGAY RECORD:</label>
 
     <hr class="border-t-2 border-gray-300">
     <br>
