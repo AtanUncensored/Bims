@@ -7,7 +7,7 @@
 @section('title', 'Announcements')
 
 @section('content')
-<div class="container mx-auto">
+<div class="py-2 px-4">
     <h2 class="important-title text-2xl font-bold mb-6">Important Announcements</h2>
 
     <hr class="border-t-2 mb-4 border-gray-300">

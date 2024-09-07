@@ -5,6 +5,9 @@ use App\Http\Controllers\LguController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BarangayController;
 use App\Http\Controllers\ResidentController;
@@ -63,23 +66,34 @@ Route::middleware('auth')->group(function () {
 
     // Barangay (admin) Routes
     Route::middleware(['role:admin'])->group(function () {
+
+    //Dashboard
         Route::get('/barangay-dashboard', [BarangayController::class, 'index'])->name('barangay.dashboard');
         Route::get('/barangay', [BarangayController::class, 'index'])->name('barangay.index');
         Route::get('/barangay/create-user', [BarangayController::class, 'createUserForm'])->name('barangay.create-user');
         Route::post('/barangay/store-user', [BarangayController::class, 'storeUser'])->name('barangay.store-user');
-
+    
+    //Residents
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');
 
+    //Budget Reports
         Route::get('/reports', [BudgetController::class, 'index'])->name('barangay.budget-report.index');
         Route::get('/barangay/create-budgetReport', [BudgetController::class, 'createBudgetReport'])->name('barangay.create-budgetReport');
         Route::post('/barangay/store-budgetReport', [BudgetController::class, 'storeBudgetReport'])->name('barangay.store-budgetReport');
-        
-
-
-
+    
+    //Announcements
         Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
         Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
+
+    //Complaints
+        Route::get('/complaints', [ComplaintController::class, 'index'])->name('complaints.index');
+
+    //Logs
+        Route::get('/logs', [LogController::class, 'index'])->name('logs.index');
+
+    //Certificates
+        Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
     });
 
     // User Routes

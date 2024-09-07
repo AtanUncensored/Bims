@@ -169,7 +169,7 @@
                         <span>Dashboard</span>
                     </a>
                     <hr class="border-t-2 ml-4 mr-4 border-gray-300">
-                    <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements/show') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fa-solid fa-bullhorn text-blue-800"></i>
                         <span>Announcements</span>
                     </a>
