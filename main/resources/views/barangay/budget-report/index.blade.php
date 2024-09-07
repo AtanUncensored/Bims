@@ -1,4 +1,3 @@
-
 @extends('barangay.templates.navigation-bar')
 
 @section('icon')
@@ -11,50 +10,47 @@
 
 <div class="py-2 px-4">
 
-    <div class="flex justify-end">
-        <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
-    </div>
-
     <h2 class="text-2xl font-semibold text-blue-600">Budget Logs</h2>
 
     <hr class="border-t-2 mt-3 mb-4 mr-4 border-gray-300">
 
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-between">
+        <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
+
         <a href="{{ route('barangay.create-budgetReport') }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition">
-            <span><i class="fa-solid fa-file-lines fa-xl"></i> Add New</span>
+            <span><i class="fa-solid fa-plus"></i> Add Expense</span>
         </a>
     </div>
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if ($budgetReports->isEmpty())
-        <p class="text-gray-500">-No budget reports available for this barangay-</p>
-    @else
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Cost</th>
-                    <th>Period From</th>
-                    <th>Period To</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($budgetReports as $report)
+    <div class="container mx-auto px-4">
+        @if(session('success'))
+            <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">{{ session('success') }}</div>
+        @endif
+    
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 bg-white shadow-lg rounded-lg">
+                <thead class="bg-gray-50">
                     <tr>
-                        <td>{{ $report->item }}</td>
-                        <td>{{ $report->cost }}</td>
-                        <td>{{ $report->period_from }}</td>
-                        <td>{{ $report->period_to }}</td>
+                        <th class="py-2 px-4 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Expense used</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Cost</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">DateTime</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($budgetReports as $report)
+                        <tr class="hover:bg-gray-100 transition">
+                            <td class="px-4 py-2 whitespace-nowrap">{{ $report->item }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->cost }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->period_from }} -- {{ $report->period_to }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="text-end mt-3">
+                <p class="font-semibold text-gray-700">Total Expenses:<span class="text-red-500">₱----</span></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

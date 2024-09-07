@@ -60,7 +60,10 @@
 
     <div class="flex items-center justify-between mt-[20px] mb-4">
         <h1 class="text-2xl font-bold text-gray-800">Barangay Officials</h1>
-        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">Add Official</a>
+            <a href="{{ route('barangay.create-user') }}" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add Officials</span>
+            </a>
     </div>
 
     <div class="table-responsive">

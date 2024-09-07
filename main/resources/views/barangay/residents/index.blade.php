@@ -8,10 +8,6 @@
 
 @section('content')
 <div class="py-2 px-4">
-    <div class="flex justify-end">
-        <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
-    </div>
-
     <h2 class="text-2xl text-green-600 font-semibold">List of Residents Available</h2>
     
     <div class="text-center">
@@ -24,10 +20,11 @@
         </form>
     </div>
     
-    <!-- Add Resident Button -->
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-between mb-4">
+        <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
+
         <a href="{{ route('barangay.create-user') }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition">
-            <i class="fa-solid fa-user-plus fa-xl"></i>
+            <i class="fa-solid fa-plus"></i>
             <span>Add Resident</span>
         </a>
     </div>
