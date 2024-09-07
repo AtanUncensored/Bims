@@ -34,7 +34,7 @@
             <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">{{ session('success') }}</div>
         @endif
     
-        <div class="overflow-x-auto">
+        <div class="max-h-[45vh] overflow-y-auto">
             <table class="min-w-full divide-y divide-gray-200 bg-white shadow-lg rounded-lg">
                 <thead class="bg-gray-50">
                     <tr>

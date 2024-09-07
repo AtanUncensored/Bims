@@ -28,7 +28,7 @@
         <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">{{ session('success') }}</div>
     @endif --}}
     
-    <div class="overflow-x-auto">
+    <div class="max-h-[40vh] overflow-y-auto">
         <table class="min-w-full divide-y divide-gray-200 bg-white shadow-lg rounded-lg">
             <thead class="bg-gray-50">
                 <tr>
@@ -40,6 +40,69 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 {{-- @forelse ($residents as $resident) --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
+                        <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap">The checking of attendance caused the long queue</td>
+                        <td class="px-4 py-2 whitespace-nowrap text-sm text-center font-medium space-x-2">
+                            <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                            <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                        </td>
+                    </tr>
                     <tr class="hover:bg-gray-100 transition">
                         <td class="px-4 py-2 whitespace-nowrap">2023-11-02</td>
                         <td class="px-4 py-2 whitespace-nowrap">Long Queue</td>

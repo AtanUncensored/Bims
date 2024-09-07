@@ -27,7 +27,7 @@
             <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">{{ session('success') }}</div>
         @endif
     
-        <div class="overflow-x-auto">
+        <div class="max-h-[45vh] overflow-y-auto">
             <table class="min-w-full divide-y divide-gray-200 bg-white shadow-lg rounded-lg">
                 <thead class="bg-gray-50">
                     <tr>
@@ -41,14 +41,14 @@
                         <tr class="hover:bg-gray-100 transition">
                             <td class="px-4 py-2 whitespace-nowrap">{{ $report->item }}</td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->cost }}</td>
-                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->period_from }} -- {{ $report->period_to }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->period_from }} | {{ $report->period_to }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="text-end mt-3">
-                <p class="font-semibold text-gray-700">Total Expenses:<span class="text-red-500">₱----</span></p>
-            </div>
+        </div>     
+        <div class="text-end mt-3">
+            <p class="font-semibold text-gray-700">Total Expenses:<span class="text-red-500">₱----</span></p>
         </div>
     </div>
 </div>

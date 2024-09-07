@@ -17,10 +17,11 @@
         <a href="{{ route('announcements.create') }}" class="btn btn-primary mb-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Post event details here</a>
     @endif
 
-    <h2 class="text-center text-gray-500 mt-8 mb-6 text-lg">-Recently Announced-</h2>
+    <h2 class="text-center text-gray-500 mb-2 text-lg">-Recently Announced-</h2>
 
     <!-- Display announcements -->
-    @if($announcements->count())
+    <div class="max-h-[55vh] overflow-y-auto">
+        @if($announcements->count())
         <div class="space-y-6"> <!-- Use space-y to add vertical spacing between cards -->
             @foreach($announcements as $announcement)
                 <div class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-4xl mx-auto"> <!-- Max width set to large and centered -->
@@ -43,8 +44,9 @@
         <div class="pagination mt-6">
             {{ $announcements->links() }}
         </div>
-    @else
-        <p class="text-center text-gray-500 mt-10">No announcements found.</p>
-    @endif
+        @else
+            <p class="text-center text-gray-500 mt-10">No announcements found.</p>
+        @endif
+    </div>
 </div>
 @endsection

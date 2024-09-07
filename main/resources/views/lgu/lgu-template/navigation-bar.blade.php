@@ -26,7 +26,7 @@
                 <div id="branding" class="flex items-center py-6 space-x-4 ml-5">
                     <img class="w-[70px] h-[70px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
                     <h1 class="text-3xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
-                        BIMS-{{ Auth::user()->barangay ? Auth::user()->barangay->name : 'LGU' }}
+                        BIMS
                     </h1> 
                 </div>
     
