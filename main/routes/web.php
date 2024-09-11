@@ -103,7 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
 
         //Announcements
-        Route::get('/announcements', [AnnouncementController::class, 'userIndex'])->name('announcements.index');
+        Route::get('/announcements', [AnnouncementController::class, 'userIndex'])->name('user.announcement.index');
 
         //BudgetReports
         Route::get('/budget-reports', [BudgetController::class, 'userIndex'])->name('user.budget-report.index');
