@@ -20,6 +20,18 @@ class BudgetController extends Controller
         return view('barangay.budget-report.index', ['budgetReports' => $budgetReports]);
     }
 
+    public function userIndex()
+    {
+        // Get the currently logged-in user's barangay
+        $userBarangayId = Auth::user()->barangay_id;
+
+        // Fetch budget reports belonging to the user's barangay
+        $budgetReports = Budget::where('barangay_id', $userBarangayId)->get();
+
+        // Return the view with the budget reports for the user
+        return view('user.budget-report.index', ['budgetReports' => $budgetReports]);
+    }
+
     public function createBudgetReport() {
         return view('barangay.budget-report.create_budget_report');
     }

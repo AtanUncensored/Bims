@@ -98,7 +98,18 @@ Route::middleware('auth')->group(function () {
 
     // User Routes
     Route::middleware(['role:user'])->group(function () {
-        Route::get('/user', [UserController::class, 'showBudgetReports'])->name('user.index');
+
+        //Dashboard
+        Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
+
+        //Announcements
+        Route::get('/announcements', [AnnouncementController::class, 'userIndex'])->name('announcements.index');
+
+        //BudgetReports
+        Route::get('/budget-reports', [BudgetController::class, 'userIndex'])->name('user.budget-report.index');
+
+        //Complaints
+        Route::get('/user-complaints', [ComplaintController::class, 'userIndex'])->name('user.complaint.index');
     });
 });
 

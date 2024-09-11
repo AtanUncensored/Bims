@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
             } elseif ($user->hasRole('admin')) {
                 return redirect()->route('barangay.dashboard');
             } elseif ($user->hasRole('user')) {
-                return redirect()->route('user.index');
+                return redirect()->route('user.dashboard');
             }
 
             return redirect()->intended('/');

@@ -18,6 +18,14 @@ class AnnouncementController extends Controller
         return view('barangay.announcement.index', compact('announcements'));
     }
     
+    public function userIndex()
+    {
+        $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
+        ->orderBy('announcement_date', 'desc')
+        ->paginate(10); 
+
+        return view('user.announcement.index', compact('announcements'));
+    }
 
     public function create()
     {

@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    public function index() {
+        return view('user.dashboard');
+    }
+
     public function showBudgetReports()
     {
         // Get the currently logged-in user's barangay

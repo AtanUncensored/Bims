@@ -9,4 +9,8 @@ class ComplaintController extends Controller
     public function index() {
         return view('barangay.complaints.index');
     }
+
+    public function userIndex() {
+        return view('user.complaint.index');
+    }
 }
