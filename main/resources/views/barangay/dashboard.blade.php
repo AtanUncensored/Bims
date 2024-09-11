@@ -53,6 +53,9 @@
 
     <div class="flex items-center justify-between mt-[20px] mb-4">
         <h1 class="text-2xl font-bold text-gray-800">Barangay Officials</h1>
+        <div class="py-2 px-4 bg-blue-500 text-white rounded">
+            <button><i class="fa-solid fa-plus"></i> Add Officials</button>
+        </div>
     </div>
 
     <div class="overflow-x-auto">
