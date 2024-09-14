@@ -13,8 +13,14 @@ class BarangayController extends Controller
 {
     public function index()
     {
-        return view('barangay.dashboard');
+        $totalResidents = Resident::count();
+        $marriedCount = Resident::where('civil_status', 'Married')->count();
+        $seniorCitizensCount = Resident::whereDate('birth_date', '<=', now()->subYears(60))->count();
+        $youthCount = Resident::whereDate('birth_date', '>', now()->subYears(18))->count();
+    
+        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount'));
     }
+    
     public function createUserForm()
     {
         return view('barangay.crud.create_user_account');

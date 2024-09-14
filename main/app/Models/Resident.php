@@ -26,4 +26,9 @@ class Resident extends Model
         'permanent_address',
         'barangay_id',  // Make sure to include the barangay_id as well
     ];
+    
+    public function barangay()
+    {
+        return $this->belongsTo(Barangay::class);
+    }
 }

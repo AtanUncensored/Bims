@@ -154,13 +154,14 @@
             <div>
                 <!-- title ug logo -->
                 <div id="branding" class="flex items-center py-6 space-x-4 ml-4">
-                    <img class="w-[70px] h-[70px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
+                    <img class="w-[70px] h-[70px] rounded-full" src="{{ asset('images/' . Auth::user()->barangay->logo) }}" alt="barangay/lgu logo">
                     <div class="flex flex-col">
                         <h1 class="text-center text-4xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
                             BIMS
                         </h1>
                     </div>
                 </div>
+                
     
                 <nav id="main-nav" class="space-y-2">
                     <hr class="border-t-2 ml-4 mr-4 border-gray-300">

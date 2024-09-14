@@ -9,7 +9,13 @@ class Barangay extends Model
 {
     use HasFactory;
 
-    public function users()
+
+        public function residents()
+        {
+            return $this->hasMany(Resident::class);
+        }
+    
+        public function users()
         {
             return $this->hasMany(User::class);
         }
