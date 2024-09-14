@@ -34,7 +34,7 @@
                         <h2 class="text-xl font-semibold text-gray-800">{{ $barangay->barangay_name }}</h2>
                     </div>
                     <div class="border-t-2 border-gray-300 my-4"></div>
-                    <p class="text-gray-600"><i class="fas fa-house fa-lg text-blue-800"></i> No. of Residents</p>
+                    <p class="text-gray-600"><i class="fas fa-house fa-lg text-blue-800"></i> No. of Users:</p>
                     <header class="flex justify-end text-green-600 font-bold text-xl">{{ $barangay->users_count }}</header>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barangay;
+use App\Models\Resident;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,9 +22,33 @@ class LguController extends Controller
         return view('lgu.barangays-list');
     }
 
-    public function show(Barangay $barangay)
+    public function show($barangayId)
     {
-        return view('lgu.barangays-show', compact('barangay'));
+        // Retrieve barangay
+        $barangay = Barangay::findOrFail($barangayId);
+
+        // Retrieve residents based on the barangay_id
+        $residents = Resident::where('barangay_id', $barangayId)->get();
+
+        // Calculate resident data
+        $totalUsers = $residents->count();
+        $totalMales = $residents->where('gender', 'Male')->count();
+        $totalFemales = $residents->where('gender', 'Female')->count();
+        $totalAdults = $residents->filter(function($resident) {
+            return \Carbon\Carbon::parse($resident->birth_date)->age >= 18;
+        })->count();
+        $totalSeniors = $residents->filter(function($resident) {
+            return \Carbon\Carbon::parse($resident->birth_date)->age >= 60;
+        })->count();
+        $totalYouth = $residents->filter(function($resident) {
+            return \Carbon\Carbon::parse($resident->birth_date)->age >= 15 && \Carbon\Carbon::parse($resident->birth_date)->age < 30;
+        })->count();
+        $totalChildren = $residents->filter(function($resident) {
+            return \Carbon\Carbon::parse($resident->birth_date)->age < 15;
+        })->count();
+
+        // Pass data to the view
+        return view('lgu.barangays-show', compact('barangay', 'totalUsers', 'totalMales', 'totalFemales', 'totalAdults', 'totalSeniors', 'totalYouth', 'totalChildren'));
     }
 
     public function edit(Barangay $barangay) {
