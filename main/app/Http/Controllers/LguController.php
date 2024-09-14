@@ -26,30 +26,45 @@ class LguController extends Controller
     {
         // Retrieve barangay
         $barangay = Barangay::findOrFail($barangayId);
-
+    
         // Retrieve residents based on the barangay_id
         $residents = Resident::where('barangay_id', $barangayId)->get();
-
-        // Calculate resident data
+    
+        // Initialize counters
         $totalUsers = $residents->count();
-        $totalMales = $residents->where('gender', 'Male')->count();
-        $totalFemales = $residents->where('gender', 'Female')->count();
-        $totalAdults = $residents->filter(function($resident) {
-            return \Carbon\Carbon::parse($resident->birth_date)->age >= 18;
-        })->count();
-        $totalSeniors = $residents->filter(function($resident) {
-            return \Carbon\Carbon::parse($resident->birth_date)->age >= 60;
-        })->count();
-        $totalYouth = $residents->filter(function($resident) {
-            return \Carbon\Carbon::parse($resident->birth_date)->age >= 15 && \Carbon\Carbon::parse($resident->birth_date)->age < 30;
-        })->count();
-        $totalChildren = $residents->filter(function($resident) {
-            return \Carbon\Carbon::parse($resident->birth_date)->age < 15;
-        })->count();
-
+        $totalMales = $totalFemales = $totalAdults = $totalSeniors = $totalYouth = $totalChildren = 0;
+    
+        // Loop through residents and calculate the statistics
+        $residents->each(function($resident) use (&$totalMales, &$totalFemales, &$totalAdults, &$totalSeniors, &$totalYouth, &$totalChildren) {
+            // Gender count
+            if ($resident->gender == 'Male') {
+                $totalMales++;
+            } elseif ($resident->gender == 'Female') {
+                $totalFemales++;
+            }
+    
+            // Calculate age once
+            $age = \Carbon\Carbon::parse($resident->birth_date)->age;
+    
+            // Age group calculations
+            if ($age >= 18) {
+                $totalAdults++;
+            }
+            if ($age >= 60) {
+                $totalSeniors++;
+            }
+            if ($age >= 15 && $age < 30) {
+                $totalYouth++;
+            }
+            if ($age < 15) {
+                $totalChildren++;
+            }
+        });
+    
         // Pass data to the view
         return view('lgu.barangays-show', compact('barangay', 'totalUsers', 'totalMales', 'totalFemales', 'totalAdults', 'totalSeniors', 'totalYouth', 'totalChildren'));
     }
+    
 
     public function edit(Barangay $barangay) {
         return view('lgu.barangay-edit', compact('barangay'));
