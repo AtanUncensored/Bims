@@ -13,10 +13,23 @@ class BarangayController extends Controller
 {
     public function index()
     {
-        $totalResidents = Resident::count();
-        $marriedCount = Resident::where('civil_status', 'Married')->count();
-        $seniorCitizensCount = Resident::whereDate('birth_date', '<=', now()->subYears(60))->count();
-        $youthCount = Resident::whereDate('birth_date', '>', now()->subYears(18))->count();
+        // Get the currently authenticated user
+        $user = Auth::user();
+        
+        // Assuming the user model has a `barangay_id` property
+        $barangayId = $user->barangay_id;
+    
+        // Fetch data for the user's barangay
+        $totalResidents = Resident::where('barangay_id', $barangayId)->count();
+        $marriedCount = Resident::where('barangay_id', $barangayId)
+                                ->where('civil_status', 'Married')
+                                ->count();
+        $seniorCitizensCount = Resident::where('barangay_id', $barangayId)
+                                        ->whereDate('birth_date', '<=', now()->subYears(60))
+                                        ->count();
+        $youthCount = Resident::where('barangay_id', $barangayId)
+                               ->whereDate('birth_date', '>', now()->subYears(18))
+                               ->count();
     
         return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount'));
     }
