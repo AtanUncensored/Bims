@@ -15,7 +15,7 @@ class ResidentController extends Controller
         $userBarangayId = Auth::user()->barangay_id;
     
         // Retrieve all residents that belong to the user's barangay
-        $residents = Resident::where('barangay_id', $userBarangayId)->get();
+        $residents = Resident::where('barangay_id', $userBarangayId)->orderBy('last_name')->get();
     
         // Return the view with the residents
         return view('barangay.residents.index', compact('residents'));
