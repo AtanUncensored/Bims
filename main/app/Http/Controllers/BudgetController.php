@@ -56,6 +56,63 @@ class BudgetController extends Controller
         $budgetReport->barangay_id = $userBarangayId;  // Associate report with barangay
         $budgetReport->save();
 
-        return back()->with('success', 'Budget report added successfully.');
+        return redirect()->route('barangay.budget-report.index')->with('success', 'Budget report added successfully.');
     }
+
+    public function editBudgetReport(Budget $budgetReport)
+{
+    // Ensure the budget report belongs to the logged-in user's barangay
+    $userBarangayId = Auth::user()->barangay_id;
+
+    if ($budgetReport->barangay_id !== $userBarangayId) {
+        abort(403, 'Unauthorized action.');
+    }
+
+    // Return the view with the budget report to edit
+    return view('barangay.budget-report.edit_budget_report', ['budgetReport' => $budgetReport]);
+}
+
+public function updateBudgetReport(Request $request, Budget $budgetReport)
+{
+    // Ensure the budget report belongs to the logged-in user's barangay
+    $userBarangayId = Auth::user()->barangay_id;
+
+    if ($budgetReport->barangay_id !== $userBarangayId) {
+        abort(403, 'Unauthorized action.');
+    }
+
+    // Validate the request data
+    $validatedData = $request->validate([
+        'item' => 'required|string|max:255',
+        'cost' => 'required|string|max:255',
+        'period_from' => 'required|date',
+        'period_to' => 'required|date',
+    ]);
+
+    // Update the budget report with the validated data
+    $budgetReport->update($validatedData);
+
+    // Redirect back with a success message
+    return redirect()->route('barangay.budget-report.index')->with('success', 'Budget report updated successfully.');
+}
+
+public function deleteBudgetReport(Budget $budgetReport)
+{
+    // Ensure that the budget report belongs to the current user's barangay
+    $userBarangayId = Auth::user()->barangay_id;
+
+    if ($budgetReport->barangay_id !== $userBarangayId) {
+        return redirect()->back()->withErrors('You are not authorized to delete this budget report.');
+    }
+
+    // Delete the budget report
+    $budgetReport->delete();
+
+    // Redirect back to the index page with a success message
+    return redirect()->route('barangay.budget-report.index')->with('success', 'Budget report deleted successfully.');
+}
+
+
+
+
 }

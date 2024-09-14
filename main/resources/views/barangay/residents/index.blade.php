@@ -53,9 +53,13 @@
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $resident->purok }}</td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $resident->gender }}</td>
                             <td class="px-4 py-2 whitespace-nowrap text-sm font-medium space-x-2 text-center">
-                                <a href="#" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
-                                <a href="#" class="py-2 px-4 text-white rounded bg-green-500 hover:bg-green-700 transition">Edit</a>
-                                <a href="#" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition">Delete</a>
+                                <a href="{{ route('barangay.residents.view', ['resident_id' => $resident->id]) }}" class="py-2 px-4 text-white rounded bg-blue-500 hover:bg-blue-700 transition">View</a>
+                                <a href="{{ route('barangay.residents.edit', ['resident_id' => $resident->id]) }}" class="py-2 px-4 text-white rounded bg-green-500 hover:bg-green-700 transition">Edit</a>
+                                <form action="{{ route('barangay.residents.delete', ['resident_id' => $resident->id]) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="py-2 px-4 text-white rounded bg-red-500 hover:bg-red-700 transition" onclick="return confirm('Are you sure you want to delete this resident?');">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @empty

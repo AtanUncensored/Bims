@@ -79,5 +79,75 @@ class BarangayController extends Controller
 
         return back()->with('success', 'Resident added successfully.');
     }
+
+    public function viewResident($resident_id)
+    {
+        // Find the resident by ID and ensure they belong to the user's barangay
+        $resident = Resident::where('id', $resident_id)
+                            ->where('barangay_id', Auth::user()->barangay_id)
+                            ->firstOrFail();
+    
+        return view('barangay.crud.view_resident', compact('resident'));
+    }
+    
+
+
+    public function editResident($resident_id)
+    {
+        // Find the resident by ID and ensure it belongs to the user's barangay
+        $resident = Resident::where('id', $resident_id)
+                            ->where('barangay_id', Auth::user()->barangay_id)
+                            ->firstOrFail();
+
+        return view('barangay.crud.edit_resident', compact('resident'));
+    }
+
+    public function updateResident(Request $request, $resident_id)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'purok' => 'nullable|string|max:255',
+            'birth_date' => 'nullable|date',
+            'place_of_birth' => 'nullable|string|max:255',
+            'gender' => 'nullable|string|max:255',
+            'civil_status' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
+            'citizenship' => 'nullable|string|max:255',
+            'nickname' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255|unique:residents,email,' . $resident_id,
+            'current_address' => 'nullable|string|max:255',
+            'permanent_address' => 'nullable|string|max:255',
+        ]);
+
+        // Find the resident and ensure it belongs to the user's barangay
+        $resident = Resident::where('id', $resident_id)
+                            ->where('barangay_id', Auth::user()->barangay_id)
+                            ->firstOrFail();
+
+        // Update resident data
+        $resident->update($validatedData);
+
+        return redirect()->route('barangay.residents.index')->with('success', 'Resident updated successfully.');
+    }
+
+    public function deleteResident(Request $request)
+{
+    // Find the resident by ID and ensure they belong to the user's barangay
+    $resident = Resident::where('id', $request->resident_id)
+                        ->where('barangay_id', Auth::user()->barangay_id)
+                        ->firstOrFail();
+
+    // Delete the resident
+    $resident->delete();
+
+    return redirect()->route('barangay.residents.index')->with('success', 'Resident deleted successfully.');
+}
+
+
+
+
 }
 

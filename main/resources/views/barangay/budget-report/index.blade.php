@@ -34,6 +34,7 @@
                         <th class="py-2 px-4 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Expense used</th>
                         <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Cost</th>
                         <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">DateTime</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -42,6 +43,19 @@
                             <td class="px-4 py-2 whitespace-nowrap">{{ $report->item }}</td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->cost }}</td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->period_from }} | {{ $report->period_to }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">
+                                <a href="{{ route('barangay.budget-report.edit', $report->id) }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition">
+                                    <span>Edit</span>
+                                </a>
+                            </td>
+
+                            <td><form action="{{ route('barangay.budget-report.delete', $report->id) }}" method="POST" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="py-2 px-4 bg-red-500 text-white rounded flex items-center space-x-2 hover:bg-red-600 transition" onclick="return confirm('Are you sure you want to delete this budget report?');">
+                                    <span>Delete</span>
+                                </button>
+                            </form></td>
                         </tr>
                     @endforeach
                 </tbody>

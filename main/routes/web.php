@@ -70,16 +70,29 @@ Route::middleware('auth')->group(function () {
     //Dashboard
         Route::get('/barangay-dashboard', [BarangayController::class, 'index'])->name('barangay.dashboard');
         Route::get('/barangay', [BarangayController::class, 'index'])->name('barangay.index');
+        Route::get('barangay/residents/{resident_id}/view', [BarangayController::class, 'viewResident'])->name('barangay.residents.view');
         Route::get('/barangay/create-user', [BarangayController::class, 'createUserForm'])->name('barangay.create-user');
         Route::post('/barangay/store-user', [BarangayController::class, 'storeUser'])->name('barangay.store-user');
+        Route::get('barangay/residents/{resident_id}/edit', [BarangayController::class, 'editResident'])->name('barangay.residents.edit');
+        Route::put('barangay/residents/{resident_id}', [BarangayController::class, 'updateResident'])->name('barangay.residents.update');
+        Route::delete('barangay/residents/{resident_id}', [BarangayController::class, 'deleteResident'])->name('barangay.residents.delete');
+
+
+
     
     //Residents
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');
+
 
     //Budget Reports
         Route::get('/reports', [BudgetController::class, 'index'])->name('barangay.budget-report.index');
         Route::get('/barangay/create-budgetReport', [BudgetController::class, 'createBudgetReport'])->name('barangay.create-budgetReport');
         Route::post('/barangay/store-budgetReport', [BudgetController::class, 'storeBudgetReport'])->name('barangay.store-budgetReport');
+        Route::get('barangay/budget-report/{budgetReport}/edit', [BudgetController::class, 'editBudgetReport'])->name('barangay.budget-report.edit');
+        Route::put('barangay/budget-report/{budgetReport}', [BudgetController::class, 'updateBudgetReport'])->name('barangay.budget-report.update');
+        Route::delete('/barangay/budget-report/{budgetReport}', [BudgetController::class, 'deleteBudgetReport'])->name('barangay.budget-report.delete');
+
+
     
     //Announcements
         Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
