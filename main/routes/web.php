@@ -100,7 +100,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
 
     //Complaints
-        Route::get('/complaints', [ComplaintController::class, 'index'])->name('complaints.index');
+        Route::get('/complaints', [ComplaintController::class, 'barangayComplaints'])->name('barangay.complaints.index');
+        Route::get('/barangay/complaints/{complaint}', [ComplaintController::class, 'viewComplaint'])->name('barangay.complaints.view');
+        Route::post('/barangay/complaints/{complaint}/reply', [ComplaintController::class, 'replyComplaint'])->name('barangay.complaints.reply');
+        Route::get('/barangay/complaints/{complaint}/edit-reply', [ComplaintController::class, 'editReply'])->name('barangay.complaints.edit-reply');
+        Route::put('/barangay/complaints/{complaint}/update-reply', [ComplaintController::class, 'updateReply'])->name('barangay.complaints.update-reply');
+
+
 
     //Logs
         Route::get('/logs', [LogController::class, 'index'])->name('logs.index');
@@ -123,6 +129,10 @@ Route::middleware('auth')->group(function () {
 
         //Complaints
         Route::get('/user-complaints', [ComplaintController::class, 'userIndex'])->name('user.complaint.index');
+        Route::get('/user-complaints/create', [ComplaintController::class, 'create'])->name('user.complaint.create');
+        Route::post('/complaints/store', [ComplaintController::class, 'storeComplaint'])->name('user.complaint.store');
+
+
     });
 });
 
