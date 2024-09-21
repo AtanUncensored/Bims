@@ -57,7 +57,9 @@ class ComplaintController extends Controller
     // View a specific complaint
     public function viewComplaint(Complaint $complaint)
     {
-        return view('barangay.complaints.view', compact('complaint'));
+        $complaint->load('user');
+        
+        return view('barangay.complaints.view', compact('complaint',));
     }
 
     // Reply to a specific complaint

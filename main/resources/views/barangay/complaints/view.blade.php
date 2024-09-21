@@ -13,6 +13,8 @@
     
     <div class="bg-white p-6 rounded-lg shadow-lg">
         <h3 class="text-lg font-semibold text-gray-700 mb-4">Complaint Details</h3>
+        <p><strong>Name:</strong> {{ $complaint->user->name }}</p>
+        <p><strong>Email:</strong> {{ $complaint->user->email }}</p>
         <p><strong>Type:</strong> {{ $complaint->complain_type }}</p>
         <p><strong>Date of Incident:</strong> {{ $complaint->date_of_incident }}</p>
         <p><strong>Details:</strong> {{ $complaint->details }}</p>

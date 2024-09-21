@@ -11,4 +11,9 @@ class Complaint extends Model
 
     protected $fillable = ['complain_type', 'date_of_incident', 'details', 'user_id', 'barangay_id'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }
