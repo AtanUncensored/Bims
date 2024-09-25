@@ -54,7 +54,7 @@
     <div class="flex items-center justify-between mt-[20px] mb-4">
         <h1 class="text-2xl font-bold text-gray-800">Barangay Officials</h1>
         <div class="py-2 px-4 bg-blue-500 text-white rounded">
-            <button><i class="fa-solid fa-plus"></i> Add Officials</button>
+            <button><a href="{{ route('barangay.officials.create')}}">Add Officials</a></button>
         </div>
     </div>
 
@@ -66,37 +66,31 @@
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Name</th>
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Position</th>
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Committee</th>
+                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Purok</th>
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Start of Service</th>
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">End of Service</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Static data for officials -->
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 py-2 whitespace-nowrap">John Doe</td>
-                        <td class="px-4 py-2 whitespace-nowrap">Chairman</td>
-                        <td class="px-4 py-2 whitespace-nowrap">Health and Sanitation</td>
-                        <td class="px-4 py-2 whitespace-nowrap">2022-01-01</td>
-                        <td class="px-4 py-2 whitespace-nowrap">2025-12-31</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 py-2 whitespace-nowrap">Jane Smith</td>
-                        <td class="px-4 py-2 whitespace-nowrap">Councilor</td>
-                        <td class="px-4 py-2 whitespace-nowrap">Public Safety</td>
-                        <td class="px-4 py-2 whitespace-nowrap">2021-06-01</td>
-                        <td class="px-4 py-2 whitespace-nowrap">2024-05-31</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 py-2 whitespace-nowrap">Mark Johnson</td>
-                        <td class="px-4 py-2 whitespace-nowrap">Treasurer</td>
-                        <td class="px-4 py-2 whitespace-nowrap">Finance</td>
-                        <td class="px-4 py-2 whitespace-nowrap">2023-02-15</td>
-                        <td class="px-4 py-2 whitespace-nowrap">2026-02-14</td>
-                    </tr>
+                    @foreach($barangayOfficials as $official)
+                        <tr>
+                            <td class="px-6 py-4 text-center">
+                                {{ $official->resident->first_name }} {{ $official->resident->last_name }}
+                            </td>
+                            <td class="px-6 py-4 text-center">{{ $official->position }}</td>
+                            <td class="px-6 py-4 text-center">{{ $official->committee }}</td>
+                            <td class="px-6 py-4 text-center">{{ $official->purok }}</td>
+                            <td class="px-6 py-4 text-center">{{ $official->start_of_service }}</td>
+                            <td class="px-6 py-4 text-center">{{ $official->end_of_service }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    
+    
+    
 </div>
 
 @endsection

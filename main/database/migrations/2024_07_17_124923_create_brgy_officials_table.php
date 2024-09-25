@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('brgy_officials', function (Blueprint $table) {
+        Schema::create('barangay_officials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('resident_id')->constrained()->onDelete('cascade');
+            $table->foreignId('barangay_id')->constrained()->onDelete('cascade');
+            $table->integer('purok')->nullable();
             $table->string('position');
             $table->string('committee');
             $table->date('start_of_service');

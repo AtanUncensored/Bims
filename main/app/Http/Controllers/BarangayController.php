@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Barangay;
 use App\Models\Resident;
 use Illuminate\Http\Request;
+use App\Models\BarangayOfficial;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,8 +31,12 @@ class BarangayController extends Controller
         $youthCount = Resident::where('barangay_id', $barangayId)
                                ->whereDate('birth_date', '>', now()->subYears(18))
                                ->count();
+
+         $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)
+                               ->with('resident') // assuming you have a relationship with Resident
+                               ->get();
     
-        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount'));
+        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials'));
     }
     
     public function createUserForm()
