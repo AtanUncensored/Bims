@@ -24,25 +24,50 @@ Route::get('/lgu-login', function () {
     return view('login.login-form');
 });
 
+//barangay login route
 Route::get('/barangay-login', function () {
     return view('login.barangay-login');
 });
 
+//tagsa ka barangay logins
 Route::get('/login/{barangay_name}', [BarangayController::class, 'showLoginPage'])->name('barangay.login');
 
 
-
-//Dashboard access dere
+/*  Dashboard access dere, pang verification purpose.
+    Gi butangan ug condition para ang iyang access
+    ma sud sa dashboard sa naka assign nga role.  
+                |  |  |
+                V  V  V
+*/
 Route::get('/dashboard', function () {
-    return view('lgu.dashboard');
+    if (auth()->user()->hasRole('superAdmin')) {
+        return view('lgu.dashboard'); // LGU dashboard
+    } elseif (auth()->user()->hasRole('admin')) {
+        return view('barangay.dashboard'); // Barangay admin dashboard
+    } elseif (auth()->user()->hasRole('user')) {
+        return view('user.dashboard'); // Barangay user dashboard
+    } else {
+        abort(403, 'Unauthorized action.'); // No record/role login access
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+/*  Built in routes for login using breeze,not included in our provided acces since we 
+    dont have profile access for each users.
+*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+/*  Dere na ang gi group na role para sa tagsa nilang access.
+    By the way, ang iyang first na route nga ga kuha ug lgu dashboard or admin or user,
+    para na sa access sa iyang Sidebar nga naa sud sa folder kada role
+                |  |  |
+                V  V  V
+*/
 Route::middleware('auth')->group(function () {
 
     // LGU (superAdmin) Routes
@@ -82,9 +107,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/barangay/officials/create', [BarangayOfficialController::class, 'createOfficial'])->name('barangay.officials.create');
         Route::post('/barangay/officials/store', [BarangayOfficialController::class, 'storeOfficial'])->name('barangay.officials.store');
 
-
-
-
     
     //Residents
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');
@@ -98,7 +120,6 @@ Route::middleware('auth')->group(function () {
         Route::put('barangay/budget-report/{budgetReport}', [BudgetController::class, 'updateBudgetReport'])->name('barangay.budget-report.update');
         Route::delete('/barangay/budget-report/{budgetReport}', [BudgetController::class, 'deleteBudgetReport'])->name('barangay.budget-report.delete');
 
-
     
     //Announcements
         Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
@@ -111,8 +132,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/barangay/complaints/{complaint}/reply', [ComplaintController::class, 'replyComplaint'])->name('barangay.complaints.reply');
         Route::get('/barangay/complaints/{complaint}/edit-reply', [ComplaintController::class, 'editReply'])->name('barangay.complaints.edit-reply');
         Route::put('/barangay/complaints/{complaint}/update-reply', [ComplaintController::class, 'updateReply'])->name('barangay.complaints.update-reply');
-
-
 
     //Logs
         Route::get('/logs', [LogController::class, 'index'])->name('logs.index');
@@ -137,7 +156,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-complaints', [ComplaintController::class, 'userIndex'])->name('user.complaint.index');
         Route::get('/user-complaints/create', [ComplaintController::class, 'create'])->name('user.complaint.create');
         Route::post('/complaints/store', [ComplaintController::class, 'storeComplaint'])->name('user.complaint.store');
-
 
     });
 });
