@@ -12,7 +12,7 @@ class LguController extends Controller
 {
     public function index()
     {
-        $barangays = Barangay::withCount('users')->get();
+        $barangays = Barangay::withCount('users')->orderBy('barangay_name','asc')->get();
         return view('lgu.dashboard', compact('barangays'));
     }
     public function barangaysList()
