@@ -12,40 +12,36 @@
     <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
     <div class="flex justify-between mb-4">
-     
         <div class="card bg-yellow-400 rounded-[10px] py-2 px-4 w-[20%]">
             <div class="card-body">
-                <p class="card-text font-semibold text-2xl">1,295</p>
+                <p class="card-text font-semibold text-2xl">{{ $totalResidents }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-yellow-900 font-bold text-lg">
                     <i class="fas fa-users fa-md"></i> Total Residents
                 </h5>
             </div>
         </div>
-       
         <div class="card bg-red-500 rounded-[10px] py-2 px-4 w-[20%]">
             <div class="card-body">
-                <p class="card-text font-semibold text-2xl">307</p>
+                <p class="card-text font-semibold text-2xl">{{ $marriedCount }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-red-900 font-bold text-lg">
                     <i class="fas fa-users fa-md"></i> Married
                 </h5>
             </div>
         </div>
-       
         <div class="card bg-purple-500 rounded-[10px] py-2 px-4 w-[20%]">
             <div class="card-body">
-                <p class="card-text font-semibold text-2xl">162</p>
+                <p class="card-text font-semibold text-2xl">{{ $seniorCitizensCount }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-purple-900 font-bold text-lg">
                     <i class="fas fa-users fa-md"></i> Senior Citizen
                 </h5>
             </div>
         </div>
-
         <div class="card bg-green-500 rounded-[10px] py-2 px-4 w-[20%]">
             <div class="card-body">
-                <p class="card-text font-semibold text-2xl">103</p>
+                <p class="card-text font-semibold text-2xl">{{ $youthCount }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-green-900 font-bold text-lg">
                     <i class="fas fa-users fa-md"></i> Youth
@@ -53,6 +49,7 @@
             </div>
         </div>
     </div>
+
 
     <hr class="border-t-2 mt-3 mb-6 mr-4 border-gray-300">
 
