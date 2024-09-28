@@ -15,13 +15,25 @@
         <hr class="border-t-2 border-gray-300">
     </div>
 
+    <!-- Filter Form -->
+    <div class="mt-4 mb-6">
+        <h2 class="font-semibold mb-2">Filter by Barangay:</h2>
+        <form action="{{ route('lgu.admins') }}" method="GET" id="filterForm">
+            @foreach ($barangays as $barangay)
+                <div>
+                    <input type="checkbox" id="barangay{{ $barangay->id }}" name="barangay_ids[]" value="{{ $barangay->id }}" {{ in_array($barangay->id, (array) request('barangay_ids', [])) ? 'checked' : '' }} onchange="this.form.submit()">
+                    <label for="barangay{{ $barangay->id }}" class="ml-2">{{ $barangay->barangay_name }}</label>
+                </div>
+            @endforeach
+        </form>
+    </div>
+
     <!-- Create -->
     <div class="mt-[20px] mb-6 flex justify-end">
         <a href="{{ route('lgu.create-barangay') }}" class="py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-500">Add Barangay Admin</a>
     </div>
 
     <!-- Table nga gi displayhan sa data sa admin -->
-
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead>
@@ -44,7 +56,7 @@
                         <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"class="text-black py-1 px-3 bg-red-500 rounded hover:text-red-700 hover:bg-gray-400" onclick="return confirm('Are you sure you want to delete this admin?')"><i class="fa-solid fa-trash"></i></button>
+                            <button type="submit" class="text-black py-1 px-3 bg-red-500 rounded hover:text-red-700 hover:bg-gray-400" onclick="return confirm('Are you sure you want to delete this admin?')"><i class="fa-solid fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -53,4 +65,5 @@
         </table>
     </div>
 </div>
+
 @endsection

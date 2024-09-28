@@ -106,11 +106,22 @@ class LguController extends Controller
     
     
     
-    public function admins()
+    public function admins(Request $request)
     {
-        $adminUsers = User::role('admin')->get();
-        return view('lgu.admins', compact('adminUsers'));
+
+        $barangays = Barangay::all();
+    
+        if ($request->has('barangay_ids')) {
+            $adminUsers = User::role('admin')
+                              ->whereIn('barangay_id', $request->barangay_ids)
+                              ->get();
+        } else {
+            $adminUsers = User::role('admin')->get();
+        }
+    
+        return view('lgu.admins', compact('adminUsers', 'barangays'));
     }
+    
 
     public function editAdmin(User $adminUser)
     {
