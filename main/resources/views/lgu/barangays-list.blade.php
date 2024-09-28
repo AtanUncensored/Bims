@@ -43,13 +43,13 @@
                         <a href="{{ route('lgu.barangays-edit', $barangay->id) }}" class="text-black py-1 px-2 md:px-3 bg-blue-500 rounded hover:text-blue-700 hover:bg-gray-400">
                             <i class="fa-solid fa-pen"></i>
                         </a>
-                        <form action="{{ route('lgu.barangays-delete', $barangay->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this barangay?');">
+                        {{-- <form action="{{ route('lgu.barangays-delete', $barangay->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this barangay?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-black py-1 px-2 md:px-3 bg-red-500 rounded hover:text-red-700 hover:bg-gray-400">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
                 @endforeach

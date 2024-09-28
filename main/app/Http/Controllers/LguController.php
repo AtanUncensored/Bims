@@ -97,12 +97,12 @@ class LguController extends Controller
         return redirect()->route('lgu.barangays-list')->with('success', 'Barangay updated successfully!');
     }
 
-    public function destroy(Barangay $barangay)
-    {
-        $barangay->delete();
+    // public function destroy(Barangay $barangay)
+    // {
+    //     $barangay->delete();
 
-        return redirect()->route('lgu.barangays-list')->with('success', 'Barangay deleted successfully.');
-    }
+    //     return redirect()->route('lgu.barangays-list')->with('success', 'Barangay deleted successfully.');
+    // }
     
     
     
