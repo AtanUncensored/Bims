@@ -12,7 +12,7 @@ class LguController extends Controller
 {
     public function index()
     {
-        $barangays = Barangay::withCount('users')->get();
+        $barangays = Barangay::withCount('users')->orderBy('barangay_name','asc')->get();
         return view('lgu.dashboard', compact('barangays'));
     }
     public function barangaysList()
@@ -106,11 +106,22 @@ class LguController extends Controller
     
     
     
-    public function admins()
+    public function admins(Request $request)
     {
-        $adminUsers = User::role('admin')->get();
-        return view('lgu.admins', compact('adminUsers'));
+
+        $barangays = Barangay::all();
+    
+        if ($request->has('barangay_ids')) {
+            $adminUsers = User::role('admin')
+                              ->whereIn('barangay_id', $request->barangay_ids)
+                              ->get();
+        } else {
+            $adminUsers = User::role('admin')->get();
+        }
+    
+        return view('lgu.admins', compact('adminUsers', 'barangays'));
     }
+    
 
     public function editAdmin(User $adminUser)
     {

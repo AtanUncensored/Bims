@@ -160,6 +160,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-complaints/create', [ComplaintController::class, 'create'])->name('user.complaint.create');
         Route::post('/complaints/store', [ComplaintController::class, 'storeComplaint'])->name('user.complaint.store');
 
+        //Certificates Route
+        Route::get('/residencyCert', [CertificateController::class, 'residencyIndex'])->name('user.certificates.residency');
+        Route::get('/unifastCert', [CertificateController::class, 'unifastIndex'])->name('user.certificates.unifast');
+        Route::get('/unemploymentCert', [CertificateController::class, 'unemploymentIndex'])->name('user.certificates.unemployment');
+        Route::get('/indigencyCert', [CertificateController::class, 'indigencyIndex'])->name('user.certificates.indigency');
+        Route::get('/jobseekCert', [CertificateController::class, 'jobseekIndex'])->name('user.certificates.jobseek');
     });
 });
 
