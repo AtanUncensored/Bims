@@ -181,15 +181,17 @@
                         <i class="fa-solid fa-file-lines text-blue-800"></i>
                         <span>Budget Reports</span>
                     </a>
-                    <button class="text-white py-2 px-4 rounded inline-flex items-center">
-                        <i class="fa-solid fa-certificate text-blue-800"></i>
-                        <select name="barangay_id" class="selection rounded bg-gray-500" onchange="redirectToLogin(this)">
-                            <option value="" selected disabled>Request Certificate</option>
-                            @foreach($barangays as $barangay)
-                                <option value="{{ url('/login/'.$barangay->barangay_name) }}">{{ $barangay->barangay_name }}</option>
-                            @endforeach
+                    <div>
+                        <i class="fa-solid fa-certificate text-blue-800 ml-3"></i>
+                        <select class="selection rounded bg-blue-500 text-white" onchange="location = this.value;">
+                            <option value="Request a Certificate" selected disabled>Request a Certificate</option>
+                            <option value="/residencyCert">Certificate of Residency</option>
+                            <option value="/unifastCert">Unifast Certificate</option>
+                            <option value="/unemploymentCert">Unemployment Certificate</option>
+                            <option value="/indigencyCert">Certificate of Indigency</option>
+                            <option value="/jobseekCert">Job Seeker Certificate</option>
                         </select>
-                    </button>
+                    </div>
                 </nav>                
             </div>
         </div>
