@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cert_unifasts', function (Blueprint $table) {
             $table->id('id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->foreignId('request_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->string('address');
             $table->string('parent_name');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('purpose');
             $table->string('age');
             $table->string('purok_name');
+            $table->timestamps();
         });
     }
 

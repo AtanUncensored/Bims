@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cert_residences', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('request_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('gender');
             $table->string('residency_status');

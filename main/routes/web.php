@@ -13,6 +13,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BarangayOfficialController;
+use App\Http\Controllers\Certificates\UnifastController;
 
 //home routing
 Route::get('/', function () {
@@ -166,6 +167,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/unemploymentCert', [CertificateController::class, 'unemploymentIndex'])->name('user.certificates.unemployment');
         Route::get('/indigencyCert', [CertificateController::class, 'indigencyIndex'])->name('user.certificates.indigency');
         Route::get('/jobseekCert', [CertificateController::class, 'jobseekIndex'])->name('user.certificates.jobseek');
+
+        //Certificates Add
+        Route::post('/unifast/store', [UnifastController::class, 'store'])->name('unifast.store');
     });
 });
 

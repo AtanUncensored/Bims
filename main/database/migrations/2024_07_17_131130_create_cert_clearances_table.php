@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cert_clearances', function (Blueprint $table) {
             $table->id('id');
             $table->string('name');
-            $table->foreignId('request_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('purok_address');
             $table->string('reason');
             $table->integer('age');
