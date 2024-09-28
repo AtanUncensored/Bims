@@ -6,6 +6,9 @@
     <script src="{{ asset('/js/tailwind.min.js') }}"></script>
     <title>@yield('title', 'Barangay Information Management System')</title>
     <link rel="icon" href="{{ asset('images/bims-logo.png') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
         body {
             background-attachment: fixed;
@@ -82,7 +85,23 @@
         }
         .selection {
             cursor: pointer;
+        
         }
+        .select2-dropdown {
+            border: none;
+            color: black ; 
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: white; 
+            color: white;
+            border: none; 
+            border-radius: 0.375rem; 
+        }
+
+
+
+        
     </style>
 </head>
 <body>
@@ -95,8 +114,8 @@
         </div>
         <div class="relative">
             <button class="text-white py-2 px-4 rounded inline-flex items-center">
-                <select name="barangay_id" class="selection rounded bg-blue-500" onchange="redirectToLogin(this)">
-                    <option value="" selected disabled>Barangays</option>
+                <select name="barangay_id" class="barangay-select selection rounded w-[150px] h-[70px]" onchange="redirectToLogin(this)">
+                    <option value="" class="text-white">Barangays</option>
                     @foreach($barangays as $barangay)
                         <option value="{{ url('/login/'.$barangay->barangay_name) }}">{{ $barangay->barangay_name }}</option>
                     @endforeach
@@ -111,13 +130,9 @@
     @include('templates.footer')
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.querySelector('.relative > button');
-            const dropdown = document.querySelector('.dropdown-menu');
-
-            button.addEventListener('click', function() {
-                dropdown.classList.toggle('hidden');
-                dropdown.classList.toggle('show');
+        $(document).ready(function() {
+            $('.barangay-select').select2({
+                width: 'resolve',
             });
         });
 

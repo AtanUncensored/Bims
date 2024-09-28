@@ -53,9 +53,7 @@
 
     <div class="flex items-center justify-between mt-[20px] mb-4">
         <h1 class="text-2xl font-bold text-gray-800">Barangay Officials</h1>
-        <div class="py-2 px-4 bg-blue-500 text-white rounded">
-            <button><a href="{{ route('barangay.officials.create')}}">Add Officials</a></button>
-        </div>
+        <a href="{{ route('barangay.officials.create')}}" class="py-2 px-4 bg-blue-500 text-white rounded">Add Officials</a>
     </div>
 
     <div class="overflow-x-auto">
@@ -69,6 +67,7 @@
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Purok</th>
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Start of Service</th>
                         <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">End of Service</th>
+                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Action</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -82,6 +81,21 @@
                             <td class="px-6 py-4 text-center">{{ $official->purok }}</td>
                             <td class="px-6 py-4 text-center">{{ $official->start_of_service }}</td>
                             <td class="px-6 py-4 text-center">{{ $official->end_of_service }}</td>
+                            <td>
+                                <div class="flex py-4 gap-2">
+                                    <a href="{{ route('barangay.officials.edit', $official) }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition w-[70px]">
+                                        <span>Edit</span>
+                                    </a>
+    
+                                    <form action="{{ route('barangay.officials.destroy', $official) }}" method="POST" onsubmit="return confirmDelete();">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 w-[70px]" onclick="return confirm('Are you sure you want to delete this Official?');">
+                                            Delete
+                                        </button>
+                                    </form> 
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

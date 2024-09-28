@@ -105,7 +105,10 @@ Route::middleware('auth')->group(function () {
 
     //BarangayOfficials
         Route::get('/barangay/officials/create', [BarangayOfficialController::class, 'createOfficial'])->name('barangay.officials.create');
-        Route::post('/barangay/officials/store', [BarangayOfficialController::class, 'storeOfficial'])->name('barangay.officials.store');
+        Route::post('/barangay/officials/store', [BarangayOfficialController::class, 'storeOfficial'])->name('barangay.officials.store');    
+        Route::get('/barangay/{official}/edit', [BarangayOfficialController::class, 'editOfficial'])->name('barangay.officials.edit');
+        Route::put('/barangay/{official}', [BarangayOfficialController::class, 'updateOfficial'])->name('barangay.officials.update');
+        Route::delete('/barangay/officials/{official}', [BarangayOfficialController::class, 'destroyOfficial'])->name('barangay.officials.destroy');
 
     
     //Residents
