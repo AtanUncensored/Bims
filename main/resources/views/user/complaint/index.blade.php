@@ -1,7 +1,7 @@
 @extends('user.templates.navigation-bar')
 
 @section('icon')
-<i class="fa-regular fa-newspaper fa-xl"></i>
+    <i class="fa-regular fa-newspaper fa-xl"></i>
 @endsection
 
 @section('title', 'Complaints')
@@ -19,26 +19,42 @@
         </a>
     </div>
 
-    <!-- List of complaints (if needed) -->
-    @foreach($complaints as $complaint)
-      <div class="bg-white p-4 mb-4 rounded-lg shadow-lg">
-          <h3 class="text-lg font-semibold">{{ $complaint->complain_type }}</h3>
-          <p class="text-gray-700">{{ $complaint->details }}</p>
-          <p class="text-gray-500 text-sm">Date: {{ $complaint->date_of_incident }}</p>
-
-          <div class="border">
-            <h5 class=text-blue-300>barangay reply:</h5>
-            <p class=" px-4 py-2">
-                @if($complaint->reply)
-                    {{ $complaint->reply }}
-                @else
-                    <span class="text-gray-500">No reply yet</span>
-                @endif
-            </p>
+    <div class="flex justify-between space-x-8">
+      <div class="w-full border border-red-300 p-4 rounded-md">
+        <h3 class="text-xl font-semibold text-red-600 mb-4">Pending Complaints</h3>
+        @forelse($complaints->whereNull('reply') as $complaint)
+          <div class="bg-white p-4 mb-4 rounded-lg shadow-lg border border-gray-200">
+              <h3 class="text-lg font-semibold">{{ $complaint->complain_type }}</h3>
+              <p class="text-gray-700 mb-2">{{ $complaint->details }}</p>
+              <p class="text-gray-500 text-sm mb-4">Date: {{ $complaint->date_of_incident }}</p>
+    
+              <div class="border-t mt-2 pt-2">
+                <span class="text-gray-500">No reply yet</span>
+              </div>
           </div>
+        @empty
+          <p class="text-gray-600">No pending complaints.</p>
+        @endforelse
       </div>
-    @endforeach
-
+      
+      <div class="w-full border border-green-300 p-4 rounded-md">
+        <h3 class="text-xl font-semibold text-green-600 mb-4">Replied Complaints</h3>
+        @forelse($complaints->whereNotNull('reply') as $complaint)
+          <div class="bg-white p-4 mb-4 rounded-lg shadow-lg border border-gray-200">
+              <h3 class="text-lg font-semibold">{{ $complaint->complain_type }}</h3>
+              <p class="text-gray-700 mb-2">{{ $complaint->details }}</p>
+              <p class="text-gray-500 text-sm mb-4">Date: {{ $complaint->date_of_incident }}</p>
+    
+              <div class="border-t mt-2 pt-2">
+                <h5 class="text-blue-600 font-bold">Barangay Reply:</h5>
+                <p class="px-4 py-2 text-gray-800">{{ $complaint->reply }}</p>
+              </div>
+          </div>
+        @empty
+          <p class="text-gray-600">No complaints have been replied to yet.</p>
+        @endforelse
+      </div>
+    </div>
   </div>
 
 @endsection

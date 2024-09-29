@@ -7,6 +7,10 @@
 @section('title', 'Assign Barangay Admin')
 
 @section('content')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <div class="p-4">
     <h2 class="text-2xl text-green-700 font-bold mb-4">Create Barangay Admin</h2>
     
@@ -23,7 +27,7 @@
 
         <div class="mb-4">
             <label for="barangay_id" class="block text-sm font-medium text-gray-700">Select Barangay</label>
-            <select name="barangay_id" id="barangay_id" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+            <select name="barangay_id" id="barangay_id" class="barangay-select mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                 @foreach($barangays as $barangay)
                     <option value="{{ $barangay->id }}">{{ $barangay->barangay_name }}</option>
                 @endforeach
@@ -73,7 +77,10 @@
         </div>
     </form>
 
-    <!-- Route back to Barangay admin -->
-
+    <script>
+        $(document).ready(function() {
+            $('.barangay-select').select2();
+        });
+    </script>
 </div>
 @endsection
