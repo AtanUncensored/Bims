@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LguController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PurokController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\ProfileController;
@@ -142,6 +143,10 @@ Route::middleware('auth')->group(function () {
 
     //Certificates
         Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
+
+    //Puroks
+        Route::get('/puroks', [PurokController::class, 'index'])->name('puroks.index');
+
     });
 
     // User Routes

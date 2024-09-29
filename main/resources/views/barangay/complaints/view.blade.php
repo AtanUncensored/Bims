@@ -2,17 +2,17 @@
 @extends('barangay.templates.navigation-bar')
 
 @section('icon')
-<i class="fa-regular fa-newspaper fa-xl"></i>
+<i class="fa-regular fa-newspaper fa-lg"></i>
 @endsection
 
 @section('title', 'Reply to Complaint')
 
 @section('content')
-<div class="py-4 px-6">
+<div class="py-2 px-4">
     <h2 class="text-2xl text-gray-800 font-semibold mb-4">Reply to Complaint</h2>
     
     <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h3 class="text-lg font-semibold text-gray-700 mb-4">Complaint Details</h3>
+        <h3 class="text-lg font-semibold text-gray-700">Details:</h3>
         <p><strong>Name:</strong> {{ $complaint->user->name }}</p>
         <p><strong>Email:</strong> {{ $complaint->user->email }}</p>
         <p><strong>Type:</strong> {{ $complaint->complain_type }}</p>

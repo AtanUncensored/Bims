@@ -1,7 +1,7 @@
 @extends('barangay.templates.navigation-bar')
 
 @section('icon')
-<i class="fas fa-users fa-xl"></i>
+<i class="fas fa-users fa-lg"></i>
 @endsection
 
 @section('title', 'Residents')

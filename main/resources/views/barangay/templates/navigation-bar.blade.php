@@ -196,15 +196,10 @@
                         <i class="fa-solid fa-certificate text-blue-800"></i>
                         <span>Certificates</span>
                     </a>
-                    <button class="text-white py-2 px-4 rounded inline-flex items-center">
-                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
-                        <select name="barangay_id" class="selection rounded bg-gray-500" onchange="redirectToLogin(this)">
-                            <option value="" selected disabled>List of Purok</option>
-                            @foreach($barangays as $barangay)
-                                <option value="{{ url('/login/'.$barangay->barangay_name) }}">{{ $barangay->barangay_name }}</option>
-                            @endforeach
-                        </select>
-                    </button>
+                    <a href="{{ url('/puroks') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('puroks') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-house fa-lg text-blue-800"></i>
+                        <span>Puroks</span>
+                    </a>
                 </nav>                
             </div>
         </div>

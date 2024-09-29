@@ -7,71 +7,106 @@
 @section('title', 'Barangay Details')
 
 @section('content')
-<div class="p-6">
-    <h2 class="text-2xl text-blue-500 font-bold mb-6">{{ $barangay->barangay_name }}</h2>
-
-    <!-- Dynamic Residents Table -->
-    <div class="bg-white shadow rounded-lg overflow-hidden">
-        <div class="grid grid-cols-3 divide-x divide-gray-300">
-
-            <div>
-                <table class="min-w-full divide-y divide-gray-200">
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Residents</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalUsers }}</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Males</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalMales }}</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Females</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalFemales }}</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Adults</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalAdults }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Separator -->
-            <div class="flex justify-center items-center">
-                <div class="w-0.5 bg-black h-full"></div>
-            </div>
-
-            <div>
-                <table class="min-w-full divide-y divide-gray-200">
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Seniors</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalSeniors }}</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Youth</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalYouth }}</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Children</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalChildren }}</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Households</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{ $totalUsers }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<div class="px-4">
+    <div class="flex justify-start items-center mb-2">
+        @if ($barangay->logo)
+            <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-[50px] h-[50px] object-cover rounded-full">
+        @else
+            <span>No Logo</span>
+        @endif
+        <h2 class="text-2xl text-blue-500 font-bold ml-2">Brgy. {{ $barangay->barangay_name }}, Tubigon, Bohol, Philippines</h2>
     </div>
-
-    <!-- Back to List Route -->
-    <div class="mt-6">
-        <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-gray-600 hover:bg-gray-500 py-2 px-4 rounded font-semibold transition">
+    <hr class="border-t-2 border-gray-300">
+    <div class="flex justify-between item-center mb-3 mt-5">
+        <h2 class="font-semibold mb-2">Current record of this barangay:</h2>
+        <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-blue-600 hover:bg-blue-500 py-2 px-4 rounded font-semibold transition">
             Back to List
         </a>
+    </div>
+    
+    <!-- Dynamic Residents Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Residents Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-user fa-lg text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Residents</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalUsers }}</p>
+        </div>
+
+        <!-- Males Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-person fa-2xl text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Males</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalMales }}</p>
+        </div>
+
+        <!-- Females Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-person-dress fa-2xl text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Females</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalFemales }}</p>
+        </div>
+
+        <!-- Adults Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-user-tie fa-xl text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Adults</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalAdults }}</p>
+        </div>
+
+        <!-- Seniors Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-user-tie fa-xl text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Seniors</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalSeniors }}</p>
+        </div>
+
+        <!-- Youth Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-user fa-lg text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Youth</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalYouth }}</p>
+        </div>
+
+        <!-- Children Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-user fa-lg text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Children</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalChildren }}</p>
+        </div>
+
+        <!-- Households Card -->
+        <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-house-chimney-user fa-lg text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Households</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalUsers }}</p>
+        </div>
+
+         <!-- Married Card -->
+         <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex items-center">
+                <i class="fa-solid fa-person fa-2xl text-blue-500"></i>
+                <i class="fa-solid fa-person-dress fa-2xl text-blue-500"></i>
+                <h3 class="text-lg font-semibold ml-4">Married</h3>
+            </div>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> 0</p>
+        </div>
     </div>
 </div>
 @endsection

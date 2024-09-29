@@ -182,14 +182,14 @@
                         <span>Budget Reports</span>
                     </a>
                     <div>
-                        <i class="fa-solid fa-certificate text-blue-800 ml-3"></i>
-                        <select class="selection rounded bg-blue-500 text-white" onchange="location = this.value;">
+                        <i class="fa-solid fa-certificate text-blue-800 ml-[15px]"></i>
+                        <select class="selection rounded py-3 text-center bg-blue-500 text-white" onchange="location = this.value;">
                             <option value="Request a Certificate" selected disabled>Request a Certificate</option>
-                            <option value="/residencyCert">Certificate of Residency</option>
-                            <option value="/unifastCert">Unifast Certificate</option>
-                            <option value="/unemploymentCert">Unemployment Certificate</option>
-                            <option value="/indigencyCert">Certificate of Indigency</option>
-                            <option value="/jobseekCert">Job Seeker Certificate</option>
+                            <option value="/residencyCert">Residency</option>
+                            <option value="/unifastCert">Unifast</option>
+                            <option value="/unemploymentCert">Unemployment</option>
+                            <option value="/indigencyCert">Indigency</option>
+                            <option value="/jobseekCert">Job Seeker</option>
                         </select>
                     </div>
                 </nav>                

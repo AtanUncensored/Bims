@@ -2,7 +2,7 @@
 @extends('barangay.templates.navigation-bar')
 
 @section('icon')
-<i class="fa-solid fa-file-lines fa-xl"></i>
+<i class="fa-solid fa-file-lines fa-lg"></i>
 @endsection
 
 @section('title', 'Budget Reports')

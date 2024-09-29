@@ -1,16 +1,16 @@
 @extends('barangay.templates.navigation-bar')
 
 @section('icon')
-    <i class="fa-regular fa-newspaper fa-xl"></i>
+    <i class="fa-regular fa-newspaper fa-lg"></i>
 @endsection
 
 @section('title', 'Complaints')
 
 @section('content')
 
-<div class="py-6 px-8 bg-gray-100 min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-3xl text-gray-800 font-semibold mb-6">Complaint Record</h2>
+<div class="py-2 px-4 bg-gray-100">
+    <div class="bg-white py-2 px-4 rounded-lg shadow-md">
+        <h2 class="text-3xl text-gray-800 font-semibold mb-6 mt-3">Complaint Record</h2>
 
         <!-- Search bar -->
         <div class="flex justify-center mb-6">
@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="flex justify-between space-x-8">
-            <div class="w-full border border-red-300 p-4 rounded-md">
+            <div class="w-full border border-red-300 p-4 rounded-md max-h-[56vh] overflow-y-auto">
                 <h3 class="text-xl text-red-600 font-semibold mb-4">Latest Pending Complaints</h3>
                 <table class="min-w-full bg-white border border-gray-300 mb-6">
                     <thead>
@@ -77,8 +77,6 @@
             </div>
         </div>
      </div>
-        
-
 </div>
 
 @endsection

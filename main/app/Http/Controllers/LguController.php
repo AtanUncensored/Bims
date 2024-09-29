@@ -109,7 +109,7 @@ class LguController extends Controller
     public function admins(Request $request)
     {
 
-        $barangays = Barangay::all();
+        $barangays = Barangay::orderBy('barangay_name','asc')->get();
     
         if ($request->has('barangay_ids')) {
             $adminUsers = User::role('admin')

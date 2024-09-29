@@ -89,19 +89,17 @@
         }
         .select2-dropdown {
             border: none;
-            color: black ; 
+            text-align: center;
+            border-radius: 0.375rem; 
+            color:rgb(69, 69, 77) ; 
         }
 
         .select2-container--default .select2-selection--single {
             background-color: white; 
-            color: white;
             border: none; 
             border-radius: 0.375rem; 
         }
-
-
-
-        
+ 
     </style>
 </head>
 <body>
@@ -113,9 +111,9 @@
             <a href="/" class="ml-4 font-bold gap-2 text-3xl">BIMS</a>
         </div>
         <div class="relative">
-            <button class="text-white py-2 px-4 rounded inline-flex items-center">
+            <button class="py-2 px-4 rounded inline-flex items-center">
                 <select name="barangay_id" class="barangay-select selection rounded w-[150px] h-[70px]" onchange="redirectToLogin(this)">
-                    <option value="" class="text-white">Barangays</option>
+                    <option value="Barangays">Barangays</option>
                     @foreach($barangays as $barangay)
                         <option value="{{ url('/login/'.$barangay->barangay_name) }}">{{ $barangay->barangay_name }}</option>
                     @endforeach

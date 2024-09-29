@@ -31,11 +31,11 @@
                         @endphp
 
                         <i class="fas fa-map-marker-alt {{ $iconColor }} text-3xl mr-3"></i>
-                        <h2 class="text-xl font-semibold text-gray-800">{{ $barangay->barangay_name }}</h2>
+                        <h2 class="text-lg font-semibold text-gray-600">Brgy. {{ $barangay->barangay_name }}, Tubigon, Bohol, Philippines</h2>
                     </div>
                     <div class="border-t-2 border-gray-300 my-4"></div>
                     <p class="text-gray-600"><i class="fas fa-house fa-lg mr-2 text-blue-800"></i> No. of Users:</p>
-                    <header class="flex justify-end text-green-600 font-bold text-xl">{{ $barangay->users_count }}</header>
+                    <header class="flex justify-end text-green-600 font-bold text-2xl">{{ $barangay->users_count }}</header>
                 </div>
             </div>
         @endforeach
