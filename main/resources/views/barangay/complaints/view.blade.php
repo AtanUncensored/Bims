@@ -8,16 +8,22 @@
 @section('title', 'Reply to Complaint')
 
 @section('content')
-<div class="py-2 px-4">
-    <h2 class="text-2xl text-gray-800 font-semibold mb-4">Reply to Complaint</h2>
-    
+<div class="py-2 px-4">    
     <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h3 class="text-lg font-semibold text-gray-700">Details:</h3>
-        <p><strong>Name:</strong> {{ $complaint->user->name }}</p>
-        <p><strong>Email:</strong> {{ $complaint->user->email }}</p>
-        <p><strong>Type:</strong> {{ $complaint->complain_type }}</p>
-        <p><strong>Date of Incident:</strong> {{ $complaint->date_of_incident }}</p>
-        <p><strong>Details:</strong> {{ $complaint->details }}</p>
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">Complaint Details:</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <p class="text-gray-600"><strong>Name:</strong> {{ $complaint->user->name }}</p>
+            <p class="text-gray-600"><strong>Email:</strong> {{ $complaint->user->email }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600"><strong>Type:</strong> {{ $complaint->complain_type }}</p>
+            <p class="text-gray-600"><strong>Date of Incident:</strong> {{ $complaint->date_of_incident }}</p>
+        </div>
+    </div>
+    <div class="mt-4">
+        <p class="text-gray-600"><strong>Details:</strong> {{ $complaint->details }}</p>
+    </div>
 
         <hr class="my-4">
 
