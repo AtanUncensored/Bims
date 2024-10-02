@@ -45,15 +45,26 @@ class ComplaintController extends Controller
          return redirect()->route('user.complaint.index')->with('success', 'Complaint filed successfully.');
      }
 
-    // Display complaints to the barangay
-    public function barangayComplaints()
-    {
-        $barangayId = Auth::user()->barangay_id;
-        $complaints = Complaint::where('barangay_id', $barangayId)->get();
-
-        return view('barangay.complaints.index', compact('complaints'));
-    }
-
+     public function barangayComplaints(Request $request)
+     {
+         $barangayId = Auth::user()->barangay_id;
+     
+         // Get the search query from the request
+         $search = $request->input('search');
+     
+         // Retrieve complaints that belong to the user's barangay
+         // Apply search filtering if a search term is provided
+         $complaints = Complaint::where('barangay_id', $barangayId)
+             ->when($search, function ($query) use ($search) {
+                 return $query->where('complain_type', 'like', "%{$search}%")
+                              ->orWhere('details', 'like', "%{$search}%"); // You can add more fields to search as needed
+             })
+             ->get();
+     
+         // Return the view with the complaints and the search term
+         return view('barangay.complaints.index', compact('complaints', 'search'));
+     }
+     
     // View a specific complaint
     public function viewComplaint(Complaint $complaint)
     {

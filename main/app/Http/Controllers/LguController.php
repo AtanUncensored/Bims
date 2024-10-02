@@ -15,11 +15,16 @@ class LguController extends Controller
         $barangays = Barangay::withCount('users')->orderBy('barangay_name','asc')->get();
         return view('lgu.dashboard', compact('barangays'));
     }
-    public function barangaysList()
+    public function barangaysList(Request $request)
     {
-        $barangays = Barangay::all();
+        // Retrieve the search query from the request
+        $search = $request->input('search');    
         
-        return view('lgu.barangays-list');
+        // If a search query is provided, filter the barangays based on the name
+        $barangays = Barangay::when($search, function ($query, $search) {
+            return $query->where('barangay_name', 'like', '%' . $search . '%');
+        })->get();
+        return view('lgu.barangays-list', compact('barangays', 'search'));
     }
 
     public function show($barangayId)

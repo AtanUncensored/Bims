@@ -14,7 +14,7 @@
 
         <!-- Search bar -->
         <div class="flex justify-center mb-6">
-            <form class="inline-flex items-center">
+            <form class="inline-flex items-center" method="GET" action="{{ route('barangay.complaints.index')}}">
                 <input type="text" name="search" placeholder="Search record..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500">
                 <button type="submit" class="py-2 px-4 bg-gray-500 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>

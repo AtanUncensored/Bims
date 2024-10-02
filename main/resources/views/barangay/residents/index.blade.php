@@ -18,7 +18,7 @@
         <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
 
           <!-- Search bar -->
-          <form class="inline-flex items-center justify-center">
+          <form class="inline-flex items-center justify-center" method="GET" action="{{ route('barangay.residents.index') }}">
             <input type="text" name="search" placeholder="Search..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-500">
             <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded-r-md hover:bg-green-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
