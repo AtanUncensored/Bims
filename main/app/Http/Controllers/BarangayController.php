@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Events\Userlog;
 use App\Models\Barangay;
 use App\Models\Resident;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class BarangayController extends Controller
         // Get the currently authenticated user
         $user = Auth::user();
         
-        // Assuming the user model has a `barangay_id` property
+        // the user model has a `barangay_id` property
         $barangayId = $user->barangay_id;
     
         // Fetch data for the user's barangay
@@ -33,7 +34,7 @@ class BarangayController extends Controller
                                ->count();
 
          $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)
-                               ->with('resident') // assuming you have a relationship with Resident
+                               ->with('resident') 
                                ->get();
     
         return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials'));
@@ -81,6 +82,10 @@ class BarangayController extends Controller
         $resident = new Resident($validatedData);
         $resident->barangay_id = $userBarangayId;
         $resident->save();
+
+        $log_entry = 'Admin Added a new resident ' . $resident->first_name . ' with the ID of ' . $resident->id;
+event(new UserLog($log_entry));
+
 
         return back()->with('success', 'Resident added successfully.');
     }
@@ -135,6 +140,9 @@ class BarangayController extends Controller
         // Update resident data
         $resident->update($validatedData);
 
+        $log_entry = 'Admin made changes to resident ' . $resident->first_name . ' with an ID of ' . $resident->id;
+event(new UserLog($log_entry));
+
         return redirect()->route('barangay.residents.index')->with('success', 'Resident updated successfully.');
     }
 
@@ -147,6 +155,9 @@ class BarangayController extends Controller
 
     // Delete the resident
     $resident->delete();
+
+    $log_entry = 'Admin Deleted ' . $resident->first_name . ' a resident with an ID of ' . $resident->id;
+event(new UserLog($log_entry));
 
     return redirect()->route('barangay.residents.index')->with('success', 'Resident deleted successfully.');
 }

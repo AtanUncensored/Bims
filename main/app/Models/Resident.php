@@ -24,7 +24,7 @@ class Resident extends Model
         'email',
         'current_address',
         'permanent_address',
-        'barangay_id',  // Make sure to include the barangay_id as well
+        'barangay_id', 
     ];
     
     public function barangay()
