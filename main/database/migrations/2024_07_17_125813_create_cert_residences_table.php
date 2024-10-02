@@ -12,19 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cert_residences', function (Blueprint $table) {
-            $table->id('id');
+            $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('gender');
-            $table->string('residency_status');
-            $table->string('barangay');
-            $table->string('purok_number');
-            $table->date('date');
-            $table->string('punongbarangay');
-            $table->string('secretary');
-            $table->integer('OR_number');
-            $table->string('treasurer');
+            $table->foreignId('purok_id')->constrained()->onDelete('cascade'); 
+            $table->string('name'); 
+            $table->integer('age'); 
+            $table->enum('gender', ['Male', 'Female', 'Other']); 
+            $table->text('reason'); 
+            $table->date('date'); 
+            $table->string('punongbarangay'); 
+            $table->string('ORnumber')->nullable(); 
+            $table->timestamps(); 
         });
+        
+        
     }
 
     /**

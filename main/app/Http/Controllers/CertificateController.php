@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CertResidency;
+use App\Models\CertUnifast;
+use App\Models\Purok;
 use Illuminate\Http\Request;
 
 class CertificateController extends Controller
@@ -9,13 +12,20 @@ class CertificateController extends Controller
 
     //Admin certificate access
     public function index() {
-        return view('barangay.certificates.index');
+        $certResidencies = CertResidency::all();
+        $unifastRecords = CertUnifast::all();
+
+        // Return the view with the records
+         return view('barangay.certificates.index', compact('certResidencies', 'unifastRecords'));
     }
 
 
     //User certificate access
     public function residencyIndex(){
-        return view('user.certificates.residency');
+
+        $puroks = Purok::all(); 
+
+        return view('user.certificates.residency', compact('puroks'));
     }
 
     public function unifastIndex(){
@@ -33,4 +43,5 @@ class CertificateController extends Controller
     public function jobseekIndex(){
         return view('user.certificates.jobseek');
     }
+    
 }
