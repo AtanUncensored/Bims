@@ -23,7 +23,7 @@
             Back to List
         </a>
     </div>
-    
+    <div class="max-h-[65vh] overflow-y-auto">
     <!-- Dynamic Residents Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Residents Card -->
@@ -107,6 +107,7 @@
             </div>
             <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> 0</p>
         </div>
+    </div>
     </div>
 </div>
 @endsection

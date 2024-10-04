@@ -23,7 +23,7 @@ class LguController extends Controller
         // If a search query is provided, filter the barangays based on the name
         $barangays = Barangay::when($search, function ($query, $search) {
             return $query->where('barangay_name', 'like', '%' . $search . '%');
-        })->get();
+        })->orderBy('barangay_name', 'asc')->get();
         return view('lgu.barangays-list', compact('barangays', 'search'));
     }
 
@@ -113,19 +113,21 @@ class LguController extends Controller
     
     public function admins(Request $request)
     {
-
-        $barangays = Barangay::orderBy('barangay_name','asc')->get();
+        $barangays = Barangay::orderBy('barangay_name', 'asc')->get();
+    
+        $adminUsersQuery = User::role('admin')
+                               ->join('barangays', 'users.barangay_id', '=', 'barangays.id')
+                               ->select('users.*', 'barangays.barangay_name')
+                               ->orderBy('barangays.barangay_name', 'asc');
     
         if ($request->has('barangay_ids')) {
-            $adminUsers = User::role('admin')
-                              ->whereIn('barangay_id', $request->barangay_ids)
-                              ->get();
-        } else {
-            $adminUsers = User::role('admin')->get();
+            $adminUsersQuery->whereIn('barangay_id', $request->barangay_ids);
         }
     
+        $adminUsers = $adminUsersQuery->get();
+    
         return view('lgu.admins', compact('adminUsers', 'barangays'));
-    }
+    }    
     
 
     public function editAdmin(User $adminUser)
@@ -156,7 +158,7 @@ class LguController extends Controller
 
     public function createBarangayForm()
     {   
-        $barangays = Barangay::all();
+        $barangays = Barangay::orderBy('barangay_name','asc')->get();
         return view('lgu.create_barangay', compact('barangays'));
     }
 

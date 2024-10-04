@@ -90,7 +90,6 @@ Route::middleware('auth')->group(function () {
         //crud
         Route::get('/barangays/{barangay}/edit', [LguController::class, 'edit'])->name('lgu.barangays-edit');//edit barangay information
         Route::post('/lgu/store-barangay-admin', [LguController::class, 'storeBarangayAdmin'])->name('lgu.store-barangay-admin');//create barangay admin
-        // Route::delete('/barangays/{barangay}', [LguController::class, 'destroy'])->name('lgu.barangays-delete');
     });
 
     // Barangay (admin) Routes

@@ -12,7 +12,6 @@
         <h1 class="text-2xl font-bold text-blue-600 text-center">Edit Barangay Administrator</h1>
     </div>
 
-    <!-- Separator -->
     <div class="my-4">
         <hr class="border-t-2 m-[15px] border-gray-300">
     </div>
@@ -23,7 +22,6 @@
             @csrf
             @method('PUT')
 
-            <!-- Name Field -->
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
                 <input type="text" name="name" id="name" value="{{ old('name', $adminUser->name) }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('name') border-red-500 @enderror" required>
@@ -31,8 +29,6 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
-
-            <!-- Email Field -->
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
                 <input type="email" name="email" id="email" value="{{ old('email', $adminUser->email) }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror" required>
@@ -40,8 +36,6 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
-
-            <!-- Barangay Selection -->
             <div class="mb-4">
                 <label for="barangay_id" class="block text-gray-700 text-sm font-bold mb-2">Assigned Barangay:</label>
                 <select name="barangay_id" id="barangay_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('barangay_id') border-red-500 @enderror">
@@ -56,8 +50,6 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
-
-            <!-- Submit Button -->
             <div class="flex items-center justify-between">
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Update Admin

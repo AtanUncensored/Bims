@@ -32,7 +32,7 @@ class AdminSeeder extends Seeder
         User::create([
             'name' => 'cabulijan',
             'email' => 'cabulijan@gmail.com',
-            'barangay_id' => 3,
+            'barangay_id' => 2,
             'email_verified_at' => now(),
             'password' => Hash::make('123456789')
         ])->assignRole('admin');
@@ -48,7 +48,21 @@ class AdminSeeder extends Seeder
         User::create([
             'name' => 'cabulijanuser',
             'email' => 'cabulijanuser@gmail.com',
+            'barangay_id' => 2,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789')
+        ])->assignRole('user');
+        User::create([
+            'name' => 'talencerasuser',
+            'email' => 'talencerasuser@gmail.com',
             'barangay_id' => 3,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789')
+        ])->assignRole('user');
+        User::create([
+            'name' => 'tinangnanuser',
+            'email' => 'tinangnanuser@gmail.com',
+            'barangay_id' => 4,
             'email_verified_at' => now(),
             'password' => Hash::make('123456789')
         ])->assignRole('user');

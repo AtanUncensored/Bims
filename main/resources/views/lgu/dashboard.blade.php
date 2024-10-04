@@ -12,12 +12,12 @@
 <div class="my-4">
     <hr class="border-t-2 m-[15px] border-gray-300">
 </div>
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 max-h-[70vh] overflow-y-auto">
     <div class="flex flex-wrap -mx-4">
         @foreach($barangays as $barangay)
             <div class="w-full md:w-1/4 px-4 mb-4">
                 <div class="bg-white shadow-lg rounded-lg p-6">
-                    <div class="flex items-center mb-4">
+                    <div class="flex mb-4">
 
                         <!-- para ni sa icon anang dashboard -->
                         @php
@@ -34,8 +34,8 @@
                         <h2 class="text-[15px] font-bold text-gray-600">Brgy. <span class="text-blue-600">{{ $barangay->barangay_name }}</span>, Tubigon, Bohol, Philippines</h2>
                     </div>
                     <hr class="border-t-2 border-gray-300">
-                    <div class="mt-3 flex justify-between">
-                        <p class="text-gray-600"><i class="fas fa-user fa-lg mr-2 text-blue-800"></i> No. of Users:</p>
+                    <div class="mt-4 flex justify-between">
+                        <p class="text-gray-600"><i class="fas fa-user fa-lg mr-2 text-blue-500"></i> No. of Users:</p>
                         <header class="text-green-600 font-bold text-2xl">{{ $barangay->users_count }}</header>
                     </div>
                 </div>

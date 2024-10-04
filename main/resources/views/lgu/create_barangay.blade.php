@@ -14,9 +14,11 @@
 <div class="p-4">
     <h2 class="text-2xl text-green-700 font-bold mb-4">Create Barangay Admin</h2>
     
-    <!-- Success message ni dere -->
+    <!-- Success message ni dere nya naka set pud na timer nya is 2 sec para ma wala
+    gamit ang alpine extension naa sa js folder-->
+
     @if(session('success'))
-    <div class="bg-green-500 text-white py-2 px-4 rounded mb-4">
+    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
         {{ session('success') }}
     </div>
     @endif
