@@ -144,8 +144,14 @@
         .btn-primary:hover {
             background-color: #0056b3;
         }
-
     </style>
+    <script>
+        //Log out modal ni
+        function toggleModal() {
+        const modal = document.getElementById('logout-modal');
+        modal.classList.toggle('hidden');
+        }
+    </script>
 </head>
 <body class="bg-gray-100">
     <div id="main" class="flex h-screen">
@@ -153,29 +159,26 @@
         <div id="sidebar" class="bg-blue-500 w-[250px] flex flex-col justify-between">
             <div>
                 <!-- title ug logo -->
-                <div id="branding" class="flex items-center py-6 space-x-4 ml-4">
-                    <img class="w-[70px] h-[70px] rounded-full" src="{{ asset('images/' . Auth::user()->barangay->logo) }}" alt="barangay/lgu logo">
+                <div id="branding" class="flex items-center py-1 px-2 space-x-4 ml-4">
+                    <img class="w-[50px] h-[50px] rounded-full" src="{{ asset('images/' . Auth::user()->barangay->logo) }}" alt="barangay/lgu logo">
 
                     <div class="flex flex-col">
-                        <h1 class="text-center text-4xl" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
+                        <h1 class="text-center text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
                             BIMS
                         </h1>
                     </div>
                 </div>
-                
     
                 <nav id="main-nav" class="space-y-2">
-                    <hr class="border-t-2 ml-4 mr-4 border-gray-300">
+                    <hr class="border-t-2 border-gray-300">
                     <a href="{{ url('/barangay-dashboard') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangay-dashboard*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-house fa-lg text-blue-800"></i>
                         <span>Dashboard</span>
                     </a>
-                    <hr class="border-t-2 ml-4 mr-4 border-gray-300">
                     <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements/show') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fa-solid fa-bullhorn text-blue-800"></i>
                         <span>Announcements</span>
                     </a>
-                    
                     <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residents') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span>Residents</span>
@@ -225,12 +228,32 @@
                         </button>
                 
                         <div id="dropdown-content" class="hidden absolute right-0 mt-20 w-[100%] bg-white rounded-lg shadow-lg z-10">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="w-full text-left px-4 py-2 text-red-700 hover:bg-gray-100 rounded-lg">
-                                    {{ __('Log Out') }}
-                                </button>
-                            </form>
+                            <button onclick="toggleModal()" class="w-full text-left px-4 py-2 text-red-700 hover:bg-gray-100 rounded-lg">
+                                Log Out
+                            </button>
+
+                            <div id="logout-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                                <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
+                                    <div class="flex items-center">
+                                        <img class="w-[50px] h-[50px] rounded-full" src="{{ asset('images/bims-logo.png') }}" alt="barangay/lgu logo">
+                                        <h3 class="text-lg font-bold text-center mt-3 ml-3 text-red-500">Confirm Log Out</h3>
+                                    </div>
+                                    <p class="mb-6 mt-3 ml-4 text-gray-600">Are you sure you want to log out?</p>
+                                    <div class="flex justify-end space-x-4">
+                                        <button onclick="toggleModal()" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">
+                                            Cancel
+                                        </button>
+                            
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700">
+                                                <i class="fa-solid fa-right-from-bracket"></i>
+                                                Log Out
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>

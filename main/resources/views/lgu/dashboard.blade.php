@@ -15,7 +15,7 @@
 <div class="container mx-auto px-4">
     <div class="flex flex-wrap -mx-4">
         @foreach($barangays as $barangay)
-            <div class="w-full md:w-1/3 px-4 mb-4">
+            <div class="w-full md:w-1/4 px-4 mb-4">
                 <div class="bg-white shadow-lg rounded-lg p-6">
                     <div class="flex items-center mb-4">
 
@@ -31,11 +31,13 @@
                         @endphp
 
                         <i class="fas fa-map-marker-alt {{ $iconColor }} text-3xl mr-3"></i>
-                        <h2 class="text-lg font-semibold text-gray-600">Brgy. {{ $barangay->barangay_name }}, Tubigon, Bohol, Philippines</h2>
+                        <h2 class="text-[15px] font-bold text-gray-600">Brgy. <span class="text-blue-600">{{ $barangay->barangay_name }}</span>, Tubigon, Bohol, Philippines</h2>
                     </div>
-                    <div class="border-t-2 border-gray-300 my-4"></div>
-                    <p class="text-gray-600"><i class="fas fa-house fa-lg mr-2 text-blue-800"></i> No. of Users:</p>
-                    <header class="flex justify-end text-green-600 font-bold text-2xl">{{ $barangay->users_count }}</header>
+                    <hr class="border-t-2 border-gray-300">
+                    <div class="mt-3 flex justify-between">
+                        <p class="text-gray-600"><i class="fas fa-user fa-lg mr-2 text-blue-800"></i> No. of Users:</p>
+                        <header class="text-green-600 font-bold text-2xl">{{ $barangay->users_count }}</header>
+                    </div>
                 </div>
             </div>
         @endforeach
