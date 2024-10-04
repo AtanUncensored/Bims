@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangayOfficial;
 use App\Models\Budget;
 use App\Models\Resident;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,9 @@ class UserController extends Controller
                                ->whereDate('birth_date', '>', now()->subYears(18))
                                ->count();
 
-        return view('user.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount'));
+        $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)->get();
+
+        return view('user.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials'));
     }
 
     public function showBudgetReports()

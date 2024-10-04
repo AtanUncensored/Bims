@@ -78,10 +78,11 @@
             @enderror
         </div>
 
-        <div class="flex justify-end">
+        <div class="flex justify-between items-center">
             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                 Add Official
             </button>
+            <a href="{{ route('barangay.dashboard') }}" class="inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-800">Return to Dashboard</a>
         </div>
     </form>
 </div>

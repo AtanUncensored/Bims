@@ -9,19 +9,20 @@
 @section('content')
 
 <div class="py-2 px-4 bg-gray-100">
-    <div class="bg-white py-2 px-4 rounded-lg shadow-md">
-        <h2 class="text-3xl text-gray-800 font-semibold mb-6 mt-3">Complaint Record</h2>
+        <h2 class="text-2xl text-gray-600 font-semibold">COMPLAINT RECORD:</h2>
+
+        <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
         <!-- Search bar -->
         <div class="flex justify-center mb-6">
             <form class="inline-flex items-center" method="GET" action="{{ route('barangay.complaints.index')}}">
-                <input type="text" name="search" placeholder="Search record..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500">
-                <button type="submit" class="py-2 px-4 bg-gray-500 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" name="search" placeholder="Search a record..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-500">
+                <button type="submit" class="py-2 px-4 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
         <div class="flex justify-between space-x-8">
-            <div class="w-full border border-red-300 p-4 rounded-md max-h-[56vh] overflow-y-auto">
-                <h3 class="text-xl text-red-600 font-semibold mb-4">Latest Pending Complaints</h3>
+            <div class="w-full border border-gray-300 p-4 rounded-md max-h-[56vh] overflow-y-auto">
+                <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">-Latest Pending Complaints-</h3>
                 <table class="min-w-full bg-white border border-gray-300 mb-6">
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-300 text-gray-600">
@@ -48,8 +49,8 @@
                 </table>
             </div>
 
-            <div class="w-full border border-green-300 p-4 rounded-md">
-                    <h3 class="text-xl text-green-600 font-semibold mb-4">Replied Complaints</h3>
+            <div class="w-full border border-gray-300 p-4 rounded-md">
+                    <h3 class="text-xl text-center text-green-600 font-semibold mb-4">-Replied Complaints-</h3>
                     <table class="min-w-full bg-white border border-gray-300">
                         <thead>
                             <tr class="bg-gray-100 border-b border-gray-300 text-gray-600">
@@ -76,7 +77,6 @@
                     </table>
             </div>
         </div>
-     </div>
 </div>
 
 @endsection

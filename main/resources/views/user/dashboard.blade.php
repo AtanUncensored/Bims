@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="records py-2 px-4">
-    <h1 class="text-2xl font-bold text-gray-800">Barangay Records</h1>
+    <h1 class="text-2xl font-bold text-green-600">BARANGAY RECORDS:</h1>
 
     <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
@@ -54,75 +54,44 @@
     <hr class="border-t-2 mt-3 mb-6 mr-4 border-gray-300">
 
     <div class="flex items-center justify-between mt-[20px] mb-4">
-        <h1 class="text-2xl font-bold text-gray-800">Barangay Officials</h1>
+        <h1 class="text-2xl font-bold text-green-600">BARANGAY OFFICIALS:</h1>
     </div>
 
-    <!-- Add a container with fixed height and scroll -->
-    <div class="overflow-x-auto">
-        <div class="max-h-[40vh] overflow-y-auto">
-            <table class="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden">
-                <thead class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Position</th>
-                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Committee</th>
-                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">Start of Service</th>
-                        <th class="px-6 py-3 bg-gray-600 text-white text-center text-xs font-medium uppercase tracking-wider">End of Service</th>
+    <div class="max-h-[40vh] overflow-y-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Name</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Position</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Committee</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Purok</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Start of Service</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">End of Service</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                @if($barangayOfficials->isEmpty())
+                <tr>
+                    <td colspan="7" class="py-4 px-6 text-center text-gray-500">
+                        Currently no barangay officials found.
+                    </td>
+                </tr>
+                @else
+                @foreach($barangayOfficials as $official)
+                    <tr class="hover:bg-gray-200 transition">
+                        <td class="py-2 px-4 border-b border-gray-200">
+                            {{ $official->resident->first_name }} {{ $official->resident->last_name }}
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->position }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->committee }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->purok }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->start_of_service }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->end_of_service }}</td>
                     </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center   py-2 whitespace-nowrap">Juan Dela Cruz</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Chairperson</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Finance</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">January 1, 2023</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">December 31, 2025</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Maria Clara</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Secretary</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Events</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 15, 2022</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 14, 2024</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Maria Clara</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Secretary</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Events</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 15, 2022</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 14, 2024</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Maria Clara</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Secretary</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Events</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 15, 2022</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 14, 2024</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Maria Clara</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Secretary</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Events</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 15, 2022</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 14, 2024</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Maria Clara</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Secretary</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Events</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 15, 2022</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 14, 2024</td>
-                    </tr>
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Maria Clara</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Secretary</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">Events</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 15, 2022</td>
-                        <td class="px-4 text-center  py-2 whitespace-nowrap">March 14, 2024</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+                @endif
+            </tbody>
+        </table>
     </div>
 </div>
 

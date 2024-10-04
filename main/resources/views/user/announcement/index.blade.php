@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="py-2 px-4">
-    <h2 class="important-title text-2xl font-bold mb-3">Important Announcements</h2>
+    <h2 class="important-title text-2xl font-bold mb-3">IMPORTANT ANNOUNCEMENTS:</h2>
 
     <hr class="border-t-2 mb-4 border-gray-300">
 

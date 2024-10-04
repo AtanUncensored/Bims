@@ -19,7 +19,7 @@
     <hr class="border-t-2 border-gray-300">
     <div class="flex justify-between item-center mb-3 mt-5">
         <h2 class="font-semibold mb-2">Current record of this barangay:</h2>
-        <a href="{{ route('lgu.barangays-list') }}" class="inline-block text-white bg-blue-600 hover:bg-blue-500 py-2 px-4 rounded font-semibold transition">
+        <a href="{{ route('lgu.barangays-list') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
             Back to List
         </a>
     </div>

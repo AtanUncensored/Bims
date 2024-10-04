@@ -45,13 +45,13 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center">
                 <div class="mb-4">
                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update Barangay</button>
                 </div>
         
                 <div class="mb-4">
-                    <a href="{{ route('lgu.barangays-list') }}" class="inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-800">
+                    <a href="{{ route('lgu.barangays-list') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
                         Back to List
                     </a>
                 </div>

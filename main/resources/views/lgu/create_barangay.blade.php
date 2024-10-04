@@ -72,7 +72,7 @@
                 <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Create Barangay</button>
             </div>
             <div class="mb-4">
-                <a href="{{ route('lgu.admins') }}" class="inline-block text-blue-600 hover:bg-blue-200 py-2 px-4 rounded font-semibold transition">
+                <a href="{{ route('lgu.admins') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
                     Back to Admins
                 </a>
             </div>

@@ -39,7 +39,7 @@
 
     <!-- Create -->
     <div class="mb-2 flex justify-end">
-        <a href="{{ route('lgu.create-barangay') }}" class="py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-500">Add Barangay Admin</a>
+        <a href="{{ route('lgu.create-barangay') }}" class="py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-500"><i class="fa-solid fa-plus"></i> Add Barangay Admin</a>
     </div>
 
     <!-- Table for displaying Barangay Admins -->

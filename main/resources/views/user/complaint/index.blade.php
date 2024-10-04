@@ -9,7 +9,7 @@
 @section('content')
 
   <div class="py-2 px-4 ">
-    <h2 class="text-2xl font-semibold text-gray-800">Complaints</h2>
+    <h2 class="text-2xl font-semibold text-gray-800">COMPLAINTS:</h2>
     <hr class="border-t-2 mt-3 mb-6 border-gray-300">
 
     <!-- Add Complaint Button -->
@@ -20,8 +20,8 @@
     </div>
 
     <div class="flex justify-between space-x-8">
-      <div class="w-full border border-red-300 p-4 rounded-md max-h-[58vh] overflow-y-auto">
-        <h3 class="text-xl font-semibold text-red-600 mb-4">Pending Complaints</h3>
+      <div class="w-full border border-gray-300 p-4 rounded-md max-h-[58vh] overflow-y-auto">
+        <h3 class="text-xl font-semibold text-center text-blue-600 mb-4">-Pending Complaints-</h3>
         @forelse($complaints->whereNull('reply') as $complaint)
           <div class="bg-white p-4 mb-4 rounded-lg shadow-lg border border-gray-200">
               <h3 class="text-lg font-semibold">{{ $complaint->complain_type }}</h3>
@@ -37,8 +37,8 @@
         @endforelse
       </div>
       
-      <div class="w-full border border-green-300 p-4 rounded-md max-h-[58vh] overflow-y-auto">
-        <h3 class="text-xl font-semibold text-green-600 mb-4">Replied Complaints</h3>
+      <div class="w-full border border-gray-300 p-4 rounded-md max-h-[58vh] overflow-y-auto">
+        <h3 class="text-xl font-semibold text-center text-green-600 mb-4">-Replied Complaints-</h3>
         @forelse($complaints->whereNotNull('reply') as $complaint)
           <div class="bg-white p-4 mb-4 rounded-lg shadow-lg border border-gray-200">
               <h3 class="text-lg font-semibold">{{ $complaint->complain_type }}</h3>

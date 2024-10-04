@@ -10,7 +10,7 @@
 
 <div class="py-2 px-4">
 
-    <h2 class="text-2xl font-semibold text-blue-600">Budget Logs</h2>
+    <h2 class="text-2xl font-semibold text-blue-600">BUDGET LOGS:</h2>
 
     <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
@@ -33,6 +33,13 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
+                    @if($budgetReports->isEmpty())
+                    <tr>
+                        <td colspan="4" class="py-4 px-6 text-center text-gray-500">
+                            Currently no budget reports available yet.
+                        </td>
+                    </tr>
+                    @else
                     @foreach ($budgetReports as $report)
                         <tr class="hover:bg-gray-100 transition">
                             <td class="px-4 py-2 whitespace-nowrap">{{ $report->item }}</td>
@@ -40,6 +47,7 @@
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->period_from }} | {{ $report->period_to }}</td>
                         </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>     
