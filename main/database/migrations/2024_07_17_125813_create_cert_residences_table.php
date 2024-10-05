@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('cert_residences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('purok_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('resident_id')->constrained()->onDelete('cascade'); 
+            
             $table->string('name'); 
             $table->integer('age'); 
-            $table->enum('gender', ['Male', 'Female', 'Other']); 
-            $table->text('reason'); 
+            $table->enum('gender', ['Male', 'Female', 'Other']);  
             $table->date('date'); 
             $table->string('punongbarangay'); 
             $table->string('ORnumber')->nullable(); 

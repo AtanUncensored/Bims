@@ -197,6 +197,11 @@
                             <option value="/jobseekCert">Job Seeker</option>
                         </select>
                     </div>
+
+                    <a href="{{ url('/certificates/request') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('budget-reports') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-file-lines fa-lg text-blue-800"></i>
+                        <span>xdxxx</span>
+                    </a>
                 </nav>                
             </div>
         </div>
