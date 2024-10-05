@@ -8,6 +8,7 @@ use App\Models\Barangay;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 use App\Models\BarangayOfficial;
+use App\Models\Household;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -42,8 +43,14 @@ class BarangayController extends Controller
     
     public function createUserForm()
     {
-        return view('barangay.crud.create_user_account');
+        $userBarangayId = Auth::user()->barangay_id;
+    
+        $households = Household::where('user_id', $userBarangayId)->get();
+        $users = User::where('barangay_id', $userBarangayId)->get();
+    
+        return view('barangay.crud.create_user_account', compact('households', 'users'));
     }
+    
 
     public function showLoginPage($barangay_name)
     {
@@ -57,7 +64,7 @@ class BarangayController extends Controller
 
     public function storeUser(Request $request)
     {
-        // Validate the request data
+        // Validate the form data
         $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -73,22 +80,45 @@ class BarangayController extends Controller
             'email' => 'nullable|email|max:255|unique:residents,email',
             'current_address' => 'nullable|string|max:255',
             'permanent_address' => 'nullable|string|max:255',
+            'household' => 'required',
+            'new_household_name' => 'nullable|string|max:255',
+            'user_id' => 'nullable|exists:users,id',
         ]);
-
+    
         // Get the currently logged-in user's barangay
         $userBarangayId = Auth::user()->barangay_id;
-
+    
         // Create a new resident and associate it with the user's barangay
         $resident = new Resident($validatedData);
         $resident->barangay_id = $userBarangayId;
         $resident->save();
-
+    
+        // Check if a new household is being created
+        if ($request->household === 'new') {
+            // Create the new household
+            $household = Household::create([
+                'household_name' => $request->new_household_name,
+                'resident_id' => $resident->id,
+                'user_id' => $request->user_id,  // Associate with the selected user from the dropdown
+            ]);
+        } else {
+            // Associate resident with an existing household
+            $household = Household::find($request->household);
+            if ($household) {
+                $household->update([
+                    'resident_id' => $resident->id,
+                ]);
+            }
+        }
+    
+        // Log the event
         $log_entry = 'Admin Added a new resident ' . $resident->first_name . ' with the ID of ' . $resident->id;
-event(new UserLog($log_entry));
-
-
-        return back()->with('success', 'Resident added successfully.');
+        event(new UserLog($log_entry));
+    
+        // Redirect back with success message
+        return back()->with('success', 'Resident and household information added successfully!');
     }
+    
 
     public function viewResident($resident_id)
     {

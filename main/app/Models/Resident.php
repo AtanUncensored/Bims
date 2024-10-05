@@ -10,22 +10,16 @@ class Resident extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'middle_name',
-        'purok',
-        'birth_date',
-        'place_of_birth',
-        'gender',
-        'civil_status',
-        'phone_number',
-        'citizenship',
-        'nickname',
-        'email',
-        'current_address',
-        'permanent_address',
-        'barangay_id', 
+        'first_name', 'last_name', 'middle_name', 'purok', 'birth_date',
+        'place_of_birth', 'gender', 'civil_status', 'phone_number', 'citizenship',
+        'nickname', 'email', 'current_address', 'permanent_address', 'household_id'
     ];
+
+    // Resident belongs to a Household
+    public function household()
+    {
+        return $this->belongsTo(Household::class);
+    }
     
     public function barangay()
     {

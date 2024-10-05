@@ -56,4 +56,9 @@ class User extends Authenticatable
         {
             return $this->belongsTo(Barangay::class);
         }
+
+        public function households()
+    {
+        return $this->hasOne(Household::class);
+    }
 }
