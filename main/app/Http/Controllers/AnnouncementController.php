@@ -58,5 +58,16 @@ class AnnouncementController extends Controller
 
         return redirect()->route('announcements.index')->with('success', 'Announcement created successfully!');
     }
+
+
+    public function show($announcementId)
+    {
+        $announcement = Announcement::findOrFail($announcementId);
+        $barangay = $announcement->barangay; 
+    
+        return view('barangay.announcement.show', compact('announcement', 'barangay'));
+    }
+    
+    
 }
 

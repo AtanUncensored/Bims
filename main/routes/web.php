@@ -127,6 +127,7 @@ Route::middleware('auth')->group(function () {
 
     
     //Announcements
+        Route::get('/announcement/{announcement}', [AnnouncementController::class, 'show'])->name('barangay.announcement.show');
         Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
         Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
