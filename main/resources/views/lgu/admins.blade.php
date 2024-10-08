@@ -41,9 +41,12 @@
     <div class="mb-2 flex justify-between">
 
         <!-- Caution before proceding to delete an admin -->
-        <button onclick="toggleWarningModal()" class="text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg">
-            <span class="font-bold">Caution <i class="fa-solid fa-triangle-exclamation"></i></span> 
-        </button>
+        <button class="relative text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg group">
+            <span class="font-bold">Caution <i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block bg-white text-red-600 text-sm p-4 rounded shadow-lg w-64">
+                <strong>Warning!</strong> Be aware that after you've deleted all admins from a specific barangay, all records will also be deleted. Proceed with caution.
+            </div>
+        </button>        
 
          <!-- Create -->
         <a href="{{ route('lgu.create-barangay') }}" class="py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-500"><i class="fa-solid fa-plus"></i> Add Barangay Admin</a>
@@ -100,7 +103,7 @@
                                     <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="py-2 px-4 mt-4 text-red-800 hover:text-red-400">
+                                        <button type="submit" class="py-2 px-4 text-red-800 hover:text-red-400">
                                             Delete
                                         </button>
                                     </form>
@@ -138,27 +141,6 @@
             const modal = document.getElementById(`delete-modal-${adminId}`);
             modal.classList.toggle('hidden');
         }
-        //Show warning ni sa delete na modal
-        function toggleWarningModal() {
-            const modal = document.getElementById(`warning-modal`);
-            modal.classList.toggle('hidden');
-        }
 </script>
 
 @endsection
-
-<!-- Caution modal ni dapita dere -->
-<div id="warning-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
-
-        <h3 class="text-lg font-bold text-red-600 mb-3 text-center uppercase"><i class="fa-solid fa-triangle-exclamation"></i> Read before deletion <i class="fa-solid fa-triangle-exclamation"></i></h3>
-        <hr class="border-t-2 border-gray-300">
-
-        <p class="mb-6 mt-3 ml-4 text-red-600">Warning! be aware that after you've deleted all admins from a specific barangay, see to it that all records will also be deleted so proceed with caution.</p>
-        <div class="flex justify-end space-x-4">
-            <button onclick="toggleWarningModal()" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">
-                Ok
-            </button>
-        </div>
-    </div>
-</div>      

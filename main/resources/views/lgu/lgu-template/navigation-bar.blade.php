@@ -98,9 +98,9 @@
 
                             <div id="logout-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                 <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
-                                    <div class="flex items-center">
+                                    <div class="flex justify-start items-center">
                                         <img class="w-[50px] h-[50px] rounded-full" src="{{ asset('images/bims-logo.png') }}" alt="barangay/lgu logo">
-                                        <h3 class="text-lg font-bold text-center mt-3 ml-3 text-red-500">Confirm Log Out</h3>
+                                        <h3 class="text-lg font-bold text-center ml-3 text-red-500">Confirm Log Out</h3>
                                     </div>
                                     <p class="mb-6 mt-3 ml-4 text-gray-600">Are you sure you want to log out?</p>
                                     <div class="flex justify-end space-x-4">

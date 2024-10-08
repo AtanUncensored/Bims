@@ -50,11 +50,11 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="flex items-center justify-between">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <div class="flex items-center justify-end">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-3">
                     Update Admin
                 </button>
-                <a href="{{ route('lgu.admins') }}" class="inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-800">
+                <a href="{{ route('lgu.admins') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
                     Cancel
                 </a>
             </div>
