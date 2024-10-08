@@ -42,7 +42,7 @@
 
         <!-- Caution before proceding to delete an admin -->
         <button onclick="toggleWarningModal()" class="text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg">
-            <span class="font-bold">--> <i class="fa-solid fa-exclamation fa-xl"></i> Caution <i class="fa-solid fa-exclamation fa-xl"></i> <--</span> 
+            <span class="font-bold">Caution <i class="fa-solid fa-triangle-exclamation"></i></span> 
         </button>
 
          <!-- Create -->
@@ -91,15 +91,16 @@
                                 <hr class="border-t-2 border-gray-300">
 
                                 <p class="mb-6 mt-3 ml-4 text-gray-600">Continue to delete admin?</p>
+                                
                                 <div class="flex justify-end space-x-4">
-                                    <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">
+                                    <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="hover:text-gray-400">
                                         Cancel
                                     </button>
 
-                                    <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800 px-3 py-2 rounded">
+                                        <button type="submit" class="py-2 px-4 mt-4 text-red-800 hover:text-red-400">
                                             Delete
                                         </button>
                                     </form>
@@ -150,7 +151,7 @@
 <div id="warning-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
 
-        <h3 class="text-lg font-bold text-red-600 mb-3 uppercase">Read before deletion</h3>
+        <h3 class="text-lg font-bold text-red-600 mb-3 text-center uppercase"><i class="fa-solid fa-triangle-exclamation"></i> Read before deletion <i class="fa-solid fa-triangle-exclamation"></i></h3>
         <hr class="border-t-2 border-gray-300">
 
         <p class="mb-6 mt-3 ml-4 text-red-600">Warning! be aware that after you've deleted all admins from a specific barangay, see to it that all records will also be deleted so proceed with caution.</p>
