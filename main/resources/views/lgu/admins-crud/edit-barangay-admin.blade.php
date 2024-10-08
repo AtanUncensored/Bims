@@ -8,13 +8,7 @@
 
 @section('content')
 <div class="edit-barangay-admin py-2 px-4">
-    <div id="title" class="py-2 px-4 mt-[15px]">
-        <h1 class="text-2xl font-bold text-blue-600 text-center">Edit Barangay Administrator</h1>
-    </div>
-
-    <div class="my-4">
-        <hr class="border-t-2 m-[15px] border-gray-300">
-    </div>
+    <h1 class="text-2xl font-bold text-blue-600 text-center">Edit Barangay Administrator</h1>
 
     <!-- Edit Form -->
     <div class="mt-[20px] mb-6 max-w-lg mx-auto bg-white p-8 rounded shadow">

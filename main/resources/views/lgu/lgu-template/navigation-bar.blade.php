@@ -78,7 +78,7 @@
                     <i class="fas fa-bars fa-lg mr-3"></i>
                 </button>
                 @yield('icon')
-                <h1 class="text-1xl lg:text-xl text-gray-600">@yield('title', 'Dashboard')</h1>
+                <h1 class="text-[15px] lg:text-xl text-gray-600">@yield('title', 'Dashboard')</h1>
     
                 <div class="flex items-center ml-auto">
                     <h1 class="text-2xl font-bold transform scale-y-130">|</h1>    

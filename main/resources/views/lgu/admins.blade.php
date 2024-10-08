@@ -15,30 +15,27 @@
         <hr class="border-t-2 border-gray-300">
     </div>
 
-    <!-- Filter Form using Select2 -->
-    <div class="mt-2 mb-4">
-        <h2 class="font-semibold mb-2">Filter by Barangay:</h2>
-        <form action="{{ route('lgu.admins') }}" method="GET" id="filterForm">
-            <div class="mb-2">
-                <select name="barangay_ids[]" id="barangay_id" class="barangay-select w-full p-2 border rounded-md" multiple>
-                    @foreach($barangays as $barangay)
-                        <option value="{{ $barangay->id }}" {{ in_array($barangay->id, (array) request('barangay_ids', [])) ? 'selected' : '' }}>
-                            {{ $barangay->barangay_name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-        </form>
-    </div>
-
     @if(session('success'))
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-2">
         {{ session('success') }}
     </div>
     @endif
 
+<!-- Filter Form using Select2 -->
+    <div class="mb-4"> 
+      <form action="{{ route('lgu.admins') }}" method="GET" id="filterForm">
+        <p class="mb-2 text-gray-600 font-semibold">Filter by Barangay:</p>
+            <select name="barangay_ids[]" id="barangay_id" class="barangay-select w-full p-2 border rounded-md" multiple>
+                @foreach($barangays as $barangay)
+                    <option value="{{ $barangay->id }}" {{ in_array($barangay->id, (array) request('barangay_ids', [])) ? 'selected' : '' }}>
+                        {{ $barangay->barangay_name }}
+                    </option>
+                @endforeach
+            </select>
+      </form>
+    </div>
    
-    <div class="mb-2 flex justify-between">
+    <div class="mb-2 flex justify-end">
 
         <!-- Caution before proceding to delete an admin -->
         <button class="relative text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg group">
@@ -54,18 +51,18 @@
 
     <!-- Table for displaying Barangay Admins -->
     <div class="max-h-[40vh] overflow-y-auto">
-        <table class="min-w-full bg-white">
-            <thead>
+        <table class="min-w-full table-auto bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead class="bg-gray-600 text-white">
                 <tr>
-                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Name</th>
-                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Email</th>
-                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Assigned Barangay</th>
-                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-sm text-left">Edit / Delete</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-sm text-left">Name</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-sm text-left">Email</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-sm text-left">Assigned Barangay</th>
+                    <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-sm text-left">Edit / Delete</th>
                 </tr>
             </thead>
             <tbody>
                 @if($adminUsers->isEmpty())
-                <tr>
+                <tr class="hover:bg-gray-300 transition duration-300 ease-in-out">
                     <td colspan="4" class="py-4 px-6 text-center text-gray-500">
                         No barangay administrators found.
                     </td>
@@ -77,9 +74,9 @@
                     <td class="py-2 px-4 font-semibold border-b text-blue-600 border-gray-200">{{ $admin->email }}</td>
                     <td class="py-2 px-4 font-semibold border-b border-gray-200">{{ $admin->barangay ? $admin->barangay->barangay_name : 'N/A' }}</td>
                     <td class="py-2 px-4 font-semibold border-b border-gray-200">
-                        <a href="{{ route('lgu.admins-crud.edit-barangay-admin', $admin->id) }}" class="text-blue-600 py-1 px-3 rounded hover:text-blue-800"><i class="fa-solid fa-pen"></i></a>
+                        <a href="{{ route('lgu.admins-crud.edit-barangay-admin', $admin->id) }}" class="text-blue-700 py-1 px-2 md:px-3 rounded hover:text-blue-900"><i class="fa-solid fa-pen"></i></a>
 
-                        <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg">
+                        <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="text-red-700 py-1 px-2 md:px-3 rounded hover:text-red-900">
                             <i class="fa-solid fa-trash"></i>
                         </button>
 

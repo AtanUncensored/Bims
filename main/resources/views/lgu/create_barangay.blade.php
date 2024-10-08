@@ -11,73 +11,73 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<div class="p-4">
-    <h2 class="text-2xl text-green-700 font-bold mb-4">Create Barangay Admin</h2>
-    
+<div class="py-2 px-4 max-h-[80vh] overflow-y-auto">
+    <h1 class="text-2xl font-bold text-blue-600 text-center">Create Barangay Admin</h1>
+
     <!-- Success message ni dere nya naka set pud na timer nya is 2 sec para ma wala
     gamit ang alpine extension naa sa js folder-->
-
     @if(session('success'))
-    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-4">
+    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-1 px-2 rounded mb-2 mt-2">
         {{ session('success') }}
     </div>
     @endif
 
     <!-- Create Form para sa admin sa kada barangay -->
-    <form method="POST" action="{{ route('lgu.store-barangay-admin') }}" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-4 w-full">
-        @csrf
-
-        <div class="mb-4">
-            <label for="barangay_id" class="block text-sm font-medium text-gray-700">Select Barangay</label>
-            <select name="barangay_id" id="barangay_id" class="barangay-select mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                @foreach($barangays as $barangay)
-                    <option value="{{ $barangay->id }}">{{ $barangay->barangay_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        
-        <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" id="name" name="name" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-            @error('name')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
-        
-        <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" id="email" name="email" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-            @error('email')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
-        
-        <div class="mb-4">
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-            <input type="password" id="password" name="password" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-            @error('password')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
-        
-        <div class="mb-4">
-            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-            @error('password_confirmation')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
-        <div class="flex justify-between">
+    <div class="mt-[20px] mb-4 max-w-lg mx-auto bg-white p-8 rounded shadow">
+        <form method="POST" action="{{ route('lgu.store-barangay-admin') }}" enctype="multipart/form-data">
+            @csrf
             <div class="mb-4">
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Create Barangay</button>
+                <label for="barangay_id" class="block text-gray-700 text-sm font-bold mb-2">Select Barangay</label>
+                <select name="barangay_id" id="barangay_id"  class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                    @foreach($barangays as $barangay)
+                        <option value="{{ $barangay->id }}">{{ $barangay->barangay_name }}</option>
+                    @endforeach
+                </select>
             </div>
+            
             <div class="mb-4">
-                <a href="{{ route('lgu.admins') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
-                    Back to Admins
-                </a>
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                <input type="text" id="name" name="name" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                @error('name')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
             </div>
-        </div>
-    </form>
+            
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                @error('email')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                <input type="password" id="password" name="password" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                @error('password')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            
+            <div class="mb-4">
+                <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                @error('password_confirmation')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="flex justify-end items-center">
+                <div class="mb-4">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Create Barangay</button>
+                </div>
+                <div class="mb-4">
+                    <a href="{{ route('lgu.admins') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <script>
         $(document).ready(function() {
