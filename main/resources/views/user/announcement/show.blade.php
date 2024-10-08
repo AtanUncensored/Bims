@@ -1,4 +1,4 @@
-@extends('barangay.templates.navigation-bar')
+@extends('user.templates.navigation-bar')
 
 @section('icon')
 <i class="fa-solid fa-bullhorn fa-lg"></i>
@@ -31,7 +31,7 @@
     </div>
 </div>
 <div class="flex justify-end mt-3 mr-8">
-    <a href="{{ url('/announcements/show') }}" class="inline-block font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 text-lg">
+    <a href="{{ url('/announcements') }}" class="inline-block font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 text-lg">
         Return to Announcements
     </a>
 </div>

@@ -29,7 +29,7 @@
                             {{-- <p class="text-gray-500 mb-4">{{ \Carbon\Carbon::parse($announcement->announcement_date)->format('F d, Y') }}</p>
                             <p class="text-gray-700">{{ \Illuminate\Support\Str::limit($announcement->content, 150, '...') }}</p> --}}
                         </div>
-                        <a href="#" class="ml-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">View details</a>
+                        <a href="{{ route('user.announcement.show', $announcement->id) }}" class="ml-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">View details</a>
                     </div>
                 </div>
             @endforeach

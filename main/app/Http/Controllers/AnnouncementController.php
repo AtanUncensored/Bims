@@ -68,6 +68,13 @@ class AnnouncementController extends Controller
         return view('barangay.announcement.show', compact('announcement', 'barangay'));
     }
     
+    public function showUser($announcementId)
+    {
+        $announcement = Announcement::findOrFail($announcementId);
+        $barangay = $announcement->barangay; 
+    
+        return view('user.announcement.show', compact('announcement', 'barangay'));
+    }
     
 }
 
