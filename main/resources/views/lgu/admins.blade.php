@@ -69,35 +69,36 @@
                     <td class="py-2 px-4 font-semibold border-b border-gray-200">
                         <a href="{{ route('lgu.admins-crud.edit-barangay-admin', $admin->id) }}" class="text-blue-600 py-1 px-3 rounded hover:text-blue-800"><i class="fa-solid fa-pen"></i></a>
 
-                        <button type="button" class="text-red-600 py-1 px-3 rounded hover:text-red-800" data-modal-target="#deleteModal" data-modal-toggle="deleteModal">
+                        <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                        
-                        <!-- Delete Confirmation Modal -->
-                        <div id="deleteModal" class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-modal h-full bg-gray-900 bg-opacity-50">
-                            <div class="relative w-full max-w-md h-full md:h-auto mx-auto mt-20">
-                                <div class="relative bg-white rounded-lg shadow">
-                                    <div class="p-4 border-b">
-                                        <h3 class="text-lg font-semibold text-gray-900">Delete Confirmation - <span class="text-blue-600">Admin</span></h3>
-                                    </div>
-                                    <div class="p-6">
-                                        <p class="text-[15px] text-gray-600">Are you sure you want to delete this admin?</p>
-                                    </div>
-                                    <div class="p-4 border-t flex justify-end space-x-2">
-                                        <button type="button" class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded" data-modal-hide="deleteModal">
-                                            Cancel
+
+                        <!-- Delete Modal ni dere same sa log out nga layout -->
+                        <div id="delete-modal-{{ $admin->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                            <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
+                                <div class="flex justify-start items-center mb-3">
+                                    <img class="w-[50px] h-[50px] rounded-full" src="{{ asset('images/' . $admin->barangay->logo) }}" alt="barangay/lgu logo">
+                                    <h3 class="text-lg font-bold text-green-600 ml-3 uppercase"> Brgy. {{ $admin->barangay ? $admin->barangay->barangay_name : 'N/A' }}</h3>
+                                </div>
+                                <h3 class="text-lg font-bold text-gray-600 mb-3">Admin user: <span class="text-blue-600">{{ $admin->name }}</span></h3>
+                                <hr class="border-t-2 border-gray-300">
+
+                                <p class="mb-6 mt-3 ml-4 text-gray-600">Continue to delete admin?</p>
+                                <div class="flex justify-end space-x-4">
+                                    <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">
+                                        Cancel
+                                    </button>
+
+                                    <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-800 px-3 py-2 rounded">
+                                            Delete
                                         </button>
-                                        <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800 px-3 py-2 rounded">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>                            
                     </td>
                 </tr>
                 @endforeach
@@ -125,18 +126,12 @@
         });
     });
         //Show ni sa delete modal
-        document.querySelectorAll('[data-modal-toggle]').forEach(button => {
-            button.addEventListener('click', function () {
-                const modalId = this.getAttribute('data-modal-target');
-                document.querySelector(modalId).classList.toggle('hidden');
-            });
-        });
-        //Hide ni sa delete modal
-        document.querySelectorAll('[data-modal-hide]').forEach(button => {
-            button.addEventListener('click', function () {
-                this.closest('.fixed').classList.add('hidden');
-            });
-        });
+        function toggleDeleteModal(adminId) {
+            const modal = document.getElementById(`delete-modal-${adminId}`);
+            modal.classList.toggle('hidden');
+        }
+
 </script>
+
 @endsection
 
