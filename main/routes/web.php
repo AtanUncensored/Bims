@@ -158,7 +158,7 @@ Route::middleware('auth')->group(function () {
 
         //Announcements
         Route::get('/announcements', [AnnouncementController::class, 'userIndex'])->name('user.announcement.index');
-        Route::get('/announcement/{announcement}', [AnnouncementController::class, 'showUser'])->name('user.announcement.show');
+        Route::get('/announcementUser/{announcement}', [AnnouncementController::class, 'showUser'])->name('user.announcement.show');
 
         //BudgetReports
         Route::get('/budget-reports', [BudgetController::class, 'userIndex'])->name('user.budget-report.index');
