@@ -14,6 +14,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BarangayOfficialController;
+use App\Http\Controllers\CertificateRequestController;
 use App\Http\Controllers\Certificates\ResidencyController;
 use App\Http\Controllers\Certificates\UnifastController;
 
@@ -184,6 +185,9 @@ Route::middleware('auth')->group(function () {
         //or number edit
 
         Route::put('/certificates/{certResidency}', [ResidencyController::class, 'updateOrNumber'])->name('certificates.update.or-number');
+
+        Route::get('/certificates/request', [CertificateRequestController::class, 'create'])->name('certificates.request');
+        Route::post('/certificates/request', [CertificateRequestController::class, 'store'])->name('certificates.store');
     });
     
 });
