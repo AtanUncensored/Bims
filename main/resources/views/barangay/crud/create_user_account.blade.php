@@ -53,9 +53,14 @@
 
                 <div class="form-group">
                     <label for="gender" class="block text-sm font-medium text-gray-700">Gender:</label>
-                    <input type="text" name="gender" id="gender" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring focus:ring-blue-400">
+                    <select name="gender" id="gender" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring focus:ring-blue-400">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
-
+                
                 <div class="form-group">
                     <label for="civil_status" class="block text-sm font-medium text-gray-700">Civil Status:</label>
                     <input type="text" name="civil_status" id="civil_status" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring focus:ring-blue-400">
