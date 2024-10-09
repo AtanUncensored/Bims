@@ -45,11 +45,17 @@ class BarangayController extends Controller
     {
         $userBarangayId = Auth::user()->barangay_id;
     
-        $households = Household::where('user_id', $userBarangayId)->get();
+        // Fetch households that belong to the user's barangay
+        $households = Household::whereHas('user', function ($query) use ($userBarangayId) {
+            $query->where('barangay_id', $userBarangayId);
+        })->get();
+    
+        // Fetch users in the same barangay
         $users = User::where('barangay_id', $userBarangayId)->get();
     
         return view('barangay.crud.create_user_account', compact('households', 'users'));
     }
+    
     
 
     public function showLoginPage($barangay_name)
