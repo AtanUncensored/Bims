@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('imgUrl');
             $table->date('announcement_date');
+            $table->dateTime('expiration_date');
             $table->text('content');
             $table->timestamps();
         });

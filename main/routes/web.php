@@ -131,6 +131,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
         Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
+        Route::get('/announcements/expired', [AnnouncementController::class, 'expiredView'])->name('announcements.expired');
 
     //Complaints
         Route::get('/complaints', [ComplaintController::class, 'barangayComplaints'])->name('barangay.complaints.index');
@@ -159,6 +160,7 @@ Route::middleware('auth')->group(function () {
         //Announcements
         Route::get('/announcements', [AnnouncementController::class, 'userIndex'])->name('user.announcement.index');
         Route::get('/announcementUser/{announcement}', [AnnouncementController::class, 'showUser'])->name('user.announcement.show');
+        Route::get('/announcementView/expired', [AnnouncementController::class, 'userExpiredView'])->name('user.announcement.expired');
 
         //BudgetReports
         Route::get('/budget-reports', [BudgetController::class, 'userIndex'])->name('user.budget-report.index');

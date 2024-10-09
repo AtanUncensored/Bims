@@ -12,7 +12,9 @@
 
     <hr class="border-t-2 mb-4 border-gray-300">
 
-    <h2 class="text-center text-gray-500 mb-2 text-lg">-Recently Announced-</h2>
+    <div class="flex justify-end">
+        <a href="{{ route('user.announcement.expired') }}" class="btn btn-primary mb-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">View Expired Announcements</a>
+    </div>
 
     <!-- Display announcements -->
     <div class="max-h-[55vh] overflow-y-auto">

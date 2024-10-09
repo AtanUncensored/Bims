@@ -11,18 +11,28 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
+        // Fetch only the announcements that haven't expired yet
         $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
-                                      ->orderBy('announcement_date', 'desc')
-                                      ->paginate(10); 
-        
+                            ->where(function($query) {
+                                $query->where('expiration_date', '>=', now())
+                                        ->orWhereNull('expiration_date');
+                            })
+                            ->orderBy('announcement_date', 'desc')
+                            ->paginate(10);
+
         return view('barangay.announcement.index', compact('announcements'));
     }
-    
+
     public function userIndex()
     {
+        // Fetch only the announcements that haven't expired yet
         $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
-        ->orderBy('announcement_date', 'desc')
-        ->paginate(10); 
+                            ->where(function($query) {
+                                $query->where('expiration_date', '>=', now())
+                                        ->orWhereNull('expiration_date');
+                            })
+                            ->orderBy('announcement_date', 'desc')
+                            ->paginate(10);
 
         return view('user.announcement.index', compact('announcements'));
     }
@@ -37,6 +47,7 @@ class AnnouncementController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'announcement_date' => 'required|date',
+            'expiration_date' => 'nullable|date',
             'content' => 'required',
             'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -52,6 +63,7 @@ class AnnouncementController extends Controller
             'barangay_id' => Auth::user()->barangay_id,
             'title' => $request->title,
             'announcement_date' => $request->announcement_date,
+            'expiration_date' => $request->expiration_date,
             'content' => $request->content,
             'imgUrl' => $imagePath,
         ]);
@@ -67,6 +79,26 @@ class AnnouncementController extends Controller
     
         return view('barangay.announcement.show', compact('announcement', 'barangay'));
     }
+
+    public function expiredView()
+    {
+        $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
+                                ->where('expiration_date', '<', now())
+                                ->orderBy('expiration_date', 'desc')
+                                ->paginate(10);
+    
+        return view('barangay.announcement.expired', compact('announcements'));
+    }
+
+    public function userExpiredView()
+    {
+        $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
+        ->where('expiration_date', '<', now())
+        ->orderBy('expiration_date', 'desc')
+        ->paginate(10);
+
+        return view('user.announcement.expired', compact('announcements'));
+    }
     
     public function showUser($announcementId)
     {
@@ -75,6 +107,7 @@ class AnnouncementController extends Controller
     
         return view('user.announcement.show', compact('announcement', 'barangay'));
     }
+
     
 }
 
