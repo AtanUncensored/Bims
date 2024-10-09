@@ -15,12 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('resident_id')->constrained()->onDelete('cascade'); 
-            
             $table->string('name'); 
             $table->integer('age'); 
             $table->enum('gender', ['Male', 'Female', 'Other']);  
             $table->date('date'); 
-            $table->string('punongbarangay'); 
             $table->string('ORnumber')->nullable(); 
             $table->timestamps(); 
         });
