@@ -16,8 +16,11 @@ class BudgetController extends Controller
         // Fetch budget reports belonging to the user's barangay
         $budgetReports = Budget::where('barangay_id', $userBarangayId)->get();
 
+        //mo calculate sa totalCost
+        $totalExpenses = $budgetReports->sum('cost');
+
         // Return the view with the budget reports for the user
-        return view('barangay.budget-report.index', ['budgetReports' => $budgetReports]);
+        return view('barangay.budget-report.index', ['budgetReports' => $budgetReports, 'totalExpenses' => $totalExpenses]);
     }
 
     public function userIndex()
@@ -28,8 +31,12 @@ class BudgetController extends Controller
         // Fetch budget reports belonging to the user's barangay
         $budgetReports = Budget::where('barangay_id', $userBarangayId)->get();
 
+        //calculating the totalcost
+        $totalExpenses = $budgetReports->sum('cost');
+
+
         // Return the view with the budget reports for the user
-        return view('user.budget-report.index', ['budgetReports' => $budgetReports]);
+        return view('user.budget-report.index', ['budgetReports' => $budgetReports, 'totalExpenses' => $totalExpenses]);
     }
 
     public function createBudgetReport() {
