@@ -186,17 +186,11 @@
                         <i class="fa-solid fa-file-lines fa-lg text-blue-800"></i>
                         <span>Budget Reports</span>
                     </a>
-                    <div>
-                        <i class="fa-solid fa-certificate fa-lg text-blue-800 ml-[15px]"></i>
-                        <select class="selection rounded py-3 text-center bg-blue-500 text-white" onchange="location = this.value;">
-                            <option value="Request a Certificate" selected disabled>Request a Certificate</option>
-                            <option value="/residencyCert">Residency</option>
-                            <option value="/unifastCert">Unifast</option>
-                            <option value="/unemploymentCert">Unemployment</option>
-                            <option value="/indigencyCert">Indigency</option>
-                            <option value="/jobseekCert">Job Seeker</option>
-                        </select>
-                    </div>
+
+                    <a href="{{ url('/certificates/request') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('budget-reports') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-certificate fa-lg text-blue-800 "></i>
+                        <span>Request Certificate</span>
+                    </a>
                 </nav>                
             </div>
         </div>

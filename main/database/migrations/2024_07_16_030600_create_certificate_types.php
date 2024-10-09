@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('certificate_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('certificate_name')->unique();
-            $table->decimal('price');
-            $table->timestamps();
+                $table->id();
+                $table->string('certificate_name');
+                $table->decimal('price', 8, 2);
+                $table->string('table_name');  // Added this field for dynamic table reference
+                $table->timestamps();
         });
     }
 

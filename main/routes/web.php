@@ -14,6 +14,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BarangayOfficialController;
+use App\Http\Controllers\CertificateRequestController;
 use App\Http\Controllers\Certificates\ResidencyController;
 use App\Http\Controllers\Certificates\UnifastController;
 
@@ -104,6 +105,9 @@ Route::middleware('auth')->group(function () {
         Route::get('barangay/residents/{resident_id}/edit', [BarangayController::class, 'editResident'])->name('barangay.residents.edit');
         Route::put('barangay/residents/{resident_id}', [BarangayController::class, 'updateResident'])->name('barangay.residents.update');
         Route::delete('barangay/residents/{resident_id}', [BarangayController::class, 'deleteResident'])->name('barangay.residents.delete');
+        Route::get('/barangay/create-User', [BarangayController::class, 'createResidentUserForm'])->name('barangay.create-User');
+        Route::post('/barangay/storeResidentUser', [BarangayController::class, 'storeResidentUser'])->name('barangay.storeResidentUser');
+
 
     //BarangayOfficials
         Route::get('/barangay/officials/create', [BarangayOfficialController::class, 'createOfficial'])->name('barangay.officials.create');
@@ -186,6 +190,9 @@ Route::middleware('auth')->group(function () {
         //or number edit
 
         Route::put('/certificates/{certResidency}', [ResidencyController::class, 'updateOrNumber'])->name('certificates.update.or-number');
+
+        Route::get('/certificates/request', [CertificateRequestController::class, 'create'])->name('certificates.request');
+        Route::post('/certificates/request', [CertificateRequestController::class, 'store'])->name('certificates.store');
     });
     
 });

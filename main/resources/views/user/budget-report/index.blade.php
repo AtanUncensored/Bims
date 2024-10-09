@@ -50,9 +50,10 @@
                     @endif
                 </tbody>
             </table>
-        </div>     
+        </div>
+        <br>  
         <div class="text-end mt-3">
-            <p class="font-semibold text-gray-700">Total Expenses:<span class="text-red-500">₱----</span></p>
+            <p class="font-semibold text-gray-700">Total Expenses:<span class="text-red-500">₱{{ number_format($totalExpenses, 2) }}</span></p>
         </div>
     </div>
 </div>

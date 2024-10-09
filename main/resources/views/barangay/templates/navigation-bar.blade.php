@@ -183,6 +183,10 @@
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span>Residents</span>
                     </a>
+                    <a href="{{ url('/barangay/create-User') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangay/create-User') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-users fa-lg text-blue-800"></i>
+                        <span>User</span>
+                    </a>
                     <a href="{{ url('/complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('complaints') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fa-regular fa-newspaper text-blue-800 font-bold"></i>
                         <span>Complaints</span>
