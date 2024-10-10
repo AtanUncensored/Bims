@@ -45,20 +45,20 @@
                     @else
                     @foreach ($budgetReports as $report)
                     <tr class="hover:bg-gray-100 transition">
-                        <td class="px-4 py-2 whitespace-nowrap">{{ $report->item }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->cost }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $report->period_from }} | {{ $report->period_to }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $report->item }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $report->cost }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $report->period_from }} | {{ $report->period_to }}</td>
                         <td class="px-4 py-2 text-right whitespace-nowrap">
-                            <div class="flex gap-2 justify-end">
-                                <a href="{{ route('barangay.budget-report.edit', $report->id) }}" class="w-24 py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-center">
-                                    Edit
+                            <div class="flex gap-2 justify-center items-center">
+                                <a href="{{ route('barangay.budget-report.edit', $report->id) }}" class="text-blue-600 py-1 px-3 rounded hover:text-blue-800">
+                                    <i class="fa-solid fa-pen"></i>
                                 </a>
                 
                                 <form action="{{ route('barangay.budget-report.delete', $report->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this budget report?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="w-24 py-1 px-3 bg-red-500 text-white rounded hover:bg-red-600 transition text-center">
-                                        Delete
+                                    <button type="submit" class="text-red-600 py-1 px-3 rounded hover:text-red-800">
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
                             </div>
