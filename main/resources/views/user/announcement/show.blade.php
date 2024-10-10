@@ -20,9 +20,10 @@
     </div>
 
     <div class="content-area mt-8 bg-white rounded-lg py-6 px-8 shadow-xl leading-relaxed">
+        <p class="uppercase font-bold tracking-wide text-gray-600 mb-3">Announcement Details</p>
         <div class="flex justify-between items-center text-sm text-gray-500 border-b border-gray-300 pb-4">
-            <p class="uppercase font-bold tracking-wide text-gray-600">Announcement Details</p>
-            <p class="italic">Date Scheduled: <span class="text-red-500 font-semibold">{{ $announcement->announcement_date }}</span></p>
+            <p class="italic">Date Scheduled: <span class="text-green-500 font-semibold">{{ $announcement->announcement_date }}</span></p>
+            <p class="italic">Expiration Time: <span class="text-red-500 font-semibold">{{ $announcement->expiration_date }}</span></p>
         </div>
 
         <article class="mt-6 space-y-6 text-lg text-gray-800">

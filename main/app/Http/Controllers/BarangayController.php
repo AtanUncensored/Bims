@@ -56,7 +56,6 @@ class BarangayController extends Controller
         return view('barangay.crud.create_user_account', compact('households', 'users'));
     }
     
-    
 
     public function showLoginPage($barangay_name)
     {
@@ -124,7 +123,6 @@ class BarangayController extends Controller
         // Redirect back with success message
         return back()->with('success', 'Resident and household information added successfully!');
     }
-    
 
     public function viewResident($resident_id)
     {
@@ -135,8 +133,6 @@ class BarangayController extends Controller
     
         return view('barangay.crud.view_resident', compact('resident'));
     }
-    
-
 
     public function editResident($resident_id)
     {
@@ -179,11 +175,11 @@ class BarangayController extends Controller
         $log_entry = 'Admin made changes to resident ' . $resident->first_name . ' with an ID of ' . $resident->id;
         event(new UserLog($log_entry));
 
-                return redirect()->route('barangay.residents.index')->with('success', 'Resident updated successfully.');
-            }
+            return redirect()->route('barangay.residents.index')->with('success', 'Resident updated successfully.');
+    }
 
-            public function deleteResident(Request $request)
-        {
+    public function deleteResident(Request $request)
+    {
             // Find the resident by ID and ensure they belong to the user's barangay
             $resident = Resident::where('id', $request->resident_id)
                                 ->where('barangay_id', Auth::user()->barangay_id)
@@ -196,14 +192,35 @@ class BarangayController extends Controller
         event(new UserLog($log_entry));
 
             return redirect()->route('barangay.residents.index')->with('success', 'Resident deleted successfully.');
-        }
+    }
 
-        public function createResidentUserForm() {
-            return view('barangay.user.createUser');
-        }
+    public function residentUser(Request $request)
+    {
 
-        public function storeResidentUser(Request $request)
-        {
+        $search = $request->input('search');
+
+
+        $users = User::where('barangay_id', Auth::user()->barangay_id)
+        ->when($search, function ($query) use ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        })
+        ->role('user') 
+        ->orderBy('name')
+        ->get();
+
+        return view('barangay.user.index', compact('users', 'search'));
+
+    }
+
+    public function createResidentUserForm() {
+        return view('barangay.user.createUser');
+    }
+
+    public function storeResidentUser(Request $request)
+    {
             // Validate the input fields
             $request->validate([
                 'name' => 'required|string|max:255|unique:users',
@@ -225,15 +242,37 @@ class BarangayController extends Controller
         
             // Assign 'user' role to the newly created user (for residents)
             $user->assignRole('user');
+
+            
+            $log_entry = 'Admin Created a new user ' . $user->name . ' with an ID of ' . $user->id;
+        event(new UserLog($log_entry));
         
             // Redirect back with success message
             return redirect()->back()->with('success', 'User has been created successfully.');
-        }
+    }
+
+    public function editUser(User $user)
+    {
+        return view('barangay.user.edit', compact('user'));
+    }
+
+    public function updateUser(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255',
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'email_verified_at' => now(),
+        ]);
         
-        
+        $log_entry = 'Admin Updated a user named ' . $user->name . ' with an ID of ' . $user->id;
+        event(new UserLog($log_entry));
 
-
-
-
+        return redirect()->route('barangay.user.index')->with('success', 'User updated successfully.');
+    }
 }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resident;
+use App\Events\Userlog;
 use Illuminate\Http\Request;
 use App\Models\BarangayOfficial;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,9 @@ class BarangayOfficialController extends Controller
             'end_of_service' => $request->end_of_service,
             'purok' => $request->purok,
         ]);
+
+        $log_entry = 'Admin Added a new Official with an ID  ' . $request->resident_id . ' in the position of ' . $request->position;
+        event(new UserLog($log_entry));
 
         return redirect()->route('barangay.dashboard')->with('success', 'Official added successfully.');
     }
@@ -91,14 +95,32 @@ class BarangayOfficialController extends Controller
             'purok' => $request->purok,
         ]);
 
+        
+        $log_entry = 'Admin Updated an Official with an ID of  ' . $request->resident_id . ' in the position ' . $request->position;
+        event(new UserLog($log_entry));
+
         return redirect()->route('barangay.dashboard')->with('success', 'Official updated successfully.');
     }
 
     public function destroyOfficial(BarangayOfficial $official) {
-
+        
+        $officialDetails = [
+            'id' => $official->id,
+            'position' => $official->position, 
+        ];
+    
+        $log_entry = sprintf(
+            'Admin Deleted an Official win an ID of: %s, in the Position of: %s',
+            $officialDetails['id'],
+            $officialDetails['position']
+        );
+    
         $official->delete();
-
+    
+        event(new UserLog($log_entry));
+    
         return redirect()->route('barangay.dashboard')->with('success', 'Official deleted successfully');
     }
+    
 
 }

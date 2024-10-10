@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Userlog;
 use Illuminate\Http\Request;
 use App\Models\Announcement;
 use App\Models\Barangay;
@@ -17,7 +18,7 @@ class AnnouncementController extends Controller
                                 $query->where('expiration_date', '>=', now())
                                         ->orWhereNull('expiration_date');
                             })
-                            ->orderBy('announcement_date', 'desc')
+                            ->orderBy('created_at', 'desc')
                             ->paginate(10);
 
         return view('barangay.announcement.index', compact('announcements'));
@@ -31,7 +32,7 @@ class AnnouncementController extends Controller
                                 $query->where('expiration_date', '>=', now())
                                         ->orWhereNull('expiration_date');
                             })
-                            ->orderBy('announcement_date', 'desc')
+                            ->orderBy('created_at', 'desc')
                             ->paginate(10);
 
         return view('user.announcement.index', compact('announcements'));
@@ -67,6 +68,9 @@ class AnnouncementController extends Controller
             'content' => $request->content,
             'imgUrl' => $imagePath,
         ]);
+
+        $log_entry = 'Admin Added a new Announcement titled as ' . $request->title;
+        event(new UserLog($log_entry));
 
         return redirect()->route('announcements.index')->with('success', 'Announcement created successfully!');
     }

@@ -15,9 +15,9 @@
         <h2 class="text-center text-gray-500 mt-8 text-lg">-Recent Activities-</h2>
     </div>
 
-    <div class="container mx-auto px-4">
+    <div class="mx-auto px-4">
         
-        <div class="max-h-[50vh] overflow-y-auto">
+        <div class="max-h-[60vh] overflow-y-auto">
             @if($logs->isEmpty())
                 <p class="text-center text-gray-500 py-4">Currently no Admin activity logs available yet.</p>
             @else
@@ -31,8 +31,8 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach($logs as $log)
                         <tr class="hover:bg-gray-100 transition">
-                            <td class="px-4 py-2 text-green-800 whitespace-nowrap">{{$log->log_entry}}</td>
-                            <td class="px-4 py-2 text-red-800 text-center whitespace-nowrap">{{$log->created_at}}</td>
+                            <td class="px-4 py-2 text-gray-800 whitespace-nowrap">{{$log->log_entry}}</td>
+                            <td class="px-4 py-2 text-green-800 text-center whitespace-nowrap">{{$log->created_at}}</td>
                         </tr>
                         @endforeach
                     </tbody>

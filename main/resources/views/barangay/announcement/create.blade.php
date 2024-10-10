@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            <label for='expiration_date' class="block text-gray-700">Expiration Date and Time:</label>
+            <label for='expiration_date'>Expiration Date and Time:</label>
             <input type="datetime-local" id='expiration_date' name="expiration_date" class="border border-gray-600 focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md" value="{{ old('expiration_date') }}">
         </div>
 

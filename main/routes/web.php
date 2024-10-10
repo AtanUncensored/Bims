@@ -105,8 +105,6 @@ Route::middleware('auth')->group(function () {
         Route::get('barangay/residents/{resident_id}/edit', [BarangayController::class, 'editResident'])->name('barangay.residents.edit');
         Route::put('barangay/residents/{resident_id}', [BarangayController::class, 'updateResident'])->name('barangay.residents.update');
         Route::delete('barangay/residents/{resident_id}', [BarangayController::class, 'deleteResident'])->name('barangay.residents.delete');
-        Route::get('/barangay/create-User', [BarangayController::class, 'createResidentUserForm'])->name('barangay.create-User');
-        Route::post('/barangay/storeResidentUser', [BarangayController::class, 'storeResidentUser'])->name('barangay.storeResidentUser');
 
 
     //BarangayOfficials
@@ -116,6 +114,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/barangay/{official}', [BarangayOfficialController::class, 'updateOfficial'])->name('barangay.officials.update');
         Route::delete('/barangay/officials/{official}', [BarangayOfficialController::class, 'destroyOfficial'])->name('barangay.officials.destroy');
 
+
+    //Residents Account
+        Route::get('/residentUser', [BarangayController::class, 'residentUser'])->name('barangay.user.index');
+        Route::get('/barangay/create-User', [BarangayController::class, 'createResidentUserForm'])->name('barangay.user.createUser');
+        Route::post('/barangay/storeResidentUser', [BarangayController::class, 'storeResidentUser'])->name('barangay.storeResidentUser');
+        Route::get('/user/{user}/edit', [BarangayController::class, 'editUser'])->name('barangay.user.edit');
+        Route::put('/user/{user}', [BarangayController::class, 'updateUser'])->name('barangay.user.update');
     
     //Residents
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');

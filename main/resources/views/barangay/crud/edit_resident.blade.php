@@ -105,13 +105,13 @@
             </div>
         </div>
 
-        <div class="flex justify-between mt-6">
-            <a href="{{ route('barangay.residents.index') }}" class="py-2 px-6 bg-gray-600 text-white font-semibold rounded-lg shadow hover:bg-gray-700 transition ease-in-out duration-150">
-                Return
-            </a>
-            <button type="submit" class="py-2 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition ease-in-out duration-150">
+        <div class="flex justify-end mt-6">
+            <button type="submit" class="py-2 px-6 bg-blue-600 text-white mr-3 font-semibold rounded-lg shadow hover:bg-blue-700 transition ease-in-out duration-150">
                 Update
             </button>
+            <a href="{{ route('barangay.residents.index') }}" class="py-2 px-6 text-blue-600 font-semibold hover:text-blue-700 transition ease-in-out duration-150">
+                Cancel
+            </a>
         </div>
     </form>
 </div>

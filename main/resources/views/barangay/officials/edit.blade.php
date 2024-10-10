@@ -16,77 +16,78 @@
         @csrf
         @method('PUT')
 
+        <div class="max-h-[60vh] overflow-y-auto">
         <!-- Resident Dropdown with Search -->
-        <div class="mb-4">
-            <label for="resident_id" class="block text-sm font-medium text-gray-700">Select Resident</label>
-            <select name="resident_id" id="resident_id" class="official-select w-full p-2 border rounded-md">
-                <option value="">Select a resident</option>
-                @foreach($residents as $resident)
-                    <option value="{{ $resident->id }}" {{ $resident->id == $official->resident_id ? 'selected' : '' }}>
-                        {{ $resident->first_name }} {{ $resident->last_name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('resident_id')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+            <div class="mb-4">
+                <label for="resident_id" class="block text-sm font-medium text-gray-700">Select Resident</label>
+                <select name="resident_id" id="resident_id" class="official-select w-full p-2 border rounded-md">
+                    <option value="">Select a resident</option>
+                    @foreach($residents as $resident)
+                        <option value="{{ $resident->id }}" {{ $resident->id == $official->resident_id ? 'selected' : '' }}>
+                            {{ $resident->first_name }} {{ $resident->last_name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('resident_id')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
 
-        <!-- Position -->
-        <div class="mb-4">
-            <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
-            <input type="text" name="position" id="position" class="w-full p-2 border rounded-md" value="{{ old('position', $official->position) }}">
-            @error('position')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+            <!-- Position -->
+            <div class="mb-4">
+                <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
+                <input type="text" name="position" id="position" class="w-full p-2 border rounded-md" value="{{ old('position', $official->position) }}">
+                @error('position')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
 
-        <!-- Committee -->
-        <div class="mb-4">
-            <label for="committee" class="block text-sm font-medium text-gray-700">Committee</label>
-            <input type="text" name="committee" id="committee" class="w-full p-2 border rounded-md" value="{{ old('committee', $official->committee) }}">
-            @error('committee')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+            <!-- Committee -->
+            <div class="mb-4">
+                <label for="committee" class="block text-sm font-medium text-gray-700">Committee</label>
+                <input type="text" name="committee" id="committee" class="w-full p-2 border rounded-md" value="{{ old('committee', $official->committee) }}">
+                @error('committee')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
 
-        <!-- Start of Service -->
-        <div class="mb-4">
-            <label for="start_of_service" class="block text-sm font-medium text-gray-700">Start of Service</label>
-            <input type="date" name="start_of_service" id="start_of_service" class="w-full p-2 border rounded-md" value="{{ old('start_of_service', $official->start_of_service) }}">
-            @error('start_of_service')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+            <!-- Start of Service -->
+            <div class="mb-4">
+                <label for="start_of_service" class="block text-sm font-medium text-gray-700">Start of Service</label>
+                <input type="date" name="start_of_service" id="start_of_service" class="w-full p-2 border rounded-md" value="{{ old('start_of_service', $official->start_of_service) }}">
+                @error('start_of_service')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
 
-        <!-- End of Service -->
-        <div class="mb-4">
-            <label for="end_of_service" class="block text-sm font-medium text-gray-700">End of Service</label>
-            <input type="date" name="end_of_service" id="end_of_service" class="w-full p-2 border rounded-md" value="{{ old('end_of_service', $official->end_of_service) }}">
-            @error('end_of_service')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
+            <!-- End of Service -->
+            <div class="mb-4">
+                <label for="end_of_service" class="block text-sm font-medium text-gray-700">End of Service</label>
+                <input type="date" name="end_of_service" id="end_of_service" class="w-full p-2 border rounded-md" value="{{ old('end_of_service', $official->end_of_service) }}">
+                @error('end_of_service')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
 
-        <!-- Purok -->
-        <div class="mb-4">
-            <label for="purok" class="block text-sm font-medium text-gray-700">Purok</label>
-            <select name="purok" id="purok" class="w-full p-2 border rounded-md">
-                <option value="">Select a Purok</option>
-                @for($i = 1; $i <= 7; $i++)
-                    <option value="{{ $i }}" {{ $i == $official->purok ? 'selected' : '' }}> {{ $i }}</option>
-                @endfor
-            </select>
-            @error('purok')
-                <span class="text-red-600 text-sm">{{ $message }}</span>
-            @enderror
+            <!-- Purok -->
+            <div class="mb-4">
+                <label for="purok" class="block text-sm font-medium text-gray-700">Purok</label>
+                <select name="purok" id="purok" class="w-full p-2 border rounded-md">
+                    <option value="">Select a Purok</option>
+                    @for($i = 1; $i <= 7; $i++)
+                        <option value="{{ $i }}" {{ $i == $official->purok ? 'selected' : '' }}> {{ $i }}</option>
+                    @endfor
+                </select>
+                @error('purok')
+                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
         </div>
-
-        <div class="flex justify-between items-center">
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+        <div class="flex justify-end items-center mt-3">
+            <button type="submit" class="px-4 py-2 bg-blue-500 mr-3 text-white rounded-md hover:bg-blue-600">
                 Update Official
             </button>
-            <a href="{{ route('barangay.dashboard') }}" class="inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-800">Return to Dashboard</a>
+            <a href="{{ route('barangay.dashboard') }}" class="inline-block align-baseline font-bold text-blue-600 hover:text-blue-800">Cancel</a>
         </div>
     </form>
 </div>

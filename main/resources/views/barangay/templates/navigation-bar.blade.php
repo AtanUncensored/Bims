@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barangay Information Management System</title>
     <script src="{{ asset('/js/tailwind.min.js') }}"></script>
+    <script src="{{ asset('/js/alpine.min.js') }}"></script>
     <link rel="icon" href="{{ asset('images/bims-logo.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
@@ -183,9 +184,9 @@
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span>Residents</span>
                     </a>
-                    <a href="{{ url('/barangay/create-User') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangay/create-User') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-users fa-lg text-blue-800"></i>
-                        <span>User</span>
+                    <a href="{{ url('/residentUser') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residentUser') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-user fa-lg text-blue-800"></i>
+                        <span>Users</span>
                     </a>
                     <a href="{{ url('/complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('complaints') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fa-regular fa-newspaper text-blue-800 font-bold"></i>
