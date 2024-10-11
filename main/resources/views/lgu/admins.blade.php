@@ -41,7 +41,7 @@
         <button class="relative text-left px-4 py-2 text-red-600 hover:text-red-800 rounded-lg group">
             <span class="font-bold">Caution <i class="fa-solid fa-triangle-exclamation"></i></span>
             <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block bg-white text-red-600 text-sm p-4 rounded shadow-lg w-64">
-                <strong>Warning!</strong> Be aware that after you've deleted all admins from a specific barangay, all records will also be deleted. Proceed with caution.
+                <strong>Warning!</strong> Beware when deleting a single admin from a specific barangay. Please Proceed with caution and read the confirmation before continuing.
             </div>
         </button>        
 
@@ -89,8 +89,9 @@
                                 </div>
                                 <h3 class="text-lg font-bold text-gray-600 mb-3">Admin user: <span class="text-blue-600">{{ $admin->name }}</span></h3>
                                 <hr class="border-t-2 border-gray-300">
+                                <p class="mb-3 mt-3 text-red-500"><i class="fa-solid fa-triangle-exclamation"></i> Records added by this admin will also be deleted.</p>
 
-                                <p class="mb-6 mt-3 ml-4 text-gray-600">Continue to delete admin?</p>
+                                <p class="mb-6 ml-4 text-gray-600">Continue to delete admin?</p>
                                 
                                 <div class="flex justify-end space-x-4">
                                     <button onclick="toggleDeleteModal('{{ $admin->id }}')" class="hover:text-gray-400">

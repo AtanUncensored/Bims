@@ -40,17 +40,19 @@
                 <div class="w-full md:w-[330px] px-4 mb-4">
                     <div class="bg-white shadow-lg rounded-lg p-6">
                         <div class="mb-4">
-                            <div class="flex justify-end items-center text-red-600 font-bold">
-                                    <button type="submit">X</button>
-                            </div>
-    
                             <h2 class="text-[15px] font-bold text-gray-600">Name: {{ $user->name }}</h2>
                             <h2 class="text-[15px] font-bold text-gray-600">Email: <span class="text-blue-600">{{ $user->email }}</span> </h2>
                         </div>
                         <hr class="border-t-2 border-gray-400">
-                        <div class="mt-4 flex justify-end text-blue-600">
-                            <div class="bg-blue-600 text-white py-2 px-4 rounded-lg">
-                                <a href="{{ route('barangay.user.edit', $user) }}">Update</a> 
+                        <div class="mt-4 flex justify-end items-center text-blue-600">
+                            <div class="text-gray-600 font-semibold">
+                                <p>Actions:</p>
+                            </div>
+                            <div class="py-2 px-4 rounded-lg">
+                                <a href="{{ route('barangay.user.edit', $user) }}"><i class="fas fa-pen fa-lg text-blue-600"></i></a> 
+                            </div>
+                            <div>
+                                <button type="submit"><i class="fas fa-trash fa-lg text-red-600"></i></button>
                             </div>
                         </div>
                     </div>
