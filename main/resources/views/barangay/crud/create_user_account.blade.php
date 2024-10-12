@@ -38,8 +38,14 @@
 
                 <div class="form-group">
                     <label for="purok" class="block text-sm font-medium text-gray-700">Purok:</label>
-                    <input type="text" name="purok" id="purok" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring focus:ring-blue-400">
+                    <select name="purok" id="purok" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring focus:ring-blue-400">
+                        <option value="">Select Purok</option>
+                        @foreach ($puroks as $purok)
+                            <option value="{{ $purok->id }}">Purok {{ $purok->purok_number }}</option>
+                        @endforeach
+                    </select>
                 </div>
+                
 
                 <div class="form-group">
                     <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date:</label>

@@ -121,6 +121,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/barangay/storeResidentUser', [BarangayController::class, 'storeResidentUser'])->name('barangay.storeResidentUser');
         Route::get('/user/{user}/edit', [BarangayController::class, 'editUser'])->name('barangay.user.edit');
         Route::put('/user/{user}', [BarangayController::class, 'updateUser'])->name('barangay.user.update');
+        Route::get('/barangay/create-purok', [PurokController::class, 'createPurok'])->name('barangay.purok.createPurok');
+        Route::post('/barangay/storePurok', [PurokController::class, 'storePurok'])->name('barangay.purok.storePurok');
+        Route::get('/purok/{purok}', [PurokController::class, 'viewPurok'])->name('purok.residents');
+
     
     //Residents
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');

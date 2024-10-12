@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name');
-            $table->string('purok');
             $table->date('birth_date');
             $table->string('place_of_birth');
             $table->string('gender');
@@ -28,6 +27,7 @@ return new class extends Migration
             $table->string('current_address');
             $table->string('permanent_address');
             $table->foreignId('barangay_id')->constrained()->onDelete('cascade');
+            $table->foreignId('purok_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Purok;
 use App\Events\Userlog;
 use App\Models\Barangay;
 use App\Models\Resident;
+use App\Models\Household;
 use Illuminate\Http\Request;
 use App\Models\BarangayOfficial;
-use App\Models\Household;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -49,11 +50,14 @@ class BarangayController extends Controller
         $households = Household::whereHas('user', function ($query) use ($userBarangayId) {
             $query->where('barangay_id', $userBarangayId);
         })->get();
+
+        $puroks = Purok::where('barangay_id', $userBarangayId)->get();
+
     
         // Fetch users in the same barangay
         $users = User::where('barangay_id', $userBarangayId)->get();
     
-        return view('barangay.crud.create_user_account', compact('households', 'users'));
+        return view('barangay.crud.create_user_account', compact('households', 'users', 'puroks'));
     }
     
 
@@ -96,6 +100,7 @@ class BarangayController extends Controller
         // Create a new resident and associate it with the user's barangay
         $resident = new Resident($validatedData);
         $resident->barangay_id = $userBarangayId;
+        $resident->purok_id = $request->purok;
         $resident->save();
     
         // Check if a new household is being created

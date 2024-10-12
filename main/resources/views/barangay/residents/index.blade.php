@@ -49,7 +49,7 @@
                         <tr class="hover:bg-gray-200 transition">
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->last_name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->first_name }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $resident->purok }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $resident->purok->purok_number }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->gender }}</td>
                             <td class="px-4 py-2 whitespace-nowrap text-sm font-medium space-x-2 text-center">
                                 <a href="{{ route('barangay.residents.view', ['resident_id' => $resident->id]) }}" class="text-gray-700 py-1 px-2 md:px-3 rounded hover:text-gray-900"><i class="fa-solid fa-window-maximize"></i></a>
