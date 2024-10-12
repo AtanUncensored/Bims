@@ -16,15 +16,16 @@ class CertificateTypeSeeder extends Seeder
         ]);
 
         CertificateType::create([
-            'certificate_name' => 'Birth Certificate',
+            'certificate_name' => 'Job Seeker Certificate',
             'price' => 150.00,
-            'table_name' => 'cert_births',
+            'table_name' => 'cert_job_seekers',
         ]);
 
         CertificateType::create([
-            'certificate_name' => 'Clearance Certificate',
+            'certificate_name' => 'Indigency Certificate',
             'price' => 200.00,
-            'table_name' => 'cert_clearances',
+            'table_name' => 'cert_indigencies',
         ]);
+        
     }
 }

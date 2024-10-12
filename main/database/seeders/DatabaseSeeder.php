@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\CertificateType;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(BarangaySeeder::class);
         $this->call(AdminSeeder::class);
-        // $this->call(CertificateType::class);
+        $this->call(CertificateTypeSeeder::class);
         
     }
 }

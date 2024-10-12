@@ -19,7 +19,7 @@
 
         <form method="POST" action="{{ route('barangay.store-user') }}">
             @csrf
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[50vh] overflow-y-auto">
 
                 <div class="form-group">
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
