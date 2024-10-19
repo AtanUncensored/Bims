@@ -44,7 +44,7 @@
             </div>
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Purok:</span>
-                <span class="text-gray-800">{{ $resident->purok }}</span>
+                <span class="text-gray-800">{{ $resident->purok->purok_number }}</span>
             </div>
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Birth Date:</span>
@@ -57,6 +57,10 @@
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Gender:</span>
                 <span class="text-gray-800">{{ $resident->gender }}</span>
+            </div>
+            <div class="flex items-center">
+                <span class="font-semibold text-gray-600 w-40">Age:</span>
+                <span class="text-gray-800">{{ $resident->age }}</span>
             </div>
         </div>
 
@@ -89,6 +93,15 @@
                 <span class="font-semibold text-gray-600 w-40">Permanent Address:</span>
                 <span class="text-gray-800">{{ $resident->permanent_address }}</span>
             </div>
+            <div class="flex items-center">
+                <span class="font-semibold text-gray-600 w-40">Household:</span>
+                <span class="text-gray-800">
+                    @if ($householdNames)
+                    {{ implode(', ', $householdNames) }}</span>
+                    @else
+                        No household selected
+                    @endif
+            </div>            
         </div>
     </div>
 

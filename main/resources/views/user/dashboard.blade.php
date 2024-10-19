@@ -84,7 +84,7 @@
                         </td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $official->position }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $official->committee }}</td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->purok }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $official->resident->purok->purok_number ?? 'N/A' }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $official->start_of_service }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $official->end_of_service }}</td>
                     </tr>

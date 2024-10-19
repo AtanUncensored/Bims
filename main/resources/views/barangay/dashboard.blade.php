@@ -85,7 +85,7 @@
                             </td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $official->position }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $official->committee }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->purok }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->resident->purok->purok_number ?? 'N/A' }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $official->start_of_service }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $official->end_of_service }}</td>
                             <td>
@@ -108,7 +108,7 @@
                                             <hr class="border-t-2 border-gray-300">
 
                                             <p class="mt-3 font-semibold text-gray-500">No longer available / Reached the end of term</p>
-                                            <p class="mb-6 mt-3 ml-4 text-gray-600">Continue to delete this Official?</p>
+                                            <p class="mb-6 mt-3 text-left text-[17px] text-gray-600">Continue to delete this Official?</p>
                                             
                                             <div class="flex justify-end space-x-4">
                                                 <button onclick="toggleDeleteModal('{{ $official->id }}')" class="hover:text-gray-400">

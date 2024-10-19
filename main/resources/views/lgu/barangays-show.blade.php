@@ -95,7 +95,7 @@
                 <i class="fa-solid fa-house-chimney-user fa-lg text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Households</h3>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalUsers }}</p>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $household }}</p>
         </div>
 
          <!-- Married Card -->
@@ -105,7 +105,7 @@
                 <i class="fa-solid fa-person-dress fa-2xl text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Married</h3>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> 0</p>
+            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $marriedCount }}</p>
         </div>
     </div>
     </div>

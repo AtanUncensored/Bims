@@ -68,20 +68,6 @@
                     <span class="text-red-600 text-sm">{{ $message }}</span>
                 @enderror
             </div>
-
-            <!-- Purok -->
-            <div class="mb-4">
-                <label for="purok" class="block text-sm font-medium text-gray-700">Purok</label>
-                <select name="purok" id="purok" class="w-full p-2 border rounded-md">
-                    <option value="">Select a Purok</option>
-                    @for($i = 1; $i <= 7; $i++)
-                        <option value="{{ $i }}" {{ $i == $official->purok ? 'selected' : '' }}> {{ $i }}</option>
-                    @endfor
-                </select>
-                @error('purok')
-                    <span class="text-red-600 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
         </div>
         <div class="flex justify-end items-center mt-3">
             <button type="submit" class="px-4 py-2 bg-blue-500 mr-3 text-white rounded-md hover:bg-blue-600">

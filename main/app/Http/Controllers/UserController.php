@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purok;
 use App\Models\BarangayOfficial;
 use App\Models\Budget;
 use App\Models\Resident;
@@ -32,7 +33,9 @@ class UserController extends Controller
 
         $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)->get();
 
-        return view('user.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials'));
+        $puroks = Purok::where('barangay_id', $barangayId)->get();
+
+        return view('user.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials', 'puroks'));
     }
 
     public function showBudgetReports()

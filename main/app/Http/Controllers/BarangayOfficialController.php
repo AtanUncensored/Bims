@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resident;
+use App\Models\Purok;
 use App\Events\Userlog;
 use Illuminate\Http\Request;
 use App\Models\BarangayOfficial;
@@ -17,7 +18,9 @@ class BarangayOfficialController extends Controller
         $barangayId = Auth::user()->barangay_id;
         $residents = Resident::where('barangay_id', $barangayId)->select('id', 'first_name', 'last_name')->get();
 
-        return view('barangay.officials.create', compact('residents'));
+        $puroks = Purok::where('barangay_id', Auth::user()->barangay_id)->get();
+
+        return view('barangay.officials.create', compact('residents', 'puroks'));
     }
 
     // Store new barangay official
@@ -29,7 +32,6 @@ class BarangayOfficialController extends Controller
             'committee' => 'required|string|max:255',
             'start_of_service' => 'required|date',
             'end_of_service' => 'required|date|after:start_of_service',
-            'purok' => 'required|integer|between:1,7',
         ]);
 
         $barangayId = Auth::user()->barangay_id;
@@ -42,7 +44,6 @@ class BarangayOfficialController extends Controller
             'committee' => $request->committee,
             'start_of_service' => $request->start_of_service,
             'end_of_service' => $request->end_of_service,
-            'purok' => $request->purok,
         ]);
 
         $log_entry = 'Admin Added a new Official with an ID  ' . $request->resident_id . ' in the position of ' . $request->position;
@@ -76,7 +77,6 @@ class BarangayOfficialController extends Controller
             'committee' => 'required|string|max:255',
             'start_of_service' => 'required|date',
             'end_of_service' => 'required|date|after:start_of_service',
-            'purok' => 'required|integer|between:1,7',
         ]);
 
         // Ensure the authenticated user's barangay matches the official's barangay
@@ -92,7 +92,6 @@ class BarangayOfficialController extends Controller
             'committee' => $request->committee,
             'start_of_service' => $request->start_of_service,
             'end_of_service' => $request->end_of_service,
-            'purok' => $request->purok,
         ]);
 
         

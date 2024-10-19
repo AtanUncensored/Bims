@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Purok;
 use App\Events\Userlog;
@@ -35,11 +36,13 @@ class BarangayController extends Controller
                                ->whereDate('birth_date', '>', now()->subYears(18))
                                ->count();
 
-         $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)
+        $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)
                                ->with('resident') 
                                ->get();
-    
-        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials'));
+
+        $puroks = Purok::where('barangay_id', $barangayId)->get();
+
+        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials', 'puroks'));
     }
     
     public function createUserForm()
@@ -131,12 +134,28 @@ class BarangayController extends Controller
 
     public function viewResident($resident_id)
     {
-        // Find the resident by ID and ensure they belong to the user's barangay
+
         $resident = Resident::where('id', $resident_id)
                             ->where('barangay_id', Auth::user()->barangay_id)
                             ->firstOrFail();
-    
-        return view('barangay.crud.view_resident', compact('resident'));
+
+        // Calculate the age of the resident
+        $birthDate = Carbon::parse($resident->birth_date);
+        $currentYear = now()->year;
+
+        if ($birthDate->year === $currentYear) {
+            $resident->age = 0;
+        } else {
+            $resident->age = $birthDate->age;
+        }
+
+        $households = Household::where('resident_id', $resident_id)
+        ->select('household_name')
+        ->get();
+
+        $householdNames = $households->pluck('household_name')->toArray();
+
+        return view('barangay.crud.view_resident', compact('resident', 'householdNames'));
     }
 
     public function editResident($resident_id)
@@ -146,7 +165,9 @@ class BarangayController extends Controller
                             ->where('barangay_id', Auth::user()->barangay_id)
                             ->firstOrFail();
 
-        return view('barangay.crud.edit_resident', compact('resident'));
+        $puroks = Purok::where('barangay_id', Auth::user()->barangay_id)->get();
+
+        return view('barangay.crud.edit_resident', compact('resident', 'puroks'));
     }
 
     public function updateResident(Request $request, $resident_id)
@@ -174,6 +195,9 @@ class BarangayController extends Controller
                             ->where('barangay_id', Auth::user()->barangay_id)
                             ->firstOrFail();
 
+        $resident->purok_id = $request->purok;
+        $resident->save();
+        
         // Update resident data
         $resident->update($validatedData);
 

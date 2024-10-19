@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Household;
 use App\Models\Barangay;
 use App\Models\Resident;
 use App\Models\User;
@@ -37,17 +38,28 @@ class LguController extends Controller
     
         // Initialize counters
         $totalUsers = $residents->count();
-        $totalMales = $totalFemales = $totalAdults = $totalSeniors = $totalYouth = $totalChildren = 0;
+        $totalAdults = $totalSeniors = $totalYouth = $totalChildren = 0;
+
+        $totalMales = Resident::where('barangay_id', $barangayId)
+        ->where('gender', 'Male')
+        ->count();
+
+        $totalFemales = Resident::where('barangay_id', $barangayId)
+        ->where('gender', 'Female')
+        ->count();
+
+        $marriedCount = Resident::where('barangay_id', $barangayId)
+        ->where('civil_status', 'Married')
+        ->count();
+        
+        $residentIds = $residents->pluck('id');
+
+        $household = Household::whereIn('resident_id', $residentIds)
+            ->count();
     
         // Loop through residents and calculate the statistics
-        $residents->each(function($resident) use (&$totalMales, &$totalFemales, &$totalAdults, &$totalSeniors, &$totalYouth, &$totalChildren) {
-            // Gender count
-            if ($resident->gender == 'Male') {
-                $totalMales++;
-            } elseif ($resident->gender == 'Female') {
-                $totalFemales++;
-            }
-    
+        $residents->each(function($resident) use (&$totalAdults, &$totalSeniors, &$totalYouth, &$totalChildren) {
+
             // Calculate age once
             $age = \Carbon\Carbon::parse($resident->birth_date)->age;
     
@@ -67,7 +79,7 @@ class LguController extends Controller
         });
     
         // Pass data to the view
-        return view('lgu.barangays-show', compact('barangay', 'totalUsers', 'totalMales', 'totalFemales', 'totalAdults', 'totalSeniors', 'totalYouth', 'totalChildren'));
+        return view('lgu.barangays-show', compact('barangay', 'totalUsers', 'totalMales', 'totalFemales', 'totalAdults', 'totalSeniors', 'totalYouth', 'totalChildren', 'marriedCount', 'household'));
     }
     
 

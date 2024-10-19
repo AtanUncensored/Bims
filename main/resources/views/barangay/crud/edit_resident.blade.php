@@ -45,11 +45,18 @@
                     <label for="middle_name" class="font-semibold">Middle Name:</label>
                     <input type="text" class="form-control w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300" id="middle_name" name="middle_name" value="{{ old('middle_name', $resident->middle_name) }}">
                 </div>
-    
+                
                 <div class="form-group">
                     <label for="purok" class="font-semibold">Purok:</label>
-                    <input type="text" class="form-control w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300" id="purok" name="purok" value="{{ old('purok', $resident->purok) }}">
-                </div>
+                    <select name="purok" id="purok" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring focus:ring-blue-400">
+                        <option value="">Select Purok</option>
+                        @foreach ($puroks as $purok)
+                            <option value="{{ $purok->id }}" {{ old('purok', $resident->purok_id) == $purok->id ? 'selected' : '' }}>
+                                Purok {{ $purok->purok_number }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>                
     
                 <div class="form-group">
                     <label for="birth_date" class="font-semibold">Birth Date:</label>

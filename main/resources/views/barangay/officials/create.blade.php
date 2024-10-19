@@ -11,19 +11,21 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<div class="py-2 px-4 max-h-[80vh] overflow-y-auto">
-    <h1 class="text-2xl font-bold text-blue-600 text-center">Add Barangay Official</h1>
 
-    @if(session('success'))
-    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-1 px-2 rounded mb-2 mt-2">
-        {{ session('success') }}
-    </div>
-    @endif
+<h1 class="text-2xl font-bold text-blue-600 text-center mb-3">Add Barangay Official</h1>
+<div class="max-h-[70vh] overflow-y-auto">
 
-    <div class="mt-[20px] mb-4 max-w-lg mx-auto bg-white p-8 rounded shadow">
+    <div class="mb-4 max-w-lg mx-auto bg-white p-8 rounded shadow">
         <form action="{{ route('barangay.officials.store') }}" method="POST">
             @csrf
               <!-- Resident Dropdown with Search -->
+              <div class="mb-4">
+                @if(session('success'))
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-1 px-2 rounded mt-2">
+                    {{ session('success') }}
+                </div>
+                @endif
+              </div>
               <div class="mb-4">
                 <label for="resident_id" class="block text-gray-700 text-sm font-bold mb-2">Select Resident</label>
                 <select name="resident_id" id="resident_id" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
@@ -66,18 +68,6 @@
                 <input type="date" id="end_of_service" name="end_of_service" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
                 @error('end_of_service')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="mb-4">
-                <label for="purok" class="block text-gray-700 text-sm font-bold mb-2">Purok</label>
-                <select name="purok" id="purok" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                    <option value="">Select a Purok</option>
-                    @for($i = 1; $i <= 7; $i++)
-                        <option value="{{ $i }}"> {{ $i }}</option>
-                    @endfor
-                </select>
-                @error('purok')
-                    <span class="text-red-600 text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <div class="flex justify-end items-center">
