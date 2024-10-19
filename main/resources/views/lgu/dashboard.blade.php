@@ -67,7 +67,7 @@
                 'Married Residents'
             ],
             datasets: [{
-                label: 'Recorded number',
+                label: 'Population Statistics',
                 data: [
                     {{ $totalUsers }},
                     {{ $totalMales }},
