@@ -38,7 +38,7 @@
         <!-- Males Card -->
         <div class="bg-white shadow rounded-lg p-6">
             <div class="flex items-center">
-                <i class="fa-solid fa-person fa-2xl text-blue-500"></i>
+                <i class="fa-solid fa-male fa-2xl text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Males</h3>
             </div>
             <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalMales }}</p>
@@ -74,7 +74,7 @@
         <!-- Youth Card -->
         <div class="bg-white shadow rounded-lg p-6">
             <div class="flex items-center">
-                <i class="fa-solid fa-user fa-lg text-blue-500"></i>
+                <i class="fa-solid fa-user-graduate fa-xl text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Youth</h3>
             </div>
             <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalYouth }}</p>
@@ -83,7 +83,7 @@
         <!-- Children Card -->
         <div class="bg-white shadow rounded-lg p-6">
             <div class="flex items-center">
-                <i class="fa-solid fa-user fa-lg text-blue-500"></i>
+                <i class="fa-solid fa-child fa-xl text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Children</h3>
             </div>
             <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalChildren }}</p>
@@ -92,7 +92,7 @@
         <!-- Households Card -->
         <div class="bg-white shadow rounded-lg p-6">
             <div class="flex items-center">
-                <i class="fa-solid fa-house-chimney-user fa-lg text-blue-500"></i>
+                <i class="fa-solid fa-home fa-xl text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Households</h3>
             </div>
             <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $household }}</p>
@@ -101,8 +101,7 @@
          <!-- Married Card -->
          <div class="bg-white shadow rounded-lg p-6">
             <div class="flex items-center">
-                <i class="fa-solid fa-person fa-2xl text-blue-500"></i>
-                <i class="fa-solid fa-person-dress fa-2xl text-blue-500"></i>
+                <i class="fa-solid fa-ring fa-xl text-blue-500"></i>
                 <h3 class="text-lg font-semibold ml-4">Married</h3>
             </div>
             <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $marriedCount }}</p>

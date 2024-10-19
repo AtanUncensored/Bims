@@ -18,6 +18,7 @@ class BarangaySeeder extends Seeder
             ['barangay_name' => 'Cabulijan', 'background_image' => 'Cabulijan.png', 'logo' => 'cabulijan-logo.jpg'],
             ['barangay_name' => 'Talenceras', 'background_image' => 'talenceras.jpg', 'logo' => 'talenceras-logo.jpg'],
             ['barangay_name' => 'Tinangnan', 'background_image' => 'tinangnan.jpg', 'logo' => 'tinangnan-logo.jpg'],
+            ['barangay_name' => 'Pinayagan', 'background_image' => 'bosongon.jpg', 'logo' => 'pinayagan-logo.jpg'],
         ]);
     }
 }

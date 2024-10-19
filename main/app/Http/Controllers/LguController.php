@@ -13,9 +13,58 @@ class LguController extends Controller
 {
     public function index()
     {
-        $barangays = Barangay::withCount('users')->orderBy('barangay_name','asc')->get();
-        return view('lgu.dashboard', compact('barangays'));
+        // Get all barangays with the count of users in each
+        $barangays = Barangay::withCount('users')->orderBy('barangay_name', 'asc')->get();
+
+        // Initialize counters
+        $totalUsers = $totalAdults = $totalSeniors = $totalYouth = $totalChildren = 0;
+        $totalMales = $totalFemales = $marriedCount = 0;
+        $householdCount = 0;
+
+        // Loop through each barangay
+        foreach ($barangays as $barangay) {
+            // Retrieve residents based on the current barangay
+            $residents = Resident::where('barangay_id', $barangay->id)->get();
+
+            // Count total users
+            $totalUsers += $residents->count();
+
+            // Count males and females
+            $totalMales += $residents->where('gender', 'male')->count();
+            $totalFemales += $residents->where('gender', 'female')->count();
+
+            // Count married residents
+            $marriedCount += $residents->where('civil_status', 'Married')->count();
+
+            // Count households
+            $residentIds = $residents->pluck('id');
+            $householdCount += Household::whereIn('resident_id', $residentIds)->count();
+
+            // Loop through residents and calculate age-based statistics
+            $residents->each(function ($resident) use (&$totalAdults, &$totalSeniors, &$totalYouth, &$totalChildren) {
+                // Calculate age once
+                $age = \Carbon\Carbon::parse($resident->birth_date)->age;
+
+                // Age group calculations
+                if ($age >= 18) {
+                    $totalAdults++;
+                }
+                if ($age >= 60) {
+                    $totalSeniors++;
+                }
+                if ($age >= 15 && $age < 30) {
+                    $totalYouth++;
+                }
+                if ($age < 15) {
+                    $totalChildren++;
+                }
+            });
+        }
+
+        // Return the view with the calculated data
+        return view('lgu.dashboard', compact('barangays', 'totalUsers', 'totalMales', 'totalFemales', 'totalAdults', 'totalSeniors', 'totalYouth', 'totalChildren', 'marriedCount', 'householdCount', 'totalUsers'));
     }
+
     public function barangaysList(Request $request)
     {
         // Retrieve the search query from the request
