@@ -20,7 +20,7 @@
     </div>
 
     <!-- Table ni record sa available barangay -->
-    <div class="max-h-[45vh] overflow-y-auto">
+    <div class="max-h-[50vh] overflow-y-auto">
         <table class="min-w-full table-auto bg-white border border-gray-300 rounded-lg shadow-md">
             <thead class="bg-gray-600 text-white">
                 <tr>
