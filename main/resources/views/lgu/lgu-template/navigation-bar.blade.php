@@ -91,7 +91,10 @@
                             </div>
                         </button>
                 
-                        <div id="dropdown-content" class="hidden absolute right-0 mt-20 w-[100%] bg-white rounded-lg shadow-lg z-10">
+                        <div id="dropdown-content" class="hidden absolute right-0 mt-[115px] w-[100%] bg-white rounded-lg shadow-lg z-10">
+                            <button onclick="window.location.href='/super-admin-profile'" class="w-full text-left px-4 py-2 text-green-700 hover:bg-gray-100 rounded-lg">
+                                Profile
+                             </button>
                             <button onclick="toggleModal()" class="w-full text-left px-4 py-2 text-red-700 hover:bg-gray-100 rounded-lg">
                                 Log Out
                             </button>

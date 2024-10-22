@@ -91,6 +91,12 @@ Route::middleware('auth')->group(function () {
         //crud
         Route::get('/barangays/{barangay}/edit', [LguController::class, 'edit'])->name('lgu.barangays-edit');//edit barangay information
         Route::post('/lgu/store-barangay-admin', [LguController::class, 'storeBarangayAdmin'])->name('lgu.store-barangay-admin');//create barangay admin
+
+        //Profile Route
+        Route::get('/super-admin-profile', [ProfileController::class, 'editSuperAdmin'])->name('lgu.profile.edit');
+        Route::patch('/super-admin-profile', [ProfileController::class, 'updateSuperAdmin'])->name('lgu.profile.update');
+        Route::delete('/super-admin-profile', [ProfileController::class, 'destroySuperAdmin'])->name('lgu.profile.destroy');
+    
     });
 
     // Barangay (admin) Routes
@@ -162,6 +168,11 @@ Route::middleware('auth')->group(function () {
 
     //Puroks
         Route::get('/puroks', [PurokController::class, 'index'])->name('puroks.index');
+
+    //Profile Route
+        Route::get('/admin-profile', [ProfileController::class, 'editAdmin'])->name('barangay.profile.edit');
+        Route::patch('/admin-profile', [ProfileController::class, 'updateAdmin'])->name('barangay.profile.update');
+        Route::delete('/admin-profile', [ProfileController::class, 'destroyAdmin'])->name('barangay.profile.destroy');
 
     });
 

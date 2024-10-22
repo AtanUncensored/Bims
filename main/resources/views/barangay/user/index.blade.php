@@ -26,7 +26,7 @@
                 <button type="submit" class="py-2 px-4 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
-            <div class="ml-[150px]">
+            <div class="ml-[140px]">
                 <button class="relative text-red-600 hover:text-red-800 rounded-lg group">
                     <span class="font-bold">Caution: <i class="fa-solid fa-triangle-exclamation"></i></span>
                     <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block bg-white text-red-600 text-sm py-2 px-4 rounded shadow-lg w-64">
@@ -35,7 +35,7 @@
                 </button> 
             </div>
             <a href="{{ route('barangay.user.createUser')}}" class="py-2 px-4 bg-blue-600 text-white ml-3 rounded hover:bg-blue-500">
-                <i class="fa-solid fa-plus"></i> Add New User
+                <i class="fa-solid fa-plus"></i> Add User
             </a>
     </div>
 
@@ -44,6 +44,7 @@
     </div>
     <div class="mx-auto px-4 max-h-[50vh] overflow-y-auto">  
         <div class="flex flex-wrap -mx-4">
+            @if($users->count() > 0)
             @foreach($users as $user)
                 <div class="w-full md:w-[330px] px-4 mb-4">
                     <div class="bg-white shadow-lg rounded-lg p-6"> 
@@ -89,6 +90,11 @@
                     </div>
                 </div>
             @endforeach
+            @else
+                <div class="w-full text-center text-gray-500">
+                    <p>No users found for this barangay.</p>
+                </div>
+            @endif
         </div>
     </div>
 </div>
