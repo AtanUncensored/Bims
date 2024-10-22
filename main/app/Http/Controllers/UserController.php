@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Purok;
 use App\Models\BarangayOfficial;
+use Illuminate\Http\Request;
+use App\Events\Userlog;
 use App\Models\Budget;
 use App\Models\Resident;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +51,20 @@ class UserController extends Controller
 
         // Return the view with the budget reports for the user
         return view('user.index', ['budgetReports' => $budgetReports]);
+    }
+
+    public function deleteUser(Request $request, $user_id)
+    {
+
+            $user = User::where('id', $user_id)
+                ->where('barangay_id', Auth::user()->barangay_id) 
+                ->firstOrFail();
+            $user->delete();
+
+            $log_entry = 'Admin Deleted ' . $user->name . ' a user with an ID of ' . $user->id;
+        event(new UserLog($log_entry));
+
+            return redirect()->route('barangay.user.index')->with('success', 'User deleted successfully.');
     }
 }
 

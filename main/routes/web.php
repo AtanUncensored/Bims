@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
     
     //Residents
         Route::get('/residents', [ResidentController::class, 'index'])->name('barangay.residents.index');
+        Route::delete('barangay/user/{user_id}', [UserController::class, 'deleteUser'])->name('barangay.user.index.delete');
 
 
     //Budget Reports
@@ -202,6 +203,13 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/certificates/request', [CertificateRequestController::class, 'create'])->name('certificates.request');
         Route::post('/certificates/request', [CertificateRequestController::class, 'store'])->name('certificates.store');
+
+
+       //Profile
+        Route::get('/user-profile', [ProfileController::class, 'editUser'])->name('user.profile.edit');
+        Route::patch('/user-profile', [ProfileController::class, 'updateUser'])->name('user.profile.update');
+        Route::delete('/user-profile', [ProfileController::class, 'destroyUser'])->name('user.profile.destroy');
+        
     });
     
 });
