@@ -85,9 +85,13 @@
                 
                     <div id="user-dropdown" class="relative px-4 py-2 rounded-lg flex items-center">
                         <button onclick="toggleDropdown()" class="flex items-center focus:outline-none">
-                            <span class="text-gray-600 font-semibold mr-3">{{ Auth::user()->name }}</span>
-                            <div class="py-1 px-2 bg-black text-white rounded-full">
-                                <i class="fa-solid fa-user-tie"></i>
+                            <span class="text-gray-600 font-bold mr-3">{{ Auth::user()->name }}</span>
+                            <div>
+                                @if(Auth::user()->user_image)
+                                    <img src="{{ Storage::url(Auth::user()->user_image) }}" alt="Profile Image" class="w-[33px] h-[33px] rounded-full object-cover">
+                                @else
+                                    <img src="{{asset('images/profile.jpg')}}" alt="Default Profile Image" class="w-[33px] h-[33px] rounded-full object-cover">
+                                @endif
                             </div>
                         </button>
                 

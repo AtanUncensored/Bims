@@ -96,6 +96,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/super-admin-profile', [ProfileController::class, 'editSuperAdmin'])->name('lgu.profile.edit');
         Route::patch('/super-admin-profile', [ProfileController::class, 'updateSuperAdmin'])->name('lgu.profile.update');
         Route::delete('/super-admin-profile', [ProfileController::class, 'destroySuperAdmin'])->name('lgu.profile.destroy');
+        Route::put('/super-admin/{superadmin}', [ProfileController::class, 'updateSuperAdminImage'])->name('lgu.lgus-update');
     
     });
 
@@ -173,6 +174,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin-profile', [ProfileController::class, 'editAdmin'])->name('barangay.profile.edit');
         Route::patch('/admin-profile', [ProfileController::class, 'updateAdmin'])->name('barangay.profile.update');
         Route::delete('/admin-profile', [ProfileController::class, 'destroyAdmin'])->name('barangay.profile.destroy');
+        Route::put('/admin/{admin}', [ProfileController::class, 'updateAdminImage'])->name('admin.admins-update');
 
     });
 
@@ -220,6 +222,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-profile', [ProfileController::class, 'editUser'])->name('user.profile.edit');
         Route::patch('/user-profile', [ProfileController::class, 'updateUser'])->name('user.profile.update');
         Route::delete('/user-profile', [ProfileController::class, 'destroyUser'])->name('user.profile.destroy');
+        Route::put('/user/{user}', [ProfileController::class, 'updateUserImage'])->name('user.users-update');
         
     });
     
