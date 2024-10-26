@@ -26,6 +26,23 @@ class CertificateTypeSeeder extends Seeder
             'price' => 200.00,
             'table_name' => 'cert_indigencies',
         ]);
+
+        CertificateType::create([
+            'certificate_name' => 'Unifast Certificate',
+            'price' => 200.00,
+            'table_name' => 'cert_unifasts',
+        ]);
         
+        CertificateType::create([
+            'certificate_name' => 'Unemployment Certificate',
+            'price' => 200.00,
+            'table_name' => 'cert_unemployments',
+        ]);
+
+        CertificateType::create([
+            'certificate_name' => 'Business Certificate',
+            'price' => 200.00,
+            'table_name' => 'cert_businesses',
+        ]);
     }
 }

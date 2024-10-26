@@ -96,11 +96,9 @@
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Household:</span>
                 <span class="text-gray-800">
-                    @if ($householdNames)
-                    {{ implode(', ', $householdNames) }}</span>
-                    @else
-                        No household selected
-                    @endif
+                    
+                    {{ $householdNames }}</span>
+                   
             </div>            
         </div>
     </div>

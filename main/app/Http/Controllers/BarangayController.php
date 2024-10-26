@@ -136,31 +136,25 @@ class BarangayController extends Controller
 }
 
 
-    public function viewResident($resident_id)
-    {
+public function viewResident($resident_id)
+{
+    $resident = Resident::where('id', $resident_id)
+                        ->where('barangay_id', Auth::user()->barangay_id)
+                        ->firstOrFail();
 
-        $resident = Resident::where('id', $resident_id)
-                            ->where('barangay_id', Auth::user()->barangay_id)
-                            ->firstOrFail();
+    // Calculate the age of the resident
+    $birthDate = Carbon::parse($resident->birth_date);
+    $currentYear = now()->year;
+    $resident->age = ($birthDate->year === $currentYear) ? 0 : $birthDate->age;
 
-        // Calculate the age of the resident
-        $birthDate = Carbon::parse($resident->birth_date);
-        $currentYear = now()->year;
+    // Retrieve household names for the resident
+    $householdNames = HouseholdMember::where('resident_id', $resident_id)
+        ->join('households', 'household_members.household_id', '=', 'households.id')
+        ->pluck('households.household_name');
 
-        if ($birthDate->year === $currentYear) {
-            $resident->age = 0;
-        } else {
-            $resident->age = $birthDate->age;
-        }
+    return view('barangay.crud.view_resident', compact('resident', 'householdNames'));
+}
 
-        $households = Household::where('resident_id', $resident_id)
-        ->select('household_name')
-        ->get();
-
-        $householdNames = $households->pluck('household_name')->toArray();
-
-        return view('barangay.crud.view_resident', compact('resident', 'householdNames'));
-    }
 
     public function editResident($resident_id)
     {

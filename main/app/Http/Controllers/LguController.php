@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Household;
+use App\Models\HouseholdMember;
 use App\Models\Barangay;
 use App\Models\Resident;
 use App\Models\User;
@@ -37,8 +38,8 @@ class LguController extends Controller
             $marriedCount += $residents->where('civil_status', 'Married')->count();
 
             // Count households
-            $residentIds = $residents->pluck('id');
-            $householdCount += Household::whereIn('resident_id', $residentIds)->count();
+            $householdCount = Household::get()->count();
+            
 
             // Loop through residents and calculate age-based statistics
             $residents->each(function ($resident) use (&$totalAdults, &$totalSeniors, &$totalYouth, &$totalChildren) {
@@ -46,7 +47,7 @@ class LguController extends Controller
                 $age = \Carbon\Carbon::parse($resident->birth_date)->age;
 
                 // Age group calculations
-                if ($age >= 18) {
+                if ($age >= 18 && $age < 60) {
                     $totalAdults++;
                 }
                 if ($age >= 60) {
@@ -100,11 +101,13 @@ class LguController extends Controller
         $marriedCount = Resident::where('barangay_id', $barangayId)
         ->where('civil_status', 'Married')
         ->count();
-        
-        $residentIds = $residents->pluck('id');
 
-        $household = Household::whereIn('resident_id', $residentIds)
-            ->count();
+        $household = Household::join('household_members', 'households.id', '=', 'household_members.household_id')
+        ->join('residents', 'household_members.resident_id', '=', 'residents.id')
+        ->where('residents.barangay_id', $barangayId)
+        ->distinct('households.id') 
+        ->count('households.id'); 
+        
     
         // Loop through residents and calculate the statistics
         $residents->each(function($resident) use (&$totalAdults, &$totalSeniors, &$totalYouth, &$totalChildren) {
@@ -113,7 +116,7 @@ class LguController extends Controller
             $age = \Carbon\Carbon::parse($resident->birth_date)->age;
     
             // Age group calculations
-            if ($age >= 18) {
+            if ($age >= 18 && $age < 60) {
                 $totalAdults++;
             }
             if ($age >= 60) {
