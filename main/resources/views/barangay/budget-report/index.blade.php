@@ -15,7 +15,14 @@
     <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
     <div class="flex justify-between mb-4">
-        <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
+        <form action="{{ route('budgets.download-excel')}}" method="POST" target="__blank">
+            @csrf
+            <div>
+                <button class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition">
+                    <i class="fa-solid fa-download"></i> Export Data
+                </button>
+            </div>
+        </form>
 
         <a href="{{ route('barangay.create-budgetReport') }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition">
             <span><i class="fa-solid fa-plus"></i> Add Expense</span>

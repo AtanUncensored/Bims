@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Export\ResidentDataExport;
 
 class ResidentController extends Controller
 {
@@ -31,6 +33,12 @@ class ResidentController extends Controller
 
         // Return the view with the residents and the search term
         return view('barangay.residents.index', compact('residents', 'search'));
+    }
+
+    public function exportExcel()
+    {
+        $barangayId = auth()->user()->barangay_id;
+        return Excel::download(new ResidentDataExport($barangayId), 'residents.xlsx');
     }
 
     

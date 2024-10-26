@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Budget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Export\BudgetDataExport;
 
 class BudgetController extends Controller
 {
@@ -118,6 +120,12 @@ public function deleteBudgetReport(Budget $budgetReport)
     // Redirect back to the index page with a success message
     return redirect()->route('barangay.budget-report.index')->with('success', 'Budget report deleted successfully.');
 }
+
+    public function exportExcel()
+        {
+            $barangayId = auth()->user()->barangay_id;
+            return Excel::download(new BudgetDataExport($barangayId), 'budgets.xlsx');
+        }
 
 
 

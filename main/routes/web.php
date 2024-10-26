@@ -131,6 +131,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/barangay/create-purok', [PurokController::class, 'createPurok'])->name('barangay.purok.createPurok');
         Route::post('/barangay/storePurok', [PurokController::class, 'storePurok'])->name('barangay.purok.storePurok');
         Route::get('/purok/{purok}', [PurokController::class, 'viewPurok'])->name('purok.residents');
+        Route::post('residents/export-excel', [ResidentController::class, 'exportExcel'])->name('residents.download-excel');
+
 
     
     //Residents
@@ -145,6 +147,7 @@ Route::middleware('auth')->group(function () {
         Route::get('barangay/budget-report/{budgetReport}/edit', [BudgetController::class, 'editBudgetReport'])->name('barangay.budget-report.edit');
         Route::put('barangay/budget-report/{budgetReport}', [BudgetController::class, 'updateBudgetReport'])->name('barangay.budget-report.update');
         Route::delete('/barangay/budget-report/{budgetReport}', [BudgetController::class, 'deleteBudgetReport'])->name('barangay.budget-report.delete');
+        Route::post('budgets/export-excel', [BudgetController::class, 'exportExcel'])->name('budgets.download-excel');
 
     
     //Announcements
@@ -175,6 +178,8 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin-profile', [ProfileController::class, 'updateAdmin'])->name('barangay.profile.update');
         Route::delete('/admin-profile', [ProfileController::class, 'destroyAdmin'])->name('barangay.profile.destroy');
         Route::put('/admin/{admin}', [ProfileController::class, 'updateAdminImage'])->name('admin.admins-update');
+
+
 
     });
 

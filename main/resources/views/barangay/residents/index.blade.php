@@ -15,7 +15,14 @@
     </div>
     
     <div class="flex justify-between mb-4">
-        <a href="#" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition"><i class="fa-solid fa-download"></i> Export Data</a>
+        <form action="{{ route('residents.download-excel')}}" method="POST" target="__blank">
+            @csrf
+            <div>
+                <button class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition">
+                    <i class="fa-solid fa-download"></i> Export Data
+                </button>
+            </div>
+        </form>
 
           <!-- Search bar -->
           <form class="inline-flex items-center justify-center" method="GET" action="{{ route('barangay.residents.index') }}">
