@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('households', function (Blueprint $table) {
             $table->id(); 
             $table->string('household_name'); 
-            $table->foreignId('resident_id')->constrained('residents')->onDelete('cascade'); 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
             $table->timestamps(); 
         });

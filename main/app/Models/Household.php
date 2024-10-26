@@ -22,6 +22,10 @@ class Household extends Model
     {
         return $this->hasMany(Resident::class);
     }
+    public function household_member()
+    {
+        return $this->hasMany(HouseholdMember::class);
+    }
 
     /**
      * Get the user that created this household.

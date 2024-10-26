@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CertificateType;
+use App\Models\Household;
+use App\Models\HouseholdMember;
 use App\Models\Request as CertificateRequest;
 use App\Models\Resident;
 use Illuminate\Http\Request as HttpRequest;
@@ -13,14 +15,20 @@ class CertificateRequestController extends Controller
 {
     public function create()
     {
-        // Fetch all residents without filtering by barangay_id
-        $residents = Resident::all();
+        // Get the current user's households
+        $userHouseholds = Household::where('user_id', Auth::id())->pluck('id');
+    
+        // Fetch residents who are members of the user's households
+        $residents = Resident::whereHas('householdMembers', function ($query) use ($userHouseholds) {
+            $query->whereIn('household_id', $userHouseholds);
+        })->get();
     
         // Fetch all certificate types
         $certificateTypes = CertificateType::all();
     
         return view('certificates.request-form', compact('residents', 'certificateTypes'));
     }
+    
     
 
     public function store(HttpRequest $request) {

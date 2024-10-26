@@ -16,12 +16,11 @@ class Resident extends Model
         'nickname', 'email', 'current_address', 'permanent_address', 'household_id'
     ];
 
-    // Resident belongs to a Household
-    public function household()
+    public function householdMembers()
     {
-        return $this->belongsTo(Household::class);
+        return $this->hasMany(HouseholdMember::class, 'resident_id');
     }
-    
+
     public function barangay()
     {
         return $this->belongsTo(Barangay::class);
