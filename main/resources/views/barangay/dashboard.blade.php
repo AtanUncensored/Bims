@@ -25,7 +25,7 @@
                 <p class="card-text font-semibold text-2xl">{{ $marriedCount }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-red-900 font-bold text-lg">
-                    <i class="fas fa-users fa-md"></i> Married
+                    <i class="fa-solid fa-ring fa-lg"></i> Married
                 </h5>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <p class="card-text font-semibold text-2xl">{{ $seniorCitizensCount }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-purple-900 font-bold text-lg">
-                    <i class="fas fa-users fa-md"></i> Senior Citizen
+                    <i class="fa-solid fa-user-tie fa-lg"></i> Senior Citizen
                 </h5>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <p class="card-text font-semibold text-2xl">{{ $youthCount }}</p>
                 <hr class="border-t-2 mt-2 mb-3 border-black">
                 <h5 class="card-title text-green-900 font-bold text-lg">
-                    <i class="fas fa-users fa-md"></i> Youth
+                    <i class="fa-solid fa-user-graduate fa-lg"></i> Youth
                 </h5>
             </div>
         </div>
