@@ -169,6 +169,7 @@ Route::middleware('auth')->group(function () {
 
     //Certificates
         Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
+        Route::get('/certificate/{certificateId}/pdf-download', [CertificateController::class, 'downloadCertificatePDF'])->name('certificate.download');
 
     //Puroks
         Route::get('/puroks', [PurokController::class, 'index'])->name('puroks.index');
