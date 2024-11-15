@@ -45,7 +45,7 @@
             <!-- Title and Logo -->
             <div id="branding" class="flex flex-col py-1 px-2 items-center space-y-2 ml-3 md:flex-row md:space-y-0 md:space-x-4">
                 <img class="w-[50px] h-[50px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
-                <h1 class="text-xl lg:text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
+                <h1 class="hidden lg:block text-xl lg:text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
                     BIMS
                 </h1> 
             </div>
@@ -100,8 +100,8 @@
                                 Log Out
                             </button>
 
-                            <div id="logout-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
-                                <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
+                            <div id="logout-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
+                                <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3 mt-16">
                                     <div class="flex justify-start items-center">
                                         <img class="w-[50px] h-[50px] rounded-full" src="{{ asset('images/bims-logo.png') }}" alt="barangay/lgu logo">
                                         <h3 class="text-lg font-bold text-center ml-3 text-red-500">Confirm Log Out</h3>

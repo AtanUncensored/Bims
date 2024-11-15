@@ -10,103 +10,103 @@
 <div class="px-4">
     <div class="flex justify-start items-center mb-2">
         @if ($barangay->logo)
-            <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-[50px] h-[50px] object-cover rounded-full">
+            <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
         @else
             <span>No Logo</span>
         @endif
-        <h2 class="text-2xl text-blue-500 font-bold ml-2">Brgy. {{ $barangay->barangay_name }}, Tubigon, Bohol, Philippines</h2>
+        <h2 class="text-xl sm:text-2xl text-blue-500 font-bold ml-2">Brgy. {{ $barangay->barangay_name }}, Tubigon, Bohol, Philippines</h2>
     </div>
     <hr class="border-t-2 border-gray-300">
-    <div class="flex justify-between item-center mb-3 mt-5">
-        <h2 class="font-semibold mb-2">Current record of this barangay:</h2>
-        <a href="{{ route('lgu.barangays-list') }}" class="inline-block align-baseline font-bold text-lg text-blue-600 hover:text-blue-800">
+    <div class="flex justify-between items-center mb-3 mt-5">
+        <h2 class="font-semibold mb-2 text-sm sm:text-base">Current record of this barangay:</h2>
+        <a href="{{ route('lgu.barangays-list') }}" class="inline-block align-baseline font-bold text-sm sm:text-lg text-blue-600 hover:text-blue-800">
             Back to List
         </a>
     </div>
-    <div class="max-h-[65vh] overflow-y-auto">
-    <!-- Dynamic Residents Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Residents Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-user fa-lg text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Residents</h3>
+    <div class="max-h-[62vh] lg:max-h-[65vh] overflow-y-auto">
+        <!-- Dynamic Residents Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Residents Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-user fa-lg text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Residents</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalUsers }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalUsers }}</p>
-        </div>
 
-        <!-- Males Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-male fa-2xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Males</h3>
+            <!-- Males Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-male fa-2xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Males</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalMales }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalMales }}</p>
-        </div>
 
-        <!-- Females Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-person-dress fa-2xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Females</h3>
+            <!-- Females Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-person-dress fa-2xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Females</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalFemales }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalFemales }}</p>
-        </div>
 
-        <!-- Adults Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-user-tie fa-xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Adults</h3>
+            <!-- Adults Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-user-tie fa-xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Adults</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalAdults }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalAdults }}</p>
-        </div>
 
-        <!-- Seniors Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-user-tie fa-xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Seniors</h3>
+            <!-- Seniors Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-user-tie fa-xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Seniors</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalSeniors }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalSeniors }}</p>
-        </div>
 
-        <!-- Youth Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-user-graduate fa-xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Youth</h3>
+            <!-- Youth Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-user-graduate fa-xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Youth</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalYouth }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalYouth }}</p>
-        </div>
 
-        <!-- Children Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-child fa-xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Children</h3>
+            <!-- Children Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-child fa-xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Children</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $totalChildren }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $totalChildren }}</p>
-        </div>
 
-        <!-- Households Card -->
-        <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-home fa-xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Households</h3>
+            <!-- Households Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-home fa-xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Households</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $household }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $household }}</p>
-        </div>
 
-         <!-- Married Card -->
-         <div class="bg-white shadow rounded-lg p-6">
-            <div class="flex items-center">
-                <i class="fa-solid fa-ring fa-xl text-blue-500"></i>
-                <h3 class="text-lg font-semibold ml-4">Married</h3>
+            <!-- Married Card -->
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-ring fa-xl text-blue-500"></i>
+                    <h3 class="text-sm sm:text-lg font-semibold ml-2">Married</h3>
+                </div>
+                <p class="text-lg sm:text-2xl font-semibold text-right text-green-600 mt-2"><span class="text-gray-500 text-xs sm:text-[15px]">Total:</span> {{ $marriedCount }}</p>
             </div>
-            <p class="text-2xl font-semibold text-right text-green-600 mt-4"><span class="text-gray-500 text-[15px]">Total:</span> {{ $marriedCount }}</p>
         </div>
-    </div>
     </div>
 </div>
 @endsection

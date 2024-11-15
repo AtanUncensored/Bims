@@ -13,12 +13,12 @@
     <hr class="border-t-2 m-[15px] border-gray-300">
 </div>
 <div class="container mx-auto px-4">
-    <div class="max-h-[28vh] overflow-y-auto">
+    <div class="max-h-[40vh] lg:max-h-[28vh] overflow-y-auto">
         <div class="flex flex-wrap">
             @foreach($barangays as $barangay)
                 <div class="w-full md:w-1/4 px-4 mb-4">
-                    <div class="bg-white shadow-lg rounded-lg p-6">
-                        <div class="flex mb-4">
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <div class="flex items-center mb-4">
                             @php
                                 $iconColors = [
                                     'text-blue-500', 'text-green-500', 'text-red-500', 
@@ -32,11 +32,7 @@
                             <i class="fas fa-map-marker-alt {{ $iconColor }} text-3xl mr-3"></i>
                             <h2 class="text-[15px] font-bold text-gray-600">Brgy. <span class="text-blue-600">{{ $barangay->barangay_name }}</span>, Tubigon, Bohol, Philippines</h2>
                         </div>
-                        <hr class="border-t-2 border-gray-300">
-                        <div class="mt-4 flex justify-between">
-                            <p class="text-gray-600"><i class="fas fa-user fa-lg mr-2 text-blue-500"></i> No. of Users:</p>
-                            <header class="text-green-600 font-bold text-2xl">{{ $barangay->users_count }}</header>
-                        </div>
+                        <hr class="border-t-2 border-blue-300">
                     </div>
                 </div>
             @endforeach
@@ -51,10 +47,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const ctx = document.getElementById('barangayChart').getContext('2d');
-    const barangayChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
+        const ctx = document.getElementById('barangayChart').getContext('2d');
+        let barangayChart;
+
+        // Data and options for the chart
+        const data = {
             labels: [
                 'Total Residents', 
                 'Total Males', 
@@ -103,17 +100,47 @@
                 ],
                 borderWidth: 1
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+        };
+
+        // Function to determine chart type based on screen width
+        function getChartType() {
+            return window.innerWidth <= 768 ? 'pie' : 'bar'; // Switch to pie chart on screens <= 768px
         }
+
+        // Function to create the chart with responsive type
+        function createChart() {
+            if (barangayChart) {
+                barangayChart.destroy(); // Destroy previous chart instance if exists
+            }
+            barangayChart = new Chart(ctx, {
+                type: getChartType(),
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            display: getChartType() === 'bar' // Hide Y-axis on pie chart
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initial chart render
+        createChart();
+
+        // Re-render the chart on window resize to adjust type
+        window.addEventListener('resize', function() {
+            createChart();
+        });
     });
-});
-
-
 </script>
 @endsection

@@ -9,7 +9,7 @@
 @section('content')
 <div class="barangay-admins py-2 px-4">
     <div id="title">
-        <h1 class="text-2xl font-bold text-blue-600">BARANGAY ADMINISTRATORS:</h1>
+        <h1 class="text-2xl font-bold text-blue-600">ADMINISTRATORS:</h1>
     </div>
     <div class="my-6">
         <hr class="border-t-2 border-gray-300">
