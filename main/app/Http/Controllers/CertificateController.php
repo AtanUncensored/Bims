@@ -17,9 +17,8 @@ class CertificateController extends Controller
 {
     public function index()
 {
-    $barangayId = Auth::user()->barangay_id; // Assuming users have a barangay_id column.
+    $barangayId = Auth::user()->barangay_id; 
 
-    // Fetch certificate requests for the current barangay
     $certificateRequests = DB::table('requests')
         ->leftJoin('residents', 'requests.resident_id', '=', 'residents.id')
         ->leftJoin('certificate_types', 'requests.certificate_type_id', '=', 'certificate_types.id')
