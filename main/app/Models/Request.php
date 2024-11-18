@@ -36,6 +36,6 @@ class Request extends Model
     }
     public function certificateType()
     {
-        return $this->belongsTo(CertificateType::class);
+        return $this->belongsTo(CertificateType::class, 'certificate_type_id');
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('requester_name');
             $table->string('purpose');
             $table->date('date_needed');
+            $table->timestamp('downloaded_at')->nullable();
             $table->timestamps();
         });
     }

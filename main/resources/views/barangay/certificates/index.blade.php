@@ -7,100 +7,90 @@
 @section('title', 'Certificates')
 
 @section('content')
-<div class="container">
-    <div class="card">
-        <div class="card-header bg-primary text-white text-center">
-            <h3>Certificate Requests</h3>
-        </div>
-        <div class="card-body">
-            @if($certificateRequests->isEmpty())
-                <div class="text-center">
-                    <p class="text-muted">No certificate requests found.</p>
+<div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Latest Requests Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Latest Certificate Requests</h2>
+            @if($latestRequests->isEmpty())
+                <div class="text-center py-16">
+                    <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
+                    <p class="mt-3 text-muted text-gray-500">No recent certificate requests found.</p>
                 </div>
             @else
-                <table class="table table-bordered table-striped text-center">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Certificate Type</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Date Needed</th>
-                            <th>OR Number</th>
-                            <th>Requester</th>
-                            <th>Purpose</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($certificateRequests as $request)
-                            <tr>
-                                <td>{{ $request->certificate_type ?? 'N/A' }}</td>
-                                <td>{{ $request->full_name ?? 'N/A' }}</td>
-                                <td>{{ $request->age ?? 'N/A' }}</td>
-                                <td>{{ ucfirst($request->gender ?? 'N/A') }}</td>
-                                <td>{{ $request->date_needed ?? 'N/A' }}</td>@extends('barangay.templates.navigation-bar')
-
-                                @section('icon')
-                                <i class="fa-solid fa-certificate fa-lg"></i>
-                                @endsection
-                                
-                                @section('title', 'Certificates')
-                                
-                                @section('content')
-                                <div class="container mt-4">
-                                    <div class="card shadow">
-                                        <div class="card-header bg-primary text-white text-center">
-                                            <h3 class="mb-0">Certificate Requests</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            @if($certificateRequests->isEmpty())
-                                                <div class="text-center my-5">
-                                                    <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
-                                                    <p class="mt-3 text-muted">No certificate requests found.</p>
-                                                </div>
-                                            @else
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover table-striped align-middle">
-                                                        <thead class="table-dark text-center">
-                                                            <tr>
-                                                                <th>Certificate Type</th>
-                                                                <th>Name</th>
-                                                                <th>Age</th>
-                                                                <th>Gender</th>
-                                                                <th>Date Needed</th>
-                                                                <th>OR Number</th>
-                                                                <th>Requester</th>
-                                                                <th>Purpose</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach($certificateRequests as $request)
-                                                                <tr>
-                                                                    <td class="text-center">{{ $request->certificate_type ?? 'N/A' }}</td>
-                                                                    <td>{{ $request->full_name ?? 'N/A' }}</td>
-                                                                    <td class="text-center">{{ $request->age ?? 'N/A' }}</td>
-                                                                    <td class="text-center">{{ ucfirst($request->gender ?? 'N/A') }}</td>
-                                                                    <td class="text-center">{{ $request->date_needed ?? 'N/A' }}</td>
-                                                                    <td class="text-center">{{ $request->or_number ?? 'N/A' }}</td>
-                                                                    <td>{{ $request->requester_name ?? 'N/A' }}</td>
-                                                                    <td>{{ $request->purpose ?? 'N/A' }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                @endsection
-                                <td>{{ $request->or_number ?? 'N/A' }}</td>
-                                <td>{{ $request->requester_name ?? 'N/A' }}</td>
-                                <td>{{ $request->purpose ?? 'N/A' }}</td>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="px-4 py-2 text-left text-gray-600">Full Name</th>
+                                <th class="px-4 py-2 text-left text-gray-600">Certificate Type</th>
+                                <th class="px-4 py-2 text-left text-gray-600">Purpose</th>
+                                <th class="px-4 py-2 text-left text-gray-600">Date Needed</th>
+                                <th class="px-4 py-2 text-center text-gray-600">Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($latestRequests as $request)
+                                <tr class="border-b hover:bg-gray-50 transition duration-200">
+                                    <td class="px-4 py-2">{{ $request->full_name }}</td>
+                                    <td class="px-4 py-2">{{ $request->certificate_type }}</td>
+                                    <td class="px-4 py-2">{{ $request->purpose }}</td>
+                                    <td class="px-4 py-2">{{ \Carbon\Carbon::parse($request->date_needed)->format('F j, Y') }}</td>
+                                    <td class="px-4 py-2 text-center">
+                                        <a href="{{ route('certificate.download', $request->id) }}" class="btn-download text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-sm">
+                                            @if(is_null($request->downloaded_at))
+                                                Download
+                                            @else
+                                                Download Again
+                                            @endif
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+
+        <!-- Downloaded Requests Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Downloaded Certificate Requests</h2>
+            @if($downloadedRequests->isEmpty())
+                <div class="text-center py-16">
+                    <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
+                    <p class="mt-3 text-muted text-gray-500">No downloaded certificate requests found.</p>
+                </div>
+            @else
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="px-4 py-2 text-left text-gray-600">Full Name</th>
+                                <th class="px-4 py-2 text-left text-gray-600">Certificate Type</th>
+                                <th class="px-4 py-2 text-left text-gray-600">Purpose</th>
+                                <th class="px-4 py-2 text-left text-gray-600">Date Needed</th>
+                                <th class="px-4 py-2 text-center text-gray-600">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($downloadedRequests as $request)
+                                <tr class="border-b hover:bg-gray-50 transition duration-200">
+                                    <td class="px-4 py-2">{{ $request->full_name }}</td>
+                                    <td class="px-4 py-2">{{ $request->certificate_type }}</td>
+                                    <td class="px-4 py-2">{{ $request->purpose }}</td>
+                                    <td class="px-4 py-2">{{ \Carbon\Carbon::parse($request->date_needed)->format('F j, Y') }}</td>
+                                    <td class="px-4 py-2 text-center">
+                                        <a href="{{ route('certificate.download', $request->id) }}" class="btn-download text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-sm">
+                                            Download Again
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @endif
         </div>
     </div>
