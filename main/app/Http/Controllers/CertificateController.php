@@ -12,19 +12,32 @@ use Carbon\Carbon;
 use App\Models\Request as CertificateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CertificateController extends Controller
 {
-
-    //Admin certificate access
     public function index()
-    {
-        $certResidencies = CertResidency::with('requests')->get();
-        $certIndigencies = CertIndigency::with('requests')->get();
-        $certJobSeekers = CertJobSeeker::with('requests')->get();
+{
+    $barangayId = Auth::user()->barangay_id; // Assuming users have a barangay_id column.
 
-        return view('barangay.certificates.index', compact('certResidencies', 'certIndigencies', 'certJobSeekers'));
-    }
+    // Fetch certificate requests for the current barangay
+    $certificateRequests = DB::table('requests')
+        ->leftJoin('residents', 'requests.resident_id', '=', 'residents.id')
+        ->leftJoin('certificate_types', 'requests.certificate_type_id', '=', 'certificate_types.id')
+        ->select(
+            'certificate_types.certificate_name as certificate_type',
+            DB::raw('CONCAT(residents.first_name, " ", residents.last_name) as full_name'),
+            DB::raw('YEAR(CURDATE()) - YEAR(residents.birth_date) as age'),
+            'residents.gender',
+            'requests.purpose',
+            'requests.date_needed',
+            'requests.requester_name'
+        )
+        ->where('requests.barangay_id', $barangayId)
+        ->get();
+
+    return view('barangay.certificates.index', compact('certificateRequests'));
+}
+    
 
     
 

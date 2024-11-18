@@ -7,91 +7,102 @@
 @section('title', 'Certificates')
 
 @section('content')
-<div class="py-2 px-4">
-    <h2 class="text-2xl font-semibold text-gray-800 text-center">Certificate Requests</h2>
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Certificate Requests</h3>
+        </div>
+        <div class="card-body">
+            @if($certificateRequests->isEmpty())
+                <div class="text-center">
+                    <p class="text-muted">No certificate requests found.</p>
+                </div>
+            @else
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Certificate Type</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Date Needed</th>
+                            <th>OR Number</th>
+                            <th>Requester</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($certificateRequests as $request)
+                            <tr>
+                                <td>{{ $request->certificate_type ?? 'N/A' }}</td>
+                                <td>{{ $request->full_name ?? 'N/A' }}</td>
+                                <td>{{ $request->age ?? 'N/A' }}</td>
+                                <td>{{ ucfirst($request->gender ?? 'N/A') }}</td>
+                                <td>{{ $request->date_needed ?? 'N/A' }}</td>@extends('barangay.templates.navigation-bar')
 
-    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
-
-    @if($certResidencies->isEmpty() && $certIndigencies->isEmpty() && $certJobSeekers->isEmpty())
-        <p class="text-gray-600 text-center">No certificate requests found.</p>
-    @else
-        <table class="min-w-full border border-gray-300">
-            <thead>
-                <tr>
-                    <th class="border-b border-gray-300 px-4 py-2">Download</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Certificate Type</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Name</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Age</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Gender</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Reason</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Date Needed</th>
-                    <th class="border-b border-gray-300 px-4 py-2">OR Number</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Requester</th>
-                    <th class="border-b border-gray-300 px-4 py-2">Purpose</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{-- CertResidencies --}}
-                @foreach($certResidencies as $cert)
-                    <tr>
-                        <td class="border-b border-gray-300 px-4 py-2">
-                            <a href="{{ route('certificate.download', ['certificateId' => $cert->id]) }}" target="_blank">
-                                <i class="fa-solid fa-download"></i>
-                            </a>
-                        </td>
-                        <td class="border-b border-gray-300 px-4 py-2">Residency</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->name ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->age ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->gender ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->reason ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->date_needed ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->ORnumber ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->requester_name ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->purpose ?? 'N/A' }}</td>
-                    </tr>
-                @endforeach
-
-                {{-- CertIndigencies --}}
-                @foreach($certIndigencies as $cert)
-                    <tr>
-                        <td class="border-b border-gray-300 px-4 py-2">
-                            <a href="{{ route('certificate.download', ['certificateId' => $cert->id]) }}" target="_blank">
-                                <i class="fa-solid fa-download"></i>
-                            </a>
-                        </td>
-                        <td class="border-b border-gray-300 px-4 py-2">Indigency</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->name ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->age ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->gender ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->reason ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->date_needed ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->ORnumber ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->requester_name ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->purpose ?? 'N/A' }}</td>
-                    </tr>
-                @endforeach
-
-                {{-- CertJobSeekers --}}
-                @foreach($certJobSeekers as $cert)
-                    <tr>
-                        <td class="border-b border-gray-300 px-4 py-2">
-                            <a href="{{ route('certificate.download', ['certificateId' => $cert->id]) }}" target="_blank">
-                                <i class="fa-solid fa-download"></i>
-                            </a>
-                        </td>
-                        <td class="border-b border-gray-300 px-4 py-2">Job Seeker</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->name ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->age ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->gender ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->reason ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->date_needed ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->ORnumber ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->requester_name ?? 'N/A' }}</td>
-                        <td class="border-b border-gray-300 px-4 py-2">{{ $cert->requests->purpose ?? 'N/A' }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
+                                @section('icon')
+                                <i class="fa-solid fa-certificate fa-lg"></i>
+                                @endsection
+                                
+                                @section('title', 'Certificates')
+                                
+                                @section('content')
+                                <div class="container mt-4">
+                                    <div class="card shadow">
+                                        <div class="card-header bg-primary text-white text-center">
+                                            <h3 class="mb-0">Certificate Requests</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            @if($certificateRequests->isEmpty())
+                                                <div class="text-center my-5">
+                                                    <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
+                                                    <p class="mt-3 text-muted">No certificate requests found.</p>
+                                                </div>
+                                            @else
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-striped align-middle">
+                                                        <thead class="table-dark text-center">
+                                                            <tr>
+                                                                <th>Certificate Type</th>
+                                                                <th>Name</th>
+                                                                <th>Age</th>
+                                                                <th>Gender</th>
+                                                                <th>Date Needed</th>
+                                                                <th>OR Number</th>
+                                                                <th>Requester</th>
+                                                                <th>Purpose</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($certificateRequests as $request)
+                                                                <tr>
+                                                                    <td class="text-center">{{ $request->certificate_type ?? 'N/A' }}</td>
+                                                                    <td>{{ $request->full_name ?? 'N/A' }}</td>
+                                                                    <td class="text-center">{{ $request->age ?? 'N/A' }}</td>
+                                                                    <td class="text-center">{{ ucfirst($request->gender ?? 'N/A') }}</td>
+                                                                    <td class="text-center">{{ $request->date_needed ?? 'N/A' }}</td>
+                                                                    <td class="text-center">{{ $request->or_number ?? 'N/A' }}</td>
+                                                                    <td>{{ $request->requester_name ?? 'N/A' }}</td>
+                                                                    <td>{{ $request->purpose ?? 'N/A' }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                @endsection
+                                <td>{{ $request->or_number ?? 'N/A' }}</td>
+                                <td>{{ $request->requester_name ?? 'N/A' }}</td>
+                                <td>{{ $request->purpose ?? 'N/A' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection

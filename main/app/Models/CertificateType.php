@@ -10,4 +10,6 @@ class CertificateType extends Model
     use HasFactory;
 
     protected $fillable = ['certificate_name', 'price', 'table_name'];
+
+    
 }

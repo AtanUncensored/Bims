@@ -10,30 +10,32 @@ class Request extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'resident_id',
+        'user_id',
+        'barangay_id',
         'certificate_type_id',
         'requester_name',
         'purpose',
         'date_needed',
+        'or_number',
     ];
 
-    public function user()
+    public function barangay()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Barangay::class, 'barangay_id');
     }
 
     public function resident()
     {
-        return $this->belongsTo(Resident::class);
+        return $this->belongsTo(Resident::class, 'resident_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function certificateType()
     {
         return $this->belongsTo(CertificateType::class);
-    }
-    public function certResidency()
-    {
-        return $this->belongsTo(CertResidency::class, 'resident_id', 'id');
     }
 }
