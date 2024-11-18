@@ -32,4 +32,8 @@ class Request extends Model
     {
         return $this->belongsTo(CertificateType::class);
     }
+    public function certResidency()
+    {
+        return $this->belongsTo(CertResidency::class, 'resident_id', 'id');
+    }
 }

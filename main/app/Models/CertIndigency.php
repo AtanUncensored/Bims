@@ -35,4 +35,9 @@ class CertIndigency extends Model
     {
         return $this->belongsTo(Resident::class);
     }
+
+    public function requests()
+    {
+        return $this->hasOne(Request::class, 'resident_id', 'resident_id');
+    }
 }

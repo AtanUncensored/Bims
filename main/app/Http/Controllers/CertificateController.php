@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CertIndigency;
+use App\Models\CertJobSeeker;
 use App\Models\CertResidency;
 use App\Models\CertUnifast;
 use App\Models\Purok;
@@ -15,14 +17,16 @@ class CertificateController extends Controller
 {
 
     //Admin certificate access
-    public function index() {
-        $certResidencies = CertResidency::all();
-        $unifastRecords = CertUnifast::all();
+    public function index()
+    {
+        $certResidencies = CertResidency::with('requests')->get();
+        $certIndigencies = CertIndigency::with('requests')->get();
+        $certJobSeekers = CertJobSeeker::with('requests')->get();
 
-        // Return the view with the records
-         return view('barangay.certificates.index', compact('certResidencies', 'unifastRecords'));
+        return view('barangay.certificates.index', compact('certResidencies', 'certIndigencies', 'certJobSeekers'));
     }
 
+    
 
     //User certificate access
     public function residencyIndex(){
