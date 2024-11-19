@@ -24,7 +24,7 @@ class CertificateController extends Controller
         ->leftJoin('residents', 'requests.resident_id', '=', 'residents.id')
         ->leftJoin('certificate_types', 'requests.certificate_type_id', '=', 'certificate_types.id')
         ->select(
-            'requests.id', // Include ID for download route
+            'requests.id',
             'certificate_types.certificate_name as certificate_type',
             DB::raw('CONCAT(residents.first_name, " ", residents.last_name) as full_name'),
             DB::raw('YEAR(CURDATE()) - YEAR(residents.birth_date) as age'),
@@ -33,13 +33,13 @@ class CertificateController extends Controller
             'requests.date_needed',
             'requests.requester_name',
             'requests.created_at',
-            'requests.downloaded_at' // Assume downloaded_at tracks download time
+            'requests.downloaded_at'
         )
         ->where('requests.barangay_id', $barangayId)
         ->get();
 
     // Group by 'latest' and 'downloaded'
-    $latestRequests = $certificateRequests->whereNull('downloaded_at')->sortByDesc('created_at')->take(5); // Show only latest 5 without downloaded_at
+    $latestRequests = $certificateRequests->whereNull('downloaded_at')->sortByDesc('created_at')->take(5); 
     $downloadedRequests = $certificateRequests->filter(function ($request) {
         return !is_null($request->downloaded_at); // Filter downloaded requests
     });
@@ -75,7 +75,7 @@ class CertificateController extends Controller
         return view('user.certificates.jobseek');
     }
 
-    public function downloadCertificatePDF($certificateId)
+    public function downloadCertificatePDF(Request $request, $certificateId)
 {
     // Retrieve the certificate request with the certificateType relationship
     $certificateRequest = CertificateRequest::with('certificateType')
@@ -125,17 +125,24 @@ class CertificateController extends Controller
         $certificateRequest->downloaded_at = now();
         $certificateRequest->save();
     }
-
     // Create a filename including the requester's name and date
-    $requesterName = $certificateRequest->requester_name ?? 'unknown'; // Assuming 'requester_name' exists; adjust if different
-    $requesterName = str_replace(' ', '_', $requesterName); // Replace spaces with underscores
-    $currentDate = now()->format('Y-m-d'); // Format the current date (e.g., 2024-11-18)
-
+    $requesterName = $certificateRequest->requester_name ?? 'unknown'; 
+    $requesterName = str_replace(' ', '_', $requesterName); 
+    $currentDate = now()->format('Y-m-d'); 
     $fileName = str_replace(' ', '_', $certificateName) . "_{$requesterName}_{$currentDate}.pdf";
 
-    // Trigger the download
+    // Determine if the user wants to print or download
+    $action = $request->query('action', 'download'); // Default to 'download' if no query parameter is set
+
+    if ($action === 'print') {
+        // Stream the PDF to the browser for printing
+        return $pdf->stream($fileName);
+    }
+
+    // Default to downloading the PDF
     return $pdf->download($fileName);
 }
+
 
     
     

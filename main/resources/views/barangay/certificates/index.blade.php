@@ -27,7 +27,7 @@
                                 <th class="px-4 py-2 text-left text-gray-600">Certificate Type</th>
                                 <th class="px-4 py-2 text-left text-gray-600">Purpose</th>
                                 <th class="px-4 py-2 text-left text-gray-600">Date Needed</th>
-                                <th class="px-4 py-2 text-center text-gray-600">Action</th>
+                                <th class="px-4 py-2 text-center text-gray-600">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,13 +38,32 @@
                                     <td class="px-4 py-2">{{ $request->purpose }}</td>
                                     <td class="px-4 py-2">{{ \Carbon\Carbon::parse($request->date_needed)->format('F j, Y') }}</td>
                                     <td class="px-4 py-2 text-center">
-                                        <a href="{{ route('certificate.download', $request->id) }}" class="btn-download text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-sm">
-                                            @if(is_null($request->downloaded_at))
-                                                Download
-                                            @else
-                                                Download Again
-                                            @endif
-                                        </a>
+                                        <div class="flex items-center justify-center gap-2">
+                                            <a href="{{ route('certificate.download', ['certificateId' => $request->id, 'action' => 'download']) }}" 
+                                            class="btn-download text-white hover:bg-blue-200 px-6 py-2 rounded-full text-sm">
+                                                @if(is_null($request->downloaded_at))
+                                                <!-- download sa pdf -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-download" viewBox="0 0 18 18">
+                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                                    </svg>
+                                                @else
+                                                <!-- download again button -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-download" viewBox="0 0 18 18">
+                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                                    </svg>
+                                                @endif
+                                            </a>
+                                            <button onclick="printCertificate('{{ route('certificate.download', ['certificateId' => $request->id, 'action' => 'print']) }}')" 
+                                                    class="btn-print text-white hover:bg-green-200 px-6 py-2 rounded-full text-sm ml-2">
+                                                    <!-- print button -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-printer" viewBox="0 0 18 18">
+                                                            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                                            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                                        </svg>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,7 +90,7 @@
                                 <th class="px-4 py-2 text-left text-gray-600">Certificate Type</th>
                                 <th class="px-4 py-2 text-left text-gray-600">Purpose</th>
                                 <th class="px-4 py-2 text-left text-gray-600">Date Needed</th>
-                                <th class="px-4 py-2 text-center text-gray-600">Action</th>
+                                <th class="px-4 py-2 text-center text-gray-600">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,9 +101,24 @@
                                     <td class="px-4 py-2">{{ $request->purpose }}</td>
                                     <td class="px-4 py-2">{{ \Carbon\Carbon::parse($request->date_needed)->format('F j, Y') }}</td>
                                     <td class="px-4 py-2 text-center">
-                                        <a href="{{ route('certificate.download', $request->id) }}" class="btn-download text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-sm">
-                                            Download Again
-                                        </a>
+                                        <div class="flex items-center justify-center gap-2">
+                                            <a href="{{ route('certificate.download', ['certificateId' => $request->id, 'action' => 'download']) }}" 
+                                            class="btn-download text-white hover:bg-blue-200 px-6 py-2 rounded-full text-sm">
+                                            <!-- download again button  -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-download" viewBox="0 0 18 18">
+                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                                </svg>
+                                            </a>
+                                            <button onclick="printCertificate('{{ route('certificate.download', ['certificateId' => $request->id, 'action' => 'print']) }}')" 
+                                                    class="btn-print text-white hover:bg-green-200 px-6 py-2 rounded-full text-sm ml-2">
+                                                    <!-- print -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-printer" viewBox="0 0 18 18">
+                                                            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                                            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                                        </svg>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -95,4 +129,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function printCertificate(url) {
+        const printWindow = window.open(url, '_blank');
+        printWindow.onload = () => {
+            printWindow.print();
+        };
+    }
+</script>
 @endsection
