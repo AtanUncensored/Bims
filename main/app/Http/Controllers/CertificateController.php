@@ -75,73 +75,61 @@ class CertificateController extends Controller
         return view('user.certificates.jobseek');
     }
 
+    
     public function downloadCertificatePDF(Request $request, $certificateId)
-{
-    // Retrieve the certificate request with the certificateType relationship
-    $certificateRequest = CertificateRequest::with('certificateType')
-        ->findOrFail($certificateId);
+    {
+        // Retrieve the certificate request with the certificateType relationship
+        $certificateRequest = CertificateRequest::with('certificateType')
+            ->findOrFail($certificateId);
 
-    // Get the certificate name from the certificateType relationship
-    $certificateType = $certificateRequest->certificateType;
+        // Get the certificate name from the certificateType relationship
+        $certificateType = $certificateRequest->certificateType;
 
-    if (!$certificateType) {
-        abort(404, "The certificate request does not have a valid certificate type.");
+        if (!$certificateType) {
+            abort(404, "The certificate request does not have a valid certificate type.");
+        }
+
+        $certificateName = $certificateType->certificate_name;
+
+        // Map each certificate name to its corresponding Blade view
+        $certificateViews = [
+            'Residency Certificate'      => 'barangay.certificates.residency-pdf',
+            'Job Seeker Certificate'     => 'barangay.certificates.jobseeker-pdf',
+            'Indigency Certificate'      => 'barangay.certificates.indigency-pdf',
+            'Unifast Certificate'        => 'barangay.certificates.unifast-pdf',
+            'Unemployment Certificate'   => 'barangay.certificates.unemployment-pdf',
+            'Business Certificate'       => 'barangay.certificates.business-pdf',
+        ];
+
+        // Find the view based on the certificate type
+        if (!array_key_exists($certificateName, $certificateViews)) {
+            abort(404, "The certificate type '{$certificateName}' does not have an associated view.");
+        }
+
+        $view = $certificateViews[$certificateName];
+
+        // Prepare the data to pass to the view
+        $pdfData = [
+            'certificateRequest' => $certificateRequest,
+        ];
+
+        // Check if the view exists
+        if (!view()->exists($view)) {
+            abort(404, "The view for '{$certificateName}' does not exist.");
+        }
+
+        // Generate the PDF
+        $pdf = Pdf::loadView($view, $pdfData);
+
+        // Mark as downloaded (if it hasn't been marked already)
+        if (!$certificateRequest->downloaded_at) {
+            $certificateRequest->downloaded_at = now();
+            $certificateRequest->save();
+        }
+
+        // Always stream the PDF to the browser for print
+        return $pdf->stream();
     }
-
-    $certificateName = $certificateType->certificate_name;
-
-    // Map each certificate name to its corresponding Blade view
-    $certificateViews = [
-        'Residency Certificate'      => 'barangay.certificates.residency-pdf',
-        'Job Seeker Certificate'     => 'barangay.certificates.jobseeker-pdf',
-        'Indigency Certificate'      => 'barangay.certificates.indigency-pdf',
-        'Unifast Certificate'        => 'barangay.certificates.unifast-pdf',
-        'Unemployment Certificate'   => 'barangay.certificates.unemployment-pdf',
-        'Business Certificate'       => 'barangay.certificates.business-pdf',
-    ];
-
-    // Find the view based on the certificate type
-    if (!array_key_exists($certificateName, $certificateViews)) {
-        abort(404, "The certificate type '{$certificateName}' does not have an associated view.");
-    }
-
-    $view = $certificateViews[$certificateName];
-
-    // Prepare the data to pass to the view
-    $pdfData = [
-        'certificateRequest' => $certificateRequest,
-    ];
-
-    // Check if the view exists
-    if (!view()->exists($view)) {
-        abort(404, "The view for '{$certificateName}' does not exist.");
-    }
-
-    // Generate the PDF
-    $pdf = Pdf::loadView($view, $pdfData);
-
-    // Mark as downloaded (only if it hasn't been marked already)
-    if (!$certificateRequest->downloaded_at) {
-        $certificateRequest->downloaded_at = now();
-        $certificateRequest->save();
-    }
-    // Create a filename including the requester's name and date
-    $requesterName = $certificateRequest->requester_name ?? 'unknown'; 
-    $requesterName = str_replace(' ', '_', $requesterName); 
-    $currentDate = now()->format('Y-m-d'); 
-    $fileName = str_replace(' ', '_', $certificateName) . "_{$requesterName}_{$currentDate}.pdf";
-
-    // Determine if the user wants to print or download
-    $action = $request->query('action', 'download'); // Default to 'download' if no query parameter is set
-
-    if ($action === 'print') {
-        // Stream the PDF to the browser for printing
-        return $pdf->stream($fileName);
-    }
-
-    // Default to downloading the PDF
-    return $pdf->download($fileName);
-}
 
 
     
