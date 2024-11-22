@@ -1,47 +1,43 @@
 @extends('lgu.lgu-template.navigation-bar')
 
-@section('icon')
-    <i class="fas fa-users fa-lg text-black mr-1"></i>
-@endsection
-
 @section('title', 'Barangays')
 
 @section('content')
-<div class="barangay-list py-4 px-6 md:px-8">
-    <label class="text-lg sm:text-2xl font-bold mb-4 block text-green-600">BARANGAY RECORD:</label>
-
-    <hr class="border-t-2 border-gray-300 mb-4">
-
-    <div class="flex items-center justify-center mt-3 mb-6"> 
-        <form class="inline-flex w-[50%] sm:w-auto" method="GET" action="{{ route('lgu.barangays-list') }}">
-            <input 
-                type="text" 
-                name="search" 
-                placeholder="Search for a barangay" 
-                class="px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500 w-full sm:w-64 lg:py-2 lg:px-4 text-[7px] sm:text-base">
-            <button 
-                type="submit" 
-                class="px-3 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition lg:py-2 lg:px-4">
-                <i class="fa-solid fa-magnifying-glass fa-sm lg:fa-lg"></i>
-            </button>
-        </form>
+<div class="px-6 md:px-4">
+    <div class="bg-white rounded-lg shadow-lg items-center px-4 mb-6">
+        <h1 class="text-xl font-bold py-2 text-blue-500">LOOK FOR A BARANGAY:</h1> 
+        <div class="py-2 px-4 flex justify-center items-center">
+            <form class="inline-flex w-full sm:w-auto" method="GET" action="{{ route('lgu.barangays-list') }}">
+                <input 
+                    type="text" 
+                    name="search" 
+                    placeholder="Search..." 
+                    class="px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500 w-full sm:w-80 lg:py-2 lg:px-4 text-[7px] sm:text-base">
+                <button 
+                    type="submit" 
+                    class="px-3 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition lg:py-2 lg:px-4">
+                    <i class="fa-solid fa-magnifying-glass fa-sm lg:fa-lg"></i>
+                </button>
+            </form>
+        </div>
     </div>
     
 
     <!-- Table ni record sa available barangay -->
-    <div class="max-h-[60vh] overflow-y-auto">
-        <table class="min-w-full table-auto bg-white border border-gray-300 rounded-lg shadow-md">
+    <div class="max-h-[60vh] overflow-y-auto bg-white py-2 px-4 rounded-lg shadow-lg">
+        <h1 class="text-xl font-bold text-blue-500 mb-5">BARANGAY RECORDS:</h1>
+        <table class="min-w-full table-auto bg-white border border-gray-300">
             <thead class="bg-gray-600 text-white">
                 <tr>
-                    <th class="py-3 px-4 lg:px-6 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[13px] text-left">Barangay Logo</th>
-                    <th class="py-3 px-4 lg:px-6 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[13px] text-left">Barangay Name</th>
-                    <th class="py-3 px-4 lg:px-6 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[13px] text-left">View / Edit</th>
+                    <th class="py-3 px-4 lg:px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-[13px] text-center">Logo</th>
+                    <th class="py-3 px-4 lg:px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-[13px] text-center">Name</th>
+                    <th class="py-3 px-4 lg:px-6 bg-gray-600 text-white font-bold uppercase text-[10px] lg:text-[13px] text-center">Update</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($barangays as $barangay)
                 <tr class="hover:bg-gray-300 transition duration-300 ease-in-out">
-                    <td class="lg:py-2 lg:px-4 font-semibold border-b border-gray-200">
+                    <td class="lg:py-2 py-3 lg:px-4 font-semibold">
                         @if ($barangay->logo)
                             <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-8 h-8 sm:w-10 sm:h-10 ml-6 object-cover rounded-full">
                         @else
@@ -49,8 +45,8 @@
                         @endif
                     </td>
 
-                    <td class="py-2 px-4 lg:py-2 lg:px-4 text-[7px] lg:text-[15px] font-semibold border-b border-gray-200">{{ $barangay->barangay_name }}</td>
-                    <td class="py-2 px-4 sm:px-6 font-semibold border-b border-gray-200">
+                    <td class="py-2 px-4 lg:py-2 lg:px-4 text-[10px] lg:text-[15px] font-semibold text-center">{{ $barangay->barangay_name }}</td>
+                    <td class="py-2 px-4 sm:px-6 font-semibold flex justify-center items-center">
                         <a href="{{ route('lgu.barangays-show', $barangay->id) }}" class="text-gray-700 py-1 px-2 sm:px-3 rounded hover:text-gray-900 text-sm sm:text-base">
                             <i class="fa-solid fa-window-maximize"></i>
                         </a>

@@ -1,9 +1,5 @@
 @extends('lgu.lgu-template.navigation-bar')
 
-@section('icon')
-    <i class="fas fa-user fa-lg text-black mr-1"></i>
-@endsection
-
 @section('title', 'Barangay Details')
 
 @section('content')

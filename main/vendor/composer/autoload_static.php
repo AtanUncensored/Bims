@@ -611,8 +611,6 @@ class ComposerStaticInit72e3bddb7c49a7dabf537a01bc4eb353
         'App\\Http\\Controllers\\BudgetController' => __DIR__ . '/../..' . '/app/Http/Controllers/BudgetController.php',
         'App\\Http\\Controllers\\CertificateController' => __DIR__ . '/../..' . '/app/Http/Controllers/CertificateController.php',
         'App\\Http\\Controllers\\CertificateRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/CertificateRequestController.php',
-        'App\\Http\\Controllers\\Certificates\\ResidencyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Certificates/ResidencyController.php',
-        'App\\Http\\Controllers\\Certificates\\UnifastController' => __DIR__ . '/../..' . '/app/Http/Controllers/Certificates/UnifastController.php',
         'App\\Http\\Controllers\\ComplaintController' => __DIR__ . '/../..' . '/app/Http/Controllers/ComplaintController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HouseholdController' => __DIR__ . '/../..' . '/app/Http/Controllers/HouseholdController.php',

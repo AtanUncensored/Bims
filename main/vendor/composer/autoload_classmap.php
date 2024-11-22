@@ -24,8 +24,6 @@ return array(
     'App\\Http\\Controllers\\BudgetController' => $baseDir . '/app/Http/Controllers/BudgetController.php',
     'App\\Http\\Controllers\\CertificateController' => $baseDir . '/app/Http/Controllers/CertificateController.php',
     'App\\Http\\Controllers\\CertificateRequestController' => $baseDir . '/app/Http/Controllers/CertificateRequestController.php',
-    'App\\Http\\Controllers\\Certificates\\ResidencyController' => $baseDir . '/app/Http/Controllers/Certificates/ResidencyController.php',
-    'App\\Http\\Controllers\\Certificates\\UnifastController' => $baseDir . '/app/Http/Controllers/Certificates/UnifastController.php',
     'App\\Http\\Controllers\\ComplaintController' => $baseDir . '/app/Http/Controllers/ComplaintController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HouseholdController' => $baseDir . '/app/Http/Controllers/HouseholdController.php',

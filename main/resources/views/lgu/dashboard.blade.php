@@ -1,46 +1,94 @@
 @extends('lgu.lgu-template.navigation-bar')
 
-@section('icon')
-    <i class="fas fa-house fa-lg text-black mr-1"></i>
-@endsection
-
 @section('content')
-<div id="title" class="py-2 px-4">
-    <h1 class="text-2xl font-bold text-green-600">AVAILABLE BARANGAYS:</h1>
-</div>
 
-<div class="my-4">
-    <hr class="border-t-2 m-[15px] border-gray-300">
-</div>
-<div class="container mx-auto px-4">
-    <div class="max-h-[40vh] lg:max-h-[28vh] overflow-y-auto">
-        <div class="flex flex-wrap">
-            @foreach($barangays as $barangay)
-                <div class="w-full md:w-1/4 px-4 mb-4">
-                    <div class="bg-white shadow-lg rounded-lg p-4">
-                        <div class="flex items-center mb-4">
-                            @php
-                                $iconColors = [
-                                    'text-blue-500', 'text-green-500', 'text-red-500', 
-                                    'text-yellow-500', 'text-purple-500', 'text-pink-500', 
-                                    'text-indigo-500', 'text-teal-500', 'text-orange-500', 
-                                    'text-cyan-500', 'text-amber-500', 'text-lime-500'
-                                ];
-                                $iconColor = $iconColors[$loop->index % count($iconColors)];
-                            @endphp
+<div class=" px-4">
+    
+    <div class="bg-white rounded-lg py-2 px-4 shadow-lg">
+        <h1 class="text-xl font-bold text-blue-500 mb-4">AVAILABLE BARANGAYS:</h1>
 
-                            <i class="fas fa-map-marker-alt {{ $iconColor }} text-3xl mr-3"></i>
-                            <h2 class="text-[15px] font-bold text-gray-600">Brgy. <span class="text-blue-600">{{ $barangay->barangay_name }}</span>, Tubigon, Bohol, Philippines</h2>
+        <div class="max-h-[40vh] lg:max-h-[28vh] overflow-y-auto">
+            <div class="flex flex-wrap">
+                @foreach($barangays as $barangay)
+                    <div class="w-full md:w-1/4 py-2 px-4">
+                        <div class="bg-white border border-[2px] border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-start items-center mb-2">
+                                @php
+                                    $iconColors = [
+                                        'text-blue-500', 'text-green-500', 'text-red-500', 
+                                        'text-yellow-500', 'text-purple-500', 'text-pink-500', 
+                                        'text-indigo-500', 'text-teal-500', 'text-orange-500', 
+                                        'text-cyan-500', 'text-amber-500', 'text-lime-500'
+                                    ];
+                                    $iconColor = $iconColors[$loop->index % count($iconColors)];
+                                @endphp
+    
+                                <i class="fas fa-map-marker-alt {{ $iconColor }} text-2xl mr-2"></i>
+                                <p class="text-blue-600 text-[16px] font-semibold">{{ $barangay->barangay_name }}</p>
+                            </div>
+
+                            <hr class="border-t-2 mb-3 border-gray-300">
+
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-[14px] font-semibold text-gray-500">Tubigon, Bohol, Philippines</h2>
+                                <div class="flex justify-end w-[50%] items-center">
+                                    <p class="text-green-700 font-bold py-1 px-4 text-[13px] rounded-full bg-green-200 mt-4"> <i class="fa-solid fa-angles-up"></i></p>
+                                </div>
+                            </div>
                         </div>
-                        <hr class="border-t-2 border-blue-300">
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 
-    <div class="my-4">
-        <canvas id="barangayChart" class="w-full h-auto max-h-[230px]"></canvas>
+    <div class="mt-4 bg-white rounded-lg shadow-lg py-2 px-4">
+        <h1 class="text-xl font-bold text-blue-500 mb-3">OVERALL RECORD:</h1>
+
+        <!-- Chart only visible on larger devices -->
+        <div class="hidden md:block">
+            <canvas id="barangayChart" class="w-full h-auto max-h-[200px]"></canvas>
+        </div>
+
+        <!-- Statistics list visible on smaller devices -->
+        <div class="md:hidden grid grid-cols-1 gap-2 max-h-[22vh] lg:max-h-[28vh] overflow-y-auto">
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Residents</span>
+                <span class="text-blue-500 font-bold">{{ $totalUsers }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Males</span>
+                <span class="text-blue-500 font-bold">{{ $totalMales }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Females</span>
+                <span class="text-blue-500 font-bold">{{ $totalFemales }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Adults</span>
+                <span class="text-blue-500 font-bold">{{ $totalAdults }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Seniors</span>
+                <span class="text-blue-500 font-bold">{{ $totalSeniors }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Youth</span>
+                <span class="text-blue-500 font-bold">{{ $totalYouth }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Children</span>
+                <span class="text-blue-500 font-bold">{{ $totalChildren }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Total Households</span>
+                <span class="text-blue-500 font-bold">{{ $householdCount }}</span>
+            </div>
+            <div class="flex justify-between items-center text-[14px] border-b py-2">
+                <span class="font-semibold text-gray-700">Married Residents</span>
+                <span class="text-blue-500 font-bold">{{ $marriedCount }}</span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -50,7 +98,6 @@
         const ctx = document.getElementById('barangayChart').getContext('2d');
         let barangayChart;
 
-        // Data and options for the chart
         const data = {
             labels: [
                 'Total Residents', 
@@ -85,7 +132,7 @@
                     'rgba(153, 102, 255, 0.2)',
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
                 ],
                 borderColor: [
                     'rgba(75, 192, 192, 1)',
@@ -96,50 +143,30 @@
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 99, 132, 1)',
                     'rgba(75, 192, 192, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)'
                 ],
                 borderWidth: 1
             }]
         };
 
-        // Function to determine chart type based on screen width
-        function getChartType() {
-            return window.innerWidth <= 768 ? 'pie' : 'bar'; // Switch to pie chart on screens <= 768px
-        }
-
-        // Function to create the chart with responsive type
-        function createChart() {
-            if (barangayChart) {
-                barangayChart.destroy(); // Destroy previous chart instance if exists
-            }
-            barangayChart = new Chart(ctx, {
-                type: getChartType(),
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            display: getChartType() === 'bar' // Hide Y-axis on pie chart
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
+        barangayChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
                     }
                 }
-            });
-        }
-
-        // Initial chart render
-        createChart();
-
-        // Re-render the chart on window resize to adjust type
-        window.addEventListener('resize', function() {
-            createChart();
+            }
         });
     });
 </script>
