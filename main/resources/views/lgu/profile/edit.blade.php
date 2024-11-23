@@ -39,32 +39,32 @@
 </head>
 <body class="bg-gray-100">
     <div id="main" class="flex h-screen">
-       <!-- Sidebar -->
-    <div id="sidebar" class="bg-blue-500 w-[250px] flex flex-col justify-between transition-transform transform md:translate-x-0 -translate-x-full hidden md:block h-auto md:h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar" class="bg-blue-500 w-[190px] flex justify-center transition-transform transform md:translate-x-0 -translate-x-full hidden md:block h-auto md:h-screen">
         <div class="flex-grow">
-            <!-- Title and Logo -->
-            <div id="branding" class="flex flex-col py-1 px-2 items-center space-y-2 ml-3 md:flex-row md:space-y-0 md:space-x-4">
-                <img class="w-[50px] h-[50px] rounded-full" src="{{asset('images/tubigon-logo.png')}}" alt="barangay/lgu logo">
-                <h1 class="hidden lg:block text-xl lg:text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
-                    BIMS
-                </h1> 
-            </div>
+        <div id="branding" class="flex flex-col py-1 px-2 items-center space-y-2 ml-3 md:flex-row md:space-y-0 md:space-x-4">
+            <img class="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full" src="{{ asset('images/tubigon-logo.png') }}" alt="barangay/lgu logo">
+            <h1 class="text-xl lg:text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
+                BIMS
+            </h1>
+        </div>
 
-            <nav id="main-nav" class="space-y-2">
-                <hr class="border-t-2 border-gray-300">
-                <a href="{{ url('/lgu') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                    <i class="fas fa-house fa-lg text-blue-800"></i>
-                    <span class="text-[13px] lg:text-[15px]">Dashboard</span>
-                </a>
-                
-                <a href="{{ url('/barangays') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangays*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                    <i class="fas fa-users fa-lg text-blue-800"></i>
-                    <span class="text-[13px] lg:text-[15px]">Barangays</span>
-                </a>
-                <a href="{{ url('/admins') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                    <i class="fas fa-user-shield fa-lg text-blue-800"></i>
-                    <span class="text-[13px] lg:text-[15px]">Barangay Admins</span>
-                </a>
+            <nav id="main-nav">  
+                <div class="mt-[15px]">
+                    <a href="{{ url('/lgu') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-house fa-lg text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Dashboard</span>
+                    </a>
+                    
+                    <a href="{{ url('/barangays') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangays*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-users fa-lg text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Barangays</span>
+                    </a>
+                    <a href="{{ url('/admins') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-user-shield fa-lg text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Barangay Admins</span>
+                    </a>
+                </div>
             </nav>
         </div>
     </div>
@@ -73,25 +73,26 @@
         <div class="flex-1 flex flex-col">
 
             <!-- Top Navigation Bar -->
-            <nav id="top-nav" class="flex justify-between items-center bg-white shadow-md h-[60px] px-4">
+            <nav id="top-nav" class="flex justify-between items-center h-[60px] px-4">
+                
                 <button onclick="toggleSidebar()" class="md:hidden flex items-center text-blue-500">
                     <i class="fas fa-bars fa-lg mr-3"></i>
                 </button>
-                <i class="fa-solid fa-id-card fa-xl"></i>
-                <h1 class="text-xl ml-2 text-gray-600">Profile</h1>
-    
-                <div class="flex items-center ml-auto">
-                    <h1 class="text-2xl font-bold transform scale-y-130">|</h1>    
+                @yield('icon')
+                <h1 class="text-[15px] lg:text-xl font-semibold text-blue-500">@yield('title', 'Profile Information')</h1>
                 
+                <div class="flex items-center ml-auto">
                     <div id="user-dropdown" class="relative px-4 py-2 rounded-lg flex items-center">
                         <button onclick="toggleDropdown()" class="flex items-center focus:outline-none">
-                            <span class="text-gray-600 font-bold mr-3">{{ Auth::user()->name }}</span>
+                            <div class="border border-gray-300 border-t-2 rounded-full w-full flex justify-between items-center py-1 px-3">
+                                <span class="text-gray-600 text-[13px] font-bold mr-2">{{ Auth::user()->name }}</span>
                             <div>
                                 @if(Auth::user()->user_image)
-                                    <img src="{{ Storage::url(Auth::user()->user_image) }}" alt="Profile Image" class="w-[33px] h-[33px] rounded-full object-cover">
+                                    <img src="{{ Storage::url(Auth::user()->user_image) }}" alt="Profile Image" class="w-[28px] h-[28px] rounded-full object-cover">
                                 @else
-                                    <img src="{{asset('images/profile.jpg')}}" alt="Default Profile Image" class="w-[33px] h-[33px] rounded-full object-cover">
+                                    <img src="{{asset('images/profile.jpg')}}" alt="Default Profile Image" class="w-[28px] h-[28px] rounded-full object-cover">
                                 @endif
+                            </div>
                             </div>
                         </button>
                 
@@ -126,6 +127,8 @@
                     </div>
                 </div>
             </nav>
+            
+            <hr class="border-t-2 mt-1 border-gray-300 ml-4 mr-4">
 
             <!-- Main Content -->
             <div id="content" class="flex-1 p-4">

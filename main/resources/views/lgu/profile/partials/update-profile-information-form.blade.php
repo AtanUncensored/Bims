@@ -1,7 +1,7 @@
 <section>
     <div class="max-h-[80vh] overflow-y-auto">
         <div class="flex justify-center items-center"> 
-            <div class="w-[400px] lg:w-[800px] bg-white shadow-lg rounded-lg py-4 px-7">
+            <div class="w-[340px] lg:w-[800px] bg-white shadow-lg rounded-lg py-4 px-7">
                 <header>
                     <h1 class="text-2xl font-bold text-start uppercase text-blue-600">Account</h1>
     

@@ -75,7 +75,7 @@ class LguController extends Controller
         $barangays = Barangay::when($search, function ($query, $search) {
             return $query->where('barangay_name', 'like', '%' . $search . '%');
         })->orderBy('barangay_name', 'asc')->get();
-        return view('lgu.barangays-list', compact('barangays', 'search'));
+        return view('lgu.barangays-list', compact('barangays', 'search'))->with('success', 'Barangay updated successfully!');
     }
 
     public function show($barangayId)
@@ -245,7 +245,7 @@ class LguController extends Controller
 
         $user->assignRole('admin'); // Assigning the 'admin' role to the created Barangay user
 
-        return redirect()->route('lgu.create-barangay')->with('success', 'Barangay created successfully.');
+        return redirect()->route('lgu.admins')->with('success', 'Barangay created successfully.');
     }
 }
 

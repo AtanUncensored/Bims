@@ -40,7 +40,7 @@
 <body class="bg-gray-100">
     <div id="main" class="flex h-screen">
 
-       <!-- Sidebar -->
+    <!-- Sidebar -->
     <div id="sidebar" class="bg-blue-500 w-[190px] flex justify-center transition-transform transform md:translate-x-0 -translate-x-full hidden md:block h-auto md:h-screen">
         <div class="flex-grow">
         <div id="branding" class="flex flex-col py-1 px-2 items-center space-y-2 ml-3 md:flex-row md:space-y-0 md:space-x-4">
@@ -50,9 +50,7 @@
             </h1>
         </div>
 
-
-            <nav id="main-nav">
-                
+            <nav id="main-nav">  
                 <div class="mt-[15px]">
                     <a href="{{ url('/lgu') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-house fa-lg text-blue-800"></i>
