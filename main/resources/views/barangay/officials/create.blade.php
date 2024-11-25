@@ -41,7 +41,7 @@
             
             <div class="mb-4">
                 <label for="position" class="block text-gray-700 text-sm font-bold mb-2">Position</label>
-                <input type="text" id="position" name="position" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                <input type="text" id="position" name="position" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
                 @error('position')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -49,7 +49,7 @@
             
             <div class="mb-4">
                 <label for="committee" class="block text-gray-700 text-sm font-bold mb-2">Committee</label>
-                <input type="committee" id="committee" name="committee" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                <input type="text" id="committee" name="committee" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
                 @error('committee')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -57,7 +57,7 @@
             
             <div class="mb-4">
                 <label for="start_of_service" class="block text-gray-700 text-sm font-bold mb-2">Start of Service</label>
-                <input type="date" id="start_of_service" name="start_of_service" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                <input type="date" id="start_of_service" name="start_of_service" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
                 @error('start_of_service')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -65,7 +65,7 @@
             
             <div class="mb-4">
                 <label for="end_of_service" class="block text-gray-700 text-sm font-bold mb-2">End of Service</label>
-                <input type="date" id="end_of_service" name="end_of_service" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                <input type="date" id="end_of_service" name="end_of_service" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
                 @error('end_of_service')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
