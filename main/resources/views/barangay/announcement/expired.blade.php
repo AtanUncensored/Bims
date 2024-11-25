@@ -1,17 +1,11 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-solid fa-bullhorn fa-lg"></i>
-@endsection
-
 @section('title', 'Expired Announcements')
 
 @section('content')
 <div class="px-4">
-    <div class="bg-white rounded-lg shadow-lg py-2 px-4">
-        <h2 class="text-xl font-bold text-red-500 mb-3 uppercase">Expired Announcements:</h2>
-
-        <hr class="border-t-2 mb-4 border-gray-300">
+    <div class="bg-white flex justify-between items-center rounded-lg shadow-lg py-2 px-4">
+        <h2 class="text-xl font-bold text-red-500 mb-3 uppercase text-start">Expired Announcements:</h2>
 
         <div class="flex justify-end">
             <a href="{{ url('/announcements/show') }}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
@@ -20,7 +14,7 @@
         </div>
     </div>
 
-    <div class="max-h-[63vh] overflow-y-auto">
+    <div class="max-h-[70vh] overflow-y-auto">
         @if($announcements->count())
             <div class="space-y-6"> 
                 @foreach($announcements as $announcement)

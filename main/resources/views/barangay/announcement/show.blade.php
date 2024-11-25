@@ -1,9 +1,5 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-solid fa-bullhorn fa-lg"></i>
-@endsection
-
 @section('title', 'Announcements Details')
 
 @section('content')

@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="max-h-[55vh] overflow-y-auto">
+    <div class="max-h-[61vh] overflow-y-auto">
         @if($announcements->count())
         <div class="space-y-6"> 
             @foreach($announcements as $announcement)
@@ -36,7 +36,7 @@
 
                         <div class="p-4 flex">
                             <div>
-                                <h3 class="lg:text-2xl text-[15px] font-bold mb-2 text-blue-600 uppercase">{{ $announcement->title }}</h3>
+                                <h3 class="lg:text-2xl text-[15px] font-semibold mb-2 text-blue-600">{{ $announcement->title }}</h3>
                             </div>
                             <a href="{{ route('barangay.announcement.show', $announcement->id) }}" class="ml-auto bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">View details</a>
                         </div>

@@ -1,9 +1,5 @@
 @extends('user.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-regular fa-newspaper fa-xl"></i>
-@endsection
-
 @section('title', 'Complaints')
 
 @section('content')

@@ -197,6 +197,7 @@ Route::middleware('auth')->group(function () {
 
         //BudgetReports
         Route::get('/budget-reports', [BudgetController::class, 'userIndex'])->name('user.budget-report.index');
+        Route::post('user-budgets/export-excel', [BudgetController::class, 'userExportExcel'])->name('user.budgets.download-excel');
 
         //Complaints
         Route::get('/user-complaints', [ComplaintController::class, 'userIndex'])->name('user.complaint.index');

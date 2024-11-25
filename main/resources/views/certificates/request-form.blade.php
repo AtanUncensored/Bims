@@ -1,9 +1,5 @@
 @extends('user.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-solid fa-certificate fa-xl"></i>
-@endsection
-
 @section('title', 'Request Certificate')
 
 @section('content')

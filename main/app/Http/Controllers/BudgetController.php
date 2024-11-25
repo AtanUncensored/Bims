@@ -121,13 +121,16 @@ public function deleteBudgetReport(Budget $budgetReport)
     return redirect()->route('barangay.budget-report.index')->with('success', 'Budget report deleted successfully.');
 }
 
-    public function exportExcel()
-        {
-            $barangayId = auth()->user()->barangay_id;
-            return Excel::download(new BudgetDataExport($barangayId), 'budgets.xlsx');
-        }
+public function exportExcel()
+{
+    $barangayId = auth()->user()->barangay_id;
+    return Excel::download(new BudgetDataExport($barangayId), 'budgets.xlsx');
+}
 
-
-
+public function userExportExcel()
+{
+    $barangayId = auth()->user()->barangay_id;
+    return Excel::download(new BudgetDataExport($barangayId), 'budgets.xlsx');
+}
 
 }
