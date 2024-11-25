@@ -48,9 +48,9 @@ class AnnouncementController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'announcement_date' => 'required|date',
-            'expiration_date' => 'nullable|date',
-            'content' => 'required',
-            'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'expiration_date' => 'required|date|after:today',
+            'content' => 'required|max:255',
+            'imgUrl' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $imagePath = null;

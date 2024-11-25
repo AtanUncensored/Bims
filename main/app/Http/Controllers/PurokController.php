@@ -22,25 +22,39 @@ class PurokController extends Controller
         return view('barangay.puroks.create');
     }
 
-    public function storePurok(Request $request) {
-        $request->validate([
-            'barangay_id' => 'nullable',
-            'purok_name'  => 'required',
-            'purok_number'=> 'required'
-        ]);
+    public function storePurok(Request $request)
+{
+    $barangayId = Auth::user()->barangay_id;
 
-        $barangayId = Auth::user()->barangay_id;
+    // Validate the request
+    $request->validate([
+        'purok_name'  => 'required|string|max:255',
+        'purok_number' => 'required|integer|in:1,2,3,4,5,6,7',
+    ]);
 
-        Purok::create([
-            'barangay_id' => $barangayId,
-            'purok_name'  => $request->purok_name,
-            'purok_number'=> $request->purok_number
-        ]);
-
-
-        return back();
-        
+    // Check if the maximum limit of 7 Puroks is reached for the barangay
+    $purokCount = Purok::where('barangay_id', $barangayId)->count();
+    if ($purokCount >= 7) {
+        return back()->withErrors(['error' => 'The maximum of 7 Puroks has already been reached for this barangay.']);
     }
+
+    // Check if the purok_number is already taken within the same barangay
+    $existingPurok = Purok::where('barangay_id', $barangayId)
+        ->where('purok_number', $request->purok_number)
+        ->first();
+    if ($existingPurok) {
+        return back()->withErrors(['error' => 'The Purok number is already taken for this barangay.']);
+    }
+
+    // Store the new Purok
+    Purok::create([
+        'barangay_id' => $barangayId,
+        'purok_name'  => $request->purok_name,
+        'purok_number'=> $request->purok_number,
+    ]);
+
+    return back()->with('success', 'Purok created successfully!');
+}
 
     public function viewPurok(Purok $purok)
     {

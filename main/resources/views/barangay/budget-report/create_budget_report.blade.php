@@ -9,7 +9,7 @@
 
 @section('content')
 
-<div class="py-2 px-4 bg-white rounded">
+<div class="py-2 px-4 bg-white rounded w-80 mx-auto">
     <h1 class="text-center font-semibold text-2xl text-blue-600">Add New Expense</h1>
 
     @if (session('success'))
@@ -18,33 +18,35 @@
         </div>
     @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <form action="{{ route('barangay.store-budgetReport') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="item">Item:</label>
-            <input type="text" class="form-control border border-gray-600 rounded" id="item" name="item" value="{{ old('item') }}" required>
+            <input type="text" class="form-control border border-gray-600 rounded" id="item" name="item" value="{{ old('item') }}">
+            @error('item')
+            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="cost">Cost:</label>
-            <input type="number" step="0.01" class="form-control border border-gray-600 rounded" id="cost" name="cost" value="{{ old('cost') }}" required>
+            <input type="number" step="0.01" class="form-control border border-gray-600 rounded" id="cost" name="cost" value="{{ old('cost') }}">
+            @error('cost')
+            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="period_from">Period From:</label>
-            <input type="date" class="form-control border border-gray-600 rounded" id="period_from" name="period_from" value="{{ old('period_from') }}" required>
+            <input type="date" class="form-control border border-gray-600 rounded" id="period_from" name="period_from" value="{{ old('period_from') }}">
+            @error('period_from')
+            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="period_to">Period To:</label>
-            <input type="date" class="form-control border border-gray-600 rounded" id="period_to" name="period_to" value="{{ old('period_to') }}" required>
+            <input type="date" class="form-control border border-gray-600 rounded" id="period_to" name="period_to" value="{{ old('period_to') }}">
+            @error('period_to')
+            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="flex justify-between mt-3">

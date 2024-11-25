@@ -52,7 +52,8 @@ class BudgetController extends Controller
             'item' => 'required|string|max:255',
             'cost' => 'required|string|max:255',
             'period_from' => 'required|date',
-            'period_to' => 'required|date',
+            'period_to' => 'required|date|after:period_from',
+
         ]);
 
         // Get the currently logged-in user's barangay

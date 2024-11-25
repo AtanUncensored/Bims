@@ -229,12 +229,12 @@ class LguController extends Controller
 
     public function storeBarangayAdmin(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'barangay_id' => 'required',
-        ]);
+            // Validate the input fields
+            $request->validate([
+                'name' => 'required|string|max:255|unique:users',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
 
         $user = User::create([
             'name' => $request->name,
