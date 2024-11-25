@@ -8,13 +8,13 @@
 
 @section('content')
 
-<div class="py-6 px-4 max-h-[75vh] overflow-y-auto mx-auto">
-    <div class="image-area relative">
+<div class="py-6 px-4 max-h-[72vh] overflow-y-auto mx-auto">
+    <div class="image-area relative shadow-xl">
         @if($announcement->imgUrl)
         <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-[350px] object-cover rounded-lg shadow-lg">
         <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>
         <div class="absolute inset-0 flex items-center justify-center">
-            <h1 class="text-white text-4xl md:text-5xl font-extrabold text-center drop-shadow-lg">{{ $announcement->title }}</h1>
+            <h1 class="text-white lg:text-4xl text-[20px] font-extrabold text-center drop-shadow-lg">{{ $announcement->title }}</h1>
         </div>
         @endif
     </div>

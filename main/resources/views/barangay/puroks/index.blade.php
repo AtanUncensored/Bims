@@ -1,9 +1,5 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fas fa-house fa-lg"></i>
-@endsection
-
 @section('title', 'Puroks')
 
 @section('content')

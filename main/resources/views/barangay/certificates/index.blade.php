@@ -1,33 +1,30 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-solid fa-certificate fa-lg"></i>
-@endsection
-
 @section('title', 'Certificates')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="container px-4">
+
+    <div class="grid grid-rows-1 md:grid-rows-2 gap-4">
         
         <!-- Latest Requests Section -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Latest Certificate Requests</h2>
+        <div class="bg-white shadow-lg rounded-lg py-2 px-4">
+            <h2 class="text-xl font-bold text-blue-500 mb-3 uppercase">Latest Certificate Requests:</h2>
             @if($latestRequests->isEmpty())
                 <div class="text-center py-16">
                     <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
                     <p class="mt-3 text-muted text-gray-500">No recent certificate requests found.</p>
                 </div>
             @else
-                <div class="overflow-x-auto">
-                    <table class="w-full table-auto">
+                <div class="max-h-[30vh] overflow-y-auto">
+                    <table class="w-full table-auto border border-[2px] border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left text-gray-600">Full Name</th>
-                                <th class="px-4 py-2 text-left text-gray-600">Certificate Type</th>
-                                <th class="px-4 py-2 text-left text-gray-600">Purpose</th>
-                                <th class="px-4 py-2 text-left text-gray-600">Date Needed</th>
-                                <th class="px-4 py-2 text-center text-gray-600">Actions</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Full Name</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Certificate Type</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purpose</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Date Needed</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,23 +61,23 @@
         </div>
 
         <!-- Downloaded Requests Section -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Downloaded Certificate Requests</h2>
+        <div class="bg-white shadow-lg rounded-lg py-2 px-4">
+            <h2 class="text-xl font-bold text-blue-500 mb-3 uppercase">Downloaded Certificate Requests:</h2>
             @if($downloadedRequests->isEmpty())
                 <div class="text-center py-16">
                     <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
                     <p class="mt-3 text-muted text-gray-500">No downloaded certificate requests found.</p>
                 </div>
             @else
-                <div class="overflow-x-auto">
-                    <table class="w-full table-auto">
+                <div class="max-h-[30vh] overflow-y-auto">
+                    <table class="w-full table-auto border border-[2px] border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left text-gray-600">Full Name</th>
-                                <th class="px-4 py-2 text-left text-gray-600">Certificate Type</th>
-                                <th class="px-4 py-2 text-left text-gray-600">Purpose</th>
-                                <th class="px-4 py-2 text-left text-gray-600">Date Needed</th>
-                                <th class="px-4 py-2 text-center text-gray-600">Actions</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Full Name</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Certificate Type</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purpose</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Date Needed</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

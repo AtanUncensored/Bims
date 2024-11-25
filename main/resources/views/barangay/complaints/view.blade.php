@@ -1,10 +1,6 @@
 {{-- resources/views/barangay/complaints/show.blade.php --}}
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-regular fa-newspaper fa-lg"></i>
-@endsection
-
 @section('title', 'Reply to Complaint')
 
 @section('content')

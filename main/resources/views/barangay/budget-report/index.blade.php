@@ -1,39 +1,41 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fa-solid fa-file-lines fa-lg"></i>
-@endsection
-
 @section('title', 'Budget Reports')
 
 @section('content')
 
-<div class="py-2 px-4">
+<div class="px-4">
 
-    <h2 class="text-2xl font-semibold text-green-600">BUDGET LOGS:</h2>
-
-    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
-
-    <div class="flex justify-between mb-4">
+    <div class="flex justify-end items-center mb-4">
         <form action="{{ route('budgets.download-excel')}}" method="POST" target="__blank">
             @csrf
             <div>
-                <button class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition">
-                    <i class="fa-solid fa-download"></i> Export Data
+                <button class="py-2 px-3 text-white bg-green-500 rounded-lg  hover:bg-green-600 shadow-lg transition">
+                    <i class="fa-solid fa-file-export"></i> Export
                 </button>
             </div>
         </form>
-
-        <a href="{{ route('barangay.create-budgetReport') }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition">
-            <span><i class="fa-solid fa-plus"></i> Add Expense</span>
-        </a>
     </div>
-        @if(session('success'))
-            <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">{{ session('success') }}</div>
-        @endif
-    
+
+    <div class="bg-white py-2 px-4 rounded-lg shadow-lg">
+        <div class="flex justify-center items-center">
+            @if(session('success'))
+                <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+        <div class="flex justify-between mb-4">
+        
+            <h2 class="text-xl font-bold text-blue-500 mb-3">BUDGET LOGS:</h2>
+            
+            <a href="{{ route('barangay.create-budgetReport') }}" class="py-2 px-4 bg-blue-500 text-white rounded flex items-center space-x-2 hover:bg-blue-600 transition">
+                <span><i class="fa-solid fa-plus"></i> Add Expense</span>
+            </a>
+        </div>
+        
         <div class="max-h-[45vh] overflow-y-auto">
-            <table class="min-w-full divide-y divide-gray-200 bg-white shadow-lg rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200 border border-[2px] border-gray-200 rounded-lg">
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="py-2 px-4 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Expense Used</th>
@@ -60,7 +62,7 @@
                                 <a href="{{ route('barangay.budget-report.edit', $report->id) }}" class="text-blue-600 py-1 px-3 rounded hover:text-blue-800">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                
+                    
                                 <form action="{{ route('barangay.budget-report.delete', $report->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this budget report?');">
                                     @csrf
                                     @method('DELETE')
@@ -72,7 +74,6 @@
                         </td>
                     </tr>
                 @endforeach
-                
                     @endif
                 </tbody>
             </table>
@@ -80,6 +81,7 @@
         <div class="text-end mt-3">
             <p class="font-semibold text-gray-700">Total Expenses:<span class="text-red-500">₱{{ number_format($totalExpenses, 2) }}</span></p>
         </div>
+    </div>
 </div>
 
 @endsection

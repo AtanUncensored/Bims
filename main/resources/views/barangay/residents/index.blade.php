@@ -1,47 +1,48 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fas fa-users fa-lg"></i>
-@endsection
-
 @section('title', 'Residents')
 
 @section('content')
-<div class="py-2 px-4">
-    <h2 class="text-2xl text-green-600 font-semibold">LIST OF AVAILABLE RESIDENTS:</h2>
-    
-    <div class="text-center">
-        <hr class="border-t-2 mt-3 mb-4 border-gray-300">
-    </div>
-    
-    <div class="flex justify-between mb-4">
+<div class="px-4">
+    <div class="flex justify-end items-center mb-4">
         <form action="{{ route('residents.download-excel')}}" method="POST" target="__blank">
             @csrf
             <div>
-                <button class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 transition">
-                    <i class="fa-solid fa-download"></i> Export Data
+                <button class="py-2 px-3 text-white bg-green-500 rounded-lg  hover:bg-green-600 shadow-lg transition">
+                    <i class="fa-solid fa-file-export"></i> Export
                 </button>
             </div>
         </form>
+    </div>
 
-          <!-- Search bar -->
-          <form class="inline-flex items-center justify-center" method="GET" action="{{ route('barangay.residents.index') }}">
+     <!-- Search bar -->
+     <div class="bg-white py-2 px-4 rounded-lg shadow-lg mb-4 max-h-[15vh] overflow-y-auto">
+        <h1 class="text-xl font-bold text-blue-500 mb-3">LOOK FOR A RESIDENT:</h1>
+
+        @if(session('success'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-2">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        <form class="flex items-center justify-center" method="GET" action="{{ route('barangay.residents.index') }}">
             <input type="text" name="search" placeholder="Search a resident..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500">
             <button type="submit" class="py-2 px-4 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
-        <a href="{{ route('barangay.create-user') }}" class="py-2 px-4 bg-blue-600 text-white rounded flex items-center space-x-2 hover:bg-blue-500 transition">
-            <i class="fa-solid fa-plus"></i>
-            <span>Add Resident</span>
-        </a>
-    </div>
+     </div>
     
-        @if(session('success'))
-            <div class="alert alert-success mb-4 bg-green-100 text-green-800 border border-green-300 rounded-lg py-2 px-4">{{ session('success') }}</div>
-        @endif
+    <div class="bg-white py-2 px-4 rounded-lg shadow-lg">
+        <div class="flex justify-between mb-4">
+            <h1 class="text-xl font-bold text-blue-500 mb-3">LIST OF AVAILABLE RESIDENTS:</h1>
     
+            <a href="{{ route('barangay.create-user') }}" class="py-2 px-4 bg-blue-600 text-white rounded flex items-center space-x-2 hover:bg-blue-500 transition">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add Resident</span>
+            </a>
+        </div>
         <div class="max-h-[50vh] overflow-y-auto">
-            <table class="min-w-full bg-white">
+            <table class="min-w-full bg-white border border-[2px] border-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Last Name</th>
@@ -64,22 +65,22 @@
                                 <button onclick="toggleDeleteModal('{{ $resident->id }}')" class="text-red-700 py-1 px-2 md:px-3 rounded hover:text-red-900">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-                                
-                                 <!-- Delete Modal ni dere same sa log out nga layout -->
+                                    
+                                <!-- Delete Modal ni dere same sa log out nga layout -->
                                 <div id="delete-modal-{{ $resident->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                     <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
                                         <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Name: <span class="text-blue-600">{{ $resident->last_name}}, {{ $resident->first_name}}</span></p>
                                         <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">From: <span class="text-blue-600">{{ $resident->current_address}}</span></p>
-
+    
                                         <hr class="border-t-2 border-gray-300">
-        
+            
                                         <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this Resident?</p>
-                                        
+                                            
                                         <div class="flex justify-end space-x-4">
                                             <button onclick="toggleDeleteModal('{{ $resident->id }}')" class="hover:text-gray-400">
                                                 Cancel
                                             </button>
-                                
+                                    
                                             <form action="{{ route('barangay.residents.delete', ['resident_id' => $resident->id]) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -100,6 +101,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </div>
 <script>
        //Show ni sa delete modal

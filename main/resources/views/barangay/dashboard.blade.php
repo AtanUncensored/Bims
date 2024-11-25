@@ -1,145 +1,193 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fas fa-house fa-lg"></i>
-@endsection
-
 @section('content')
 
-<div class="records py-2 px-4">
-    <h1 class="text-2xl font-bold text-green-600">BARANGAY RECORDS:</h1>
-    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
+<div class="records px-4">
+    <div class="bg-white py-2 px-4 rounded-lg shadow-lg">
+        <h1 class="text-xl font-bold text-blue-500 mb-4">BARANGAY RECORDS:</h1>
+        <div class="flex flex-wrap justify-between mb-4 max-h-[28vh] lg:gap-1 lg:max-h-[20vh] overflow-y-auto space-y-2 lg:space-y-0">
+            <!-- Total Residents Card -->
+            <div class="card border border-[2px] border-gray-200 rounded-[8px] py-1 px-3 w-full sm:w-1/2 lg:w-[23%]">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h5 class="card-title text-blue-900 font-bold">Residents</h5>
+                        <p class="text-blue-900 font-bold py-1 mb-2 px-2 text-[9px] lg:text-sm rounded-full mt-2">  
+                            <i class="fa-solid fa-users text-lg lg:text-lg"></i> 
+                        </p>
+                    </div>
+                    <hr class="border-t-2 mb-2 border-gray-300">
+                    <div class="flex justify-between items-center">
+                        <div class="flex justify-start items-center">
+                            <p class="cart-text font-semibold text-[13px] lg:text-sm mr-1 text-gray-500">Total:</p>
+                            <p class="card-text font-semibold text-lg lg:text-lg text-green-700 mb-1"> {{ $totalResidents }}</p>
+                        </div>
+                        <div class="flex justify-end items-center">
+                            <p class="text-green-700 font-bold py-1 px-2 text-[9px] rounded-full bg-green-200">
+                                <i class="fa-solid fa-angles-up text-[13px]"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="flex justify-between mb-4">
-        <div class="card bg-yellow-400 rounded-[10px] py-2 px-4 w-[20%]">
-            <div class="card-body">
-                <p class="card-text font-semibold text-2xl">{{ $totalResidents }}</p>
-                <hr class="border-t-2 mt-2 mb-3 border-black">
-                <h5 class="card-title text-yellow-900 font-bold text-lg">
-                    <i class="fas fa-users fa-md"></i> Total Residents
-                </h5>
+            <!-- Married Card -->
+            <div class="card border border-[2px] border-gray-200 rounded-[8px] py-1 px-3 w-full sm:w-1/2 lg:w-[23%]">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h5 class="card-title text-red-900 font-bold">Married</h5>
+                        <p class="text-red-900 font-bold py-1 mb-2 px-2 text-[9px] lg:text-sm rounded-full mt-2"> 
+                            <i class="fa-solid fa-ring text-lg lg:text-lg"></i> 
+                        </p>
+                    </div>
+                    <hr class="border-t-2 mb-2 border-gray-300">
+                    <div class="flex justify-between items-center">
+                        <div class="flex justify-start items-center">
+                            <p class="cart-text font-semibold text-[13px] lg:text-sm mr-1 text-gray-500">Total:</p>
+                            <p class="card-text font-semibold text-lg lg:text-lg text-green-700 mb-1"> {{ $marriedCount }}</p>
+                        </div>
+                        <div class="flex justify-end items-center">
+                            <p class="text-green-700 font-bold py-1 px-2 text-[9px] rounded-full bg-green-200">
+                                <i class="fa-solid fa-angles-up text-[13px]"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card bg-red-500 rounded-[10px] py-2 px-4 w-[20%]">
-            <div class="card-body">
-                <p class="card-text font-semibold text-2xl">{{ $marriedCount }}</p>
-                <hr class="border-t-2 mt-2 mb-3 border-black">
-                <h5 class="card-title text-red-900 font-bold text-lg">
-                    <i class="fa-solid fa-ring fa-lg"></i> Married
-                </h5>
+
+            <!-- Senior Citizen Card -->
+            <div class="card border border-[2px] border-gray-200 rounded-[8px] py-1 px-3 w-full sm:w-1/2 lg:w-[23%]">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h5 class="card-title text-gray-700 font-bold">Senior Citizen</h5>
+                        <p class="text-gray-700 font-bold py-1 mb-2 px-2 text-[9px] lg:text-sm rounded-full mt-2"> 
+                            <i class="fa-solid fa-user-tie text-lg lg:text-lg"></i> 
+                        </p>
+                    </div>
+                    <hr class="border-t-2 mb-2 border-gray-300">
+                    <div class="flex justify-between items-center">
+                        <div class="flex justify-start items-center">
+                            <p class="cart-text font-semibold text-[13px] lg:text-sm mr-1 text-gray-500">Total:</p>
+                            <p class="card-text font-semibold text-lg lg:text-lg text-green-700 mb-1"> {{ $seniorCitizensCount }}</p>
+                        </div>
+                        <div class="flex justify-end items-center">
+                            <p class="text-green-700 font-bold py-1 px-2 text-[9px] rounded-full bg-green-200">
+                                <i class="fa-solid fa-angles-up text-[13px]"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card bg-purple-500 rounded-[10px] py-2 px-4 w-[20%]">
-            <div class="card-body">
-                <p class="card-text font-semibold text-2xl">{{ $seniorCitizensCount }}</p>
-                <hr class="border-t-2 mt-2 mb-3 border-black">
-                <h5 class="card-title text-purple-900 font-bold text-lg">
-                    <i class="fa-solid fa-user-tie fa-lg"></i> Senior Citizen
-                </h5>
-            </div>
-        </div>
-        <div class="card bg-green-500 rounded-[10px] py-2 px-4 w-[20%]">
-            <div class="card-body">
-                <p class="card-text font-semibold text-2xl">{{ $youthCount }}</p>
-                <hr class="border-t-2 mt-2 mb-3 border-black">
-                <h5 class="card-title text-green-900 font-bold text-lg">
-                    <i class="fa-solid fa-user-graduate fa-lg"></i> Youth
-                </h5>
+
+            <!-- Youth Card -->
+            <div class="card border border-[2px] border-gray-200 rounded-[8px] py-1 px-3 w-full sm:w-1/2 lg:w-[23%]">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h5 class="card-title text-purple-900 font-bold">Youth</h5>
+                        <p class="text-purple-900 font-bold py-1 mb-2 px-2 text-[9px] lg:text-sm rounded-full mt-2"> 
+                            <i class="fa-solid fa-user-graduate text-lg lg:text-lg"></i>
+                        </p>
+                    </div>
+                    <hr class="border-t-2 mb-2 border-gray-300">
+                    <div class="flex justify-between items-center">
+                        <div class="flex justify-start items-center">
+                            <p class="cart-text font-semibold text-[13px] lg:text-sm mr-1 text-gray-500">Total:</p>
+                            <p class="card-text font-semibold text-lg lg:text-lg text-green-700 mb-1">{{ $youthCount }}</p>
+                        </div>
+                        <div class="flex justify-end items-center">
+                            <p class="text-green-700 font-bold py-1 px-2 text-[9px] rounded-full bg-green-200">
+                                <i class="fa-solid fa-angles-up text-[13px]"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <hr class="border-t-2 mt-3 mb-6 mr-4 border-gray-300">
-
-    <div class="flex items-center justify-between mt-[20px] mb-4">
-        <h1 class="text-2xl font-bold text-green-600">BARANGAY OFFICIALS:</h1>
-        <a href="{{ route('barangay.officials.create')}}" class="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-500"><i class="fa-solid fa-plus"></i> Add Officials</a>
-    </div>
-
-    <div class="overflow-x-auto">
-        <div class="max-h-[40vh] overflow-y-auto">
-            <table class="min-w-full bg-white">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Name</th>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Position</th>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Committee</th>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Purok</th>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Start of Service</th>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">End of Service</th>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @if($barangayOfficials->isEmpty())
-                    <tr>
-                        <td colspan="7" class="py-4 px-6 text-center text-gray-500">
-                            Currently no barangay officials found.
-                        </td>
-                    </tr>
-                    @else
-                    @foreach($barangayOfficials as $official)
-                        <tr class="hover:bg-gray-200 transition">
-                            <td class="py-2 px-4 border-b border-gray-200">
-                                {{ $official->resident->first_name }} {{ $official->resident->last_name }}
-                            </td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->position }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->committee }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->resident->purok->purok_number ?? 'N/A' }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->start_of_service }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $official->end_of_service }}</td>
-                            <td>
-                                <div class="flex py-4 gap-2">
-                                    <a href="{{ route('barangay.officials.edit', $official) }}" class="text-blue-600 py-1 px-3 rounded hover:text-blue-800">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-
-                                    <button onclick="toggleDeleteModal('{{ $official->id }}')" class="text-red-700 py-1 px-2 md:px-3 rounded hover:text-red-900">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-
-                                     <!-- Delete Modal ni dere same sa log out nga layout -->
-                                    <div id="delete-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
-                                        <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
-                                            <div class="flex justify-start items-center mb-3">
-                                            </div>
-                                            <h3 class="text-lg font-bold text-gray-600 uppercase mb-3">Position: <span class="text-blue-600">{{ $official->position }}</span></h3>
-                                            <h3 class="text-lg font-bold text-gray-600 uppercase mb-3">Official name: <span class="text-blue-600">{{ $official->resident->first_name }} {{ $official->resident->last_name }}</span></h3>
-                                            <hr class="border-t-2 border-gray-300">
-
-                                            <p class="mt-3 font-semibold text-gray-500">No longer available / Reached the end of term</p>
-                                            <p class="mb-6 mt-3 text-left text-[17px] text-gray-600">Continue to delete this Official?</p>
-                                            
-                                            <div class="flex justify-end space-x-4">
-                                                <button onclick="toggleDeleteModal('{{ $official->id }}')" class="hover:text-gray-400">
-                                                    Cancel
-                                                </button>
-
-                                                <form action="{{ route('barangay.officials.destroy', $official) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="py-2 px-4 text-red-800 hover:text-red-400">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>          
-                                </div>
-                            </td>
+    <!-- Barangay Officials Section -->
+    <div class="bg-white py-2 px-4 rounded-lg shadow-lg mt-4">
+        <div class="flex items-center justify-between">
+            <h1 class="text-xl font-bold text-blue-500 mb-3">BARANGAY OFFICIALS:</h1>
+            <div class="flex justify-end items-center mb-3">
+                <a href="{{ route('barangay.officials.create')}}" class="py-2 px-4 text-[13px] lg:text-[14px] bg-blue-600 text-white rounded hover:bg-blue-500"><i class="fa-solid fa-plus "></i> Add Officials</a>
+            </div>
+        </div>
+    
+        <div class="overflow-x-auto">
+            <div class="max-h-[38vh] overflow-y-auto">
+                <table class="min-w-full border border-[2px] border-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Name</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Position</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Committee</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purok</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Start of Service</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">End of Service</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Action</th>
                         </tr>
-                    @endforeach
-                    @endif
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="text-[8px] lg:text-[12px]">
+                        @foreach ($barangayOfficials as $official)
+                            <tr class="border-b border-gray-200">
+                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->resident->first_name }}, {{ $official->resident->last_name}}</td>
+                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->position }}</td>
+                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->committee }}</td>
+                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->resident->purok->purok_number }}</td>
+                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->start_of_service }}</td>
+                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->end_of_service }}</td>
+                                <td class="text-center py-2">
+                                    <div class="flex py-4 gap-2">
+                                        <a href="{{ route('barangay.officials.edit', $official) }}" class="text-blue-600 lg:text-[14px] text-[7px] py-1 px-3 rounded hover:text-blue-800">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+    
+                                        <button onclick="toggleDeleteModal('{{ $official->id }}')" class="text-red-700 lg:text-[14px] text-[7px] py-1 px-2 md:px-3 rounded hover:text-red-900">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                        
+                                        <div id="delete-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                                            <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
+                                                <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Name: 
+                                                    <span class="text-blue-600">{{ $official->resident->first_name }}, {{ $official->resident->last_name }}</span>
+                                                </p>
+                                                <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Position: 
+                                                    <span class="text-blue-600">{{ $official->position }}</span>
+                                                </p>
+                                                <hr class="border-t-2 border-gray-300">
+                                                <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this Official?</p>
+                                                <div class="flex justify-end space-x-4">
+                                                    <button onclick="toggleDeleteModal('{{ $official->id }}')" class="hover:text-gray-400">
+                                                        Cancel
+                                                    </button>
+                                                    <form action="{{ route('barangay.officials.destroy', ['official' => $official->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="py-2 px-4 text-red-800 hover:text-red-400">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div> 
+    </div>
 </div>
+
 <script>
-        //Show ni sa delete modal
-        function toggleDeleteModal(adminId) {
-            const modal = document.getElementById(`delete-modal-${adminId}`);
+    function toggleDeleteModal(id) {
+        const modal = document.getElementById(`delete-modal-${id}`);
+        if (modal) {
             modal.classList.toggle('hidden');
         }
+    }
 </script>
+
 @endsection
