@@ -13,17 +13,12 @@ return new class extends Migration
     {
         Schema::create('cert_businesses', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('status');
-            $table->string('gender');
-            $table->string('purok_num');
-            $table->string('barangay_name');
-            $table->string('business_name');
-            $table->string('business_type');
-            $table->string('or_number');
-            $table->string('punongbarangay');
-            $table->timestamps();
+            $table->foreignId('resident_id')->constrained()->onDelete('cascade'); 
+            $table->string('name');
+            $table->integer('age'); 
+            $table->string('civil_status');
+            $table->enum('gender', ['Male', 'Female', 'Other']);
         });
     }
 

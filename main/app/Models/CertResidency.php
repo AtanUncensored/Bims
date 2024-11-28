@@ -31,7 +31,6 @@ class CertResidency extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Define the relationship with the Purok model
     public function purok()
     {
         return $this->belongsTo(Purok::class);

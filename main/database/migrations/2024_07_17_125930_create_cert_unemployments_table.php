@@ -13,16 +13,12 @@ return new class extends Migration
     {
         Schema::create('cert_unemployments', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('address');
-            $table->string('status');
-            $table->string('parent_name');
-            $table->date('date');
-            $table->integer('age');
-            $table->string('secretary');
-            $table->string('treasurer');
-            $table->timestamps();
+            $table->foreignId('resident_id')->constrained()->onDelete('cascade'); 
+            $table->string('name');
+            $table->integer('age'); 
+            $table->string('civil_status');
+            $table->enum('gender', ['Male', 'Female', 'Other']);
         });
     }
 

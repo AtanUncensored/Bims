@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CertUnifast extends Model
+class CertBusiness extends Model
 {
     use HasFactory;
 
-    protected $table = 'cert_unifast';
+    protected $table = 'cert_job_seekers';
 
     protected $fillable = [
         'user_id',

@@ -14,17 +14,11 @@ return new class extends Migration
         Schema::create('cert_unifasts', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('resident_id')->constrained()->onDelete('cascade'); 
             $table->string('name');
-            $table->date('date');
-            $table->string('address');
-            $table->string('parent_name');
-            $table->string('punong_barangay');
-            $table->string('secretary');
-            $table->string('treasurer');
-            $table->string('purpose');
-            $table->string('age');
-            $table->string('purok_name');
-            $table->timestamps();
+            $table->integer('age'); 
+            $table->string('civil_status');
+            $table->enum('gender', ['Male', 'Female', 'Other']);
         });
     }
 

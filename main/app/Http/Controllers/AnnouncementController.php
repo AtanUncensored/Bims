@@ -53,9 +53,20 @@ class AnnouncementController extends Controller
             'imgUrl' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('imgUrl')) {
-            $imagePath = $request->file('imgUrl')->store('announcements', 'public');
+        
+        if ($request->has('imgUrl')) {
+
+            $file = $request->file('imgUrl');
+            $extension = $file->getClientOriginalExtension();
+
+            $filename = time() . '.' .$extension;
+
+            $path = 'storage/announcement/';
+            $file->move($path, $filename);
+
+            $filename = 'announcement/' . $filename;
+
+
         }
 
 
@@ -66,7 +77,7 @@ class AnnouncementController extends Controller
             'announcement_date' => $request->announcement_date,
             'expiration_date' => $request->expiration_date,
             'content' => $request->content,
-            'imgUrl' => $imagePath,
+            'imgUrl' => $filename,
         ]);
 
         $log_entry = 'Admin Added a new Announcement titled as ' . $request->title;
