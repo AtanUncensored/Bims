@@ -4,8 +4,17 @@
 
 @section('content')
 <div class="px-6 md:px-4">
-    <div class="bg-white rounded-lg max-h-[15vh] overflow-y-auto  shadow-lg items-center px-4 mb-6">
-        <h1 class="text-xl font-bold py-2 text-blue-500">LOOK FOR A BARANGAY:</h1> 
+    <!-- Search and Create Barangay -->
+    <div class="bg-white rounded-lg max-h-[15vh] overflow-y-auto shadow-lg items-center px-4 mb-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold py-2 text-blue-500">LOOK FOR A BARANGAY:</h1>
+
+            <!-- Create Barangay Button -->
+            <a href="{{ route('lgu.create-newBarangay') }}" 
+               class="inline-block px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 text-sm sm:text-base">
+                Create New Barangay
+            </a>
+        </div>
 
         @if(session('success'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-2">
@@ -28,7 +37,6 @@
             </form>
         </div>
     </div>
-    
 
     <!-- Table ni record sa available barangay -->
     <div class="max-h-[60vh] overflow-y-auto bg-white py-2 px-4 rounded-lg shadow-lg">
@@ -46,7 +54,7 @@
                 <tr class="hover:bg-gray-300 transition duration-300 ease-in-out">
                     <td class="lg:py-2 py-3 lg:px-4 font-semibold">
                         @if ($barangay->logo)
-                            <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-8 h-8 sm:w-10 sm:h-10 ml-6 object-cover rounded-full">
+                        <img src="{{ asset('storage/' . (strpos($barangay->logo, 'images/') === false ? 'images/' . $barangay->logo : $barangay->logo)) }}" alt="Barangay Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
                         @else
                             <span class="text-sm text-gray-500">No Logo</span>
                         @endif
@@ -57,9 +65,6 @@
                         <a href="{{ route('lgu.barangays-show', $barangay->id) }}" class="text-gray-700 py-1 px-2 sm:px-3 rounded hover:text-gray-900 text-sm sm:text-base">
                             <i class="fa-solid fa-window-maximize"></i>
                         </a>
-                        {{-- <a href="{{ route('lgu.barangays-edit', $barangay->id) }}" class="text-blue-600 py-1 px-2 sm:px-3 rounded hover:text-blue-800 text-sm sm:text-base">
-                            <i class="fa-solid fa-pen"></i>
-                        </a> --}}
                         <button onclick="toggleEditModal('{{ $barangay->id }}')" class="text-blue-600 py-1 px-2 sm:px-3 rounded hover:text-blue-800 text-sm sm:text-base">
                             <i class="fa-solid fa-pen"></i>
                         </button>
@@ -87,7 +92,7 @@
                             @method('PUT')
 
                             <div class="flex items-center justify-center mb-4">
-                                <img class="w-[50px] h-[50px] rounded-full mr-3" src="{{ asset('images/' . $barangay->logo) }}" alt="Barangay Logo">
+                                <img src="{{ asset('storage/' . (strpos($barangay->logo, 'images/') === false ? 'images/' . $barangay->logo : $barangay->logo)) }}" alt="Barangay Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
                                 <h3 class="text-sm lg:text-lg font-bold text-green-600 uppercase">Brgy. {{ $barangay->barangay_name }}</h3>
                             </div>
 

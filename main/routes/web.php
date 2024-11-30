@@ -78,6 +78,11 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:superAdmin'])->group(function () {
 
         //routes
+        Route::get('/barangays/create', [LguController::class, 'createBarangay'])->name('lgu.create-newBarangay');
+        Route::post('/barangays', [LguController::class, 'storeBarangay'])->name('lgu.store-barangay');
+
+
+
         Route::get('/lgu', [LguController::class, 'index'])->name('lgu.dashboard');
         Route::put('/barangays/{barangay}', [LguController::class, 'update'])->name('lgu.barangays-update');//route to show edit
         Route::get('/barangays', [LguController::class, 'barangaysList'])->name('lgu.barangays-list');//route to show barangays

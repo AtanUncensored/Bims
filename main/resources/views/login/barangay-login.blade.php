@@ -3,7 +3,7 @@
 @section('content')
 <style>
     body {
-        background-image: url('{{ asset('images/' . ($barangay->background_image ?? 'default-bg.jpg')) }}');
+        background-image: url('{{ asset('storage/' . (strpos($barangay->background_image, 'images/') === false ? 'images/' . $barangay->background_image : $barangay->background_image)) }}');
         background-size: cover;
         background-position: center;
     }
@@ -47,7 +47,7 @@
         
         <div class="flex items-center justify-center mb-6">
             <div class="logo mr-4">
-                <img src="{{ asset('images/' . ($barangay->logo)) }}" alt="{{ $barangay->barangay_name}} logo" class="w-[50px] h-[50px] rounded-full">
+                <img src="{{ asset('storage/' . (strpos($barangay->logo, 'images/') === false ? 'images/' . $barangay->logo : $barangay->logo)) }}" alt="Barangay Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
             </div>
             <h2 class="text-xl font-bold text-blue-600">
                 Brgy. {{ $barangay->barangay_name}}, Tubigon, Bohol

@@ -65,6 +65,56 @@ class LguController extends Controller
         // Return the view with the calculated data
         return view('lgu.dashboard', compact('barangays', 'totalUsers', 'totalMales', 'totalFemales', 'totalAdults', 'totalSeniors', 'totalYouth', 'totalChildren', 'marriedCount', 'householdCount', 'totalUsers'));
     }
+        public function createBarangay()
+    {
+        return view('lgu.create-barangay');
+    }
+    public function storeBarangay(Request $request)
+{
+    $request->validate([
+        'barangay_name' => 'required|string|max:255|unique:barangays,barangay_name',
+        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'background_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $barangay = new Barangay();
+    $barangay->barangay_name = $request->barangay_name;
+
+    // Sanitize the barangay name for file naming (slugify)
+    $barangayNameSlug = strtolower(str_replace(' ', '-', $request->barangay_name));
+
+    // Handle the logo upload
+    if ($request->has('logo')) {
+        $logoFile = $request->file('logo');
+        $extension = $logoFile->getClientOriginalExtension(); // Get the original extension
+        $logoFileName = $barangayNameSlug . '-logo.' . $extension; // Keep original extension
+
+        // Store the file in the 'public/images' directory
+        $logoFile->move(public_path('storage/images'), $logoFileName);
+        $barangay->logo = 'images/' . $logoFileName; // Save relative path
+    }
+
+    // Handle the background image upload
+    if ($request->has('background_image')) {
+        $backgroundFile = $request->file('background_image');
+        $extension = $backgroundFile->getClientOriginalExtension(); // Get the original extension
+        $backgroundFileName = $barangayNameSlug . '.' . $extension; // Keep original extension
+
+        // Store the file in the 'public/images' directory
+        $backgroundFile->move(public_path('storage/images'), $backgroundFileName);
+        $barangay->background_image = 'images/' . $backgroundFileName; // Save relative path
+    }
+
+    // Save the Barangay record
+    $barangay->save();
+
+    return redirect()->route('lgu.barangays-list')->with('success', 'Barangay successfully created.');
+}
+
+    
+
+
+
 
     public function barangaysList(Request $request)
     {
@@ -140,32 +190,56 @@ class LguController extends Controller
     }
 
     public function update(Barangay $barangay, Request $request)
-    {
-        $request->validate([
-            'logo'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'barangay_name'       => 'required|string|max:255',
-            'background_image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
-    
-        // Handle file uploads
-        if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('public/images');
-            $barangay->logo = basename($logoPath);
+{
+    $request->validate([
+        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'barangay_name' => 'required|string|max:255',
+        'background_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Handle logo update
+    $logoFilename = $barangay->logo; // Preserve current logo if not updated
+    if ($request->hasFile('logo')) {
+        // Delete old logo if it exists
+        $oldLogoPath = public_path('storage/images/' . $barangay->logo);
+        if (file_exists($oldLogoPath)) {
+            unlink($oldLogoPath);
         }
-    
-        if ($request->hasFile('background_image')) {
-            $backgroundImagePath = $request->file('background_image')->store('public/images');
-            $barangay->background_image = basename($backgroundImagePath);
-        }
-    
-        // Update other fields
-        $barangay->barangay_name = $request->input('barangay_name');
-        
-        $barangay->save();
-    
-        return redirect()->route('lgu.barangays-list')->with('success', 'Barangay updated successfully!');
+
+        // Get the original file name without time() modification
+        $logoFile = $request->file('logo');
+        $logoExtension = $logoFile->getClientOriginalExtension();
+        $logoFilename = $barangay->logo; // Use the original filename for the new logo
+        $logoFile->move(public_path('storage/images'), $logoFilename); // Overwrite the existing file with the same name
     }
 
+    // Handle background image update
+    $backgroundImageFilename = $barangay->background_image; // Preserve current background image if not updated
+    if ($request->hasFile('background_image')) {
+        // Delete old background image if it exists
+        $oldBackgroundImagePath = public_path('storage/images/' . $barangay->background_image);
+        if (file_exists($oldBackgroundImagePath)) {
+            unlink($oldBackgroundImagePath);
+        }
+
+        // Get the original file name without time() modification
+        $backgroundImageFile = $request->file('background_image');
+        $backgroundImageExtension = $backgroundImageFile->getClientOriginalExtension();
+        $backgroundImageFilename = $barangay->background_image; // Use the original filename for the new background image
+        $backgroundImageFile->move(public_path('storage/images'), $backgroundImageFilename); // Overwrite the existing file with the same name
+    }
+
+    // Update the database
+    $barangay->update([
+        'barangay_name' => $request->barangay_name,
+        'logo' => $logoFilename,
+        'background_image' => $backgroundImageFilename,
+    ]);
+
+    return redirect()->route('lgu.barangays-list')->with('success', 'Barangay updated successfully!');
+}
+
+    
     // public function destroy(Barangay $barangay)
     // {
     //     $barangay->delete();
@@ -247,5 +321,7 @@ class LguController extends Controller
 
         return redirect()->route('lgu.admins')->with('success', 'Barangay created successfully.');
     }
+
+    
 }
 

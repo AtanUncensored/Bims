@@ -10,6 +10,12 @@ class Barangay extends Model
     use HasFactory;
 
 
+    protected $fillable = [
+        'barangay_name',
+        'logo',
+        'background_image',
+    ];
+    
         public function residents()
         {
             return $this->hasMany(Resident::class);
