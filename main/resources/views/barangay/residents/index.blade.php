@@ -41,7 +41,7 @@
                 <span>Add Resident</span>
             </a>
         </div>
-        <div class="max-h-[50vh] overflow-y-auto">
+        <div class="max-h-[43vh] overflow-y-auto">
             <table class="min-w-full bg-white border border-[2px] border-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -77,17 +77,18 @@
                                         <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this Resident?</p>
                                             
                                         <div class="flex justify-end space-x-4">
-                                            <button onclick="toggleDeleteModal('{{ $resident->id }}')" class="hover:text-gray-400">
-                                                Cancel
-                                            </button>
                                     
                                             <form action="{{ route('barangay.residents.delete', ['resident_id' => $resident->id]) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="py-2 px-4 text-red-800 hover:text-red-400">
+                                                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                                                     Delete
                                                 </button>
                                             </form>
+
+                                            <button onclick="toggleDeleteModal('{{ $resident->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                Cancel
+                                            </button>
                                         </div>
                                     </div>
                                 </div> 

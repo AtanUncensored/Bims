@@ -107,14 +107,112 @@
     <!-- Barangay Officials Section -->
     <div class="bg-white py-2 px-4 rounded-lg shadow-lg mt-4">
         <div class="flex items-center justify-between">
-            <h1 class="text-xl font-bold text-blue-500 mb-3">BARANGAY OFFICIALS:</h1>
+            <div class="flex justify-start items-center">
+                <h1 class="text-xl font-bold text-blue-500 mb-3">BARANGAY OFFICIALS:</h1>
+            </div>
+            <div class="flex justify-center items-center">
+                @if(session('success'))
+                    <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-2">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
             <div class="flex justify-end items-center mb-3">
-                <a href="{{ route('barangay.officials.create')}}" class="py-2 px-4 text-[13px] lg:text-[14px] bg-blue-600 text-white rounded hover:bg-blue-500"><i class="fa-solid fa-plus "></i> Add Officials</a>
+                <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
+                    <i class="fa-solid fa-plus"></i> Add Officials</a>
+                </button>
+
+                <div id="add-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
+                            
+                    <!-- Add Form -->
+                    <div class="mt-[20px] mb-6 w-[400px] mx-auto bg-white p-6 rounded shadow">
+    
+                        <div class="flex justify-center items-center mb-4">
+                            <div class="flex justify-start items-center">
+                                <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 mr-5"></i>
+                            </div>
+                            <div class="flex justify-center items-center">
+                                <h1 class="text-xl font-bold text-blue-600 text-center mb-2">Add Barangay Official</h1>
+                            </div>
+                            <div class="flex justify-start items-center">
+                                <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 ml-5"></i>
+                            </div>
+                        </div>
+    
+                        <hr class="border-t-2 border-blue-300 mb-4">
+    
+                        <form action="{{ route('barangay.officials.store') }}" method="POST">
+                            @csrf
+                              <!-- Resident Dropdown with Search -->
+                            <div class="mb-4">
+                                @if(session('success'))
+                                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-1 px-2 rounded mt-2">
+                                    {{ session('success') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="mb-4">
+                                <label for="resident_id" class="block text-gray-700 text-sm font-bold mb-2">Select Resident</label>
+                                <select name="resident_id" id="resident_id" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                    <option value="">Select a resident</option>
+                                    @foreach($residents as $resident)
+                                        <option value="{{ $resident->id }}">{{ $resident->first_name }} {{ $resident->last_name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('resident_id')
+                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="position" class="block text-gray-700 text-sm font-bold mb-2">Position</label>
+                                <input type="text" id="position" name="position" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
+                                @error('position')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="committee" class="block text-gray-700 text-sm font-bold mb-2">Committee</label>
+                                <input type="text" id="committee" name="committee" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
+                                @error('committee')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="start_of_service" class="block text-gray-700 text-sm font-bold mb-2">Start of Service</label>
+                                <input type="date" id="start_of_service" name="start_of_service" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
+                                @error('start_of_service')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="end_of_service" class="block text-gray-700 text-sm font-bold mb-2">End of Service</label>
+                                <input type="date" id="end_of_service" name="end_of_service" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
+                                @error('end_of_service')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex justify-end items-center">
+                                <div class="mb-4">
+                                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Add Official</button>
+                                </div>
+                                <div class="mb-4">
+                                    <button type="button" onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     
         <div class="overflow-x-auto">
-            <div class="max-h-[38vh] overflow-y-auto">
+            <div class="max-h-[40vh] overflow-y-auto">
                 <table class="min-w-full border border-[2px] border-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
@@ -127,24 +225,111 @@
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-[8px] lg:text-[12px]">
+                    <tbody>
                         @foreach ($barangayOfficials as $official)
                             <tr class="border-b border-gray-200">
-                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->resident->first_name }}, {{ $official->resident->last_name}}</td>
-                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->position }}</td>
-                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->committee }}</td>
-                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->resident->purok->purok_number }}</td>
-                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->start_of_service }}</td>
-                                <td class="lg:px-6 py-2 text-[10px] lg:text-[15px]">{{ $official->end_of_service }}</td>
-                                <td class="text-center py-2">
-                                    <div class="flex py-4 gap-2">
-                                        <a href="{{ route('barangay.officials.edit', $official) }}" class="text-blue-600 lg:text-[14px] text-[7px] py-1 px-3 rounded hover:text-blue-800">
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->resident->first_name }}, {{ $official->resident->last_name}}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->position }}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->committee }}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->resident->purok->purok_number }}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->start_of_service }}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->end_of_service }}</td>
+                                <td class="text-center">
+                                    <div class="flex py-2 gap-2">
+                                        <button onclick="toggleEditModal('{{ $official->id }}')" class="text-blue-600 py-1 px-2 sm:px-3 rounded hover:text-blue-800 text-sm sm:text-base">
                                             <i class="fa-solid fa-pen"></i>
-                                        </a>
+                                        </button>
     
                                         <button onclick="toggleDeleteModal('{{ $official->id }}')" class="text-red-700 lg:text-[14px] text-[7px] py-1 px-2 md:px-3 rounded hover:text-red-900">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
+
+                                        <div id="edit-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
+                                            <!-- Edit Form -->
+                                            <div class="mt-[20px] mb-6 w-[400px] mx-auto bg-white p-6 rounded shadow">
+                                        
+                                                <div class="flex justify-center items-center mb-4">
+                                                    <div class="flex justify-start items-center">
+                                                        <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 mr-5"></i>
+                                                    </div>
+                                                    <div class="flex justify-center items-center">
+                                                        <h1 class="text-xl font-bold text-blue-600 text-center mb-2">Edit Barangay Official</h1>
+                                                    </div>
+                                                    <div class="flex justify-start items-center">
+                                                        <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 ml-5"></i>
+                                                    </div>
+                                                </div>
+                                        
+                                                <hr class="border-t-2 border-blue-300 mb-4">
+                                        
+                                                <form action="{{ route('barangay.officials.update', $official->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                            
+                                                    <div class="max-h-[60vh] overflow-y-auto">
+                                                    <!-- Resident Dropdown with Search -->
+                                                        <div class="mb-4">
+                                                            <label for="resident_id" class="block text-gray-700 text-sm font-bold mb-2 text-start">Select Resident</label>
+                                                            <select name="resident_id" id="resident_id" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                                                <option value="">Select a resident</option>
+                                                                @foreach($residents as $resident)
+                                                                    <option value="{{ $resident->id }}" {{ $resident->id == $official->resident_id ? 'selected' : '' }}>
+                                                                        {{ $resident->first_name }} {{ $resident->last_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('resident_id')
+                                                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                            
+                                                        <!-- Position -->
+                                                        <div class="mb-4">
+                                                            <label for="position" class="block text-gray-700 text-sm font-bold mb-2 text-start">Position</label>
+                                                            <input type="text" name="position" id="position" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('position', $official->position) }}">
+                                                            @error('position')
+                                                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                            
+                                                        <!-- Committee -->
+                                                        <div class="mb-4">
+                                                            <label for="committee" class="block text-gray-700 text-sm font-bold mb-2 text-start">Committee</label>
+                                                            <input type="text" name="committee" id="committee" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('committee', $official->committee) }}">
+                                                            @error('committee')
+                                                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                            
+                                                        <!-- Start of Service -->
+                                                        <div class="mb-4">
+                                                            <label for="start_of_service" class="block text-gray-700 text-sm font-bold mb-2 text-start">Start of Service</label>
+                                                            <input type="date" name="start_of_service" id="start_of_service" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('start_of_service', $official->start_of_service) }}">
+                                                            @error('start_of_service')
+                                                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                            
+                                                        <!-- End of Service -->
+                                                        <div class="mb-4">
+                                                            <label for="end_of_service" class="block text-gray-700 text-sm font-bold mb-2 text-start">End of Service</label>
+                                                            <input type="date" name="end_of_service" id="end_of_service" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('end_of_service', $official->end_of_service) }}">
+                                                            @error('end_of_service')
+                                                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-end items-center mt-3">
+                                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">
+                                                            Update Official
+                                                        </button>
+                                                        <button type="button" onclick="toggleEditModal('{{ $official->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                         
                                         <div id="delete-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                             <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
@@ -155,18 +340,20 @@
                                                     <span class="text-blue-600">{{ $official->position }}</span>
                                                 </p>
                                                 <hr class="border-t-2 border-gray-300">
-                                                <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this Official?</p>
+
+                                                <p class="mt-3 text-gray-600 text-left text-[17px]">End of term / Some issue occured</p>
+                                                <p class="mb-5 mt-2 text-gray-600 text-left text-[17px]">Continue to delete this Official?</p>
                                                 <div class="flex justify-end space-x-4">
-                                                    <button onclick="toggleDeleteModal('{{ $official->id }}')" class="hover:text-gray-400">
-                                                        Cancel
-                                                    </button>
                                                     <form action="{{ route('barangay.officials.destroy', ['official' => $official->id]) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="py-2 px-4 text-red-800 hover:text-red-400">
+                                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                                                             Delete
                                                         </button>
                                                     </form>
+                                                    <button onclick="toggleDeleteModal('{{ $official->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                        Cancel
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>                                        
@@ -187,6 +374,15 @@
         if (modal) {
             modal.classList.toggle('hidden');
         }
+    }
+    function toggleAddModal() {
+        const modal = document.getElementById(`add-modal`);
+        modal.classList.toggle('hidden');
+    }
+
+    function toggleEditModal(officialId) {
+        const modal = document.getElementById(`edit-modal-${officialId}`);
+        modal.classList.toggle('hidden');
     }
 </script>
 

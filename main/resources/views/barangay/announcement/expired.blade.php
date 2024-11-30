@@ -8,7 +8,7 @@
         <h2 class="text-xl font-bold text-red-500 mb-3 uppercase text-start">Expired Announcements:</h2>
 
         <div class="flex justify-end">
-            <a href="{{ url('/announcements/show') }}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            <a href="{{ url('/announcements/show') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
                 Return
             </a>
         </div>
@@ -32,7 +32,7 @@
                             <div>
                                 <h3 class="lg:text-2xl text-[15px] font-semibold mb-2 text-red-600">{{ $announcement->title }}</h3>
                             </div>
-                            <a href="{{ route('barangay.announcement.show', $announcement->id) }}" class="ml-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">View details</a>
+                            <a href="{{ route('barangay.announcement.show', $announcement->id) }}" class="ml-auto py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">View details</a>
                         </div>
                     </div>
                 @endforeach        

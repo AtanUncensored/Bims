@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Resident;
+use App\Models\User;
+use App\Models\Purok;
+use App\Models\Household;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -19,6 +22,14 @@ class ResidentController extends Controller
         // Get the search query from the request
         $search = $request->input('search');
 
+        $households = Household::whereHas('user', function ($query) use ($userBarangayId) {
+            $query->where('barangay_id', $userBarangayId);
+        })->get();
+
+        $puroks = Purok::where('barangay_id', $userBarangayId)->get();
+
+        $users = User::where('barangay_id', $userBarangayId)->get();
+
         // Retrieve residents that belong to the user's barangay
         // Apply search filtering if a search term is provided
         $residents = Resident::where('barangay_id', $userBarangayId)
@@ -32,7 +43,7 @@ class ResidentController extends Controller
             ->get();
 
         // Return the view with the residents and the search term
-        return view('barangay.residents.index', compact('residents', 'search'));
+        return view('barangay.residents.index', compact('residents', 'search', 'puroks', 'households', 'users'));
     }
 
     public function exportExcel()

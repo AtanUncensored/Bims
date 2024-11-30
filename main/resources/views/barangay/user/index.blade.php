@@ -46,7 +46,7 @@
         <div class="flex justify-center items-center bg-gray-600 py-3 shadow-xl px-6 font-semibold text-white uppercase mb-3 text-[12px]">
             List of available users from this barangay
         </div>
-        <div class="mx-auto px-4 max-h-[45vh] overflow-y-auto">  
+        <div class="mx-auto px-4 max-h-[43vh] overflow-y-auto">  
             <div class="flex flex-wrap -mx-4">
                 @if($users->count() > 0)
                 @foreach($users as $user)

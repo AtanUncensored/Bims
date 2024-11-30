@@ -24,6 +24,8 @@ class BarangayController extends Controller
         
         // the user model has a `barangay_id` property
         $barangayId = $user->barangay_id;
+
+        $residents = Resident::where('barangay_id', $barangayId)->select('id', 'first_name', 'last_name')->get();
     
         // Fetch data for the user's barangay
         $totalResidents = Resident::where('barangay_id', $barangayId)->count();
@@ -43,7 +45,7 @@ class BarangayController extends Controller
 
         $puroks = Purok::where('barangay_id', $barangayId)->get();
 
-        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials', 'puroks'));
+        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials', 'puroks', 'residents'));
     }
     
     public function createUserForm()

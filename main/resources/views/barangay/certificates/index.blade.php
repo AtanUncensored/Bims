@@ -5,7 +5,7 @@
 @section('content')
 <div class="container px-4">
 
-    <div class="grid grid-rows-1 md:grid-rows-2 gap-4">
+    <div class="grid grid-rows-1 md:grid-rows-2 gap-4 max-h-[79vh] overflow-y-auto">
         
         <!-- Latest Requests Section -->
         <div class="bg-white shadow-lg rounded-lg py-2 px-4">

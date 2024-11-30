@@ -49,7 +49,7 @@ class BarangayOfficialController extends Controller
         $log_entry = 'Admin Added a new Official with an ID  ' . $request->resident_id . ' in the position of ' . $request->position;
         event(new UserLog($log_entry));
 
-        return redirect()->route('barangay.officials.create')->with('success', 'Official added successfully.');
+        return redirect()->route('barangay.dashboard')->with('success', 'Official added successfully.');
     }
 
 

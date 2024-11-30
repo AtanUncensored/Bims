@@ -111,7 +111,7 @@
         </div>
     
         <div class="overflow-x-auto">
-            <div class="max-h-[38vh] overflow-y-auto">
+            <div class="max-h-[40vh] overflow-y-auto">
                 <table class="min-w-full border border-[2px] border-gray-200">
                     <thead class="bg-gray-50">
                         <tr>

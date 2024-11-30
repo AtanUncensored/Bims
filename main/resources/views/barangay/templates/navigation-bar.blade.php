@@ -55,11 +55,11 @@
                         <i class="fas fa-house fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Dashboard</span>
                     </a>
-                    <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements/show') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements/show', 'announcements/expired') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fa-solid fa-bullhorn text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Announcements</span>
                     </a>
-                    <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residents') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residents', 'barangay/create-user') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Residents</span>
                     </a>
