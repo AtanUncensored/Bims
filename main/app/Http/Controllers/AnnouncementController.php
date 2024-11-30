@@ -49,7 +49,7 @@ class AnnouncementController extends Controller
             'title' => 'required|max:255',
             'announcement_date' => 'required|date',
             'expiration_date' => 'required|date|after:today',
-            'content' => 'required|max:255',
+            'content' => 'required|max:10000',
             'imgUrl' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
