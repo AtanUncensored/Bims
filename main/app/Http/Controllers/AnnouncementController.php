@@ -12,21 +12,27 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
-        // Fetch only the announcements that haven't expired yet
-        $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
-                            ->where(function($query) {
-                                $query->where('expiration_date', '>=', now())
-                                        ->orWhereNull('expiration_date');
-                            })
-                            ->orderBy('created_at', 'desc')
-                            ->paginate(10);
 
+        $announcements = Announcement::where(function($query) {
+            $query->where('barangay_id', Auth::user()->barangay_id)
+                  ->where(function($query) {
+                      
+                      $query->where('expiration_date', '>=', now())
+                            ->orWhereNull('expiration_date');
+                  });
+        })
+        ->orWhere('is_global', true) 
+        ->orderByRaw('is_global DESC')  
+        ->orderBy('created_at', 'desc') 
+        ->paginate(10);
+    
         return view('barangay.announcement.index', compact('announcements'));
     }
+    
 
     public function userIndex()
     {
-        // Fetch only the announcements that haven't expired yet
+        
         $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
                             ->where(function($query) {
                                 $query->where('expiration_date', '>=', now())
@@ -78,6 +84,8 @@ class AnnouncementController extends Controller
             'expiration_date' => $request->expiration_date,
             'content' => $request->content,
             'imgUrl' => $filename,
+            'is_global' => false, 
+
         ]);
 
         $log_entry = 'Admin Added a new Announcement titled as ' . $request->title;
