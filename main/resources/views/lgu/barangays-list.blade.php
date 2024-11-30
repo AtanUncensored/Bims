@@ -8,12 +8,6 @@
     <div class="bg-white rounded-lg max-h-[15vh] overflow-y-auto shadow-lg items-center px-4 mb-6">
         <div class="flex justify-between items-center">
             <h1 class="text-xl font-bold py-2 text-blue-500">LOOK FOR A BARANGAY:</h1>
-
-            <!-- Create Barangay Button -->
-            <a href="{{ route('lgu.create-newBarangay') }}" 
-               class="inline-block px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 text-sm sm:text-base">
-                Create New Barangay
-            </a>
         </div>
 
         @if(session('success'))
@@ -40,7 +34,80 @@
 
     <!-- Table ni record sa available barangay -->
     <div class="max-h-[60vh] overflow-y-auto bg-white py-2 px-4 rounded-lg shadow-lg">
-        <h1 class="text-xl font-bold text-blue-500 mb-5">BARANGAY RECORDS:</h1>
+        <div class="flex justify-between items-center mb-3">
+            <h1 class="text-xl font-bold text-blue-500">BARANGAY RECORDS:</h1>
+
+            <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
+                <i class="fa-solid fa-plus"></i> Add Barangay Admin</a>
+            </button>
+
+            <div id="add-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
+                            
+                <!-- Add Form -->
+                <div class="mt-[20px] mb-6 w-[400px] mx-auto bg-white p-6 rounded shadow">
+
+                    <div class="flex justify-center items-center mb-4">
+                        <div class="flex justify-start items-center">
+                            <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 mr-5"></i>
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <h1 class="text-xl font-bold text-blue-600 text-center mb-2">Create New Barangay</h1>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 ml-5"></i>
+                        </div>
+                    </div>
+
+                    <hr class="border-t-2 border-blue-300 mb-4">
+
+                    <form action="{{ route('lgu.store-barangay') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <!-- Barangay Name -->
+                        <div class="mb-4">
+                            <label for="barangay_name" class="block text-gray-700 text-sm font-bold mb-2">Barangay Name</label>
+                            <input type="text" id="barangay_name" name="barangay_name" 
+                                   class="mt-1 py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" 
+                                   value="{{ old('barangay_name') }}" required>
+                            @error('barangay_name')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                
+                        <!-- Logo -->
+                        <div class="mb-4">
+                            <label for="logo" class="block text-gray-700 text-sm font-bold mb-2">Barangay Logo</label>
+                            <input type="file" id="logo" name="logo" 
+                                   class="mt-1 py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                            @error('logo')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                
+                        <!-- Background Image -->
+                        <div class="mb-4">
+                            <label for="background_image" class="block text-gray-700 text-sm font-bold mb-2">Background Image</label>
+                            <input type="file" id="background_image" name="background_image" 
+                                   class="mt-1 py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                            @error('background_image')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                
+                        <!-- Submit Button -->
+                        <div class="flex justify-end">
+                            <button type="submit" 
+                                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">
+                                Create
+                            </button>
+
+                            <button onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <table class="min-w-full table-auto bg-white border border-gray-300">
             <thead class="bg-gray-600 text-white">
                 <tr>
@@ -92,13 +159,13 @@
                             @method('PUT')
 
                             <div class="flex items-center justify-center mb-4">
-                                <img src="{{ asset('storage/' . (strpos($barangay->logo, 'images/') === false ? 'images/' . $barangay->logo : $barangay->logo)) }}" alt="Barangay Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
+                                <img src="{{ asset('storage/' . (strpos($barangay->logo, 'images/') === false ? 'images/' . $barangay->logo : $barangay->logo)) }}" alt="Barangay Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full mr-3">
                                 <h3 class="text-sm lg:text-lg font-bold text-green-600 uppercase">Brgy. {{ $barangay->barangay_name }}</h3>
                             </div>
 
                             <div class="mb-4">
                                 <label for="logo" class="block text-gray-700 text-sm font-bold mb-2">Logo:</label>
-                                <input type="file" id="logo" name="logo" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" accept="image/*">
+                                <input type="file" id="logo" name="logo" class="mt-1 py-1 px-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" accept="image/*">
                                 @error('logo')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -106,7 +173,7 @@
 
                             <div class="mb-4">
                                 <label for="barangay_name" class="block text-gray-700 text-sm font-bold mb-2">Barangay Name:</label>
-                                <input type="text" id="barangay_name" name="barangay_name" value="{{ old('barangay_name', $barangay->barangay_name) }}" class="mt-1 py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                <input type="text" id="barangay_name" name="barangay_name" value="{{ old('barangay_name', $barangay->barangay_name) }}" class="mt-1 py-1 px-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                                 @error('barangay_name')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -114,7 +181,7 @@
 
                             <div class="mb-4">
                                 <label for="background_image" class="block text-gray-700 text-sm font-bold mb-2">Background Image:</label>
-                                <input type="file" id="background_image" name="background_image" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" accept="image/*">
+                                <input type="file" id="background_image" name="background_image" class="mt-1 py-1 px-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" accept="image/*">
                                 @error('background_image')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -135,6 +202,12 @@
 
 <script>
     // Pangpagawas sa modal
+
+    function toggleAddModal() {
+        const modal = document.getElementById(`add-modal`);
+        modal.classList.toggle('hidden');
+    }
+
     function toggleEditModal(barangayId) {
         const modal = document.getElementById(`edit-modal-${barangayId}`);
         modal.classList.toggle('hidden');
