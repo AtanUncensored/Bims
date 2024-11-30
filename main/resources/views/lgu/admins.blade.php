@@ -236,7 +236,7 @@
                             <div id="delete-modal-{{ $admin->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
                                 <div class="bg-white rounded-lg shadow-lg w-[400px] max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3 mt-[16px]">
                                     <div class="flex justify-start items-center mb-3">
-                                        <img class="w-[25px] h-[25px] lg:w-[50px] lg:h-[50px] rounded-full" src="{{ asset('images/' . $admin->barangay->logo) }}" alt="barangay/lgu logo">
+                                        <img src="{{ asset('storage/' . (strpos($admin->barangay->logo, 'images/') === false ? 'images/' . $admin->barangay->logo : $admin->barangay->logo)) }}" alt="barangay/lgu logo" class="w-[25px] h-[25px] lg:w-[50px] lg:h-[50px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
                                         <h3 class="text-sm lg:text-lg font-bold text-green-600 ml-3 uppercase"> Brgy. {{ $admin->barangay ? $admin->barangay->barangay_name : 'N/A' }}</h3>
                                     </div>
                                     <h3 class="block text-gray-700 text-[18px] font-bold mb-2">Admin user: <span class="text-blue-600">{{ $admin->name }}</span></h3>

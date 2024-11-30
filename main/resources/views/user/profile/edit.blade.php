@@ -44,8 +44,10 @@
     <div id="sidebar" class="bg-blue-500 w-[190px] flex justify-center transition-transform transform md:translate-x-0 -translate-x-full hidden md:block h-auto md:h-screen">
         <div class="flex-grow">
         <div id="branding" class="flex flex-col py-1 px-2 items-center space-y-2 ml-3 md:flex-row md:space-y-0 md:space-x-4">
-            <img class="w-[50px] h-[50px] rounded-full" src="{{ asset('images/' . Auth::user()->barangay->logo) }}" alt="barangay/lgu logo">
-            <h1 class="text-xl lg:text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
+            <img class="w-[50px] h-[50px] rounded-full" 
+            src="{{ asset('storage/' . (strpos(Auth::user()->barangay->logo, 'images/') === false ? 'images/' . Auth::user()->barangay->logo : Auth::user()->barangay->logo)) }}" 
+            alt="barangay/lgu logo">
+                   <h1 class="text-xl lg:text-[25px]" style="font-family: 'Roboto', sans-serif; font-weight: 900; color: white;">
                 BIMS
             </h1>
         </div>

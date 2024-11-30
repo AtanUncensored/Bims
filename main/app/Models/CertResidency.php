@@ -21,6 +21,7 @@ class CertResidency extends Model
         'gender',
         'reason',
         'date',
+        'civil_status',
         'punongbarangay',
         'ORnumber',
     ];
