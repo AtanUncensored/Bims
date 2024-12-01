@@ -42,7 +42,7 @@
                 {{ $announcements->links() }}
             </div>
         @else
-            <p class="text-center text-gray-500">No expired announcements found.</p>
+            <p class="text-center text-gray-500 mt-10">No expired announcements found.</p>
         @endif
     </div>
 </div>

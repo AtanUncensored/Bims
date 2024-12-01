@@ -95,6 +95,39 @@ class AnnouncementController extends Controller
         return view('barangay.announcement.show', compact('announcement', 'barangay'));
     }
 
+    public function updateAnnouncement(Request $request, Announcement $announcement)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'announcement_date' => 'required|date',
+            'expiration_date' => 'required|date|after_or_equal:today',
+            'content' => 'required|max:10000',
+            'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('imgUrl')) {
+            $filename = $request->file('imgUrl')->store('announcement', 'public');
+        } else {
+            $filename = $announcement->imgUrl;
+        }
+
+        $announcement->update([
+            'user_id' => Auth::user()->id,
+            'barangay_id' => Auth::user()->barangay_id,
+            'title' => $request->title,
+            'announcement_date' => $request->announcement_date,
+            'expiration_date' => $request->expiration_date,
+            'content' => $request->content,
+            'imgUrl' => $filename,
+        ]);
+
+        $log_entry = 'Admin Updated an Announcement with a Title of ' . $request->title;
+        event(new UserLog($log_entry));
+
+        return redirect()->route('announcements.index')->with('success', 'Announcement updated successfully.');
+    }
+
+
     public function expiredView()
     {
         $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)

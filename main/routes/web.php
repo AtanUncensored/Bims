@@ -160,6 +160,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/announcements/show', [AnnouncementController::class, 'index'])->name('announcements.index');
         Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
+        Route::put('/announcements/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('barangay.announcement.update');
         Route::get('/announcements/expired', [AnnouncementController::class, 'expiredView'])->name('announcements.expired');
 
     //Complaints

@@ -117,6 +117,12 @@
                     </div>
                 </div>
             </div>
+
+            @if(session('success'))
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-2">
+                    {{ session('success') }}
+                </div>
+            @endif
             
             <a href="{{ route('announcements.expired') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">View Expired</a>
         </div>

@@ -23,7 +23,7 @@
         </div>
 
         <article class="mt-6 space-y-6 text-lg text-gray-800">
-            <p>{{ $announcement->content }}</p>
+            {!! nl2br(e($announcement->content)) !!}
         </article>
     </div>
 </div>
