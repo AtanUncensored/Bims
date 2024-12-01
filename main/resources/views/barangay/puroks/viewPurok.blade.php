@@ -8,19 +8,19 @@
 
         <div class="mb-4">
 
-            <h1 class="text-2xl font-bold mb-4">
-                Statistics in Purok {{ $purok->purok_number }}
+            <h1 class="text-xl font-bold text-blue-500 mb-2">
+                Statistics in Purok {{ $purok->purok_name }}
             </h1>
 
-            <p class="text-lg"><strong>Total Residents:</strong> {{ $totalResidents }}</p>
-            <p class="text-lg"><strong>Total Males:</strong> {{ $totalMales }}</p>
-            <p class="text-lg"><strong>Total Females:</strong> {{ $totalFemales }}</p>
+            <p class="text-lg"><strong>Total Residents:</strong> <span class="text-green-800 font-semibold">{{ $totalResidents }}</span></p>
+            <p class="text-lg"><strong>Total Males:</strong> <span class="text-blue-800 font-semibold">{{ $totalMales }}</span></p>
+            <p class="text-lg"><strong>Total Females:</strong> <span class="text-pink-800 font-semibold">{{ $totalFemales }}</span></p>
             {{-- <p class="text-lg"><strong>Total Households:</strong> {{ $totalHouseholds }}</p> --}}
 
         </div>
 
         <div>
-            <h3 class="text-xl font-semibold mb-4">Resident List</h3>
+            <h3 class="text-xl font-bold mb-4">Resident List</h3>
             <ul class="list-disc ml-6">
                 @forelse ($residents as $resident)
                     <li class="mb-2">

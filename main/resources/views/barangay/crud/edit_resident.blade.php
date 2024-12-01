@@ -1,10 +1,6 @@
 @extends('barangay.templates.navigation-bar')
 
-@section('icon')
-<i class="fas fa-users fa-lg"></i>
-@endsection
-
-@section('title', 'Residents')
+@section('title', 'Resident Details Update')
 
 @section('content')
 <div class="py-6 px-8 bg-white rounded-lg shadow-lg">

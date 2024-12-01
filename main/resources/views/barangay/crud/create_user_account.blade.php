@@ -7,34 +7,21 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<div class="px-6  max-h-[150vh] overflow-y-auto">
+<div class="px-6  max-h-[78vh] overflow-y-auto">
     @if(session('success'))
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded mb-2">
         {{ session('success') }}
     </div>
     @endif
     
-    <div class="form-container max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg relative">
-        <div class="flex justify-center items-center mb-4">
-            <div class="flex justify-start items-center">
-                <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 mr-5"></i>
-            </div>
-            <div class="flex justify-center items-center">
-                <h1 class="text-xl font-bold text-blue-600 text-center mb-2">Add Barangay Official</h1>
-            </div>
-            <div class="flex justify-start items-center">
-                <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 ml-5"></i>
-            </div>
-        </div>
-
-        <hr class="border-t-2 border-blue-300 mb-4 mt-4">
+    <div class="form-container w-full mx-auto p-6 bg-white rounded-lg shadow-lg relative">
 
         <form method="POST" action="{{ route('barangay.store-user') }}">
             @csrf
-            <div class=" grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[50vh] overflow-y-auto">
+            <div class=" grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="container">
 
-                    <label class="font-bold">Personal Information:</label>
+                    <label class="font-bold text-xl">Personal Information:</label>
                     <hr class="border-t-2 border-gray-300 mb-4 mt-4">
 
                     <div class="form-group">
@@ -103,14 +90,10 @@
                          <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                          @enderror
                     </div>
-
-                    <label>
-                        <p class="text-right mt-[50px] font-bold">Household Information:</p>
-                    </label>
                 </div>
                 <div class="container2">
 
-                    <label class="font-bold">Aditional Information:</label>
+                    <label class="font-bold text-xl">Aditional Information:</label>
                     <hr class="border-t-2 border-gray-300 mb-4 mt-4">
     
                     <div class="form-group">
@@ -194,25 +177,27 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="user_id" class="block text-sm font-medium text-gray-700">Assign to User:</label>
-                            <select name="user_id" id="user_id" value="{{ old('user_id') }}" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dropdown-with-scroll">
-                                <option value="">Select User</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('user_id')
-                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
-                            @enderror
+                        <div class="form-group mt-3">
+                            <div class="form-group border border-gray-300 mt-5 mb-5 block w-full rounded-md shadow-sm py-2 px-4 focus:outline-none focus:ring focus:ring-blue-400">
+                                <label for="user_id" class="block text-sm font-medium text-gray-700">Assign to User:</label>
+                                <select name="user_id" id="user_id" value="{{ old('user_id') }}" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 dropdown-with-scroll">
+                                    <option value="">Select User</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
+                                <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>   
             </div>      
-            <div class="button-group flex justify-end ">
+            <div class="button-group flex justify-end mt-3">
                 <button type="submit" class="btn btn-primary bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mr-3">Add Resident</button>
 
-                <a href="/residents" class="inline-block text-white bg-gray-600 hover:bg-gray-500 py-2 px-4 rounded transition">
+                <a href="/residents" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800 mt-2">
                     Return
                 </a>
             </div>

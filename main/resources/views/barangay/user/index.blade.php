@@ -31,15 +31,83 @@
             </div>
         
                 <div class="flex justify-end items-center">
-                    <button class="relative text-red-600 hover:text-red-800 rounded-lg group">
+                    <button class="relative text-red-600 hover:text-red-800 rounded-lg group mr-3">
                         <span class="font-bold">Caution <i class="fa-solid fa-triangle-exclamation"></i></span>
                         <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block bg-white text-red-600 text-sm py-2 px-4 rounded shadow-lg w-64">
                             <strong>Reminder:</strong> You can only delete a user if there is a login-related issue. Please ensure that you have verified the problem before proceeding with the deletion.
                         </div>
                     </button> 
-                    <a href="{{ route('barangay.user.createUser')}}" class="py-2 px-4 bg-blue-600 text-white ml-3 rounded hover:bg-blue-500">
-                        <i class="fa-solid fa-plus"></i> User Account
-                    </a>
+
+                    <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
+                        <i class="fa-solid fa-plus"></i> Add User Account</a>
+                    </button>
+                    
+                    <div id="add-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
+                            
+                        <!-- Add Form -->
+                        <div class="mt-[20px] mb-6 w-[400px] mx-auto bg-white p-6 rounded shadow">
+        
+                            <div class="flex justify-center items-center mb-4">
+                                <div class="flex justify-start items-center">
+                                    <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 mr-5"></i>
+                                </div>
+                                <div class="flex justify-center items-center">
+                                    <h1 class="text-xl font-bold text-blue-600 text-center mb-2">Create Resident Account</h1>
+                                </div>
+                                <div class="flex justify-start items-center">
+                                    <i class="fa-solid fa-diamond text-blue-600 text-[8px] mb-1 ml-5"></i>
+                                </div>
+                            </div>
+        
+                            <hr class="border-t-2 border-blue-300 mb-4">
+        
+                            <form action="{{ route('barangay.storeResidentUser') }}" method="POST">
+                                @csrf
+                                  <!-- Resident Dropdown with Search -->
+                                  <div class="mb-4">
+                                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                                    <input type="text" id="name" name="name" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('name') }}">
+                                    @error('name')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                
+                                <div class="mb-4">
+                                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                                    <input type="email" id="email" name="email" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('email') }}">
+                                    @error('email')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                
+                                <div class="mb-4">
+                                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                                    <input type="password" id="password" name="password" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('password') }}">
+                                    @error('password')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                
+                                <div class="mb-4">
+                                    <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+                                    <input type="password" id="password_confirmation" name="password_confirmation" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                    @error('password_confirmation')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="flex justify-end items-center">
+                                    <div class="mb-4">
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Add Official</button>
+                                    </div>
+                                    <div class="mb-4">
+                                        <button type="button" onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
         </div>
     
@@ -75,17 +143,18 @@
                                             <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this User?</p>
                                             
                                             <div class="flex justify-end space-x-4">
-                                                <button onclick="toggleDeleteModal('{{ $user->id }}')" class="hover:text-gray-400">
-                                                    Cancel
-                                                </button>
                                     
                                                 <form action="{{ route('barangay.user.index.delete', ['user_id' => $user->id]) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="py-2 px-4 text-red-800 hover:text-red-400">
+                                                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                                                         Delete
                                                     </button>
                                                 </form>
+
+                                                <button onclick="toggleDeleteModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                    Cancel
+                                                </button>
                                             </div>
                                         </div>
                                     </div> 
@@ -105,6 +174,11 @@
 </div>
 
 <script>
+
+        function toggleAddModal() {
+            const modal = document.getElementById(`add-modal`);
+            modal.classList.toggle('hidden');
+        }
         function toggleDeleteModal(userId) {
             const modal = document.getElementById(`delete-modal-${userId}`);
             modal.classList.toggle('hidden');

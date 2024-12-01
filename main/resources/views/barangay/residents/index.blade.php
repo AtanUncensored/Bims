@@ -36,7 +36,7 @@
         <div class="flex justify-between mb-4">
             <h1 class="text-xl font-bold text-blue-500 mb-3">LIST OF AVAILABLE RESIDENTS:</h1>
     
-            <a href="{{ route('barangay.create-user') }}" class="py-2 px-4 bg-blue-600 text-white rounded flex items-center space-x-2 hover:bg-blue-500 transition">
+            <a href="{{ route('barangay.create-user') }}" class="py-2 px-2 font-semibold bg-blue-600 text-white rounded flex items-center space-x-2 hover:bg-blue-500 transition">
                 <i class="fa-solid fa-plus"></i>
                 <span>Add Resident</span>
             </a>
