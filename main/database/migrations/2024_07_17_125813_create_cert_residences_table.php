@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('age'); 
             $table->enum('gender', ['Male', 'Female', 'Other']);  
             $table->date('date'); 
+            $table->string('civil_status');
             $table->string('ORnumber')->nullable(); 
             $table->timestamps(); 
         });
