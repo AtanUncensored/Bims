@@ -32,17 +32,21 @@ class AnnouncementController extends Controller
 
     public function userIndex()
     {
-        
-        $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
-                            ->where(function($query) {
-                                $query->where('expiration_date', '>=', now())
-                                        ->orWhereNull('expiration_date');
-                            })
-                            ->orderBy('created_at', 'desc')
-                            ->paginate(10);
-
+        $announcements = Announcement::where(function ($query) {
+            $query->where('barangay_id', Auth::user()->barangay_id)
+                  ->orWhereNull('barangay_id') 
+                  ->orWhere('is_global', true); 
+        })
+        ->where(function ($query) {
+            $query->where('expiration_date', '>=', now())
+                  ->orWhereNull('expiration_date');
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+    
         return view('user.announcement.index', compact('announcements'));
     }
+    
 
     public function create()
     {
