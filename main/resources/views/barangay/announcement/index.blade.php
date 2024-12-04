@@ -10,7 +10,7 @@
         <hr class="border-t-2 mb-4 border-gray-300">
 
         <div class="flex justify-between items-center">
-        <!-- Link to create a new announcement (only for admins) -->
+
             @if(auth()->user()->hasRole('admin'))
                 {{-- <a href="{{ route('announcements.create') }}" class="btn btn-primary text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Post event</a> --}}
                 <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
@@ -124,7 +124,7 @@
                 </div>
             @endif
             
-            <a href="{{ route('announcements.expired') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">View Expired</a>
+            <a href="{{ route('announcements.expired') }}" class="btn btn-primary bg-red-500 text-center text-white py-2 px-4 rounded hover:bg-red-600">View Expired</a>
         </div>
     </div>
 
@@ -132,14 +132,26 @@
         @if($announcements->count())
         <div class="space-y-6"> 
             @foreach($announcements as $announcement)
-                    <div class="bg-white shadow-md rounded-lg overflow-hidden w-full mt-4 w-full">
+                <div class="bg-white shadow-md rounded-lg overflow-hidden w-full mt-4 w-full">
+                    <div class="p-4 flex flex-col">
+
+                        <div class="flex items-center justify-between mb-2">
+
+                            @if($announcement->is_global)
+                                <div class="flex items-center space-x-2 ml-auto"> 
+                                    <span class="text-yellow-500 text-3xl">&#x1F4CC;</span> 
+                                    <span class="text-yellow-500 text-sm font-semibold">LGU Announcement</span> 
+                                </div>
+                            @endif
+                        </div>
+
                         <div class="image-area relative shadow-xl">
                             @if($announcement->imgUrl)
-                            <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
-                            <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>
-                            <div class="absolute inset-0 flex items-start justify-end py-2 px-4">
-                                <p class="italic"><span class="text-white text-[20px] font-semibold">{{ $announcement->announcement_date }}</span></p>
-                            </div>
+                                <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
+                                <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>
+                                <div class="absolute inset-0 flex items-start justify-end py-2 px-4">
+                                    <p class="italic"><span class="text-white text-[20px] font-semibold">{{ $announcement->announcement_date }}</span></p>
+                                </div>
                             @endif
                         </div>
 
@@ -147,7 +159,7 @@
                             <div>
                                 <h3 class="lg:text-2xl text-[15px] font-semibold mb-2 text-blue-600">{{ $announcement->title }}</h3>
                             </div>
-                            <a href="{{ route('barangay.announcement.show', $announcement->id) }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 ml-auto">View details</a>
+                            <a href="{{ route('barangay.announcement.show', $announcement->id) }}" class="ml-auto bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">View details</a>
                         </div>
                     </div>
             @endforeach        

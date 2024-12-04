@@ -16,7 +16,9 @@ class Announcement extends Model
         'imgUrl',
         'announcement_date',
         'content', 
-        'expiration_date'
+        'expiration_date',
+        'is_global', 
+
     ];
 
     protected $casts = [
