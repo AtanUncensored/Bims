@@ -26,7 +26,7 @@ class SuperAdminAnnouncementController extends Controller
             'title' => 'required|max:255',
             'announcement_date' => 'required|date',
             'expiration_date' => 'required|date|after:today',
-            'content' => 'required|max:255',
+            'content' => 'required|max:10000',
             'imgUrl' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
@@ -54,5 +54,39 @@ class SuperAdminAnnouncementController extends Controller
         return redirect()->route('superadmin.announcements.index')->with('success', 'Global announcement created successfully!');
     }
     
+    public function show($announcementId)
+    {
+        $announcement = Announcement::findOrFail($announcementId);
+        $announcements = Announcement::where('is_global', true)->latest()->paginate(10);
+    
+        return view('lgu.announcement.show', compact('announcements', 'announcement'));
+    }
+
+    public function updateAnnouncement(Request $request, Announcement $announcement)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'announcement_date' => 'required|date',
+            'expiration_date' => 'required|date|after_or_equal:today',
+            'content' => 'required|max:10000',
+            'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('imgUrl')) {
+            $filename = $request->file('imgUrl')->store('announcement', 'public');
+        } else {
+            $filename = $announcement->imgUrl;
+        }
+
+        $announcement->update([
+            'title' => $request->title,
+            'announcement_date' => $request->announcement_date,
+            'expiration_date' => $request->expiration_date,
+            'content' => $request->content,
+            'imgUrl' => $filename,
+        ]);
+
+        return redirect()->route('superadmin.announcements.index')->with('success', 'Announcement updated successfully.');
+    }
 
 }

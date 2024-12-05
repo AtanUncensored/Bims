@@ -81,11 +81,15 @@ Route::middleware('auth')->group(function () {
         //routes
         Route::get('/barangays/create', [LguController::class, 'createBarangay'])->name('lgu.create-newBarangay');
         Route::post('/barangays', [LguController::class, 'storeBarangay'])->name('lgu.store-barangay');
+    
+        //announcements
+        Route::get('/lgu-announcement', [SuperAdminAnnouncementController::class, 'index'])->name('superadmin.announcements.index');
+        Route::get('/lgu-announcement/{announcement}', [SuperAdminAnnouncementController::class, 'show'])->name('superadmin.announcement.show');
+        Route::get('/lgu-announcement/create', [SuperAdminAnnouncementController::class, 'create'])->name('superadmin.announcements.create');
+        Route::post('/lgu-announcement/store', [SuperAdminAnnouncementController::class, 'store'])->name('superadmin.announcements.store'); 
+        Route::put('/lgu-announcement/{announcement}', [SuperAdminAnnouncementController::class, 'updateAnnouncement'])->name('superadmin.announcement.update');
 
-        Route::get('/lgu-annoucement', [SuperAdminAnnouncementController::class, 'index'])->name('superadmin.announcements.index');
-        Route::get('/lgu-annoucement/create', [SuperAdminAnnouncementController::class, 'create'])->name('superadmin.announcements.create');
-        Route::post('/lgu-annoucement/store', [SuperAdminAnnouncementController::class, 'store'])->name('superadmin.announcements.store'); 
-
+        //barangay list & admin
         Route::get('/lgu', [LguController::class, 'index'])->name('lgu.dashboard');
         Route::put('/barangays/{barangay}', [LguController::class, 'update'])->name('lgu.barangays-update');//route to show edit
         Route::get('/barangays', [LguController::class, 'barangaysList'])->name('lgu.barangays-list');//route to show barangays

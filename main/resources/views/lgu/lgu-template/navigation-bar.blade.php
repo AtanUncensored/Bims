@@ -52,7 +52,7 @@
 
             <nav id="main-nav">  
                 <div class="mt-[15px]">
-                    <a href="{{ url('/lgu') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ url('/lgu') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-house fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Dashboard</span>
                     </a>
@@ -61,7 +61,7 @@
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Barangays</span>
                     </a>
-                    <a href="{{ url('/lgu-annoucement') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu-annoucement*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <a href="{{ url('/lgu-announcement') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu-announcement') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Announcement</span>
                     </a>

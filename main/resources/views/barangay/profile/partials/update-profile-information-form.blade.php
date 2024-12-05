@@ -10,7 +10,7 @@
                     </p>
                 </header>
 
-            <div class="flex items-center mb-[30px] mt-3">
+            {{-- <div class="flex items-center mb-[30px] mt-3">
                 <div>
                     @if($user->user_image)
                     <img src="{{ Storage::url($user->user_image) }}" alt="Profile Image" class="w-32 h-32 rounded-full object-cover">
@@ -37,16 +37,16 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
             <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
             <div>
-                <button id="toggleEmailForm" class='px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
+                {{-- <button id="toggleEmailForm" class='px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
                     <i class="fa-solid fa-envelope"></i> Email
                 </button>
 
-                <div id="emailForm" style="display: none;">
+                <div id="emailForm" style="display: none;"> --}}
 
                     <h2 class="text-xl font-bold text-start text-blue-900 mt-3">
                         Username & Email
@@ -84,7 +84,7 @@
                             @endif
                         </div>
                     </form>
-                </div>
+                {{-- </div> --}}
             </div>
             
             <hr class="border-t-2 mt-3 mb-4 border-gray-300">
@@ -114,10 +114,10 @@
 
 <script>
 
-    document.getElementById('toggleEmailForm').onclick = function() {
-        var emailForm = document.getElementById('emailForm');
-        emailForm.style.display = (emailForm.style.display === 'none' || emailForm.style.display === '') ? 'block' : 'none';
-    };
+    // document.getElementById('toggleEmailForm').onclick = function() {
+    //     var emailForm = document.getElementById('emailForm');
+    //     emailForm.style.display = (emailForm.style.display === 'none' || emailForm.style.display === '') ? 'block' : 'none';
+    // };
 
     document.getElementById('togglePasswordForm').onclick = function() {
         var passwordForm = document.getElementById('passwordForm');

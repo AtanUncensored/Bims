@@ -61,9 +61,12 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition focus:outline-none">
+                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition focus:outline-none mr-3">
                         Submit Reply
                     </button>
+                    <a href="/complaints" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800 mt-2">
+                        Cancel
+                    </a>
                 </div>
             </form>
         @endif
