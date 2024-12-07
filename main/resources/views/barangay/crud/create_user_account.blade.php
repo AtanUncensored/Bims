@@ -16,14 +16,13 @@
     
     <div class="form-container w-full mx-auto p-6 bg-white rounded-lg shadow-lg relative">
 
+        <p class="font-bold text-xl text-center">Personal Information</p>
+                    <hr class="border-t-2 border-gray-300 mb-4 mt-4">
+
         <form method="POST" action="{{ route('barangay.store-user') }}">
             @csrf
             <div class=" grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="container">
-
-                    <label class="font-bold text-xl">Personal Information:</label>
-                    <hr class="border-t-2 border-gray-300 mb-4 mt-4">
-
                     <div class="form-group">
                         <label for="first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
                         <input type="text" name="first_name" id="first_name" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" value="{{ old('first_name') }}">
@@ -101,9 +100,6 @@
                 </div>
                 <div class="container2">
 
-                    <label class="font-bold text-xl">Aditional Information:</label>
-                    <hr class="border-t-2 border-gray-300 mb-4 mt-4">
-    
                     <div class="form-group">
                         <label for="civil_status" class="block text-sm font-medium text-gray-700">Civil Status:</label>
                         <input type="text" name="civil_status" id="civil_status" value="{{ old('civil_status') }}"class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">

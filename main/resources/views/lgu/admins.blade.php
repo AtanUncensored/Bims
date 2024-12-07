@@ -117,7 +117,7 @@
                         </div>
                         <div class="flex justify-end items-center">
                             <div class="mb-4">
-                                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Create</button>
+                                <button type="submit" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-3">Create</button>
                             </div>
                             <div class="mb-4">
                                 <button onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
@@ -219,7 +219,7 @@
                             
                                         <div class="flex justify-end items-center">
                                             <div class="mb-4">
-                                                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Update</button>
+                                                <button type="submit" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-3">Update</button>
                                             </div>
                                             <div class="mb-4">
                                                 <button onclick="toggleEditModal('{{ $admin->id }}')" type="button" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
@@ -249,7 +249,7 @@
                                         <form action="{{ route('lgu.admins-crud.delete-barangay-admin', $admin->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                            <button type="submit" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">
                                                 Delete
                                             </button>
                                         </form>

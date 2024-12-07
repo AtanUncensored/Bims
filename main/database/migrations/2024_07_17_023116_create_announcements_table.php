@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('barangay_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('imgUrl');
-            $table->date('announcement_date');
+            $table->dateTime('announcement_date');
             $table->dateTime('expiration_date');
             $table->text('content');
             $table->boolean('is_global')->default(false);

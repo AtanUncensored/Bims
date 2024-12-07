@@ -5,7 +5,12 @@
 @section('content')
 
 <div class="py-6 px-4 max-h-[72vh] overflow-y-auto mx-auto">
-    <div class="image-area relative shadow-xl">
+    <div class="image-area relative shadow-xl">    
+        @if($announcement->expiration_date && $announcement->expiration_date < now())
+            <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
+                This announcement is expired and will disappear after 3 months
+            </div>
+        @endif                        
         @if($announcement->imgUrl)
         <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-[350px] object-cover rounded-lg shadow-lg">
         <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>

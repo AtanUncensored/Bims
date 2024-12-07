@@ -9,11 +9,11 @@
 
         <hr class="border-t-2 mb-4 border-gray-300">
 
-        <div class="flex justify-between items-center">
+        <div class="flex justify-start items-center">
 
             @if(auth()->user()->hasRole('admin'))
                 {{-- <a href="{{ route('announcements.create') }}" class="btn btn-primary text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Post event</a> --}}
-                <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
+                <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-[200px]">
                     <i class="fa-solid fa-plus"></i> Post event</a>
                 </button>
             @endif
@@ -48,7 +48,7 @@
                                 <div>
                                     <label for="announcement_date" class="block text-sm font-medium text-gray-700">Announcement Date:</label>
                                     <input 
-                                        type="date" 
+                                        type="datetime-local" 
                                         name="announcement_date" 
                                         id="announcement_date" 
                                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
@@ -123,8 +123,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            
-            <a href="{{ route('announcements.expired') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">View Expired</a>
+        
         </div>
     </div>
 
@@ -145,6 +144,13 @@
                         </div>
 
                         <div class="image-area relative shadow-xl">
+
+                            @if($announcement->expiration_date && $announcement->expiration_date < now())
+                                <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
+                                    This announcement is expired and will disappear after 3 months
+                                </div>
+                            @endif
+                            
                             @if($announcement->imgUrl)
                             <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
                             <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>

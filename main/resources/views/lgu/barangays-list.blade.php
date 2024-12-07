@@ -96,7 +96,7 @@
                         <!-- Submit Button -->
                         <div class="flex justify-end">
                             <button type="submit" 
-                                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">
+                                    class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-3">
                                 Create
                             </button>
 
@@ -188,7 +188,7 @@
                             </div>
 
                             <div class="flex justify-end items-center">
-                                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Update</button>
+                                <button type="submit" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-3">Update</button>
                                 <button onclick="toggleEditModal('{{ $barangay->id }}')" type="button" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">Cancel</button>
                             </div>
                         </form>

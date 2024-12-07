@@ -123,7 +123,7 @@
                 
                         <!-- Action Buttons -->
                         <div class="flex justify-end items-center mt-6">
-                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-3">
+                            <button type="submit" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-3">
                                 Update Announcement
                             </button>
                             <button type="button" onclick="toggleEditModal('{{ $announcement->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">

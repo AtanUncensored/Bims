@@ -11,39 +11,63 @@ use Illuminate\Support\Facades\Auth;
 class AnnouncementController extends Controller
 {
     public function index()
-    {
+{
+    // Delete expired announcements
+    Announcement::whereNotNull('expiration_date')
+        ->where('expiration_date', '<', now()->subMonths(3))
+        ->delete();
 
-        $announcements = Announcement::where(function($query) {
-            $query->where('barangay_id', Auth::user()->barangay_id)
-                  ->where(function($query) {
-                      
-                      $query->where('expiration_date', '>=', now())
-                            ->orWhereNull('expiration_date');
-                  });
-        })
-        ->orWhere('is_global', true) 
-        ->orderByRaw('is_global DESC')  
-        ->orderBy('created_at', 'desc') 
-        ->paginate(10);
-    
-        return view('barangay.announcement.index', compact('announcements'));
-    }
+    // Fetch announcements
+    $announcements = Announcement::where(function ($query) {
+        $query->where('barangay_id', Auth::user()->barangay_id)
+            ->where(function ($query) {
+                // Check for announcements without an announcement date or those that are not expired
+                $query->whereNull('announcement_date')
+                    ->orWhere('announcement_date', '<=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('expiration_date')
+                    ->orWhere('expiration_date', '>=', now())
+                    ->orWhere('expiration_date', '<', now()); // Include expired announcements
+            });
+    })
+    ->orWhere('is_global', true) // Include global announcements
+    ->orderByRaw('is_global DESC') // Order global announcements first
+    ->orderBy('created_at', 'desc') // Then order by creation date
+    ->latest() // Sort by the most recent
+    ->paginate(10);
+
+    return view('barangay.announcement.index', compact('announcements'));
+}
+
     
 
     public function userIndex()
     {
-        $announcements = Announcement::where(function ($query) {
-                $query->where('barangay_id', Auth::user()->barangay_id)
-                      ->orWhereNull('barangay_id') 
-                      ->orWhere('is_global', true); 
-            })
-            ->where(function ($query) {
-                $query->where('expiration_date', '>=', now())
-                      ->orWhereNull('expiration_date');
-            })
-            ->orderByDesc('is_global') 
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        // Delete expired announcements
+    Announcement::whereNotNull('expiration_date')
+    ->where('expiration_date', '<', now()->subMonths(3))
+    ->delete();
+
+// Fetch announcements
+$announcements = Announcement::where(function ($query) {
+    $query->where('barangay_id', Auth::user()->barangay_id)
+        ->where(function ($query) {
+            // Check for announcements without an announcement date or those that are not expired
+            $query->whereNull('announcement_date')
+                ->orWhere('announcement_date', '<=', now());
+        })
+        ->where(function ($query) {
+            $query->whereNull('expiration_date')
+                ->orWhere('expiration_date', '>=', now())
+                ->orWhere('expiration_date', '<', now()); // Include expired announcements
+        });
+    })
+    ->orWhere('is_global', true) // Include global announcements
+    ->orderByRaw('is_global DESC') // Order global announcements first
+    ->orderBy('created_at', 'desc') // Then order by creation date
+    ->latest() // Sort by the most recent
+    ->paginate(10);
         
         return view('user.announcement.index', compact('announcements'));
     }
@@ -160,15 +184,15 @@ class AnnouncementController extends Controller
 
 
 
-    public function expiredView()
-    {
-        $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
-                                ->where('expiration_date', '<', now())
-                                ->orderBy('expiration_date', 'desc')
-                                ->paginate(10);
+    // public function expiredView()
+    // {
+    //     $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
+    //                             ->where('expiration_date', '<', now())
+    //                             ->orderBy('expiration_date', 'desc')
+    //                             ->paginate(10);
     
-        return view('barangay.announcement.expired', compact('announcements'));
-    }
+    //     return view('barangay.announcement.expired', compact('announcements'));
+    // }
 
     public function userExpiredView()
     {

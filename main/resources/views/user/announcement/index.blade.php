@@ -6,10 +6,6 @@
 <div class="px-4">
     <div class="bg-white flex justify-between items-center py-2 px-4 rounded-lg shadow-lg mb-1">
         <h2 class="text-xl font-bold text-blue-500 mb-3 text-start">IMPORTANT ANNOUNCEMENTS:</h2>
-
-        <div class="flex justify-end items-center">
-            <a href="{{ route('user.announcement.expired') }}" class="btn btn-primary bg-red-500 text-center text-white py-2 px-4 rounded hover:bg-red-600">View Expired</a>
-        </div>
     </div>
 
     <div class="max-h-[70vh] overflow-y-auto">
@@ -25,10 +21,13 @@
                         <span class="text-yellow-500 text-sm font-semibold">LGU Announcement</span> 
                     </div>
                     @endif
-                
-                
 
                     <div class="image-area relative shadow-xl">
+                        @if($announcement->expiration_date && $announcement->expiration_date < now())
+                            <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
+                                This announcement is expired and will disappear after 3 months
+                            </div>
+                        @endif
                         @if($announcement->imgUrl)
                         <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>

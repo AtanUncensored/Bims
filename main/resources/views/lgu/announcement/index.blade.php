@@ -11,7 +11,7 @@
 
         <div class="flex justify-start items-center">
             <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-[200px]">
-                <i class="fa-solid fa-plus"></i> Add Announcement</a>
+                <i class="fa-solid fa-plus"></i> Announcement</a>
             </button>
     
             @if(session('success'))
@@ -51,7 +51,7 @@
                             <div>
                                 <label for="announcement_date" class="block text-sm font-medium text-gray-700">Announcement Date:</label>
                                 <input 
-                                    type="date" 
+                                    type="datetime-local" 
                                     name="announcement_date" 
                                     id="announcement_date" 
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
@@ -109,7 +109,7 @@
                 
                         <!-- Action Buttons -->
                         <div class="flex justify-end items-center mt-6">
-                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-3">
+                            <button type="submit" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-3">
                                 Create Announcement
                             </button>
                             <button type="button" onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
@@ -128,6 +128,11 @@
             @foreach($announcements as $announcement)
                     <div class="bg-white shadow-md rounded-lg overflow-hidden w-full mt-4 w-full">
                         <div class="image-area relative shadow-xl">
+                            @if($announcement->expiration_date && $announcement->expiration_date < now())
+                                <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
+                                    This announcement is expired and will disappear after 3 months
+                                </div>
+                            @endif
                             @if($announcement->imgUrl)
                             <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
                             <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>
@@ -141,7 +146,7 @@
                             <div>
                                 <h3 class="lg:text-2xl text-[15px] font-semibold mb-2 text-blue-600">{{ $announcement->title }}</h3>
                             </div>
-                            <a href="{{ route('superadmin.announcement.show', $announcement->id) }}" class="ml-auto bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">View details</a>
+                            <a href="{{ route('superadmin.announcement.show', $announcement->id) }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 ml-auto">View details</a>
                         </div>
                     </div>
             @endforeach        

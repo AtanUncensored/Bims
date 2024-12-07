@@ -22,7 +22,7 @@ class Announcement extends Model
     ];
 
     protected $casts = [
-        'announcement_date' => 'date',
+        'announcement_date' => 'datetime',
         'expiration_date' => 'datetime', 
     ];
 }
