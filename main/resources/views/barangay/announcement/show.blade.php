@@ -63,7 +63,7 @@
                 
                             <!-- Announcement Date Input -->
                             <div>
-                                <label for="announcement_date" class="block text-sm font-medium text-gray-700">Expiration Date and Time:</label>
+                                <label for="announcement_date" class="block text-sm font-medium text-gray-700">Announced Date and Time:</label>
                                 <input 
                                     type="datetime-local" 
                                     name="announcement_date" 
