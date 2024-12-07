@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('resident_id')->constrained()->onDelete('cascade');
             $table->foreignId('barangay_id')->constrained()->onDelete('cascade');
             $table->string('position');
+            $table->string('purok');
             $table->string('committee');
             $table->date('start_of_service');
             $table->date('end_of_service');

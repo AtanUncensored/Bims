@@ -180,6 +180,20 @@
                                     <span class="text-red-600 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="mb-4">
+                                <label for="purok" class="block text-gray-700 text-sm font-bold mb-2">Assign Purok:</label>
+                                <select name="purok" id="purok" value="{{ old('purok') }}" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                    <option value="">Select Purok</option>
+                                    @foreach ($puroks as $purok)
+                                        <option value="{{ $purok->id }}">Purok {{ $purok->purok_number }}</option>
+                                    @endforeach
+                                        <option value="All Purok">All Purok</option>
+                                </select>
+                                @error('purok')
+                                 <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                 @enderror
+                            </div>
                             
                             <div class="mb-4">
                                 <label for="committee" class="block text-gray-700 text-sm font-bold mb-2">Committee</label>
@@ -236,6 +250,7 @@
                         <tr>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Name</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Position</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purok Assigned</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Committee</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Start of Service</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">End of Service</th>
@@ -247,6 +262,7 @@
                             <tr class="border-b border-gray-200">
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->resident->first_name }}, {{ $official->resident->last_name}}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->position }}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->purok }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->committee }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->start_of_service }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->end_of_service }}</td>
@@ -315,7 +331,20 @@
                                                                 <span class="text-red-600 text-sm">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-                                                        
+                                            
+                                                        <div class="mb-4">
+                                                            <label for="purok" class="block text-gray-700 text-sm font-bold mb-2 text-start">Select Purok</label>
+                                                            <select name="purok" id="purok" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                                                <option value="">Select a Purok</option>
+                                                                @foreach($puroks as $purok)
+                                                                    <option value="{{ $purok->id }}" {{ $purok->id == $official->purok ? 'selected' : '' }}>
+                                                                        Purok {{ $purok->purok_number }}
+                                                                    </option>
+                                                                @endforeach
+                                                                <option value="All Purok" {{ $official->purok === 'All Purok' ? 'selected' : '' }}>All Purok</option>
+                                                            </select>
+                                                            @error('purok')<span>{{ $message }}</span>@enderror
+                                                        </div>
                                                         
                                                         <div class="mb-4">
                                                             <label for="committee" class="block text-gray-700 text-sm font-bold mb-2 text-left">Committee</label>

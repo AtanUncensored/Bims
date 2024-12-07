@@ -21,6 +21,8 @@ class BarangayController extends Controller
     {
         // Get the currently authenticated user
         $user = Auth::user();
+
+        $userBarangayId = Auth::user()->barangay_id;
         
         // the user model has a `barangay_id` property
         $barangayId = $user->barangay_id;
@@ -52,7 +54,9 @@ class BarangayController extends Controller
         ->with('resident') 
         ->get();
 
-        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials' , 'residents'));
+        $puroks = Purok::where('barangay_id', $userBarangayId)->get();
+
+        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials' , 'residents' , 'puroks'));
     }
     
     public function createUserForm()

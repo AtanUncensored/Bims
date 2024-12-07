@@ -10,7 +10,7 @@ class BarangayOfficial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['resident_id', 'barangay_id', 'position', 'committee', 'start_of_service', 'end_of_service'];
+    protected $fillable = ['resident_id', 'barangay_id', 'position', 'purok' , 'committee', 'start_of_service', 'end_of_service'];
 
 
     // Relationship with Resident

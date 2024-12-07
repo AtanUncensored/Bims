@@ -27,6 +27,7 @@ class BarangayOfficialController extends Controller
         $request->validate([
             'resident_id' => 'required|exists:residents,id',
             'position' => 'required|string|max:255',
+            'purok' => 'required|string|max:255',
             'committee' => 'required|string|max:255',
             'start_of_service' => 'required|date',
             'end_of_service' => 'required|date|after:start_of_service',
@@ -39,6 +40,7 @@ class BarangayOfficialController extends Controller
             'resident_id' => $request->resident_id,
             'barangay_id' => $barangayId,
             'position' => $request->position,
+            'purok' => $request->purok,
             'committee' => $request->committee,
             'start_of_service' => $request->start_of_service,
             'end_of_service' => $request->end_of_service,
@@ -72,6 +74,7 @@ class BarangayOfficialController extends Controller
         $request->validate([
             'resident_id' => 'required|exists:residents,id',
             'position' => 'required|string|max:255',
+            'purok' => 'required|string|max:255',
             'committee' => 'required|string|max:255',
             'start_of_service' => 'required|date',
             'end_of_service' => 'required|date|after:start_of_service',
@@ -87,6 +90,7 @@ class BarangayOfficialController extends Controller
         $official->update([
             'resident_id' => $request->resident_id,
             'position' => $request->position,
+            'purok' => $request->purok,
             'committee' => $request->committee,
             'start_of_service' => $request->start_of_service,
             'end_of_service' => $request->end_of_service,
