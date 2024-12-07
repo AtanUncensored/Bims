@@ -198,7 +198,7 @@ class LguController extends Controller
     ]);
 
     // Handle logo update
-    $logoFilename = $barangay->logo; // Preserve current logo if not updated
+    $logoFilename = $barangay->logo; // Preserve logo kung wala gi update
     if ($request->hasFile('logo')) {
         // Delete old logo if it exists
         $oldLogoPath = public_path('storage/images/' . $barangay->logo);
@@ -206,17 +206,17 @@ class LguController extends Controller
             unlink($oldLogoPath);
         }
 
-        // Get the original file name without time() modification
+
         $logoFile = $request->file('logo');
         $logoExtension = $logoFile->getClientOriginalExtension();
         $logoFilename = $barangay->logo; // Use the original filename for the new logo
-        $logoFile->move(public_path('storage/images'), $logoFilename); // Overwrite the existing file with the same name
+        $logoFile->move(public_path('storage/images'), $logoFilename); // Overwrite file with same name
     }
 
     // Handle background image update
-    $backgroundImageFilename = $barangay->background_image; // Preserve current background image if not updated
+    $backgroundImageFilename = $barangay->background_image; // Preserve background kung wala gi update
     if ($request->hasFile('background_image')) {
-        // Delete old background image if it exists
+        
         $oldBackgroundImagePath = public_path('storage/images/' . $barangay->background_image);
         if (file_exists($oldBackgroundImagePath)) {
             unlink($oldBackgroundImagePath);
