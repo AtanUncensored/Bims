@@ -24,7 +24,8 @@
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Certificate Type</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purpose</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Date Needed</th>
-                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Actions</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">OR number</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Print</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,21 +86,23 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <!-- Print Button -->
-                                            <button 
-                                                onclick="printCertificate('{{ route('certificate.download', [
-                                                    'certificateId' => $request->id,
-                                                    'requesterName' => str_replace(' ', '_', $request->requester_name),
-                                                    'certificateType' => str_replace(' ', '_', $request->certificate_type),
-                                                    'date' => \Carbon\Carbon::parse($request->created_at)->format('Y-m-d'),
-                                                ]) }}')"
-                                                class="btn-print text-white hover:bg-green-200 px-6 py-2 rounded-full text-sm ml-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-printer" viewBox="0 0 18 18">
-                                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-                                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
-                                                </svg>
-                                            </button>
                                         </div>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                         <!-- Print Button -->
+                                         <button 
+                                         onclick="printCertificate('{{ route('certificate.download', [
+                                             'certificateId' => $request->id,
+                                             'requesterName' => str_replace(' ', '_', $request->requester_name),
+                                             'certificateType' => str_replace(' ', '_', $request->certificate_type),
+                                             'date' => \Carbon\Carbon::parse($request->created_at)->format('Y-m-d'),
+                                         ]) }}')"
+                                         class="btn-print text-white hover:bg-green-200 px-6 py-2 rounded-full text-sm ml-2">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-printer" viewBox="0 0 18 18">
+                                             <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                             <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                         </svg>
+                                     </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -126,8 +129,8 @@
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Certificate Type</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purpose</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Date Needed</th>
-                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-center">Actions</th>
-                            </tr>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">OR number</th>
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Print</th>                            </tr>
                         </thead>
                         <tbody>
                             @foreach($downloadedRequests as $request)
@@ -188,23 +191,24 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            
-                                            <!-- Print Button -->
-                                            <button 
-                                                onclick="printCertificate('{{ route('certificate.download', [
-                                                    'certificateId' => $request->id,
-                                                    'requesterName' => str_replace(' ', '_', $request->requester_name),
-                                                    'certificateType' => str_replace(' ', '_', $request->certificate_type),
-                                                    'date' => \Carbon\Carbon::parse($request->created_at)->format('Y-m-d'),
-                                                ]) }}')"
-                                                class="btn-print text-white hover:bg-green-200 px-6 py-2 rounded-full text-sm ml-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-printer" viewBox="0 0 18 18">
-                                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-                                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
-                                                </svg>
-                                            </button>
                                         </div>
                                     </td>
+                                    <td class="px-4 py-2">
+                                        <!-- Print Button -->
+                                        <button 
+                                        onclick="printCertificate('{{ route('certificate.download', [
+                                            'certificateId' => $request->id,
+                                            'requesterName' => str_replace(' ', '_', $request->requester_name),
+                                            'certificateType' => str_replace(' ', '_', $request->certificate_type),
+                                            'date' => \Carbon\Carbon::parse($request->created_at)->format('Y-m-d'),
+                                        ]) }}')"
+                                        class="btn-print text-white hover:bg-green-200 px-6 py-2 rounded-full text-sm ml-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-printer" viewBox="0 0 18 18">
+                                            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                        </svg>
+                                    </button>
+                                   </td>
                                 </tr>
                             @endforeach
                         </tbody>
