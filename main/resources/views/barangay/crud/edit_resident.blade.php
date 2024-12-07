@@ -41,6 +41,11 @@
                     <label for="middle_name" class="font-semibold">Middle Name:</label>
                     <input type="text" class="form-control w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300" id="middle_name" name="middle_name" value="{{ old('middle_name', $resident->middle_name) }}">
                 </div>
+
+                <div class="form-group">
+                    <label for="suffix" class="font-semibold">Suffix:</label>
+                    <input type="text" class="form-control w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300" id="suffix" name="suffix" value="{{ old('suffix', $resident->suffix) }}">
+                </div>
                 
                 <div class="form-group">
                     <label for="purok" class="font-semibold">Purok:</label>

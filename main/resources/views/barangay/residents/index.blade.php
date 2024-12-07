@@ -117,6 +117,13 @@
                                                          @enderror
                                                     </div>
                     
+                                                    <div class="form-group">
+                                                        <label for="suffix" class="block text-sm font-medium text-gray-700">Suffix:</label>
+                                                        <input type="text" name="suffix" id="suffix" value="{{ old('suffix', $resident->suffix) }}" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                        @error('suffix')
+                                                         <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                                         @enderror
+                                                    </div>
 
                                                     <div class="form-group">
                                                         <label for="purok" class="block text-sm font-medium text-gray-700">Purok:</label>

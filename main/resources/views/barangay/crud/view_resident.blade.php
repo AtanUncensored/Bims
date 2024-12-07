@@ -46,6 +46,10 @@
                 <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">{{ $resident->middle_name }}</span>
             </div>
             <div class="flex items-center">
+                <span class="font-semibold text-gray-600 w-40">Suffix:</span>
+                <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">{{ $resident->suffix }}</span>
+            </div>
+            <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Purok:</span>
                 <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">{{ $resident->purok->purok_number }}</span>
             </div>

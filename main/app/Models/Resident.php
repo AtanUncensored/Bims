@@ -11,7 +11,7 @@ class Resident extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name', 'last_name', 'middle_name', 'purok_id', 'birth_date',
+        'first_name', 'last_name', 'middle_name', 'suffix' , 'purok_id', 'birth_date',
         'place_of_birth', 'gender', 'civil_status', 'phone_number', 'citizenship',
         'nickname', 'email', 'current_address', 'permanent_address', 'household_id'
     ];
