@@ -26,38 +26,41 @@
         @endif
 
         <form method="GET" action="{{ route('barangay.residents.index') }}">
-            <div class="flex items-center mb-3">
-                <!-- Search Bar -->
-                <input type="text" name="search" value="{{ old('search', $search) }}" placeholder="Search a resident..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500">
-                <button type="submit" class="py-2 px-4 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-        
-            <div class="flex mb-3">
-                <!-- Purok Filter -->
-                <select name="purok_filter" class="py-1 px-2 bg-gray-500 text-white text-xs rounded focus:outline-none" onchange="this.form.submit()">
-                    <option value="">Select Purok</option>
-                    @foreach($puroks as $purok)
-                        <option value="{{ $purok->id }}" {{ $purok->id == old('purok_filter', $purokFilter) ? 'selected' : '' }}>{{ $purok->purok_name }}</option>
-                    @endforeach
-                </select>
-        
-                <!-- Gender Filter -->
-                <select name="gender_filter" class="py-1 px-2 bg-gray-500 text-white text-xs rounded focus:outline-none" onchange="this.form.submit()">
-                    <option value="">Select Gender</option>
-                    <option value="male" {{ old('gender_filter', $genderFilter) == 'male' ? 'selected' : '' }}>Male</option>
-                    <option value="female" {{ old('gender_filter', $genderFilter) == 'female' ? 'selected' : '' }}>Female</option>
-                </select>
-        
-                <!-- Age Filter -->
-                <select name="age_filter" class="py-1 px-2 bg-gray-500 text-white text-xs rounded focus:outline-none" onchange="this.form.submit()">
-                    <option value="">Select Age Group</option>
-                    <option value="children" {{ old('age_filter', $ageFilter) == 'children' ? 'selected' : '' }}>Children (0-12)</option>
-                    <option value="teens" {{ old('age_filter', $ageFilter) == 'teens' ? 'selected' : '' }}>Teens (13-19)</option>
-                    <option value="adults" {{ old('age_filter', $ageFilter) == 'adults' ? 'selected' : '' }}>Adults (20-39)</option>
-                    <option value="middle_aged" {{ old('age_filter', $ageFilter) == 'middle_aged' ? 'selected' : '' }}>Middle-aged (40-59)</option>
-                    <option value="senior" {{ old('age_filter', $ageFilter) == 'senior' ? 'selected' : '' }}>Senior Citizens (60+)</option>
-                </select>
-                
+            <div class="flex justify-between items-center">
+                <div class="flex items-center mb-3">
+                    <!-- Search Bar -->
+                    <input type="text" name="search" value="{{ old('search', $search) }}" placeholder="Search a resident..." class="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500">
+                    <button type="submit" class="py-2 px-4 bg-gray-600 text-white rounded-r-md hover:bg-gray-600 transition"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            
+                <div class="flex mb-3">
+                    <label class="mt-2 mr-3 text-gray-600 text-[13px] lg:text-[15px] font-semibold">Filter Resident By:</label>
+                    <!-- Purok Filter -->
+                    <select name="purok_filter" class="py-2 px-4 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none mr-2" onchange="this.form.submit()">
+                        <option value="">Purok</option>
+                        @foreach($puroks as $purok)
+                            <option class="capitalize" value="{{ $purok->id }}" {{ $purok->id == old('purok_filter', $purokFilter) ? 'selected' : '' }}>{{ $purok->purok_name }}</option>
+                        @endforeach
+                    </select>
+            
+                    <!-- Gender Filter -->
+                    <select name="gender_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none mr-2" onchange="this.form.submit()">
+                        <option value="">Gender</option>
+                        <option value="male" {{ old('gender_filter', $genderFilter) == 'male' ? 'selected' : '' }}>Male</option>
+                        <option value="female" {{ old('gender_filter', $genderFilter) == 'female' ? 'selected' : '' }}>Female</option>
+                    </select>
+            
+                    <!-- Age Filter -->
+                    <select name="age_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none" onchange="this.form.submit()">
+                        <option value="">Age Group</option>
+                        <option value="children" {{ old('age_filter', $ageFilter) == 'children' ? 'selected' : '' }}>Children (0-12)</option>
+                        <option value="teens" {{ old('age_filter', $ageFilter) == 'teens' ? 'selected' : '' }}>Teens (13-19)</option>
+                        <option value="adults" {{ old('age_filter', $ageFilter) == 'adults' ? 'selected' : '' }}>Adults (20-39)</option>
+                        <option value="middle_aged" {{ old('age_filter', $ageFilter) == 'middle_aged' ? 'selected' : '' }}>Middle-aged (40-59)</option>
+                        <option value="senior" {{ old('age_filter', $ageFilter) == 'senior' ? 'selected' : '' }}>Senior Citizens (60+)</option>
+                    </select>
+                    
+                </div>
             </div>
         </form>
      </div>
