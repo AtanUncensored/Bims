@@ -37,7 +37,7 @@
                     <label class="mt-2 mr-3 text-gray-600 text-[13px] lg:text-[15px] font-semibold">Filter Resident By:</label>
                     <!-- Purok Filter -->
                     <select name="purok_filter" class="py-2 px-4 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none mr-2" onchange="this.form.submit()">
-                        <option value="">Purok</option>
+                        <option value="">All Purok</option>
                         @foreach($puroks as $purok)
                             <option class="capitalize" value="{{ $purok->id }}" {{ $purok->id == old('purok_filter', $purokFilter) ? 'selected' : '' }}>{{ $purok->purok_name }}</option>
                         @endforeach
@@ -45,19 +45,25 @@
             
                     <!-- Gender Filter -->
                     <select name="gender_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none mr-2" onchange="this.form.submit()">
-                        <option value="">Gender</option>
+                        <option value="">All Gender</option>
                         <option value="male" {{ old('gender_filter', $genderFilter) == 'male' ? 'selected' : '' }}>Male</option>
                         <option value="female" {{ old('gender_filter', $genderFilter) == 'female' ? 'selected' : '' }}>Female</option>
                     </select>
             
                     <!-- Age Filter -->
-                    <select name="age_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none" onchange="this.form.submit()">
-                        <option value="">Age Group</option>
+                    <select name="age_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none mr-2" onchange="this.form.submit()">
+                        <option value="">All Age Group</option>
                         <option value="children" {{ old('age_filter', $ageFilter) == 'children' ? 'selected' : '' }}>Children (0-12)</option>
                         <option value="teens" {{ old('age_filter', $ageFilter) == 'teens' ? 'selected' : '' }}>Teens (13-19)</option>
                         <option value="adults" {{ old('age_filter', $ageFilter) == 'adults' ? 'selected' : '' }}>Adults (20-39)</option>
                         <option value="middle_aged" {{ old('age_filter', $ageFilter) == 'middle_aged' ? 'selected' : '' }}>Middle-aged (40-59)</option>
                         <option value="senior" {{ old('age_filter', $ageFilter) == 'senior' ? 'selected' : '' }}>Senior Citizens (60+)</option>
+                    </select>
+
+                    <select name="is_alive_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none" onchange="this.form.submit() " >
+                        <option value="">Is Alive?</option>
+                        <option value="1" {{ $isAliveFilter == '1' ? 'selected' : '' }}>Alive</option>
+                        <option value="0" {{ $isAliveFilter == '0' ? 'selected' : '' }}>Dead</option>
                     </select>
                     
                 </div>
@@ -78,6 +84,7 @@
             <table class="min-w-full bg-white border border-[2px] border-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Is Alive</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Last Name</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">First Name</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Purok</th>
@@ -89,6 +96,10 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($residents as $resident)
                         <tr class="hover:bg-gray-200 transition">
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                <!-- Displaying the "Is Alive" status as a colored dot -->
+                                <span class="inline-block w-3 h-3 rounded-full {{ $resident->is_alive ? 'bg-green-500' : 'bg-red-500' }}"></span>
+                            </td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->last_name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->first_name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->purok->purok_number }}</td>
@@ -127,7 +138,18 @@
                                 
                                                     <label class="font-bold text-xl">Personal Information:</label>
                                                     <hr class="border-t-2 border-gray-300 mb-4 mt-4">
-                                
+
+                                                    <div class="form-group">
+                                                        <label for="is_alive" class="block text-sm font-medium text-gray-700">Is Alive:</label>
+                                                        <div class="flex items-center">
+                                                            <!-- Switch toggle for Is Alive -->
+                                                            <input type="checkbox" name="is_alive" id="is_alive" value="1" {{ old('is_alive', $resident->is_alive) ? 'checked' : '' }} class="toggle-switch">
+                                                            @error('is_alive')
+                                                                <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    
                                                     <div class="form-group">
                                                         <label for="first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
                                                         <input type="text" name="first_name" id="first_name" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" value="{{ old('first_name', $resident->first_name) }}">
@@ -333,5 +355,55 @@
         modal.classList.toggle('hidden');
     }
 </script>
+
+<style>
+    /* Switch styling */
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    -webkit-appearance: none;
+    background-color: #ccc;
+    border-radius: 50px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch:checked {
+    background-color: #4CAF50; /* Green when checked */
+}
+
+.toggle-switch:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch:checked:before {
+    transform: translateX(26px); /* Move the circle to the right when checked */
+}
+
+    .toggle-checkbox:checked {
+        right: 0;
+        border-color: #4CAF50; 
+    }
+    .toggle-checkbox:checked + .toggle-label {
+        background-color: #4CAF50; 
+    }
+    .toggle-checkbox {
+        transition: all 0.3s ease;
+    }
+    .toggle-label {
+        transition: all 0.3s ease;
+    }
+</style>
+
 
 @endsection
