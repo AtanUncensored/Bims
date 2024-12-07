@@ -4,15 +4,7 @@
 
 @section('content')
 <div class="px-4">
-    <div class="flex justify-start items-center mb-2">
-        @if ($barangay->logo)
-            <img src="{{ asset('images/' . $barangay->logo) }}" alt="Logo" class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] object-cover rounded-full">
-        @else
-            <span>No Logo</span>
-        @endif
-        <h2 class="text-xl sm:text-2xl text-blue-500 font-bold ml-2">Brgy. {{ $barangay->barangay_name }}, Tubigon, Bohol, Philippines</h2>
-    </div>
-    <hr class="border-t-2 border-gray-300">
+
     <div class="flex justify-between items-center mb-3 mt-5">
         <h2 class="font-semibold mb-2 text-sm sm:text-base">Current record of this barangay:</h2>
         <a href="{{ route('lgu.barangays-list') }}" class="inline-block align-baseline font-bold text-sm sm:text-lg text-blue-600 hover:text-blue-800">
@@ -20,9 +12,9 @@
         </a>
     </div>
     <div class="max-h-[62vh] lg:max-h-[65vh] overflow-y-auto">
-        <!-- Dynamic Residents Cards -->
+        
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <!-- Residents Card -->
+            
             <div class="bg-white shadow rounded-lg p-4 sm:p-6">
                 <div class="flex items-center">
                     <i class="fa-solid fa-user fa-lg text-blue-500"></i>

@@ -71,13 +71,24 @@ class SuperAdminAnnouncementController extends Controller
             'content' => 'required|max:10000',
             'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+    
+        // Handle image upload
+        $filename = $announcement->imgUrl; // Keep the current image if no new one is uploaded
         if ($request->hasFile('imgUrl')) {
-            $filename = $request->file('imgUrl')->store('announcement', 'public');
-        } else {
-            $filename = $announcement->imgUrl;
+            $newImage = $request->file('imgUrl');
+    
+            // Delete the old image if it exists
+            $oldImagePath = public_path('storage/' . $announcement->imgUrl);
+            if (file_exists($oldImagePath) && $announcement->imgUrl) {
+                unlink($oldImagePath);
+            }
+    
+            // Use the existing image name for the new file
+            $filename = $announcement->imgUrl ? $announcement->imgUrl : 'announcement_' . time() . '.' . $newImage->getClientOriginalExtension();
+            $newImage->move(public_path('storage/announcement'), $filename);
         }
-
+    
+        // Update announcement details in the database
         $announcement->update([
             'title' => $request->title,
             'announcement_date' => $request->announcement_date,
@@ -85,8 +96,9 @@ class SuperAdminAnnouncementController extends Controller
             'content' => $request->content,
             'imgUrl' => $filename,
         ]);
-
+    
         return redirect()->route('superadmin.announcements.index')->with('success', 'Announcement updated successfully.');
     }
+    
 
 }
