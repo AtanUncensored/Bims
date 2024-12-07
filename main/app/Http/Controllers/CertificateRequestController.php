@@ -43,7 +43,7 @@ class CertificateRequestController extends Controller
     
 
         $resident = Resident::find($validated['resident_id']);
-        $fullName = $resident->first_name . ' ' . $resident->last_name;
+        $fullName = $resident->first_name . ' ' . $resident->last_name . ' ' . $resident->suffix;
         $birthDate = $resident->birth_date;
         $age = \Carbon\Carbon::parse($birthDate)->age;
     

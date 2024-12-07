@@ -191,7 +191,7 @@
                 <p>TO WHOM IT MAY CONCERN:</p>
                 <br>
                 <br>
-                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }}</span> , {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
+                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
                 <p>years old, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }} is a bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}} {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
                 <br>
                 <p class="text">This certification is being issued upon her request for her</p>
