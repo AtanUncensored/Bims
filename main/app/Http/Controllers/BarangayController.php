@@ -115,6 +115,7 @@ class BarangayController extends Controller
     $resident = new Resident($validatedData);
     $resident->barangay_id = $userBarangayId;
     $resident->purok_id = $request->purok;
+    $resident->is_alive = 1;
     $resident->save();
 
     // Check if a new household is being created
@@ -179,42 +180,43 @@ public function viewResident($resident_id)
     }
 
     public function updateResident(Request $request, $resident_id)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'middle_name' => 'nullable|string|max:255',
-            'suffix' => 'nullable|string|max:255',
-            'purok' => 'nullable|string|max:255',
-            'birth_date' => 'nullable|date',
-            'place_of_birth' => 'nullable|string|max:255',
-            'gender' => 'nullable|string|max:255',
-            'civil_status' => 'nullable|string|max:255',
-            'phone_number' => 'nullable|string|max:255',
-            'citizenship' => 'nullable|string|max:255',
-            'nickname' => 'nullable|string|max:255',
-            'email' => 'nullable|email|max:255|unique:residents,email,' . $resident_id,
-            'current_address' => 'nullable|string|max:255',
-            'permanent_address' => 'nullable|string|max:255',
-        ]);
+{
+    // Validate the request data
+    $validatedData = $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'middle_name' => 'nullable|string|max:255',
+        'suffix' => 'nullable|string|max:255',
+        'purok' => 'nullable|string|max:255',
+        'birth_date' => 'nullable|date',
+        'place_of_birth' => 'nullable|string|max:255',
+        'gender' => 'nullable|string|max:255',
+        'civil_status' => 'nullable|string|max:255',
+        'phone_number' => 'nullable|string|max:255',
+        'citizenship' => 'nullable|string|max:255',
+        'nickname' => 'nullable|string|max:255',
+        'email' => 'nullable|email|max:255|unique:residents,email,' . $resident_id,
+        'current_address' => 'nullable|string|max:255',
+        'permanent_address' => 'nullable|string|max:255',
+        'is_alive' => 'nullable|boolean', // Add validation for is_alive
+    ]);
 
-        // Find the resident and ensure it belongs to the user's barangay
-        $resident = Resident::where('id', $resident_id)
-                            ->where('barangay_id', Auth::user()->barangay_id)
-                            ->firstOrFail();
+    // Find the resident and ensure it belongs to the user's barangay
+    $resident = Resident::where('id', $resident_id)
+                        ->where('barangay_id', Auth::user()->barangay_id)
+                        ->firstOrFail();
 
-        $resident->purok_id = $request->purok;
-        $resident->save();
-        
-        // Update resident data
-        $resident->update($validatedData);
+   $resident->is_alive = $request->has('is_alive');
 
-        $log_entry = 'Admin made changes to resident ' . $resident->first_name . ' with an ID of ' . $resident->id;
-        event(new UserLog($log_entry));
+    // Update other data
+    $resident->update($validatedData);
 
-            return redirect()->route('barangay.residents.index')->with('success', 'Resident updated successfully.');
-    }
+    $log_entry = 'Admin made changes to resident ' . $resident->first_name . ' with an ID of ' . $resident->id;
+    event(new UserLog($log_entry));
+
+    return redirect()->route('barangay.residents.index')->with('success', 'Resident updated successfully.');
+}
+
 
     public function deleteResident(Request $request)
     {
