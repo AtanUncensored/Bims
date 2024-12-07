@@ -10,6 +10,7 @@ use App\Models\Resident;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class CertificateRequestController extends Controller
 {
@@ -27,7 +28,6 @@ class CertificateRequestController extends Controller
     
         return view('certificates.request-form', compact('residents', 'certificateTypes'));
     }
-    
     
 
     public function store(HttpRequest $request)
@@ -57,6 +57,7 @@ class CertificateRequestController extends Controller
             'certificate_type_id' => $validated['certificate_type_id'],
             'requester_name' => $validated['requester_name'] ?? Auth::user()->name,
             'purpose' => $validated['purpose'],
+            'or_number' => null,
             'date_needed' => $validated['date_needed'],
             'barangay_id' => $barangayId,
         ]);
@@ -87,8 +88,30 @@ class CertificateRequestController extends Controller
 
         return redirect()->back()->with('success', "You have successfully requested a $certificateName certificate.");
     }
-    
 
-    
-    
+
+    public function edit($id)
+{
+    $certificateRequest = CertificateRequest::findOrFail($id);
+    return view('barangay.certificates.edit', compact('certificateRequest'));
+}
+    // Update the certificate request
+
+    public function update(HttpRequest $request, $id)
+{
+    // Validate the data
+    $validated = $request->validate([
+        'purpose' => 'required|string|max:255',
+        'or_number' => 'required|string|max:50',
+    ]);
+
+    // Find the certificate request by ID and update it
+    $certificateRequest = CertificateRequest::findOrFail($id);
+    $certificateRequest->purpose = $request->input('purpose');
+    $certificateRequest->or_number = $request->input('or_number');
+    $certificateRequest->save();
+
+    return redirect()->route('certificates.index')->with('success', 'Certificate request updated successfully!');
+}
+
 }

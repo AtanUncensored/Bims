@@ -218,7 +218,7 @@
                 <br>
                 <br>
                 <br>
-                <p>Receipt No: </p>
+                <p>Receipt No: {{$certificateRequest->or_number}} </p>
                 <p>Date: {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</p>
                 <p>Place Issued: {{ $barangay->barangay_name }}, Tubigon, Bohol</p>
             </div>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('certificate_type_id')->constrained()->onDelete('cascade');
             $table->string('requester_name');
             $table->string('purpose');
+            $table->string('or_number')->nullable();
             $table->date('date_needed');
             $table->timestamp('downloaded_at')->nullable();
             $table->timestamps();
