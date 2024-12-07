@@ -44,7 +44,7 @@ class CertificateController extends Controller
     $latestRequests = $certificateRequests->whereNull('downloaded_at')->sortByDesc('created_at')->take(5); 
     $downloadedRequests = $certificateRequests->filter(function ($request) {
         return !is_null($request->downloaded_at); // Filter downloaded requests
-    });
+    })->sortByDesc('downloaded_at');
 
     return view('barangay.certificates.index', compact('latestRequests', 'downloadedRequests', 'certificateRequests'));
 }

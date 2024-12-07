@@ -123,6 +123,15 @@
                             <div class="mb-4">
                                 <h2 class="text-[15px] font-bold text-gray-600">Name: {{ $user->name }}</h2>
                                 <h2 class="text-[15px] font-bold text-gray-600">Email: <span class="text-blue-600">{{ $user->email }}</span> </h2>
+                                <h2 class="text-[15px] font-bold text-gray-600">Household: 
+                                    <span class="text-blue-600">
+                                        @if($user->households)
+                                            {{ $user->households->household_name }}
+                                        @else
+                                            No household assigned
+                                        @endif
+                                    </span>
+                                </h2>
                             </div>
                             <hr class="border-t-2 border-gray-300">
                             <div class="mt-4 flex justify-end items-center text-blue-600">

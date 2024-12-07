@@ -28,11 +28,9 @@ class CertificateRequestController extends Controller
     
         return view('certificates.request-form', compact('residents', 'certificateTypes'));
     }
-    
 
     public function store(HttpRequest $request)
     {
-
         $validated = $request->validate([
             'resident_id' => 'required|exists:residents,id',
             'certificate_type_id' => 'required|exists:certificate_types,id',
@@ -41,16 +39,14 @@ class CertificateRequestController extends Controller
             'date_needed' => 'nullable|date',
         ]);
     
-
         $resident = Resident::find($validated['resident_id']);
         $fullName = $resident->first_name . ' ' . $resident->last_name . ' ' . $resident->suffix;
         $birthDate = $resident->birth_date;
         $age = \Carbon\Carbon::parse($birthDate)->age;
     
-
         $barangayId = Auth::user()->barangay_id;
     
-
+        // Save Certificate Request
         CertificateRequest::create([
             'user_id' => Auth::user()->id,
             'resident_id' => $validated['resident_id'],
@@ -85,9 +81,18 @@ class CertificateRequestController extends Controller
         }
     
         $certificateName = $certificateType->certificate_name;
-
-        return redirect()->back()->with('success', "You have successfully requested a $certificateName certificate.");
+    
+        // Adjust date_needed to be 3 minutes earlier
+        $adjustedDate = $validated['date_needed']
+            ? \Carbon\Carbon::parse($validated['date_needed'])->subMinutes(3)->toDateTimeString()
+            : null;
+    
+        return redirect()->back()->with('success', [
+            'message' => "You have successfully requested a $certificateName certificate.",
+            'adjusted_date' => $adjustedDate,
+        ]);
     }
+    
 
 
     public function edit($id)

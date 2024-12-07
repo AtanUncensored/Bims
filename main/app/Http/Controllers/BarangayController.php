@@ -234,24 +234,24 @@ public function viewResident($resident_id)
 
     public function residentUser(Request $request)
     {
-
         $search = $request->input('search');
-
-
+    
+        
         $users = User::where('barangay_id', Auth::user()->barangay_id)
-        ->when($search, function ($query) use ($search) {
-            return $query->where(function ($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
-            });
-        })
-        ->role('user') 
-        ->orderBy('name')
-        ->get();
-
+            ->when($search, function ($query) use ($search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->role('user') 
+            ->orderBy('name')
+            ->with('households') 
+            ->get();
+    
         return view('barangay.user.index', compact('users', 'search'));
-
     }
+    
 
     public function createResidentUserForm() {
         return view('barangay.user.createUser');
