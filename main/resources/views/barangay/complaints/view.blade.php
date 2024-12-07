@@ -21,13 +21,16 @@
         <p class="text-gray-600"><strong>Details:</strong> {{ $complaint->details }}</p>
     </div>
 
-        <hr class="my-4">
+        <hr class="my-4 border border-gray-300">
 
         @if($complaint->reply)
+        <div class="text-blue-600 font-semibold text-[15px] mb-3">
+            <a href="/complaints">Return</a>
+        </div>
             <div class="p-4 bg-gray-100 rounded-md">
-                <h3 class="text-lg font-semibold">Barangay Reply:</h3>
+                    <h3 class="text-lg font-semibold">Barangay Reply:</h3>
                 <p>{{ $complaint->reply }}</p>
-                <button onclick="toggleEditForm()" class="text-blue-500 hover:underline">Edit Reply</button>
+                <button onclick="toggleEditForm()" class="text-blue-500 hover:underline mr-3">Edit Reply</button>
 
                 <form id="edit-reply-form" style="display:none;" action="{{ route('barangay.complaints.update-reply', $complaint->id) }}" method="POST">
                     @csrf

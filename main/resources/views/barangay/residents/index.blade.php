@@ -292,8 +292,7 @@
                                 <div id="delete-modal-{{ $resident->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                     <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
                                         <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Name: <span class="text-blue-600">{{ $resident->last_name}}, {{ $resident->first_name}}</span></p>
-                                        <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">From: <span class="text-blue-600">{{ $resident->current_address}}</span></p>
-    
+                                        <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">From: <span class="text-blue-600">Purok - {{ $resident->purok->purok_number}} ({{ $resident->purok->purok_name}})</span></p>
                                         <hr class="border-t-2 border-gray-300">
             
                                         <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this Resident?</p>
