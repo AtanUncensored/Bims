@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="flex justify-end items-center">
                                     <div class="mb-4">
-                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Add Official</button>
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Add User</button>
                                     </div>
                                     <div class="mb-4">
                                         <button type="button" onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">

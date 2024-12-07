@@ -195,7 +195,7 @@
                 </div>   
             </div>      
             <div class="button-group flex justify-end mt-3">
-                <button type="submit" class="btn btn-primary bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mr-3">Add Resident</button>
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-3">Add Resident</button>
 
                 <a href="/residents" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800 mt-2">
                     Return

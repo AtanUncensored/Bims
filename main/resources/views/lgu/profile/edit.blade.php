@@ -60,6 +60,12 @@
                         <i class="fas fa-users fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Barangays</span>
                     </a>
+
+                    <a href="{{ url('/lgu-announcement') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('lgu-announcement') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fas fa-users fa-lg text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Announcement</span>
+                    </a>
+                    
                     <a href="{{ url('/admins') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('admins*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-user-shield fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Barangay Admins</span>

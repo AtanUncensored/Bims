@@ -197,7 +197,7 @@
                             </div>
                             <div class="flex justify-end items-center">
                                 <div class="mb-4">
-                                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Add Official</button>
+                                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-3">Create Official</button>
                                 </div>
                                 <div class="mb-4">
                                     <button type="button" onclick="toggleAddModal()" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
@@ -320,7 +320,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex justify-end items-center mt-3">
-                                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">
+                                                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-3">
                                                             Update Official
                                                         </button>
                                                         <button type="button" onclick="toggleEditModal('{{ $official->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
@@ -347,7 +347,7 @@
                                                     <form action="{{ route('barangay.officials.destroy', ['official' => $official->id]) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
                                                             Delete
                                                         </button>
                                                     </form>
