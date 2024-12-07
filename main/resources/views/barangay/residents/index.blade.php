@@ -61,7 +61,7 @@
                     </select>
 
                     <select name="is_alive_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none" onchange="this.form.submit() " >
-                        <option value="">Is Alive?</option>
+                        <option value="">Status</option>
                         <option value="1" {{ $isAliveFilter == '1' ? 'selected' : '' }}>Alive</option>
                         <option value="0" {{ $isAliveFilter == '0' ? 'selected' : '' }}>Dead</option>
                     </select>
@@ -335,7 +335,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">No residents found for this barangay.</td>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">No residents record found for this barangay.</td>
                         </tr>
                     @endforelse
                 </tbody>
