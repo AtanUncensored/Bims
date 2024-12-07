@@ -148,7 +148,7 @@
 
                 <p class="details">BARANGAY KAGAWAD</p>
                 @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Kagawad')
+                    @if ($official->position === 'Barangay Kagawad')
                         <p class="details">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
                     @endif
                 @endforeach
@@ -218,7 +218,7 @@
                 <br>
                 <br>
                 <br>
-                <p>Receipt No: </p>
+                <p>Receipt No: {{$certificateRequest->or_number}}</p>
                 <p>Date: {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</p>
                 <p>Place Issued: {{ $barangay->barangay_name }}, Tubigon, Bohol</p>
             </div>

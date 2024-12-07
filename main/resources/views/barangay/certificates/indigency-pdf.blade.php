@@ -148,7 +148,7 @@
 
                 <p class="details">BARANGAY KAGAWAD</p>
                 @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Kagawad')
+                    @if ($official->position === 'Barangay Kagawad')
                         <p class="details">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
                     @endif
                 @endforeach

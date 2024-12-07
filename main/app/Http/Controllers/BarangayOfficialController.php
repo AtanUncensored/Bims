@@ -18,9 +18,7 @@ class BarangayOfficialController extends Controller
         $barangayId = Auth::user()->barangay_id;
         $residents = Resident::where('barangay_id', $barangayId)->select('id', 'first_name', 'last_name')->get();
 
-        $puroks = Purok::where('barangay_id', Auth::user()->barangay_id)->get();
-
-        return view('barangay.officials.create', compact('residents', 'puroks'));
+        return view('barangay.officials.create', compact('residents'));
     }
 
     // Store new barangay official
@@ -101,25 +99,25 @@ class BarangayOfficialController extends Controller
         return redirect()->route('barangay.dashboard')->with('success', 'Official updated successfully.');
     }
 
-    public function destroyOfficial(BarangayOfficial $official) {
+    // public function destroyOfficial(BarangayOfficial $official) {
         
-        $officialDetails = [
-            'id' => $official->id,
-            'position' => $official->position, 
-        ];
+    //     $officialDetails = [
+    //         'id' => $official->id,
+    //         'position' => $official->position, 
+    //     ];
     
-        $log_entry = sprintf(
-            'Admin Deleted an Official win an ID of: %s, in the Position of: %s',
-            $officialDetails['id'],
-            $officialDetails['position']
-        );
+    //     $log_entry = sprintf(
+    //         'Admin Deleted an Official win an ID of: %s, in the Position of: %s',
+    //         $officialDetails['id'],
+    //         $officialDetails['position']
+    //     );
     
-        $official->delete();
+    //     $official->delete();
     
-        event(new UserLog($log_entry));
+    //     event(new UserLog($log_entry));
     
-        return redirect()->route('barangay.dashboard')->with('success', 'Official deleted successfully');
-    }
+    //     return redirect()->route('barangay.dashboard')->with('success', 'Official deleted successfully');
+    // }
     
 
 }

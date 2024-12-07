@@ -3,7 +3,7 @@
 @section('title', 'Resident Details')
 
 @section('content')
-<div class="py-2 px-4 bg-white rounded-lg shadow-lg">
+<div class="py-1 px-4 bg-white rounded-lg shadow-lg">
 
     @if (session('success'))
         <div class="bg-green-100 text-green-800 p-3 rounded-lg border border-green-300 text-center mb-4">

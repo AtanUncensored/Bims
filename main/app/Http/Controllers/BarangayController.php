@@ -25,6 +25,11 @@ class BarangayController extends Controller
         // the user model has a `barangay_id` property
         $barangayId = $user->barangay_id;
 
+        BarangayOfficial::where('barangay_id', $barangayId)
+        ->whereNotNull('end_of_service')
+        ->where('end_of_service', '<', now())
+        ->delete();
+
         $residents = Resident::where('barangay_id', $barangayId)->select('id', 'first_name', 'last_name')->get();
     
         // Fetch data for the user's barangay
@@ -40,12 +45,14 @@ class BarangayController extends Controller
                                ->count();
 
         $barangayOfficials = BarangayOfficial::where('barangay_id', $barangayId)
-                               ->with('resident') 
-                               ->get();
+        ->where(function($query) {
+            $query->whereNull('end_of_service')
+                    ->orWhere('end_of_service', '>', now());
+        })
+        ->with('resident') 
+        ->get();
 
-        $puroks = Purok::where('barangay_id', $barangayId)->get();
-
-        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials', 'puroks', 'residents'));
+        return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials' , 'residents'));
     }
     
     public function createUserForm()

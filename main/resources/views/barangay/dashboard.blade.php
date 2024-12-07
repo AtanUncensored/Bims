@@ -163,20 +163,38 @@
                                     <span class="text-red-600 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
-                            
+
                             <div class="mb-4">
                                 <label for="position" class="block text-gray-700 text-sm font-bold mb-2">Position</label>
-                                <input type="text" id="position" name="position" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
+                                <select name="position" id="position" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                    <option value="">Select a Position</option>
+                                    <option value="Barangay Captain">Barangay Captain</option>
+                                    <option value="Barangay Kagawad">Barangay Kagawad</option>
+                                    <option value="Secretary">Barangay Secretary</option>
+                                    <option value="Treasurer">Barangay Treasurer</option>
+                                    <option value="Barangay Tanod">Barangay Tanod</option>
+                                    <option value="Sk Chairperson">SK Chairperson</option>
+                                    <option value="Sk Kagawad">SK Kagawad</option>
+                                </select>
                                 @error('position')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-600 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
                             
                             <div class="mb-4">
                                 <label for="committee" class="block text-gray-700 text-sm font-bold mb-2">Committee</label>
-                                <input type="text" id="committee" name="committee" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" >
+                                <select name="committee" id="committee" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                    <option value="">Select a Committee</option>
+                                    <option value="Committee on Health">Committee on Health</option>
+                                    <option value="Committee on Education">Committee on Education</option>
+                                    <option value="Committee on Social Services">Committee on Social Services</option>
+                                    <option value="Committee on Finance">Committee on Finance</option>
+                                    <option value="Committee on Environment">Committee on Environment</option>
+                                    <option value="Committee on Public Safety">Committee on Public Safety</option>
+                                    <option value="None">None</option>
+                                </select>
                                 @error('committee')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    <span class="text-red-600 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
                             
@@ -219,7 +237,6 @@
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Name</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Position</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Committee</th>
-                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purok</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Start of Service</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">End of Service</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Action</th>
@@ -231,18 +248,17 @@
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->resident->first_name }}, {{ $official->resident->last_name}}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->position }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->committee }}</td>
-                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->resident->purok->purok_number }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->start_of_service }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->end_of_service }}</td>
                                 <td class="text-center">
-                                    <div class="flex py-2 gap-2">
+                                    <div class="flex justify-center items-center py-2">
                                         <button onclick="toggleEditModal('{{ $official->id }}')" class="text-blue-600 py-1 px-2 sm:px-3 rounded hover:text-blue-800 text-sm sm:text-base">
                                             <i class="fa-solid fa-pen"></i>
                                         </button>
     
-                                        <button onclick="toggleDeleteModal('{{ $official->id }}')" class="text-red-700 lg:text-[14px] text-[7px] py-1 px-2 md:px-3 rounded hover:text-red-900">
+                                        {{-- <button onclick="toggleDeleteModal('{{ $official->id }}')" class="text-red-700 lg:text-[14px] text-[7px] py-1 px-2 md:px-3 rounded hover:text-red-900">
                                             <i class="fa-solid fa-trash"></i>
-                                        </button>
+                                        </button> --}}
 
                                         <div id="edit-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-start z-20">
                                             <!-- Edit Form -->
@@ -282,24 +298,42 @@
                                                                 <span class="text-red-600 text-sm">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-                                            
-                                                        <!-- Position -->
+                
                                                         <div class="mb-4">
-                                                            <label for="position" class="block text-gray-700 text-sm font-bold mb-2 text-start">Position</label>
-                                                            <input type="text" name="position" id="position" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('position', $official->position) }}">
+                                                            <label for="position" class="block text-gray-700 text-sm font-bold mb-2 text-left">Position</label>
+                                                            <select name="position" id="position" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                                                <option value="">Select a Position</option>
+                                                                <option value="Barangay Captain" {{ $official->position === 'Barangay Captain' ? 'selected' : '' }}>Barangay Captain</option>
+                                                                <option value="Barangay Kagawad" {{ $official->position === 'Barangay Kagawad' ? 'selected' : '' }}>Barangay Kagawad</option>
+                                                                <option value="Secretary" {{ $official->position === 'Secretary' ? 'selected' : '' }}>Barangay Secretary</option>
+                                                                <option value="Treasurer" {{ $official->position === 'Treasurer' ? 'selected' : '' }}>Barangay Treasurer</option>
+                                                                <option value="Barangay Tanod" {{ $official->position === 'Barangay Tanod' ? 'selected' : '' }}>Barangay Tanod</option>
+                                                                <option value="Sk Chairperson" {{ $official->position === 'Sk Chairperson' ? 'selected' : '' }}>SK Chairperson</option>
+                                                                <option value="Sk Kagawad" {{ $official->position === 'Sk Kagawad' ? 'selected' : '' }}>SK Kagawad</option>
+                                                            </select>
                                                             @error('position')
                                                                 <span class="text-red-600 text-sm">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-                                            
-                                                        <!-- Committee -->
+                                                        
+                                                        
                                                         <div class="mb-4">
-                                                            <label for="committee" class="block text-gray-700 text-sm font-bold mb-2 text-start">Committee</label>
-                                                            <input type="text" name="committee" id="committee" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" value="{{ old('committee', $official->committee) }}">
+                                                            <label for="committee" class="block text-gray-700 text-sm font-bold mb-2 text-left">Committee</label>
+                                                            <select name="committee" id="committee" class="mt-1 block w-full text-sm text-gray-900 border py-1 px-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                                                                <option value="">Select a Committee</option>
+                                                                <option value="Committee on Health" {{ $official->committee == 'Committee on Health' ? 'selected' : '' }}>Committee on Health</option>
+                                                                <option value="Committee on Education" {{ $official->committee == 'Committee on Education' ? 'selected' : '' }}>Committee on Education</option>
+                                                                <option value="Committee on Social Services" {{ $official->committee == 'Committee on Social Services' ? 'selected' : '' }}>Committee on Social Services</option>
+                                                                <option value="Committee on Finance" {{ $official->committee == 'Committee on Finance' ? 'selected' : '' }}>Committee on Finance</option>
+                                                                <option value="Committee on Environment" {{ $official->committee == 'Committee on Environment' ? 'selected' : '' }}>Committee on Environment</option>
+                                                                <option value="Committee on Public Safety" {{ $official->committee == 'Committee on Public Safety' ? 'selected' : '' }}>Committee on Public Safety</option>
+                                                                <option value="None" {{ $official->committee == 'None' ? 'selected' : '' }}>None</option>
+                                                            </select>
                                                             @error('committee')
                                                                 <span class="text-red-600 text-sm">{{ $message }}</span>
                                                             @enderror
                                                         </div>
+                                                        
                                             
                                                         <!-- Start of Service -->
                                                         <div class="mb-4">
@@ -331,7 +365,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div id="delete-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                                        {{-- <div id="delete-modal-{{ $official->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                             <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
                                                 <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Name: 
                                                     <span class="text-blue-600">{{ $official->resident->first_name }}, {{ $official->resident->last_name }}</span>
@@ -356,7 +390,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>                                         --}}
                                     </div>
                                 </td>
                             </tr>
@@ -369,12 +403,12 @@
 </div>
 
 <script>
-    function toggleDeleteModal(id) {
-        const modal = document.getElementById(`delete-modal-${id}`);
-        if (modal) {
-            modal.classList.toggle('hidden');
-        }
-    }
+    // function toggleDeleteModal(id) {
+    //     const modal = document.getElementById(`delete-modal-${id}`);
+    //     if (modal) {
+    //         modal.classList.toggle('hidden');
+    //     }
+    // }
     function toggleAddModal() {
         const modal = document.getElementById(`add-modal`);
         modal.classList.toggle('hidden');
