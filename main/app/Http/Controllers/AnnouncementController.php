@@ -33,19 +33,21 @@ class AnnouncementController extends Controller
     public function userIndex()
     {
         $announcements = Announcement::where(function ($query) {
-            $query->where('barangay_id', Auth::user()->barangay_id)
-                  ->orWhereNull('barangay_id') 
-                  ->orWhere('is_global', true); 
-        })
-        ->where(function ($query) {
-            $query->where('expiration_date', '>=', now())
-                  ->orWhereNull('expiration_date');
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
-    
+                $query->where('barangay_id', Auth::user()->barangay_id)
+                      ->orWhereNull('barangay_id') 
+                      ->orWhere('is_global', true); 
+            })
+            ->where(function ($query) {
+                $query->where('expiration_date', '>=', now())
+                      ->orWhereNull('expiration_date');
+            })
+            ->orderByDesc('is_global') 
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        
         return view('user.announcement.index', compact('announcements'));
     }
+    
     
 
     public function create()
@@ -108,36 +110,54 @@ class AnnouncementController extends Controller
     }
 
     public function updateAnnouncement(Request $request, Announcement $announcement)
-    {
-        $request->validate([
-            'title' => 'required|max:255',
-            'announcement_date' => 'required|date',
-            'expiration_date' => 'required|date|after_or_equal:today',
-            'content' => 'required|max:10000',
-            'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'announcement_date' => 'required|date',
+        'expiration_date' => 'required|date|after_or_equal:today',
+        'content' => 'required|string',
+        'imgUrl' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        if ($request->hasFile('imgUrl')) {
-            $filename = $request->file('imgUrl')->store('announcement', 'public');
-        } else {
-            $filename = $announcement->imgUrl;
+    // Directory path for storing announcement images
+    $storagePath = public_path('storage/announcement');
+
+    // Ensure the directory exists
+    if (!file_exists($storagePath)) {
+        mkdir($storagePath, 0755, true);
+    }
+
+    if ($request->hasFile('imgUrl')) {
+        // Path to the old image
+        $oldImagePath = $storagePath . '/' . $announcement->imgUrl;
+
+        // Delete the old image if it exists
+        if ($announcement->imgUrl && file_exists($oldImagePath)) {
+            unlink($oldImagePath);
         }
 
-        $announcement->update([
-            'user_id' => Auth::user()->id,
-            'barangay_id' => Auth::user()->barangay_id,
-            'title' => $request->title,
-            'announcement_date' => $request->announcement_date,
-            'expiration_date' => $request->expiration_date,
-            'content' => $request->content,
-            'imgUrl' => $filename,
-        ]);
+        // Use the same name as the old image, or generate one if no old name exists
+        $newImageName = $announcement->imgUrl ?? uniqid() . '.' . $request->file('imgUrl')->getClientOriginalExtension();
 
-        $log_entry = 'Admin Updated an Announcement with a Title of ' . $request->title;
-        event(new UserLog($log_entry));
-
-        return redirect()->route('announcements.index')->with('success', 'Announcement updated successfully.');
+        // Move the new file to the storage directory with the same name
+        $request->file('imgUrl')->move($storagePath, $newImageName);
+    } else {
+        // If no new image is uploaded, retain the old image name
+        $newImageName = $announcement->imgUrl;
     }
+
+    // Update the announcement record
+    $announcement->update([
+        'title' => $request->title,
+        'announcement_date' => $request->announcement_date,
+        'expiration_date' => $request->expiration_date,
+        'content' => $request->content,
+        'imgUrl' => $newImageName,
+    ]);
+
+    return redirect()->route('announcements.index')->with('success', 'Announcement updated successfully!');
+}
+
 
 
     public function expiredView()
