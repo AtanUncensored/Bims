@@ -9,11 +9,11 @@
 
         <hr class="border-t-2 mb-4 border-gray-300">
 
-        <div class="flex justify-start items-center">
+        <div class="flex justify-between items-center">
 
             @if(auth()->user()->hasRole('admin'))
                 {{-- <a href="{{ route('announcements.create') }}" class="btn btn-primary text-center bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Post event</a> --}}
-                <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 mr-[200px]">
+                <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
                     <i class="fa-solid fa-plus"></i> Post event</a>
                 </button>
             @endif
@@ -123,7 +123,8 @@
                     {{ session('success') }}
                 </div>
             @endif
-        
+
+            <a href="{{ route('announcements.expired') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">View Expired</a>
         </div>
     </div>
 

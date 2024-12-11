@@ -50,7 +50,7 @@
             {{-- <a href="{{ route('lgu.create-barangay') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500"><i class="fa-solid fa-plus"></i> Add Barangay Admin</a> --}}
 
             <button onclick="toggleAddModal()" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500">
-                <i class="fa-solid fa-plus"></i> Add Barangay Admin</a>
+                <i class="fa-solid fa-plus"></i> Add New Barangay </a>
             </button>
 
             <!-- Add Modal ni dere same sa log out nga layout -->

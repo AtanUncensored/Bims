@@ -10,23 +10,7 @@ class SuperAdminAnnouncementController extends Controller
     public function index()
     {
         // Delete announcements that have been expired for more than 3 months
-        Announcement::whereNotNull('expiration_date')
-            ->where('expiration_date', '<', now()->subMonths(3))
-            ->delete();
-
-        // Retrieve announcements
-        $announcements = Announcement::where('is_global', true)
-            ->where(function ($query) {
-                $query->whereNull('announcement_date')
-                    ->orWhere('announcement_date', '<=', now()); 
-            })
-            ->where(function ($query) {
-                $query->whereNull('expiration_date')
-                    ->orWhere('expiration_date', '>=', now())
-                    ->orWhere('expiration_date', '<', now()); // Include expired announcements
-            })
-            ->latest()
-            ->paginate(10);
+        $announcements = Announcement::where('is_global', true)->latest()->paginate(10);
 
         return view('lgu.announcement.index', compact('announcements'));
     }
