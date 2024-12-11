@@ -49,7 +49,15 @@
 
                     <div class="form-group">
                         <label for="suffix" class="block text-sm font-medium text-gray-700">Suffix:</label>
-                        <input type="text" name="suffix" id="suffix" value="{{ old('suffix') }}" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                        <select name="suffix" id="suffix" value="{{ old('suffix') }}"class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <option value="">Select Suffix</option>
+                            <option value="Sr.">Sr.</option>
+                            <option value="Jr.">Jr.</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="None">None</option>
+                        </select>
                         @error('suffix')
                          <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                          @enderror
@@ -102,7 +110,14 @@
 
                     <div class="form-group">
                         <label for="civil_status" class="block text-sm font-medium text-gray-700">Civil Status:</label>
-                        <input type="text" name="civil_status" id="civil_status" value="{{ old('civil_status') }}"class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                        <select name="civil_status" id="civil_status" value="{{ old('civil_status') }}"class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <option value="">Select Civil Status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Widowed">Widowed</option>
+                            <option value="Separated">Separated</option>
+                            <option value="Devorced">Devorced</option>
+                        </select>
                         @error('civil_status')
                          <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                          @enderror

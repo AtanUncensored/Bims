@@ -84,10 +84,11 @@
             <table class="min-w-full bg-white border border-[2px] border-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Status</th>
+                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Living / Deceased</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Last Name</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">First Name</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Middle Name</th>
+                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Suffix</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Purok</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Gender</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Age</th>
@@ -104,6 +105,7 @@
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->last_name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->first_name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->middle_name }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $resident->suffix }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->purok->purok_name }} ({{ $resident->purok->purok_number }})</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->gender }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->age }}</td>
@@ -161,14 +163,22 @@
                                                          <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                                                          @enderror
                                                     </div>
-                    
+
                                                     <div class="form-group">
                                                         <label for="suffix" class="block text-sm font-medium text-gray-700 text-left">Suffix:</label>
-                                                        <input type="text" name="suffix" id="suffix" value="{{ old('suffix', $resident->suffix) }}" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                        <select name="suffix" id="suffix" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                            <option value="">Select suffix</option>
+                                                            <option value="Sr." {{ old('suffix', $resident->suffix) === 'Sr.' ? 'selected' : '' }}>Sr.</option>
+                                                            <option value="Jr." {{ old('suffix', $resident->suffix) === 'Jr.' ? 'selected' : '' }}>Jr.</option>
+                                                            <option value="1st" {{ old('suffix', $resident->suffix) === '1st' ? 'selected' : '' }}>1st</option>
+                                                            <option value="2nd" {{ old('suffix', $resident->suffix) === '2nd' ? 'selected' : '' }}>2nd</option>
+                                                            <option value="3rd" {{ old('suffix', $resident->suffix) === '3rd' ? 'selected' : '' }}>3rd</option>
+                                                            <option value="None" {{ old('suffix', $resident->suffix) === 'None' ? 'selected' : '' }}>None</option>
+                                                        </select>
                                                         @error('suffix')
-                                                         <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
-                                                         @enderror
-                                                    </div>
+                                                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>   
 
                                                     <div class="form-group">
                                                         <label for="purok" class="block text-sm font-medium text-gray-700 text-left">Purok:</label>
@@ -220,11 +230,18 @@
                                 
                                                     <div class="form-group">
                                                         <label for="civil_status" class="block text-sm font-medium text-gray-700 text-left">Civil Status:</label>
-                                                        <input type="text" name="civil_status" id="civil_status" value="{{ old('civil_status', $resident->civil_status) }}"class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                        <select name="civil_status" id="civil_status" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                            <option value="">Select Civil Status</option>
+                                                            <option value="Single." {{ old('civil_status', $resident->civil_status) === 'Single' ? 'selected' : '' }}>Single</option>
+                                                            <option value="Married" {{ old('civil_status', $resident->civil_status) === 'Married' ? 'selected' : '' }}>Married</option>
+                                                            <option value="Widowed" {{ old('civil_status', $resident->civil_status) === 'Widowed' ? 'selected' : '' }}>Widowed</option>
+                                                            <option value="Separated" {{ old('civil_status', $resident->civil_status) === 'Separated' ? 'selected' : '' }}>Separated</option>
+                                                            <option value="Divorced" {{ old('civil_status', $resident->civil_status) === 'Divorced' ? 'selected' : '' }}>Divorced</option>
+                                                        </select>
                                                         @error('civil_status')
-                                                         <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
-                                                         @enderror
-                                                    </div>
+                                                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>   
                                     
                                                     <div class="form-group">
                                                         <label for="phone_number" class="block text-sm font-medium text-gray-700 text-left">Phone Number:</label>

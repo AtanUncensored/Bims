@@ -115,7 +115,7 @@
                 <table class="min-w-full border border-[2px] border-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-center">Status</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-center">Active Status</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Name</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Email</th>
                             <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Household</th>
@@ -138,30 +138,27 @@
                                     </td>                                
                                     <td class="text-center">
                                         <div class="flex justify-center items-center py-2">
-                                            <button onclick="toggleDeleteModal('{{ $user->id }}')" class="text-blue-700 py-1 px-2 md:px-3 rounded hover:text-blue-900">
+                                            <button onclick="toggleDisableModal('{{ $user->id }}')" class="text-blue-700 py-1 px-2 md:px-3 rounded hover:text-blue-900">
                                                 <i class="fa-solid fa-user-gear fa-lg"></i>
                                             </button>
                                             
                                              <!-- Delete Modal ni dere same sa log out nga layout -->
-                                            <div id="delete-modal-{{ $user->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                                            <div id="disable-modal-{{ $user->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                                 <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
                                                     <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User: <span class="text-blue-600">{{ $user->name}}</span></p>
-                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User Household: <span class="text-blue-600">{{ $user->households->household_name }}</span></p>
+                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Household: <span class="text-blue-600">{{ $user->households->household_name }}</span></p>
                                                     <hr class="border-t-2 mt-3 mb-4 border-gray-300">
             
-                                                    <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this User?</p>
+                                                    <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">User Account Options</p>
+
+                                                    <div class="flex justify-start items-center">
+                                                        <label class="mr-3 font-semibold">Disable / Enable:</label>
+                                                        <input type="checkbox" value="1" class="toggle-switch">
+                                                    </div>
                                                     
-                                                    <div class="flex justify-end space-x-4">
-                                            
-                                                        <form action="{{ route('barangay.user.index.delete', ['user_id' => $user->id]) }}" method="POST" style="display: inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                                                Delete
-                                                            </button>
-                                                        </form>
-        
-                                                        <button onclick="toggleDeleteModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                    <div class="flex justify-end items-center">
+                                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Save changes</button>
+                                                        <button onclick="toggleDisableModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
                                                             Cancel
                                                         </button>
                                                     </div>
@@ -189,10 +186,58 @@
             const modal = document.getElementById(`add-modal`);
             modal.classList.toggle('hidden');
         }
-        function toggleDeleteModal(userId) {
-            const modal = document.getElementById(`delete-modal-${userId}`);
+        function toggleDisableModal(userId) {
+            const modal = document.getElementById(`disable-modal-${userId}`);
             modal.classList.toggle('hidden');
         }
 </script>
 
+<style>
+    /* Switch styling */
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    -webkit-appearance: none;
+    background-color: #ccc;
+    border-radius: 50px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch:checked {
+    background-color: #4CAF50; /* Green when checked */
+}
+
+.toggle-switch:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch:checked:before {
+    transform: translateX(26px); /* Move the circle to the right when checked */
+}
+
+    .toggle-checkbox:checked {
+        right: 0;
+        border-color: #4CAF50; 
+    }
+    .toggle-checkbox:checked + .toggle-label {
+        background-color: #4CAF50; 
+    }
+    .toggle-checkbox {
+        transition: all 0.3s ease;
+    }
+    .toggle-label {
+        transition: all 0.3s ease;
+    }
+</style>
 @endsection
