@@ -109,17 +109,6 @@
             100% { opacity: 1; }
         }
 
-        .admin-notice {
-            background-color: #e96a6a;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            animation: blink 1s infinite; 
-        }
-
         @media (max-width: 768px) { 
             .content {
                 flex-direction: column; 
@@ -152,8 +141,8 @@
         <div class="info-login">
 
             <!-- Admin Notice -->
-            <div class="admin-notice">
-                NOTICE: This is an Admin Login
+            <div class="admin-notice bg-blue-500 text-white py-2 px-4 rounded-lg text-center">
+                <strong>Local Government Unit (LGU) Tubigon </strong>
             </div>
             <div class="login-form">
                 <form method="POST" action="{{ route('login') }}">
