@@ -124,7 +124,7 @@
                 </div>
             @endif
 
-            <a href="{{ route('announcements.expired') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">View Expired</a>
+            <a href="{{ route('announcements.previous') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">Previous Announcements</a>
         </div>
     </div>
 

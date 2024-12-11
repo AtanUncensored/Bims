@@ -168,7 +168,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
         Route::put('/announcements/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('barangay.announcement.update');
-        Route::get('/announcements/expired', [AnnouncementController::class, 'expiredView'])->name('announcements.expired');
+        Route::get('/announcements/previous', [AnnouncementController::class, 'previousView'])->name('announcements.previous');
 
     //Complaints
         Route::get('/complaints', [ComplaintController::class, 'barangayComplaints'])->name('barangay.complaints.index');
@@ -208,7 +208,7 @@ Route::middleware('auth')->group(function () {
         //Announcements
         Route::get('/announcements', [AnnouncementController::class, 'userIndex'])->name('user.announcement.index');
         Route::get('/announcementUser/{announcement}', [AnnouncementController::class, 'showUser'])->name('user.announcement.show');
-        Route::get('/announcementView/expired', [AnnouncementController::class, 'userExpiredView'])->name('user.announcement.expired');
+        Route::get('/announcementView/previous', [AnnouncementController::class, 'userPreviousView'])->name('user.announcement.previous');
 
         //BudgetReports
         Route::get('/budget-reports', [BudgetController::class, 'userIndex'])->name('user.budget-report.index');

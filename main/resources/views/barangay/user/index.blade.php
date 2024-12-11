@@ -32,9 +32,9 @@
         
                 <div class="flex justify-end items-center">
                     <button class="relative text-red-600 hover:text-red-800 rounded-lg group mr-3">
-                        <span class="font-bold">Caution <i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <span class="font-bold">Reminder <i class="fa-solid fa-triangle-exclamation"></i></span>
                         <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block bg-white text-red-600 text-sm py-2 px-4 rounded shadow-lg w-64">
-                            <strong>Reminder:</strong> You can only delete a user if there is a login-related issue. Please ensure that you have verified the problem before proceeding with the deletion.
+                            <strong>Note:</strong> You can only disable a user account if internal issues has been found. Please ensure that you have verified the problem before proceeding to disable the account.
                         </div>
                     </button> 
 
@@ -110,73 +110,74 @@
                     </div>
                 </div>
         </div>
-    
-        <div class="flex justify-center items-center bg-gray-600 py-3 shadow-xl px-6 font-semibold text-white uppercase mb-3 text-[12px]">
-            List of available users from this barangay
-        </div>
-        <div class="mx-auto px-4 max-h-[43vh] overflow-y-auto">  
-            <div class="flex flex-wrap -mx-4">
-                @if($users->count() > 0)
-                @foreach($users as $user)
-                    <div class="w-full md:w-[330px] px-4 mb-4">
-                        <div class="border border-gray-200 border-[2px] rounded-lg p-6"> 
-                            <div class="mb-4">
-                                <h2 class="text-[15px] font-bold text-gray-600">Name: {{ $user->name }}</h2>
-                                <h2 class="text-[15px] font-bold text-gray-600">Email: <span class="text-blue-600">{{ $user->email }}</span> </h2>
-                                <h2 class="text-[15px] font-bold text-gray-600">Household: 
-                                    <span class="text-blue-600">
+        <div class="overflow-x-auto">
+            <div class="max-h-[40vh] overflow-y-auto">
+                <table class="min-w-full border border-[2px] border-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-center">Status</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Name</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Email</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Household</th>
+                            <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($users->count() > 0)
+                            @foreach($users as $user)
+                                <tr class="border-b border-gray-200">
+                                    <td class="lg:px-6 text-[10px] lg:text-[15px] text-center"><span class="inline-block w-3 h-3 rounded-full bg-green-500"></span></td>
+                                    <td class="lg:px-6 text-[10px] lg:text-[15px] font-semibold">{{ $user->name }}</td>
+                                    <td class="lg:px-6 text-[10px] lg:text-[15px] text-blue-500 font-semibold">{{ $user->email }}</td>
+                                    <td class="lg:px-6 text-[10px] lg:text-[15px]">
                                         @if($user->households)
                                             {{ $user->households->household_name }}
                                         @else
                                             No household assigned
                                         @endif
-                                    </span>
-                                </h2>
-                            </div>
-                            <hr class="border-t-2 border-gray-300">
-                            <div class="mt-4 flex justify-end items-center text-blue-600">
-                                <div class="text-gray-600 font-semibold">
-                                    <p>Actions:</p>
-                                </div>                        
-                                <div>
-                                    <button onclick="toggleDeleteModal('{{ $user->id }}')" class="text-red-700 py-1 px-2 md:px-3 rounded hover:text-red-900">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    
-                                     <!-- Delete Modal ni dere same sa log out nga layout -->
-                                    <div id="delete-modal-{{ $user->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
-                                        <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
-                                            <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User: <span class="text-blue-600">{{ $user->name}}</span></p>
-                                            <hr class="border-t-2 mt-3 mb-4 border-gray-300">
-    
-                                            <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this User?</p>
+                                    </td>                                
+                                    <td class="text-center">
+                                        <div class="flex justify-center items-center py-2">
+                                            <button onclick="toggleDeleteModal('{{ $user->id }}')" class="text-blue-700 py-1 px-2 md:px-3 rounded hover:text-blue-900">
+                                                <i class="fa-solid fa-user-gear fa-lg"></i>
+                                            </button>
                                             
-                                            <div class="flex justify-end space-x-4">
-                                    
-                                                <form action="{{ route('barangay.user.index.delete', ['user_id' => $user->id]) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                                        Delete
-                                                    </button>
-                                                </form>
-
-                                                <button onclick="toggleDeleteModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
-                                                    Cancel
-                                                </button>
+                                             <!-- Delete Modal ni dere same sa log out nga layout -->
+                                            <div id="delete-modal-{{ $user->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                                                <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
+                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User: <span class="text-blue-600">{{ $user->name}}</span></p>
+                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User Household: <span class="text-blue-600">{{ $user->households->household_name }}</span></p>
+                                                    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
+            
+                                                    <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">Continue to delete this User?</p>
+                                                    
+                                                    <div class="flex justify-end space-x-4">
+                                            
+                                                        <form action="{{ route('barangay.user.index.delete', ['user_id' => $user->id]) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+        
+                                                        <button onclick="toggleDeleteModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div> 
-                                </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @else
+                            <div class="w-full text-center text-gray-500">
+                                <p>No users found for this barangay.</p>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
-                @else
-                    <div class="w-full text-center text-gray-500">
-                        <p>No users found for this barangay.</p>
-                    </div>
-                @endif
+                        @endif
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

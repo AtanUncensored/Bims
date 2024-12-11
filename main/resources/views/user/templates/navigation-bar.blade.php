@@ -56,24 +56,24 @@
                 <div class="mt-[15px]">
                     <a href="{{ url('/user-dashboard') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('user-dashboard*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-house fa-lg text-blue-800"></i>
-                        <span>Dashboard</span>
+                        <span class="text-[13px] lg:text-[15px]">Dashboard</span>
                     </a>
-                    <a href="{{ url('/announcements') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-bullhorn fa-lg text-blue-800"></i>
-                        <span>Announcements</span>
+                    <a href="{{ url('/announcements') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements' , 'announcementView/previous') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-bullhorn text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Announcements</span>
                     </a>
                     <a href="{{ url('/user-complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('user-complaints') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-regular fa-newspaper fa-lg text-blue-800 font-bold"></i>
-                        <span>Submit Complaints</span>
+                        <i class="fa-regular fa-newspaper text-blue-800 font-bold"></i>
+                        <span class="text-[13px] lg:text-[15px]">Submit Complaints</span>
                     </a>
                     <a href="{{ url('/budget-reports') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('budget-reports') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-file-lines fa-lg text-blue-800"></i>
-                        <span>Budget Reports</span>
+                        <i class="fa-solid fa-file-lines text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Budget Reports</span>
                     </a>
 
                     <a href="{{ url('/certificates/request') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates/request') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-certificate fa-lg text-blue-800 "></i>
-                        <span>Request Certificate</span>
+                        <i class="fa-solid fa-certificate text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Request Certificate</span>
                     </a>
                 </div>
             </nav>

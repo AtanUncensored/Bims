@@ -262,7 +262,13 @@
                             <tr class="border-b border-gray-200">
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->resident->first_name }}, {{ $official->resident->last_name}}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->position }}</td>
-                                <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->purok }}</td>
+                                <td class="lg:px-6 text-[10px] lg:text-[15px]">
+                                    @if ($official->purok !== 'All Purok')
+                                        Purok {{ $official->purok }}
+                                    @else
+                                        {{ $official->purok }}
+                                    @endif
+                                </td>                                
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->committee }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->start_of_service }}</td>
                                 <td class="lg:px-6 text-[10px] lg:text-[15px]">{{ $official->end_of_service }}</td>

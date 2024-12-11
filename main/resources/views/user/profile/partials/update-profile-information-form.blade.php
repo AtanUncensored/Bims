@@ -9,6 +9,14 @@
                         {{ __("Keep track of your account and update your information if necessary") }}
                     </p>
                 </header>
+
+                <div class="mt-3 flex justify-center items-center">
+                    <img src="{{asset('images/profile.jpg')}}" alt="Default Profile Image" class="w-[100px] h-[100px] rounded-full object-cover bg-blue-500 py-1 px-1">
+                </div>
+                <div>
+                    <p class="text-center font-semibold text-gray-600">{{ $user->name }}</p>
+                    <p class="text-center font-semibold text-blue-600">{{ $user->email }}</p>
+                </div>
     
                 {{-- <div class="flex items-center mb-[30px] mt-3">
                     <div>
@@ -42,19 +50,19 @@
                 <hr class="border-t-2 mt-3 mb-4 border-gray-300">
     
                 <div>
-                    {{-- <button id="toggleEmailForm" class='px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
+                    <button id="toggleEmailForm" class='px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
                         <i class="fa-solid fa-envelope"></i> Email
                     </button>
+                       
+                    <p class="mt-3 text-sm text-start text-gray-600">
+                        {{ __("Update your account's profile information and email address.") }}
+                    </p>
     
-                    <div id="emailForm" style="display: none;"> --}}
+                    <div id="emailForm" style="display: none;">
     
                         <h2 class="text-xl font-bold text-start text-blue-900 mt-3">
                             Username & Email
                          </h2>
-                        
-                        <p class="mt-1 text-sm text-start text-gray-600">
-                            {{ __("Update your account's profile information and email address.") }}
-                        </p>
         
                         <form id="send-verification" method="post" action="{{ route('verification.send') }}">
                             @csrf
@@ -84,7 +92,7 @@
                                 @endif
                             </div>
                         </form>
-                    {{-- </div> --}}
+                    </div>
                 </div>
                 
                 <hr class="border-t-2 mt-3 mb-4 border-gray-300">
@@ -93,12 +101,17 @@
                     <button id="togglePasswordForm" class='px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
                         <i class="fa-solid fa-key"></i> Password
                     </button>
+
+                    <p class="mt-3 mb-3 text-start text-sm text-gray-600">
+                        {{ __('Ensure your account is using a long, random password to stay secure.') }}
+                    </p>
+                    
                     <div id="passwordForm" style="display: none;">
                         @include('user.profile.partials.update-password-form')  
                     </div>
                 </div>
     
-                <hr class="border-t-2 mt-3 mb-4 border-gray-300">
+                {{-- <hr class="border-t-2 mt-3 mb-4 border-gray-300">
     
                 <div>
                     <button id="toggleDeleteForm" class='px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
@@ -107,7 +120,7 @@
                     <div id="deleteForm" style="display: none;">
                         @include('user.profile.partials.delete-user-form')
                     </div>
-                </div> 
+                </div>  --}}
             </div>
         </div>
     </div>
@@ -115,18 +128,18 @@
 
 <script>
 
-    // document.getElementById('toggleEmailForm').onclick = function() {
-    //     var emailForm = document.getElementById('emailForm');
-    //     emailForm.style.display = (emailForm.style.display === 'none' || emailForm.style.display === '') ? 'block' : 'none';
-    // };
+    document.getElementById('toggleEmailForm').onclick = function() {
+        var emailForm = document.getElementById('emailForm');
+        emailForm.style.display = (emailForm.style.display === 'none' || emailForm.style.display === '') ? 'block' : 'none';
+    };
 
     document.getElementById('togglePasswordForm').onclick = function() {
         var passwordForm = document.getElementById('passwordForm');
         passwordForm.style.display = (passwordForm.style.display === 'none' || passwordForm.style.display === '') ? 'block' : 'none';
     };
 
-    document.getElementById('toggleDeleteForm').onclick = function() {
-        var deleteForm = document.getElementById('deleteForm');
-        deleteForm.style.display = (deleteForm.style.display === 'none' || deleteForm.style.display === '') ? 'block' : 'none';
-    };
+    // document.getElementById('toggleDeleteForm').onclick = function() {
+    //     var deleteForm = document.getElementById('deleteForm');
+    //     deleteForm.style.display = (deleteForm.style.display === 'none' || deleteForm.style.display === '') ? 'block' : 'none';
+    // };
 </script>

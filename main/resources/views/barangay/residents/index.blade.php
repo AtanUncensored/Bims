@@ -56,8 +56,8 @@
 
                     <select name="is_alive_filter" class="py-1 px-2 bg-gray-600 text-white text-md font-semibold rounded focus:outline-none" onchange="this.form.submit() " >
                         <option value="">Status</option>
-                        <option value="1" {{ $isAliveFilter == '1' ? 'selected' : '' }}>Alive</option>
-                        <option value="0" {{ $isAliveFilter == '0' ? 'selected' : '' }}>Dead</option>
+                        <option value="1" {{ $isAliveFilter == '1' ? 'selected' : '' }}>Living</option>
+                        <option value="0" {{ $isAliveFilter == '0' ? 'selected' : '' }}>Deceased</option>
                     </select>
                     
                 </div>
@@ -84,9 +84,10 @@
             <table class="min-w-full bg-white border border-[2px] border-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Is Alive</th>
+                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Status</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Last Name</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">First Name</th>
+                        <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Middle Name</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Purok</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Gender</th>
                         <th class="py-3 px-6 bg-gray-600 text-white font-bold uppercase text-[12px] text-left">Age</th>
@@ -96,13 +97,14 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($residents as $resident)
                         <tr class="hover:bg-gray-200 transition">
-                            <td class="px-6 py-4 text-sm text-gray-500">
+                            <td class="py-2 px-4 text-sm text-gray-500 text-center">
                                 <!-- Displaying the "Is Alive" status as a colored dot -->
                                 <span class="inline-block w-3 h-3 rounded-full {{ $resident->is_alive ? 'bg-green-500' : 'bg-red-500' }}"></span>
                             </td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->last_name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->first_name }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $resident->purok->purok_number }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $resident->middle_name }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $resident->purok->purok_name }} ({{ $resident->purok->purok_number }})</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->gender }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $resident->age }}</td>
                             <td class="px-4 py-2 whitespace-nowrap text-sm font-medium space-x-2 text-center">
@@ -126,7 +128,7 @@
                                             <div class="max-h-[70vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div class="container">
                                                     <div class="form-group">
-                                                        <label for="is_alive" class="block text-sm font-medium text-gray-700 text-left">Is Alive:</label>
+                                                        <label for="is_alive" class="block text-sm font-medium text-gray-700 text-left">Status ( Living/Deceased ):</label>
                                                         <div class="flex items-center">
                                                             <!-- Switch toggle for Is Alive -->
                                                             <input type="checkbox" name="is_alive" id="is_alive" value="1" {{ old('is_alive', $resident->is_alive) ? 'checked' : '' }} class="toggle-switch">

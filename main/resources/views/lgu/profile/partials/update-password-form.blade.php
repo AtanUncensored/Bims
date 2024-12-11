@@ -3,10 +3,6 @@
         <h2 class="text-xl font-bold text-start text-blue-900">
             Update Password
          </h2>
-
-        <p class="mt-1 text-start text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
     </header>
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">

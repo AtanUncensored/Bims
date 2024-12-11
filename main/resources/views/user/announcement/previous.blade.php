@@ -1,11 +1,11 @@
 @extends('user.templates.navigation-bar')
 
-@section('title', 'Expired Announcements')
+@section('title', 'Previous Announcements')
 
 @section('content')
 <div class="px-4">
     <div class="bg-white flex justify-between items-center rounded-lg shadow-lg py-2 px-4">
-        <h2 class="text-xl font-bold text-red-500 mb-3 uppercase text-start">Expired Announcements:</h2>
+        <h2 class="text-xl font-bold text-red-500 mb-3 uppercase text-start">Previous Announcements:</h2>
 
         <div class="flex justify-end">
             <a href="{{ url('/announcements') }}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
@@ -42,7 +42,7 @@
                 {{ $announcements->links() }}
             </div>
         @else
-            <p class="text-center text-gray-500 mt-10">No expired announcements found.</p>
+            <p class="text-center text-gray-500 mt-10">No previous announcements found.</p>
         @endif
     </div>
 </div>

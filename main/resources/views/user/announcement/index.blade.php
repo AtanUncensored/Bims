@@ -6,7 +6,7 @@
 <div class="px-4">
     <div class="bg-white flex justify-between items-center py-2 px-4 rounded-lg shadow-lg mb-1">
         <h2 class="text-xl font-bold text-blue-500 mb-3 text-start">IMPORTANT ANNOUNCEMENTS:</h2>
-        <a href="{{ route('user.announcement.expired') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">View Expired</a>
+        <a href="{{ route('user.announcement.previous') }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-red-600 text-white font-bold rounded hover:bg-red-500">Previous Announcements</a>
     </div>
     
 

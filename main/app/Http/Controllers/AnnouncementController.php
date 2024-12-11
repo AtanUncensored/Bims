@@ -161,24 +161,24 @@ class AnnouncementController extends Controller
 
 
 
-    public function expiredView()
+    public function previousView()
     {
         $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
                                 ->where('expiration_date', '<', now())
                                 ->orderBy('expiration_date', 'desc')
                                 ->paginate(10);
     
-        return view('barangay.announcement.expired', compact('announcements'));
+        return view('barangay.announcement.previous', compact('announcements'));
     }
 
-    public function userExpiredView()
+    public function userPreviousView()
     {
         $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
         ->where('expiration_date', '<', now())
         ->orderBy('expiration_date', 'desc')
         ->paginate(10);
 
-        return view('user.announcement.expired', compact('announcements'));
+        return view('user.announcement.previous', compact('announcements'));
     }
     
     public function showUser($announcementId)
