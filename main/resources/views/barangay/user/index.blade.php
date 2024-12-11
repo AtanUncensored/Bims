@@ -29,7 +29,13 @@
             <div class="flex justify-start items-center">
                 <h1 class="text-xl font-bold text-blue-500 mb-3 uppercase">residents account:</h1>
             </div>
-        
+
+            @if(session('status'))
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show" class="bg-green-500 text-white text-center py-2 px-4 rounded">
+                    {{ session('status') }}
+                </div>
+            @endif
+
                 <div class="flex justify-end items-center">
                     <button class="relative text-red-600 hover:text-red-800 rounded-lg group mr-3">
                         <span class="font-bold">Reminder <i class="fa-solid fa-triangle-exclamation"></i></span>
@@ -126,7 +132,7 @@
                         @if($users->count() > 0)
                             @foreach($users as $user)
                                 <tr class="border-b border-gray-200">
-                                    <td class="lg:px-6 text-[10px] lg:text-[15px] text-center"><span class="inline-block w-3 h-3 rounded-full bg-green-500"></span></td>
+                                    <td class="lg:px-6 text-[10px] lg:text-[15px] text-center"><span class="inline-block w-3 h-3 rounded-full {{ $user->is_active ? 'bg-green-500' : 'bg-gray-500' }}"></span></td>
                                     <td class="lg:px-6 text-[10px] lg:text-[15px] font-semibold">{{ $user->name }}</td>
                                     <td class="lg:px-6 text-[10px] lg:text-[15px] text-blue-500 font-semibold">{{ $user->email }}</td>
                                     <td class="lg:px-6 text-[10px] lg:text-[15px]">
@@ -143,27 +149,37 @@
                                             </button>
                                             
                                              <!-- Delete Modal ni dere same sa log out nga layout -->
-                                            <div id="disable-modal-{{ $user->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
+                                             <div id="disable-modal-{{ $user->id }}" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
                                                 <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6 md:w-1/2 lg:w-1/3">
-                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User: <span class="text-blue-600">{{ $user->name}}</span></p>
-                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Household: <span class="text-blue-600">{{ $user->households->household_name }}</span></p>
-                                                    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
-            
-                                                    <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">User Account Options</p>
+                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">User: <span class="text-blue-600">{{ $user->name }}</span></p>
+                                                    <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Household: <span class="text-blue-600"> 
+                                                        @if($user->households)
+                                                        {{ $user->households->household_name }}
+                                                        @else
+                                                            No household assigned
+                                                        @endif</span>
+                                                    </p>
 
-                                                    <div class="flex justify-start items-center">
-                                                        <label class="mr-3 font-semibold">Disable / Enable:</label>
-                                                        <input type="checkbox" value="1" class="toggle-switch">
-                                                    </div>
-                                                    
-                                                    <div class="flex justify-end items-center">
-                                                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Save changes</button>
-                                                        <button onclick="toggleDisableModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
-                                                            Cancel
-                                                        </button>
-                                                    </div>
+                                                    <hr class="border-t-2 mt-3 mb-4 border-gray-300">
+                                                
+                                                    <p class="mb-5 mt-3 text-gray-600 text-left text-[17px]">User Account Options</p>
+                                                
+                                                    <form method="POST" action="{{ route('barangay.user.toggleStatus', $user->id) }}">
+                                                        @csrf
+                                                        <div class="flex justify-start items-center mb-5">
+                                                            <label class="mr-3 font-semibold">Disable / Enable:</label>
+                                                            <input type="checkbox" name="is_active" id="toggle-switch-{{ $user->id }}" class="toggle-switch" {{ $user->is_active ? 'checked' : '' }}>
+                                                        </div>
+                                                
+                                                        <div class="flex justify-end items-center">
+                                                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-3">Save changes</button>
+                                                            <button type="button" onclick="toggleDisableModal('{{ $user->id }}')" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                            </div>
+                                            </div>                                                                                       
                                         </div>
                                     </td>
                                 </tr>
@@ -190,7 +206,37 @@
             const modal = document.getElementById(`disable-modal-${userId}`);
             modal.classList.toggle('hidden');
         }
+
+        function saveUserStatus(userId) {
+    const checkbox = document.querySelector(`#toggle-switch-${userId}`);
+    const isChecked = checkbox.checked;
+
+    fetch(`/user/${userId}/toggle-status`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'  // Ensure CSRF token is included for security
+        },
+        body: JSON.stringify({ is_active: isChecked })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            toggleDisableModal(userId); // Close modal after saving
+        } else {
+            alert('An error occurred while updating user status.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Something went wrong while saving.');
+    });
+}
+
+
 </script>
+
 
 <style>
     /* Switch styling */

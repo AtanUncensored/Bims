@@ -58,9 +58,6 @@
             <div class="mt-4 flex items-center">
                 <label for="email" class="text-sm font-bold text-start text-gray-700 mb-1 w-1/3 rounded">Email: </label>
                 <input id="email" class="block w-full border-gray-300 dark:border-gray-700 text-black py-1 px-2 shadow-sm" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" />
-                @error('email')
-                    <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
-                @enderror
             </div>
 
             <div class="mt-4 flex items-center">
@@ -77,9 +74,7 @@
                         </svg>
                     </span>
                 </div>
-                @error('password')
-                    <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
-                @enderror
+        
             </div>
 
             <!-- Login sud sa tagsa tagsang barangay -->

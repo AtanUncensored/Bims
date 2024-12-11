@@ -318,5 +318,17 @@ public function viewResident($resident_id)
 
         return redirect()->route('barangay.user.index')->with('success', 'User updated successfully.');
     }
+
+    public function toggleUserStatus(Request $request, User $user)
+    {
+        // Update the user's active status based on the form value
+        $user->is_active = $request->has('is_active'); // Checkbox sends value only if checked
+        $user->save();
+    
+        return redirect()->back()->with('status', $user->is_active ? 'User enabled successfully.' : 'User disabled successfully.');
+    }
+    
+
+
 }
 

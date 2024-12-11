@@ -144,6 +144,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/barangay/storePurok', [PurokController::class, 'storePurok'])->name('barangay.purok.storePurok');
         Route::get('/purok/{purok}', [PurokController::class, 'viewPurok'])->name('purok.residents');
         Route::post('residents/export-excel', [ResidentController::class, 'exportExcel'])->name('residents.download-excel');
+        Route::post('/user/{user}/toggle-status', [BarangayController::class, 'toggleUserStatus'])->name('barangay.user.toggleStatus');
 
 
     
