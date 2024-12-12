@@ -14,6 +14,7 @@ class Budget extends Model
         'barangay_id',
         'item',
         'cost',
+        'description',
         'period_from',
         'period_to',
     ];

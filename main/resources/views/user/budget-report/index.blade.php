@@ -37,6 +37,7 @@
                     <tr>
                         <th class="py-2 px-4 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Expense Used</th>
                         <th class="px-6 py-3 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Cost</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Description</th>
                         <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">DateTime</th>
                     </tr>
                 </thead>
@@ -52,6 +53,7 @@
                     <tr class="hover:bg-gray-100 transition">
                         <td class="py-2 px-4 border-b border-gray-200">{{ $report->item }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $report->cost }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $report->description }}</td>
                         <td class="py-2 px-4 border-b text-center border-gray-200">{{ $report->period_from }} | {{ $report->period_to }}</td>
                     </tr>
                 @endforeach

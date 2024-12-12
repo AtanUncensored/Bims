@@ -51,6 +51,7 @@ class BudgetController extends Controller
         $validatedData = $request->validate([
             'item' => 'required|string|max:255',
             'cost' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'period_from' => 'required|date',
             'period_to' => 'required|date|after:period_from',
 
@@ -95,6 +96,7 @@ public function updateBudgetReport(Request $request, Budget $budgetReport)
     $validatedData = $request->validate([
         'item' => 'required|string|max:255',
         'cost' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
         'period_from' => 'required|date',
         'period_to' => 'required|date',
     ]);

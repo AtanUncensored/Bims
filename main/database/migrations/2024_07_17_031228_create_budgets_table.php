@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('barangay_id')->constrained()->onDelete('cascade');
             $table->string('item');
             $table->decimal('cost');
+            $table->string('description');
             $table->date('period_from');
             $table->date('period_to');
             $table->timestamps();

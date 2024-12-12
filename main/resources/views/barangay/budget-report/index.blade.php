@@ -68,6 +68,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">description:</label>
+                            <input type="text" step="0.01" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" id="description" name="description" value="{{ old('description') }}">
+                            @error('description')
+                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="period_from" class="block text-gray-700 text-sm font-bold mb-2">Period From:</label>
                             <input type="date" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" id="period_from" name="period_from" value="{{ old('period_from') }}">
                             @error('period_from')
@@ -100,6 +107,7 @@
                     <tr>
                         <th class="py-2 px-4 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Expense Used</th>
                         <th class="px-6 py-3 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Cost</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Description</th>
                         <th class="px-6 py-3 text-start text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">DateTime</th>
                         <th class="px-6 py-3 text-center text-xs font-medium bg-gray-600 text-white uppercase tracking-wider">Actions</th>
                     </tr>
@@ -116,6 +124,7 @@
                     <tr class="hover:bg-gray-100 transition">
                         <td class="py-2 px-4 border-b border-gray-200">{{ $report->item }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $report->cost }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">{{ $report->description }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">{{ $report->period_from }} | {{ $report->period_to }}</td>
                         <td class="px-4 py-2 text-right whitespace-nowrap">
                             <div class="flex gap-2 justify-center items-center">
@@ -154,7 +163,10 @@
                                                 <label for="cost" class="block  text-start text-gray-700 text-sm font-bold mb-2">Cost</label>
                                                 <input type="text" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" id="cost" name="cost" value="{{ old('cost', $report->cost) }}" required>
                                             </div>
-                                    
+                                            <div class="mb-3">
+                                                <label for="description" class="block  text-start text-gray-700 text-sm font-bold mb-2">Description</label>
+                                                <input type="text" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" id="description" name="description" value="{{ old('description', $report->description) }}" required>
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="period_from" class="block  text-start text-gray-700 text-sm font-bold mb-2">Period From</label>
                                                 <input type="date" class="mt-1 block py-1 px-2 w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" id="period_from" name="period_from" value="{{ old('period_from', $report->period_from) }}" required>
@@ -184,7 +196,7 @@
                                         <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Item: 
                                             <span class="text-blue-600">{{ $report->item }}</span>
                                         </p>
-                                        <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">Cost: 
+                                        <p class="text-left text-lg font-bold text-gray-600 uppercase mb-3">cost: 
                                             <span class="text-blue-600">{{ $report->cost }}</span>
                                         </p>
                                         <hr class="border-t-2 border-gray-300">
