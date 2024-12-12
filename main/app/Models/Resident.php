@@ -39,9 +39,9 @@ class Resident extends Model
         return $this->hasMany(Resident::class, 'father_id');
     }
 
-    public function householdMembers()
+    public function householdMember()
     {
-        return $this->hasMany(HouseholdMember::class, 'resident_id');
+        return $this->hasOne(HouseholdMember::class, 'resident_id');
     }
     public function households()
     {

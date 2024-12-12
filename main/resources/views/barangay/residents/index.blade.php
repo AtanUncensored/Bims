@@ -295,6 +295,37 @@
                                                          <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                                                          @enderror
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="father_id" class="block text-sm font-medium text-gray-700 text-left">Father:</label>
+                                                        <select name="father_id" id="father_id" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                            <option value="">Select Father</option>
+                                                            @foreach ($residents->where('gender', 'male') as $residentOption)  <!-- Filter for males -->
+                                                                <option value="{{ $residentOption->id }}" {{ old('father_id', $resident->father_id) == $residentOption->id ? 'selected' : '' }}>
+                                                                    {{ $residentOption->first_name }} {{ $residentOption->last_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('father_id')
+                                                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    
+                                                    <!-- Mother Field -->
+                                                    <div class="form-group">
+                                                        <label for="mother_id" class="block text-sm font-medium text-gray-700 text-left">Mother:</label>
+                                                        <select name="mother_id" id="mother_id" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                                            <option value="">Select Mother</option>
+                                                            @foreach ($residents->where('gender', 'female') as $residentOption)  <!-- Filter for females -->
+                                                                <option value="{{ $residentOption->id }}" {{ old('mother_id', $resident->mother_id) == $residentOption->id ? 'selected' : '' }}>
+                                                                    {{ $residentOption->first_name }} {{ $residentOption->last_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('mother_id')
+                                                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    
                                                 </div>   
                                             </div>      
                                             <div class="button-group flex justify-end mt-3">

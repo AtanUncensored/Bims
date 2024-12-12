@@ -200,6 +200,8 @@ public function viewResident($resident_id)
         'current_address' => 'nullable|string|max:255',
         'permanent_address' => 'nullable|string|max:255',
         'is_alive' => 'nullable|boolean', // Add validation for is_alive
+        'father_id' => 'nullable|exists:residents,id',  // Validate father_id
+        'mother_id' => 'nullable|exists:residents,id',
     ]);
 
     // Find the resident and ensure it belongs to the user's barangay
@@ -208,6 +210,9 @@ public function viewResident($resident_id)
                         ->firstOrFail();
 
    $resident->is_alive = $request->has('is_alive');
+
+   $resident->father_id = $request->input('father_id');
+   $resident->mother_id = $request->input('mother_id');
 
     // Update other data
     $resident->update($validatedData);

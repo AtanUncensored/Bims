@@ -3,7 +3,7 @@
 @section('title', 'Resident Details')
 
 @section('content')
-<div class="py-1 px-4 bg-white rounded-lg shadow-lg">
+<div class="py-1 px-4 bg-white rounded-lg shadow-lg max-h-[600px] overflow-y-auto">
 
     @if (session('success'))
         <div class="bg-green-100 text-green-800 p-3 rounded-lg border border-green-300 text-center mb-4">
@@ -133,18 +133,19 @@
                 </div>
             
                 <!-- Children -->
-                <div class="flex items-center">
+                <div class="flex items-start">
                     <span class="font-semibold text-gray-600 w-40">Children:</span>
-                    <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">
+                    <div class="text-gray-800 border border-gray-300 py-1 w-full px-3">
                         @if ($children->isNotEmpty())
                             @foreach ($children as $child)
-                                {{ $child->first_name }} {{ $child->last_name }}@if (!$loop->last), @endif
+                                <div>-{{ $child->first_name }} {{ $child->last_name }}-</div>
                             @endforeach
                         @else
-                            None
+                            <div>None</div>
                         @endif
-                    </span>
+                    </div>
                 </div>
+                
             </div>
                         
         </div>
