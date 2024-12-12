@@ -6,6 +6,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 <div class="px-6  max-h-[78vh] overflow-y-auto">
     @if(session('success'))
@@ -170,6 +174,38 @@
                          <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                          @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="mother_id" class="block text-sm font-medium text-gray-700">Mother:</label>
+                        <select name="mother_id" id="mother_id" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <option value="">Select Mother</option>
+                            @foreach ($residents as $resident)
+                                @if (strtolower($resident->gender) === 'female')
+                                    <option value="{{ $resident->id }}">{{ $resident->first_name }} {{ $resident->last_name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('mother_id')
+                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="father_id" class="block text-sm font-medium text-gray-700">Father:</label>
+                        <select name="father_id" id="father_id" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <option value="">Select Father</option>
+                            @foreach ($residents as $resident)
+                                @if (strtolower($resident->gender) === 'male')
+                                    <option value="{{ $resident->id }}">{{ $resident->first_name }} {{ $resident->last_name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('father_id')
+                            <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    
+                    
             
                     <!-- Household Dropdown -->
                     <div class="form-group border border-gray-300 mt-5 mb-5 block w-full rounded-md shadow-sm py-2 px-4 focus:outline-none focus:ring focus:ring-blue-400">
@@ -225,6 +261,14 @@
 </div>
 
 <script>
+  
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Search for a resident",
+            allowClear: true
+        });
+    });
+
     function toggleHouseholdForm() {
         const householdSelect = document.getElementById('household');
         const newHouseholdForm = document.getElementById('new-household-form');

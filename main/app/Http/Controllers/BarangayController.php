@@ -58,26 +58,6 @@ class BarangayController extends Controller
 
         return view('barangay.dashboard', compact('totalResidents', 'marriedCount', 'seniorCitizensCount', 'youthCount', 'barangayOfficials' , 'residents' , 'puroks'));
     }
-    
-    public function createUserForm()
-    {
-        $userBarangayId = Auth::user()->barangay_id;
-    
-        // Fetch households that belong to the user's barangay
-        $households = Household::whereHas('user', function ($query) use ($userBarangayId) {
-            $query->where('barangay_id', $userBarangayId);
-        })->get();
-
-        $puroks = Purok::where('barangay_id', $userBarangayId)->get();
-
-    
-        // Fetch users in the same barangay
-        $users = User::where('barangay_id', $userBarangayId)->get();
-    
-        return view('barangay.crud.create_user_account', compact('households', 'users', 'puroks'));
-    }
-    
-
     public function showLoginPage($barangay_name)
     {
         // Retrieve the barangay by name
@@ -86,17 +66,33 @@ class BarangayController extends Controller
         // Pass the barangay data to the view
         return view('login.barangay-login', compact('barangay'));
     }
-    
 
-    public function storeUser(Request $request)
+public function createUserForm()
 {
-    // Validate the form data
+    $userBarangayId = Auth::user()->barangay_id;
+
+    $households = Household::whereHas('user', function ($query) use ($userBarangayId) {
+        $query->where('barangay_id', $userBarangayId);
+    })->get();
+
+    $puroks = Purok::where('barangay_id', $userBarangayId)->get();
+
+    $users = User::where('barangay_id', $userBarangayId)->get();
+
+    $residents = Resident::where('barangay_id', $userBarangayId)->get();
+
+    return view('barangay.crud.create_user_account', compact('households', 'users', 'puroks', 'residents'));
+}
+
+public function storeUser(Request $request)
+{
     $validatedData = $request->validate([
+        // Include parent (mother, father) selection
         'first_name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
-        'middle_name' => 'required|string|max:255',
+        'middle_name' => 'nullable|string|max:255',
         'suffix' => 'nullable|string|max:255',
-        'purok' => 'required|string|max:255',
+        'purok' => 'required|integer', 
         'birth_date' => 'required|date',
         'place_of_birth' => 'required|string|max:255',
         'gender' => 'required|string|max:255',
@@ -104,37 +100,41 @@ class BarangayController extends Controller
         'phone_number' => 'required|string|max:255',
         'citizenship' => 'required|string|max:255',
         'nickname' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:residents,email',
+        'email' => 'required|email|max:255',
         'current_address' => 'required|string|max:255',
         'permanent_address' => 'required|string|max:255',
         'household' => 'required',
         'new_household_name' => 'nullable|string|max:255',
         'user_id' => 'nullable|exists:users,id',
+        'mother_id' => 'nullable|exists:residents,id',
+        'father_id' => 'nullable|exists:residents,id',
     ]);
 
     // Get the currently logged-in user's barangay
     $userBarangayId = Auth::user()->barangay_id;
 
-    // Create a new resident and associate it with the user's barangay
+    // Create a new resident
     $resident = new Resident($validatedData);
     $resident->barangay_id = $userBarangayId;
     $resident->purok_id = $request->purok;
+    $resident->mother_id = $request->mother_id;
+    $resident->father_id = $request->father_id;
     $resident->is_alive = 1;
     $resident->save();
 
-    // Check if a new household is being created
+    // Handle household creation or assignment
     if ($request->household === 'new') {
-        // Create the new household
+        // Create a new household
         $household = Household::create([
             'household_name' => $request->new_household_name,
-            'user_id' => $request->user_id,  // Associate with the selected user from the dropdown
+            'user_id' => $request->user_id,
         ]);
     } else {
-        // Find the existing household
+        // Assign to an existing household
         $household = Household::find($request->household);
     }
 
-    // Associate resident with the household through the household_members table
+    // Link the resident to the household
     if ($household) {
         HouseholdMember::create([
             'resident_id' => $resident->id,
@@ -142,11 +142,10 @@ class BarangayController extends Controller
         ]);
     }
 
-    // Log the event
+    // Log the action
     $log_entry = 'Admin Added a new resident ' . $resident->first_name . ' with the ID of ' . $resident->id;
     event(new UserLog($log_entry));
 
-    // Redirect back with success message
     return back()->with('success', 'Resident and household information added successfully!');
 }
 
@@ -167,21 +166,19 @@ public function viewResident($resident_id)
         ->join('households', 'household_members.household_id', '=', 'households.id')
         ->pluck('households.household_name');
 
-    return view('barangay.crud.view_resident', compact('resident', 'householdNames'));
+    // Retrieve parents
+    $mother = Resident::find($resident->mother_id);
+    $father = Resident::find($resident->father_id);
+
+    // Retrieve children
+    $children = Resident::where(function ($query) use ($resident_id) {
+        $query->where('mother_id', $resident_id)
+              ->orWhere('father_id', $resident_id);
+    })->get();
+
+    return view('barangay.crud.view_resident', compact('resident', 'householdNames', 'mother', 'father', 'children'));
 }
 
-
-    public function editResident($resident_id)
-    {
-        // Find the resident by ID and ensure it belongs to the user's barangay
-        $resident = Resident::where('id', $resident_id)
-                            ->where('barangay_id', Auth::user()->barangay_id)
-                            ->firstOrFail();
-
-        $puroks = Purok::where('barangay_id', Auth::user()->barangay_id)->get();
-
-        return view('barangay.crud.edit_resident', compact('resident', 'puroks'));
-    }
 
     public function updateResident(Request $request, $resident_id)
 {
@@ -203,6 +200,8 @@ public function viewResident($resident_id)
         'current_address' => 'nullable|string|max:255',
         'permanent_address' => 'nullable|string|max:255',
         'is_alive' => 'nullable|boolean', // Add validation for is_alive
+        'father_id' => 'nullable|exists:residents,id',  // Validate father_id
+        'mother_id' => 'nullable|exists:residents,id',
     ]);
 
     // Find the resident and ensure it belongs to the user's barangay
@@ -211,6 +210,9 @@ public function viewResident($resident_id)
                         ->firstOrFail();
 
    $resident->is_alive = $request->has('is_alive');
+
+   $resident->father_id = $request->input('father_id');
+   $resident->mother_id = $request->input('mother_id');
 
     // Update other data
     $resident->update($validatedData);

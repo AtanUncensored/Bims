@@ -10,6 +10,7 @@
     <link rel="icon" href="{{ asset('images/bims-logo.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
+
     <style>
         .new-amsterdam-regular {
             font-family: "New Amsterdam", sans-serif;
