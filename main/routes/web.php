@@ -17,6 +17,7 @@ use App\Http\Controllers\BarangayOfficialController;
 use App\Http\Controllers\CertificateRequestController;
 use App\Http\Controllers\Certificates\ResidencyController;
 use App\Http\Controllers\Certificates\UnifastController;
+use App\Http\Controllers\CustomCertificateController;
 use App\Http\Controllers\SuperAdminAnnouncementController;
 
 //home routing
@@ -233,6 +234,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/unifast/store', [UnifastController::class, 'store'])->name('unifast.store');
 
         Route::post('/residency/store', [ResidencyController::class, 'store'])->name('certificates.residences.store');
+
+        Route::get('/certificates/customized', [CustomCertificateController::class, 'create'])->name('certificates.customized');
+        Route::post('/certificates/customized', [CustomCertificateController::class, 'submit'])->name('certificates.customized.submit');
 
 
         //or number edit

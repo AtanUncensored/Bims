@@ -20,7 +20,7 @@ class Household extends Model
      */
     public function residents()
     {
-        return $this->belongsToMany(Resident::class, 'household_members', 'household_id', 'resident_id');
+        return $this->hasMany(Resident::class);
     }
     public function household_member()
     {
