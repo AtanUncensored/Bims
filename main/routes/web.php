@@ -123,6 +123,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/barangay/store-user', [BarangayController::class, 'storeUser'])->name('barangay.store-user');
         Route::get('barangay/residents/{resident_id}/edit', [BarangayController::class, 'editResident'])->name('barangay.residents.edit');
         Route::put('barangay/residents/{resident_id}', [BarangayController::class, 'updateResident'])->name('barangay.residents.update');
+        Route::get('/resident/{id}/edit', [BarangayController::class, 'edit'])->name('resident.edit');
+
         Route::delete('barangay/residents/{resident_id}', [BarangayController::class, 'deleteResident'])->name('barangay.residents.delete');
 
 

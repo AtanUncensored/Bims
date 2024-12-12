@@ -30,6 +30,10 @@ return new class extends Migration
             $table->string('permanent_address');
             $table->foreignId('barangay_id')->constrained()->onDelete('cascade');
             $table->foreignId('purok_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('mother_id')->nullable();
+            $table->unsignedBigInteger('father_id')->nullable();
+            $table->foreign('mother_id')->references('id')->on('residents')->onDelete('set null');
+            $table->foreign('father_id')->references('id')->on('residents')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -106,7 +106,47 @@
                     @foreach($householdNames as $householdName)
                     {{ $householdName }}@if(!$loop->last), @endif
                     @endforeach
-            </div>            
+            </div>
+            <div class="info2 space-y-4">
+                <!-- Mother -->
+                <div class="flex items-center">
+                    <span class="font-semibold text-gray-600 w-40">Mother:</span>
+                    <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">
+                        @if ($mother)
+                            {{ $mother->first_name }} {{ $mother->last_name }}
+                        @else
+                            Not Specified
+                        @endif
+                    </span>
+                </div>
+            
+                <!-- Father -->
+                <div class="flex items-center">
+                    <span class="font-semibold text-gray-600 w-40">Father:</span>
+                    <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">
+                        @if ($father)
+                            {{ $father->first_name }} {{ $father->last_name }}
+                        @else
+                            Not Specified
+                        @endif
+                    </span>
+                </div>
+            
+                <!-- Children -->
+                <div class="flex items-center">
+                    <span class="font-semibold text-gray-600 w-40">Children:</span>
+                    <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">
+                        @if ($children->isNotEmpty())
+                            @foreach ($children as $child)
+                                {{ $child->first_name }} {{ $child->last_name }}@if (!$loop->last), @endif
+                            @endforeach
+                        @else
+                            None
+                        @endif
+                    </span>
+                </div>
+            </div>
+                        
         </div>
     </div>
 </div>
