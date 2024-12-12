@@ -20,6 +20,11 @@ class Resident extends Model
     {
         return $this->hasMany(HouseholdMember::class, 'resident_id');
     }
+    public function households()
+    {
+        return $this->belongsToMany(Household::class, 'household_members', 'resident_id', 'household_id');
+    }
+
 
     public function barangay()
     {

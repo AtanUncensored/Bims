@@ -102,12 +102,24 @@ class ResidentController extends Controller
     
 
 
-
-    public function exportExcel()
+    public function exportExcel(Request $request)
     {
         $barangayId = auth()->user()->barangay_id;
-        return Excel::download(new ResidentDataExport($barangayId), 'residents.xlsx');
+    
+        // Get the filter values from the request
+        $search = $request->input('search');
+        $purokFilter = $request->input('purok_filter');
+        $genderFilter = $request->input('gender_filter');
+        $ageFilter = $request->input('age_filter');
+        $isAliveFilter = $request->input('is_alive_filter');
+    
+        // Pass the filtered values to the export class
+        return Excel::download(new ResidentDataExport(
+            $barangayId, $search, $purokFilter, $genderFilter, $ageFilter, $isAliveFilter
+        ), 'residents.xlsx');
     }
+    
+
 
     
 }

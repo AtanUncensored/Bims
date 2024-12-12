@@ -5,8 +5,13 @@
 @section('content')
 <div class="px-4">
     <div class="flex justify-end items-center mb-4">
-        <form action="{{ route('residents.download-excel')}}" method="POST" target="__blank">
+        <form action="{{ route('residents.download-excel') }}" method="POST" target="__blank">
             @csrf
+            <input type="hidden" name="search" value="{{ $search }}">
+            <input type="hidden" name="purok_filter" value="{{ $purokFilter }}">
+            <input type="hidden" name="gender_filter" value="{{ $genderFilter }}">
+            <input type="hidden" name="age_filter" value="{{ $ageFilter }}">
+            <input type="hidden" name="is_alive_filter" value="{{ $isAliveFilter }}">
             <div>
                 <button class="py-2 px-3 text-white bg-green-500 rounded-lg  hover:bg-green-600 shadow-lg transition">
                     <i class="fa-solid fa-file-export"></i> Export
