@@ -4,6 +4,19 @@
 
 @section('content')
 <div class="container px-4">
+    <form action="{{ route('certificates.index') }}" method="GET" class="mb-4 flex items-center justify-end">
+        <input 
+            type="text" 
+            name="search" 
+            value="{{ request('search') }}" 
+            class="border rounded-l-lg px-4 py-2 w-1/5.5"
+            placeholder="Search certificates......" 
+            id="search-input"
+        />
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">
+            Search
+        </button>
+    </form>
 
     <div class="grid grid-rows-1 md:grid-rows-2 gap-4 max-h-[79vh] overflow-y-auto">
         
@@ -250,6 +263,10 @@
     function printCertificate(url) {
         window.open(url, '_blank');
     }
+
+    window.onload = function() {
+        document.getElementById('search-input').value = ''; // Clear the input field
+    };
 
     
     function toggleEditModal(requestId) {
