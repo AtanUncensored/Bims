@@ -128,10 +128,10 @@
             <img src="{{ asset('images/bims-logo.png') }}" alt="BIMS logo">
         </div>
         <div class="title">
-            <a href="/" class="font-bold text-white text-[15px] lg:text-xl">
+            <p href="/" class="font-bold text-white text-[15px] lg:text-xl">
                 <span class="block lg:hidden font-bold gap-2 text-3xl px-4">BIMS</span> 
                 <span class="hidden lg:block gap-2 px-4">Barangay Information Management System</span>
-            </a>
+            </p>
         </div>
     </div>     
     <div class="content">

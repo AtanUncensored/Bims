@@ -15,10 +15,16 @@ class CustomCertificateController extends Controller
         $barangayId = auth()->user()->barangay_id;
 
         // Retrieve the certificate request (you might need to modify this based on your relationships)
-        $certificateRequest = CertificateRequest::with('resident.purok') // Assuming there's a relationship
-            ->where('user_id', auth()->id())  // Fetch request for the logged-in user
-            ->firstOrFail();
-
+        $certificateRequest = CertificateRequest::with('resident.purok') 
+        ->where('user_id', auth()->id()) 
+        ->first();  // Changed from firstOrFail()
+    
+        if (!$certificateRequest) {
+            // Handle case when certificate request doesn't exist
+            // For example, you could pass an empty object or a default value
+            $certificateRequest = new CertificateRequest(); // Or another approach depending on the scenario
+        }
+    
         // Retrieve barangay officials
         $barangayOfficials = BarangayOfficial::with('resident')
             ->where('barangay_id', $barangayId)

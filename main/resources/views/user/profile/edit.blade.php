@@ -75,6 +75,11 @@
                     <i class="fa-solid fa-certificate text-blue-800"></i>
                     <span class="text-[13px] lg:text-[15px]">Request Certificate</span>
                 </a>
+                
+                <a href="{{ url('/certificates/customized') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates/customized') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-solid fa-certificate text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Customized Certificate</span>
+                </a>
             </div>
         </nav>
         </div>

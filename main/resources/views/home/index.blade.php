@@ -11,7 +11,7 @@
     }
 </style>
 
-<div class="title flex flex-col items-center lg:flex-row lg:justify-center lg:items-center py-2">
+<div class="title flex flex-col items-center lg:flex-row lg:justify-center lg:items-center py-2 mt-[50px]">
     <div class="img-logo lg:w-1/4 mb-4 lg:mb-0">
         <img class="rounded-full w-32 h-32 lg:w-[100%] lg:h-[100%]" src="{{ asset('images/bims-logo.png') }}" alt="LGU logo">
     </div>
@@ -23,11 +23,11 @@
     </div>
 </div>
 
-<div class="login-form text-center lg:text-left mt-6">
+{{-- <div class="login-form text-center lg:text-left mt-6">
     <label for="lgu" class="text-lg lg:text-xl font-semibold">LGU Tubigon</label>
     <div>
         <a href="/lgu-login" class="hover:text-blue-900 font-bold lg:text-xl">Log in</a>
     </div>
-</div>
+</div> --}}
 
 @endsection

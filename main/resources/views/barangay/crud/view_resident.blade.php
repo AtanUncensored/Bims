@@ -3,7 +3,7 @@
 @section('title', 'Resident Details')
 
 @section('content')
-<div class="py-1 px-4 bg-white rounded-lg shadow-lg max-h-[600px] overflow-y-auto">
+<div class="py-1 px-4 bg-white rounded-lg shadow-lg">
 
     @if (session('success'))
         <div class="bg-green-100 text-green-800 p-3 rounded-lg border border-green-300 text-center mb-4">
@@ -22,7 +22,7 @@
     @endif
     
     <div class="flex justify-between items-center mt-6">
-        <p class="text-blue-500 font-semibold text-2xl">{{ $resident->last_name}}, {{ $resident->first_name}}</p>
+        <p class="text-blue-500 font-semibold text-2xl">Resident: {{ $resident->last_name}}, {{ $resident->first_name}}</p>
 
         <a href="{{ route('barangay.residents.index') }}" class="inline-block align-baseline font-bold text-[10px] lg:text-[15px] text-gray-600 hover:text-blue-800">
             Back to List
@@ -31,7 +31,7 @@
 
     <hr class="border-t-2 mt-3 mb-4 border-gray-300">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-3 max-h-[430px] overflow-y-auto">
         <div class="info1 space-y-4">
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">First Name:</span>
@@ -69,13 +69,13 @@
                 <span class="font-semibold text-gray-600 w-40">Age:</span>
                 <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">{{ $resident->age }}</span>
             </div>
-        </div>
-
-        <div class="info2 space-y-4">
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Civil Status:</span>
                 <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">{{ $resident->civil_status }}</span>
             </div>
+        </div>
+
+        <div class="info2 space-y-4">
             <div class="flex items-center">
                 <span class="font-semibold text-gray-600 w-40">Phone Number:</span>
                 <span class="text-gray-800 border border-gray-300 py-1 w-full px-3">{{ $resident->phone_number }}</span>
@@ -138,7 +138,7 @@
                     <div class="text-gray-800 border border-gray-300 py-1 w-full px-3">
                         @if ($children->isNotEmpty())
                             @foreach ($children as $child)
-                                <div>-{{ $child->first_name }} {{ $child->last_name }}-</div>
+                                <div>{{ $child->first_name }} {{ $child->last_name }}</div>
                             @endforeach
                         @else
                             <div>None</div>
