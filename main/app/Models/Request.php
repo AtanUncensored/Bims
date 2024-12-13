@@ -16,6 +16,7 @@ class Request extends Model
         'certificate_type_id',
         'requester_name',
         'purpose',
+        'business_name',
         'date_needed',
         'or_number',
     ];

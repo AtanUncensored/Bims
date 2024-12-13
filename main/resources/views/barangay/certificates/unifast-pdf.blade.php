@@ -23,10 +23,6 @@
             margin: 15px 70px;
         }
 
-        .line-break2 {
-            border-top: 2px solid black;
-        }
-
         .line {
             border-top: 5px solid rgb(22, 92, 150);
             margin: 10px 10px;
@@ -47,27 +43,16 @@
             align-items: flex-start; 
         }
          
-        .officials {
-            margin-left: 25px;
-            width: 230px;
-            font-style: italic;
-            text-align: center;
-            padding: 15px;
-            border: 2px solid rgb(102, 178, 250);
-            border-radius: 5px;
-        }
 
         .information-detail {
-            width: 470px;
-            margin-left: 300px;
-            margin-top: -750px;
+            margin-left: 100px;
         }
 
         .info-heading {
             text-align: center;
-            width: 135px;    
+            width: 500px;    
             margin-top: -500px;
-            margin-left: 130px;
+            margin-left: 80px;
         }
 
         .info-title {
@@ -136,69 +121,62 @@
             <div class="line-break"></div>
         </div>
         <div class="content">
-            <div class="officials">
-                <div class="line"></div>
-        
-                @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Barangay Captain')
-                        <p class="captain-name">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
-                        <p class="details">Punong Barangay</p>
-                    @endif
-                @endforeach
-
-                <p class="details">BARANGAY KAGAWAD</p>
-                @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Barangay Kagawad')
-                        <p class="details">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
-                    @endif
-                @endforeach
-
-                @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Sk Chairperson')
-                        <p class="details">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
-                        <p class="details">SK Chairperson</p>
-                    @endif
-                @endforeach
-                
-                @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Secretary')
-                        <p class="details">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
-                        <p class="details">Barangay Secretary</p>
-                    @endif
-                @endforeach
-
-                @foreach ($barangayOfficials as $official)
-                    @if ($official->position === 'Treasurer')
-                        <p class="details">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
-                        <p class="last-title">Barangay Treasurer</p>
-                    @endif
-                @endforeach
-            
-                <div class="line"></div>
-            </div>
             
             <div class="information-detail">
                 <div class="background-logo">
                     <img src="{{ public_path('storage/images/' . $barangay->logo) }}" style="width: 500px; height:auto" alt="">
                 </div>
                 <div class="info-heading">
-                    <header class="info-title">CERTIFICATION</header>
-                    <div class="line-break2"></div>
-                    <p>(Unifast Certificate)</p>
+                    <h2 class="info-title">Certificate of Residency</h2>
                 </div>
                 <br>
                 <br>
                 <p>TO WHOM IT MAY CONCERN:</p>
                 <br>
                 <br>
-                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
+                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ $certificateRequest->resident->citizenship }} ,  {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
                 <p>years old, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }} is a bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}} {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
+                <p>
+                    She is the daughter of 
+                    <b>
+                      @if($certificateRequest->resident->father_id && $certificateRequest->resident->mother_id)
+                        {{ $certificateRequest->resident->father->first_name }} {{ $certificateRequest->resident->father->last_name }} 
+                        @if($certificateRequest->resident->father->suffix) 
+                          {{ $certificateRequest->resident->father->suffix }} 
+                        @endif
+                        and 
+                        {{ $certificateRequest->resident->mother->first_name }} {{ $certificateRequest->resident->mother->last_name }} 
+                        @if($certificateRequest->resident->mother->suffix) 
+                          {{ $certificateRequest->resident->mother->suffix }} 
+                        @endif</b>
+                        .Both are residents of the afore-mentioned barangay.
+                        <b>
+                      @elseif($certificateRequest->resident->father_id)
+                        {{ $certificateRequest->resident->father->first_name }} {{ $certificateRequest->resident->father->last_name }} 
+                        @if($certificateRequest->resident->father->suffix) 
+                          {{ $certificateRequest->resident->father->suffix }} 
+                        @endif</b>
+                        , resident of the afore-mentioned barangay.
+                        <b>
+                      @elseif($certificateRequest->resident->mother_id)
+                        {{ $certificateRequest->resident->mother->first_name }} {{ $certificateRequest->resident->mother->last_name }} 
+                        @if($certificateRequest->resident->mother->suffix) 
+                          {{ $certificateRequest->resident->mother->suffix }} 
+                        @endif</b>
+                        , resident of the afore-mentioned barangay.
+                      @else
+                        The parents are not available.
+                      @endif
+
+                  </p>
+                  
+
                 <br>
-                <p class="text">This certification is being issued upon her request for her</p>
-                <p>application for <span class="purpose">{{ $certificateRequest->purpose }} purposes</span>.</p>
+                <p class="text">This certification is being issued upon request of {{ $certificateRequest->requester_name }} </p>
+                <p> for <span class="purpose">{{ $certificateRequest->purpose }}</span>  and for whatever purpose this may serve her </p>
                 <br>
-                <p class="text">Issued this day of {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
-                    at Barangay {{ $barangay->barangay_name }},</p>
+                <p class="text">Given this day of {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
+                    at Barangay {{ $barangay->barangay_name }},</p>    
                 <p class="text-last">Tubigon, Bohol, Philippines.</p>
                 <br>
                 <br>
