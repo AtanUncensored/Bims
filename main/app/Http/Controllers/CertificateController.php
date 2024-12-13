@@ -35,7 +35,8 @@ class CertificateController extends Controller
             'requests.date_needed',
             'requests.requester_name',
             'requests.created_at',
-            'requests.downloaded_at'
+            'requests.downloaded_at',
+            'requests.reference_number'
         )
         ->where('requests.barangay_id', $barangayId)
         ->get();

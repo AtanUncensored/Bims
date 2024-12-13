@@ -12,6 +12,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
+
 
 class CertificateRequestController extends Controller
 {
@@ -32,8 +34,6 @@ class CertificateRequestController extends Controller
 
     public function store(HttpRequest $request)
 {
-
-
     // Validate input
     $validated = $request->validate([
         'resident_id' => 'required|exists:residents,id',
@@ -41,9 +41,10 @@ class CertificateRequestController extends Controller
         'requester_name' => 'nullable|string|max:255',
         'purpose' => 'nullable|string|max:255',
         'date_needed' => 'nullable|date',
-        'business_name' => 'nullable|required_if:certificate_type_id,6|string|max:255', // Adjust certificate_type_id as needed
+        'business_name' => 'nullable|required_if:certificate_type_id,6|string|max:255',
     ]);
 
+    // Fetch resident details
     $resident = Resident::find($validated['resident_id']);
     $fullName = $resident->first_name . ' ' . $resident->last_name . ' ' . $resident->suffix;
     $birthDate = $resident->birth_date;
@@ -51,7 +52,10 @@ class CertificateRequestController extends Controller
 
     $barangayId = Auth::user()->barangay_id;
 
-    // Conditionally add business_name if present
+    // Generate a unique reference number
+    $referenceNumber = 'BRGY-' . strtoupper(Str::random(6)) . '-' . now()->format('YmdHis');
+
+    // Prepare data for the certificate request
     $certificateRequestData = [
         'user_id' => Auth::user()->id,
         'resident_id' => $validated['resident_id'],
@@ -61,10 +65,11 @@ class CertificateRequestController extends Controller
         'or_number' => null,
         'date_needed' => $validated['date_needed'],
         'barangay_id' => $barangayId,
+        'reference_number' => $referenceNumber,
     ];
 
+    // Include business name if required
     if ($validated['certificate_type_id'] == 6 && isset($validated['business_name'])) {
-        // Only add business_name if certificate_type_id requires it
         $certificateRequestData['business_name'] = $validated['business_name'];
     }
 
@@ -72,9 +77,11 @@ class CertificateRequestController extends Controller
     $certificateRequest = CertificateRequest::create($certificateRequestData);
     $requestId = $certificateRequest->id; 
 
+    // Determine the certificate type and associated table
     $certificateType = CertificateType::find($validated['certificate_type_id']);
     $tableName = $certificateType->table_name;
 
+    // Prepare common data for specific certificate tables
     $commonData = [
         'user_id' => Auth::user()->id,
         'resident_id' => $validated['resident_id'],
@@ -86,6 +93,7 @@ class CertificateRequestController extends Controller
         'updated_at' => now(),
     ];
 
+    // Insert into specific tables based on certificate type
     if (in_array($tableName, ['cert_indigencies', 'cert_job_seekers', 'cert_unifast', 'cert_unemployment', 'cert_business'])) {
         $businessSpecificData = $tableName == 'cert_business'
             ? ['business_name' => $validated['business_name']]
@@ -97,19 +105,19 @@ class CertificateRequestController extends Controller
         ]));
     }
 
-    $certificateName = $certificateType->certificate_name;
-
     // Adjust date_needed to be 3 minutes earlier
     $adjustedDate = $validated['date_needed']
         ? Carbon::parse($validated['date_needed'])->subMinutes(3)->toDateTimeString()
         : null;
 
-
+    // Return with success data
     return redirect()->back()->with('success', [
-        'message' => "You have successfully requested a $certificateName certificate.",
+        'message' => "You have successfully requested a {$certificateType->certificate_name} certificate.",
         'adjusted_date' => $adjustedDate,
+        'reference_number' => $referenceNumber,
     ]);
 }
+
 
     
 

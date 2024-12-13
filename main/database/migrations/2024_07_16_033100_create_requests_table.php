@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('resident_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('certificate_type_id')->constrained()->onDelete('cascade');
+            $table->string('reference_number')->nullable();
             $table->string('requester_name');
             $table->string('purpose');
             $table->string('business_name')->nullable();
