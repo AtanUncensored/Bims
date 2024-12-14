@@ -19,7 +19,8 @@ class Request extends Model
         'business_name',
         'date_needed',
         'or_number',
-        'reference_number'
+        'reference_number',
+        'monthly_ave_income'
     ];
 
     public function barangay()
