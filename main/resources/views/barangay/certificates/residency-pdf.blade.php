@@ -176,7 +176,7 @@
                 <br>
                 @foreach ($barangayOfficials as $official)
                     @if ($official->position === 'Barangay Captain')
-                        <p class="last-info">{{ $official->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $official->resident->last_name }}</p>
+                        <p class="last-info">{{ $official->resident->first_name }} {{ strtoupper(substr($official->resident->middle_name, 0, 1)) }}. {{ $official->resident->last_name }}</p>
                     @endif
                 @endforeach
                 <p class="last-info2">punong barangay</p>
