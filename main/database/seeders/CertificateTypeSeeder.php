@@ -34,9 +34,9 @@ class CertificateTypeSeeder extends Seeder
         ]);
         
         CertificateType::create([
-            'certificate_name' => 'Unemployment Certificate',
+            'certificate_name' => 'Low Income Certificate',
             'price' => 200.00,
-            'table_name' => 'cert_unemployments',
+            'table_name' => 'cert_low_income',
         ]);
 
         CertificateType::create([

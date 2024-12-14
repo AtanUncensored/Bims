@@ -65,7 +65,7 @@
 
         .info-heading {
             text-align: center;
-            width: 190px;    
+            width: 350px;    
             margin-top: -500px;
             margin-left: 130px;
         }
@@ -182,20 +182,56 @@
                     <img src="{{ public_path('storage/images/' . $barangay->logo) }}" style="width: 500px; height:auto" alt="">
                 </div>
                 <div class="info-heading">
-                    <header class="info-title">CERTIFICATION</header>
-                    <div class="line-break2"></div>
-                    <p>(Unemployment Certificate)</p>
+                    <h2 class="info-title">Certificate of Residency</h2>
+
                 </div>
                 <br>
                 <br>
-                <p>TO WHOM IT MAY CONCERN:</p>
+                <p><b>TO WHOM IT MAY CONCERN:</b></p>
                 <br>
                 <br>
-                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
-                <p>years old, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }} is a bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}} {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
+                <p class="text">
+                    This is to certify that 
+                    <span class="name">
+                        @if($certificateRequest->resident->gender == 'male')
+                            Mr. 
+                        @elseif($certificateRequest->resident->gender == 'female' && $certificateRequest->resident->civil_status == 'married')
+                            Mrs. 
+                        @elseif($certificateRequest->resident->gender == 'female' && $certificateRequest->resident->civil_status != 'married')
+                            Miss. 
+                        @endif
+                        {{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}
+                    </span>, 
+                    {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }} years old, 
+                    {{ $certificateRequest->resident->citizenship }}, 
+                    {{ $certificateRequest->resident->civil_status }} and a bona fide resident of 
+                    Purok {{ $certificateRequest->resident->purok->purok_number}} {{ $barangay->barangay_name }}, Tubigon, Bohol.
+                </p>
                 <br>
-                <p class="text">This certification is being issued upon her request for her</p>
-                <p>application for <span class="purpose">{{ $certificateRequest->purpose }} purposes</span>.</p>
+                <p class="text">This is to certify further that 
+                    <span class="name">
+                        @if($certificateRequest->resident->gender == 'male')
+                            Mr. 
+                        @elseif($certificateRequest->resident->gender == 'female' && $certificateRequest->resident->civil_status == 'married')
+                            Mrs. 
+                        @elseif($certificateRequest->resident->gender == 'female' && $certificateRequest->resident->civil_status != 'married')
+                            Miss. 
+                        @endif
+                        {{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}
+                    </span>
+                    is earning a 
+                    @if(isset($monthly_ave_income))
+                        Monthly Average Income of {{ number_format($monthly_ave_income, 2) }} pesos
+                    @else
+                        No income data available.
+                    @endif
+                    
+                
+                </p>
+                <br>
+                <p class="text">This certification is being issued upon the request of <b>{{$certificateRequest->requester_name}}</b>
+                    for the purpose of {{ $certificateRequest->purpose }}
+                </p>
                 <br>
                 <p class="text">Issued this day of {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
                     at Barangay {{ $barangay->barangay_name }},</p>

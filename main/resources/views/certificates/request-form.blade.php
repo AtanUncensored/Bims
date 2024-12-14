@@ -41,11 +41,18 @@
                 <label for="purpose" class="block text-gray-700">Purpose</label>
                 <input type="text" id="purpose" name="purpose" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
             </div>
+
+            <!-- Mga hidden textfield -->
             <div class="mb-4 hidden" id="businessNameField">
                 <label for="business_name" class="block text-gray-700">Business Name</label>
                 <input type="text" id="business_name" name="business_name" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
             </div>
-            
+
+            <div class="mb-4 hidden" id="lowIncomeField">
+                <label for="monthly_ave_income" class="block text-gray-700">Monthly Average Income</label>
+                <input type="text" id="monthly_ave_income" name="monthly_ave_income" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
+            </div>
+            <!-- Mga hidden textfield -->
 
             <div class="mb-6">
                 <label for="date_needed" class="block text-gray-700">Date Needed</label>
@@ -130,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const successModal = document.getElementById('successModal');
     const certificateSelect = document.getElementById('certificate_type_id');
     const businessNameField = document.querySelector('.mb-4.hidden');
+    const lowIncomeField = document.getElementById('lowIncomeField');
+
 
     // Helper: Show Modal
     const showModal = (modal) => modal.classList.remove('hidden');
@@ -151,6 +160,15 @@ document.addEventListener('DOMContentLoaded', function () {
             businessNameField.classList.remove('hidden');
         } else {
             businessNameField.classList.add('hidden');
+        }
+    });
+
+    certificateSelect.addEventListener('change', function () {
+        const selectedOption = certificateSelect.options[certificateSelect.selectedIndex].text.toLowerCase();
+        if (selectedOption.includes('low income')) {
+            lowIncomeField.classList.remove('hidden');
+        } else {
+            lowIncomeField.classList.add('hidden');
         }
     });
 

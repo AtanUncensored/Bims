@@ -42,6 +42,8 @@ class CertificateRequestController extends Controller
         'purpose' => 'nullable|string|max:255',
         'date_needed' => 'nullable|date',
         'business_name' => 'nullable|required_if:certificate_type_id,6|string|max:255',
+        'monthly_ave_income' => 'nullable|required_if:certificate_type_id,5|numeric',
+
     ]);
 
     // Fetch resident details
@@ -72,6 +74,10 @@ class CertificateRequestController extends Controller
     if ($validated['certificate_type_id'] == 6 && isset($validated['business_name'])) {
         $certificateRequestData['business_name'] = $validated['business_name'];
     }
+    // Include monthly average low income if the certificate type is low income
+    if ($validated['certificate_type_id'] ==  5 && isset($validated['monthly_ave_income'])) {
+        $certificateRequestData['monthly_ave_income'] = $validated['monthly_ave_income'];
+    }
 
     // Save Certificate Request
     $certificateRequest = CertificateRequest::create($certificateRequestData);
@@ -94,11 +100,14 @@ class CertificateRequestController extends Controller
     ];
 
     // Insert into specific tables based on certificate type
-    if (in_array($tableName, ['cert_indigencies', 'cert_job_seekers', 'cert_unifast', 'cert_unemployment', 'cert_business'])) {
+    if (in_array($tableName, ['cert_indigencies', 'cert_job_seekers', 'cert_unifast', 'cert_low_income', 'cert_business'])) {
         $businessSpecificData = $tableName == 'cert_business'
             ? ['business_name' => $validated['business_name']]
             : [];
-        DB::table($tableName)->insert(array_merge($commonData, $businessSpecificData));
+        $lowIncomeSpecificData = $tableName == 'cert_low_income'
+        ? ['monthly_ave_income' => $validated['monthly_ave_income']]
+        : [];
+        DB::table($tableName)->insert(array_merge($commonData, $businessSpecificData, $lowIncomeSpecificData));
     } elseif ($tableName == 'cert_residences') {
         DB::table($tableName)->insert(array_merge($commonData, [
             'date' => now(),
@@ -122,11 +131,11 @@ class CertificateRequestController extends Controller
     
 
 
-    public function edit($id)
-{
-    $certificateRequest = CertificateRequest::findOrFail($id);
-    return view('barangay.certificates.edit', compact('certificateRequest'));
-}
+//     public function edit($id)
+// {
+//     $certificateRequest = CertificateRequest::findOrFail($id);
+//     return view('barangay.certificates.edit', compact('certificateRequest'));
+// }
     // Update the certificate request
 
     public function update(HttpRequest $request, $id)

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('requester_name');
             $table->string('purpose');
             $table->string('business_name')->nullable();
+            $table->string('monthly_ave_income')->nullable();
             $table->string('or_number')->nullable();
             $table->date('date_needed');
             $table->timestamp('downloaded_at')->nullable();

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cert_unemployments', function (Blueprint $table) {
+        Schema::create('cert_low_income', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('resident_id')->constrained()->onDelete('cascade'); 
@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('age'); 
             $table->string('civil_status');
             $table->enum('gender', ['Male', 'Female', 'Other']);
+            $table->timestamps();
+
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cert_unemployments');
+        Schema::dropIfExists('cert_low_income');
     }
 };

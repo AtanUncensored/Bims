@@ -191,7 +191,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
         Route::get('/certificate-requests/{id}/edit', [CertificateRequestController::class, 'edit'])->name('certificate_requests.edit');
         Route::put('/certificate-requests/{id}', [CertificateRequestController::class, 'update'])->name('certificate_requests.update');
+        Route::get('/certificates/custom/template', [CustomCertificateController::class, 'indexCustom'])->name('certificates.indexCustom');
         Route::get('/certificate/{certificateId}/{requesterName}_{certificateType}_{date}', [CertificateController::class, 'downloadCertificatePDF'])->name('certificate.download');
+        Route::get('/custom-certificate/{certificateId}/{requesterName}_{certificateType}_{date}', [CustomCertificateController::class, 'downloadCustomCertificatePDF'])->name('custom-certificate.download');
+
+    //custom certificate
+    Route::get('/custom-certificate/{id}/edit', [CustomCertificateController::class, 'edit'])->name('custom_certificate.edit');
+    Route::put('/certificates/custom/{id}', [CustomCertificateController::class, 'update'])->name('custom_certificate.update');
 
     //Puroks
         Route::get('/puroks', [PurokController::class, 'index'])->name('puroks.index');
@@ -239,6 +245,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/residency/store', [ResidencyController::class, 'store'])->name('certificates.residences.store');
 
         Route::get('/certificates/customized', [CustomCertificateController::class, 'create'])->name('certificates.customized');
+        Route::get('/certificates/create', [CustomCertificateController::class, 'createTemplate'])->name('certificates.createTemplate');
         Route::post('/certificates/customized', [CustomCertificateController::class, 'submit'])->name('certificates.customized.submit');
 
 

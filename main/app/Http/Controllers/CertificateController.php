@@ -110,7 +110,7 @@ class CertificateController extends Controller
         'Job Seeker Certificate'     => 'barangay.certificates.jobseeker-pdf',
         'Indigency Certificate'      => 'barangay.certificates.indigency-pdf',
         'Unifast Certificate'        => 'barangay.certificates.unifast-pdf',
-        'Unemployment Certificate'   => 'barangay.certificates.unemployment-pdf',
+        'Low Income Certificate'   => 'barangay.certificates.lowincome-pdf',
         'Business Certificate'       => 'barangay.certificates.business-pdf',
     ];
 
@@ -125,7 +125,8 @@ class CertificateController extends Controller
     $barangay = Barangay::findOrFail($certificateRequest->barangay_id);
     $barangayOfficials = BarangayOfficial::where('barangay_id', $barangay->id)->get();
 
-    $certType = $certificateType;
+    $certificateRequest = CertificateRequest::with('certificateType')
+    ->findOrFail($certificateId);
 
     // Prepare the data to pass to the view
     $pdfData = [
@@ -134,6 +135,7 @@ class CertificateController extends Controller
         'certType' => $certType,
         'barangayOfficials' => $barangayOfficials, 
         'barangayLogo' => public_path('storage/images/' . $barangay->logo), 
+        'monthly_ave_income' => $certificateRequest->monthly_ave_income,
     ];
 
     // Check if the view exists
