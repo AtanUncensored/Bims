@@ -19,6 +19,7 @@ class Request extends Model
         'business_name',
         'date_needed',
         'or_number',
+        'reference_number'
     ];
 
     public function barangay()

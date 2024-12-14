@@ -98,8 +98,17 @@
             </div>
             <p class="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
                 {{ $successData['message'] }}<br>
+                <span class="block mt-4 text-red-600 font-bold text-lg">
+                    Reference Number:
+                </span>
+                <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 rounded-lg p-2 mt-2 text-center text-lg">
+                    {{ $successData['reference_number'] }}
+                </div>
+                <small class="block text-gray-500 mt-2">
+                    Please take a screenshot of this number to present when you get the certificate in the barangay hall.
+                </small>
+                <br>
                 You can get it on: <strong>{{ $adjustedDate }}</strong><br>
-                User ID: <strong>{{ $successData['user_id'] }}</strong>
             </p>
             <div class="flex justify-center mt-6">
                 <button id="closeSuccessModal" 
@@ -110,6 +119,7 @@
         </div>
     </div>
 @endif
+
 
 
 

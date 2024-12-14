@@ -13,13 +13,15 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use App\Models\Request as CertificateRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;    
 use Illuminate\Support\Facades\DB;
 class CertificateController extends Controller
 {
-    public function index()
+    public function index(Request $request)
 {
     $barangayId = Auth::user()->barangay_id;
+
+    $search = $request->input('search');
 
     // Retrieve all certificate requests
     $certificateRequests = DB::table('requests')
@@ -35,22 +37,31 @@ class CertificateController extends Controller
             'requests.date_needed',
             'requests.requester_name',
             'requests.created_at',
-            'requests.downloaded_at'
+            'requests.downloaded_at',
+            'requests.reference_number'
         )
         ->where('requests.barangay_id', $barangayId)
+        ->when($search, function ($query, $search) {
+            return $query->where(function ($q) use ($search) {
+                $q->where('requests.reference_number', 'like', "%$search%")
+                  ->orWhere('residents.first_name', 'like', "%$search%")
+                  ->orWhere('residents.last_name', 'like', "%$search%")
+                  ->orWhere('certificate_types.certificate_name', 'like', "%$search%")
+                  ->orWhere('requests.purpose', 'like', "%$search%");
+            });
+        })
         ->get();
 
     // Group by 'latest' and 'downloaded'
-    $latestRequests = $certificateRequests->whereNull('downloaded_at')->sortByDesc('created_at')->take(5); 
+    $latestRequests = $certificateRequests->whereNull('downloaded_at')->sortByDesc('created_at')->take(5);
     $downloadedRequests = $certificateRequests->filter(function ($request) {
-        return !is_null($request->downloaded_at); // Filter downloaded requests
+        return !is_null($request->downloaded_at);
     })->sortByDesc('downloaded_at');
 
     return view('barangay.certificates.index', compact('latestRequests', 'downloadedRequests', 'certificateRequests'));
 }
 
     
-
     
 
     //User certificate access

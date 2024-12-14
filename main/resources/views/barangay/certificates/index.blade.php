@@ -4,6 +4,19 @@
 
 @section('content')
 <div class="container px-4">
+    <form action="{{ route('certificates.index') }}" method="GET" class="mb-4 flex items-center justify-end">
+        <input 
+            type="text" 
+            name="search" 
+            value="{{ request('search') }}" 
+            class="border rounded-l-lg px-4 py-2 w-1/5.5"
+            placeholder="Search certificates......" 
+            id="search-input"
+        />
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">
+            Search
+        </button>
+    </form>
 
     <div class="grid grid-rows-1 md:grid-rows-2 gap-4 max-h-[79vh] overflow-y-auto">
         
@@ -20,6 +33,7 @@
                     <table class="w-full table-auto border border-[2px] border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Reference Number</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Full Name</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Certificate Type</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purpose</th>
@@ -31,7 +45,18 @@
                         <tbody>
                             @foreach($latestRequests as $request)
                                 <tr class="border-b hover:bg-gray-50 transition duration-200">
-                                    <td class="px-4 py-2">{{ $request->full_name }}</td>
+                                    <td class="px-4 py-2 text-center">
+                                        @if($request->reference_number)
+                                            <span class="px-2 py-1 bg-blue-100 text-blue-800 font-semibold rounded-md text-sm tracking-wide">
+                                                {{ $request->reference_number }}
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 bg-red-100 text-red-800 font-semibold rounded-md text-sm tracking-wide">
+                                                No Reference Number
+                                            </span>
+                                        @endif
+                                    </td>
+                                                                        <td class="px-4 py-2">{{ $request->full_name }}</td>
                                     <td class="px-4 py-2">{{ $request->certificate_type }}</td>
                                     <td class="px-4 py-2">{{ $request->purpose }}</td>
                                     <td class="px-4 py-2">{{ \Carbon\Carbon::parse($request->date_needed)->format('F j, Y') }}</td>
@@ -125,6 +150,7 @@
                     <table class="w-full table-auto border border-[2px] border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
+                                <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Reference Number</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Full Name</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Certificate Type</th>
                                 <th class="lg:py-3 lg:px-6 py-1 px-1 bg-gray-600 text-white font-bold uppercase text-[7px] lg:text-[12px] text-left">Purpose</th>
@@ -135,6 +161,18 @@
                         <tbody>
                             @foreach($downloadedRequests as $request)
                                 <tr class="border-b hover:bg-gray-50 transition duration-200">
+                                    <td class="px-4 py-2 text-center">
+                                        @if($request->reference_number)
+                                            <span class="px-2 py-1 bg-blue-100 text-blue-800 font-semibold rounded-md text-sm tracking-wide">
+                                                {{ $request->reference_number }}
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 bg-red-100 text-red-800 font-semibold rounded-md text-sm tracking-wide">
+                                                No Reference Number
+                                            </span>
+                                        @endif
+                                    </td>
+                                    
                                     <td class="px-4 py-2">{{ $request->full_name }}</td>
                                     <td class="px-4 py-2">{{ $request->certificate_type }}</td>
                                     <td class="px-4 py-2">{{ $request->purpose }}</td>
@@ -225,6 +263,10 @@
     function printCertificate(url) {
         window.open(url, '_blank');
     }
+
+    window.onload = function() {
+        document.getElementById('search-input').value = ''; // Clear the input field
+    };
 
     
     function toggleEditModal(requestId) {
