@@ -4,25 +4,27 @@
 
 @section('content')
 <div class="container px-4">
-    <form action="{{ route('certificates.index') }}" method="GET" class="mb-4 flex items-center justify-end">
-        <input 
-            type="text" 
-            name="search" 
-            value="{{ request('search') }}" 
-            class="border rounded-l-lg px-4 py-2 w-1/5.5"
-            placeholder="Search certificates......" 
-            id="search-input"
-        />
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">
-            Search
-        </button>
-    </form>
 
     <div class="grid grid-rows-1 md:grid-rows-2 gap-4 max-h-[79vh] overflow-y-auto">
         
         <!-- Latest Requests Section -->
         <div class="bg-white shadow-lg rounded-lg py-2 px-4">
-            <h2 class="text-xl font-bold text-blue-500 mb-3 uppercase">Latest Certificate Requests:</h2>
+            <div class="flex justify-start items-center">
+                <h2 class="text-xl font-bold text-blue-500 mb-3 uppercase mr-[125px]">Latest Certificate Requests:</h2>
+            <form action="{{ route('certificates.index') }}" method="GET" class="mb-4 flex items-center">
+                <input 
+                    type="text" 
+                    name="search" 
+                    value="{{ request('search') }}" 
+                    class="border rounded-l-lg px-4 py-2 w-1/5.5"
+                    placeholder="Search certificates......" 
+                    id="search-input"
+                />
+                <button type="submit" class="bg-gray-600 text-white px-4 py-2 rounded-r-lg">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            </div>
             @if($latestRequests->isEmpty())
                 <div class="text-center py-16">
                     <i class="fa-solid fa-folder-open fa-3x text-muted"></i>
