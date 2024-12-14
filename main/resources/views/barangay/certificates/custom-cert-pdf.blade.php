@@ -46,6 +46,7 @@
                     <strong>{{ $purpose ?? 'Purpose not specified' }}</strong>.
                 </p>
                 <br>
+                <p>Receipt Number: {{$or_number}}</p>
                 <p class="text">
                     Issued this day of 
                     <strong>{{ \Carbon\Carbon::now()->format('F d, Y') }}</strong>

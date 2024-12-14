@@ -195,6 +195,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/certificate/{certificateId}/{requesterName}_{certificateType}_{date}', [CertificateController::class, 'downloadCertificatePDF'])->name('certificate.download');
         Route::get('/custom-certificate/{certificateId}/{requesterName}_{certificateType}_{date}', [CustomCertificateController::class, 'downloadCustomCertificatePDF'])->name('custom-certificate.download');
 
+    //custom certificate
+    Route::get('/custom-certificate/{id}/edit', [CustomCertificateController::class, 'edit'])->name('custom_certificate.edit');
+    Route::put('/certificates/custom/{id}', [CustomCertificateController::class, 'update'])->name('custom_certificate.update');
+
     //Puroks
         Route::get('/puroks', [PurokController::class, 'index'])->name('puroks.index');
 

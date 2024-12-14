@@ -10,6 +10,8 @@ use App\Models\BarangayOfficial;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\CertificateRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request as HttpRequest;
+
 
 class CustomCertificateController extends Controller
 {
@@ -91,11 +93,13 @@ class CustomCertificateController extends Controller
         // Ensure the certificate has the required details
         $certificateName = $customCert->certificate_name ?? 'Custom Certificate';
         $purpose = $customCert->purpose ?? 'Not specified';
+        $or_number = $customCert->or_number ?? 'None';
     
         // Data to pass to the view
         $pdfData = [
             'certificateName' => $certificateName,
             'purpose' => $purpose,
+            'or_number' => $or_number,
             'resident' => $customCert->resident, // Resident data
             'barangay' => $barangay, // Barangay details
             'barangayOfficials' => $barangayOfficials, // Barangay officials list
@@ -121,6 +125,28 @@ class CustomCertificateController extends Controller
         
         // Stream the PDF to the browser for printing
         return $pdf->stream('custom_certificate.pdf');
+    }
+
+    // public function edit($id)
+    // {
+    //     $certificateRequest = CertificateRequest::findOrFail($id);
+    //     return view('barangay.certificates.edit', compact('certificateRequest'));
+    // }
+        // Update the certificate request
+    
+        public function update(HttpRequest $request, $id)
+    {
+        // Validate the data
+        $validated = $request->validate([
+            'or_number' => 'required|string|max:50',
+        ]);
+    
+        // Find the certificate request by ID and update it
+        $certificateRequest = CertificateRequest::findOrFail($id);
+        $certificateRequest->or_number = $request->input('or_number');
+        $certificateRequest->save();
+    
+        return redirect()->route('certificates.indexCustom')->with('success', 'Certificate request updated successfully!');
     }
     
 
