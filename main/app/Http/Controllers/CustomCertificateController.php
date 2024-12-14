@@ -3,60 +3,126 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barangay;
-use App\Models\BarangayOfficial;
-use App\Models\CertificateRequest;
+use App\Models\Resident;
+use App\Models\Household;
 use Illuminate\Http\Request;
+use App\Models\BarangayOfficial;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\CertificateRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CustomCertificateController extends Controller
 {
-    public function create()
-    {
+
+    public function create() {
+
         $barangayId = auth()->user()->barangay_id;
 
-        // Retrieve the certificate request (you might need to modify this based on your relationships)
-        $certificateRequest = CertificateRequest::with('resident.purok') 
-        ->where('user_id', auth()->id()) 
-        ->first();  // Changed from firstOrFail()
+         // Retrieve user households
+        $userHouseholds = Household::where('user_id', auth()->id())->pluck('id');
     
-        if (!$certificateRequest) {
-            // Handle case when certificate request doesn't exist
-            // For example, you could pass an empty object or a default value
-            $certificateRequest = new CertificateRequest(); // Or another approach depending on the scenario
-        }
-    
-        // Retrieve barangay officials
-        $barangayOfficials = BarangayOfficial::with('resident')
-            ->where('barangay_id', $barangayId)
-            ->get();
+        // Retrieve residents belonging to these households
+        $residents = Resident::whereHas('householdMembers', function ($query) use ($userHouseholds) {
+            $query->whereIn('household_id', $userHouseholds);
+        })->get();
 
-        // Get barangay information
-        $barangay = Barangay::findOrFail($barangayId);
+        return view('certificates.indexTemplate', compact('residents'));
+    }
 
-        return view('certificates.customized', [
-            'certificateRequest' => $certificateRequest,
-            'barangayOfficials' => $barangayOfficials,
-            'barangay' => $barangay,
-        ]);
+    public function createTemplate(Request $request)
+    {
+        $resident = Resident::findOrFail($request->resident_id);
+        return view('certificates.createTemplate', compact('resident'));
     }
 
     public function submit(Request $request)
     {
-        // Validate the incoming data
+        $barangayId = Auth::user()->barangay_id;
+
         $validated = $request->validate([
             'certificate_name' => 'required|string|max:255',
-            'certificate_body' => 'required|string|max:2000',
+            'purpose' => 'required|string',
+            'date_needed' => 'required|date',
+            'resident_id' => 'required|exists:residents,id',
         ]);
 
-        // Create a new certificate request
         CertificateRequest::create([
             'user_id' => auth()->id(),
+            'resident_id' => $validated['resident_id'],
             'certificate_name' => $validated['certificate_name'],
-            'body' => $validated['certificate_body'],
+            'purpose' => $validated['purpose'],
+            'date_needed' => $validated['date_needed'],
         ]);
 
-        // Redirect back with a success message
-        return redirect()->route('certificates.customized')
-                         ->with('success', 'Your customized certificate request has been submitted.');
+        return redirect()->back()->with('success', 'Certificate request submitted successfully.');
     }
+    
+    public function indexCustom()
+    {
+        $barangayId = auth()->user()->barangay_id;
+
+        $customCert = CertificateRequest::whereHas('resident', function ($query) use ($barangayId) {
+            $query->where('barangay_id', $barangayId);
+        })->get();
+
+        $latestRequests = $customCert->whereNull('downloaded_at')->sortByDesc('created_at')->take(5);
+
+        $downloadedRequests = $customCert->filter(function ($request) {
+            return !is_null($request->downloaded_at);
+        })->sortByDesc('downloaded_at');
+
+        return view('certificates.custom', compact('latestRequests', 'downloadedRequests'));
+    }
+
+    
+    
+
+    
+
+    public function downloadCustomCertificatePDF(Request $request, $certificateId)
+    {
+        // Retrieve the custom certificate with resident relationship
+        $customCert = CertificateRequest::with('resident')->findOrFail($certificateId);
+    
+        // Retrieve Barangay details and officials
+        $barangay = Barangay::findOrFail($customCert->resident->barangay_id);
+        $barangayOfficials = BarangayOfficial::where('barangay_id', $barangay->id)->get();
+    
+        // Ensure the certificate has the required details
+        $certificateName = $customCert->certificate_name ?? 'Custom Certificate';
+        $purpose = $customCert->purpose ?? 'Not specified';
+    
+        // Data to pass to the view
+        $pdfData = [
+            'certificateName' => $certificateName,
+            'purpose' => $purpose,
+            'resident' => $customCert->resident, // Resident data
+            'barangay' => $barangay, // Barangay details
+            'barangayOfficials' => $barangayOfficials, // Barangay officials list
+            'barangayLogo' => public_path('storage/images/' . $barangay->logo), // Barangay logo path
+        ];
+    
+        // Define the single Blade template for custom certificates
+        $view = 'barangay.certificates.custom-cert-pdf';
+    
+        // Check if the view exists
+        if (!view()->exists($view)) {
+            abort(404, "The view for custom certificates does not exist.");
+        }
+    
+        // Generate the PDF
+        $pdf = Pdf::loadView($view, $pdfData);
+
+        // Mark as downloaded (if it hasn't been marked already)
+        if (!$customCert->downloaded_at) {
+            $customCert->downloaded_at = now();
+            $customCert->save();
+        }
+        
+        // Stream the PDF to the browser for printing
+        return $pdf->stream('custom_certificate.pdf');
+    }
+    
+
+
 }

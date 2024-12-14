@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('cert_custom', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('resident_id')->constrained()->onDelete('cascade');
             $table->string('certificate_name');
-            $table->text('body');
+            $table->text('purpose');
+            $table->string('or_number')->nullable();
+            $table->timestamp('downloaded_at')->nullable();
+            $table->date('date_needed');
             $table->timestamps();
         });
     }

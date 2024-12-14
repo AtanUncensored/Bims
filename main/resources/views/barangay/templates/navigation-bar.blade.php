@@ -84,6 +84,10 @@
                         <i class="fa-solid fa-certificate text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Certificates</span>
                     </a>
+                    <a href="{{ url('/certificates/custom/template') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates/custom/template') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                        <i class="fa-solid fa-certificate text-blue-800"></i>
+                        <span class="text-[13px] lg:text-[15px]">Custom Certificates</span>
+                    </a>
                     <a href="{{ url('/puroks') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('puroks') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
                         <i class="fas fa-house fa-lg text-blue-800"></i>
                         <span class="text-[13px] lg:text-[15px]">Puroks</span>

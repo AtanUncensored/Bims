@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Resident;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CertificateRequest extends Model
 {
@@ -13,8 +14,11 @@ class CertificateRequest extends Model
 
     protected $fillable = [
         'user_id',
+        'resident_id',
         'certificate_name',
-        'body',
+        'purpose',
+        'or_number',
+        'date_needed',
     ];
 
     public function resident()
