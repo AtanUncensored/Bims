@@ -125,10 +125,13 @@ class CertificateController extends Controller
     $barangay = Barangay::findOrFail($certificateRequest->barangay_id);
     $barangayOfficials = BarangayOfficial::where('barangay_id', $barangay->id)->get();
 
+    $certType = $certificateType;
+
     // Prepare the data to pass to the view
     $pdfData = [
         'certificateRequest' => $certificateRequest,
         'barangay' => $barangay,
+        'certType' => $certType,
         'barangayOfficials' => $barangayOfficials, 
         'barangayLogo' => public_path('storage/images/' . $barangay->logo), 
     ];

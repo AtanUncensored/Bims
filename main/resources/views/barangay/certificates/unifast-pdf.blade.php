@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Certificate Request ( Unifast Certificate )</title>
+    <title>Certificate Request ( Residency Certificate / Unifast Application )</title>
     <style>
 
         * {
@@ -14,18 +14,7 @@
 
         .heading {
             text-align: center;
-            margin-top: -100px;
-            font-weight: bold;
-        }
-
-        .line-break {
-            border-top: 2px solid black;
-            margin: 15px 70px;
-        }
-
-        .line {
-            border-top: 5px solid rgb(22, 92, 150);
-            margin: 10px 10px;
+            margin-top: -95px;
         }
 
         .last-title {
@@ -36,27 +25,19 @@
             margin: 15px;
         }
 
-        .content {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row; 
-            align-items: flex-start; 
-        }
-         
-
-        .information-detail {
-            margin-left: 100px;
-        }
-
         .info-heading {
-            text-align: center;
-            width: 500px;    
-            margin-top: -500px;
-            margin-left: 80px;
+            width: 100%;   
+            font-size: 13px; 
+            margin-top: 25px;
+            margin-left: 150px;
         }
 
         .info-title {
             font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            width: 500px;
+            text-transform: uppercase;
         }
 
         .name, .purpose {
@@ -65,7 +46,7 @@
         }
         
         .text {
-            margin-left: 50px;
+            margin-left: 120px;
         }
 
         .text-last {
@@ -75,34 +56,60 @@
             font-weight: bold;
             text-align: right;
             text-transform: uppercase;
-            margin-right: 45px;
+            margin-right: 90px;
         }
 
         .last-info2 {
-            font-weight: bold;
             text-align: right;
-            margin-right: 60px;
-        }
-
-        .line-break-last {
-            border-top: 2px solid black;
-            margin-left: 230px;
-            margin-right: 45px;
+            font-size: 18px;
+            text-transform: capitalize;
+            margin-right: 130px;
         }
 
         .logo {
-            margin-left: 150px;
-            margin-top: 30px;
+            margin-left: 155px;
+            margin-top: 90px;
         }
 
-        .background-logo {
-            margin-top: 10px;
-            margin-left: -150px;
-            opacity: 0.1;
-        }
-
-        .barangay-name , .captain-name {
+        .barangay-name , .barangay-office {
+            font-weight: bold;
             text-transform: uppercase;
+        }
+
+        .purok {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        p {
+            margin-left: 70px;
+        }
+        .footer {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 2px;
+        }
+        .footer-2 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 95px;
+        }
+        .footer-3 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 45px;
+        }
+        .footer-4 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 20px;
+        }
+        .footer-5 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 73px;
+        }
+        .and {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -117,67 +124,55 @@
             <header>Municipality of Tubigon</header>
             <header class="barangay-name">BARANGAY OF {{ $barangay->barangay_name }}</header>
             <br>
-            <header>OFFICE OF THE PUNONG BARANGAY</header>
+            <header class="barangay-office">OFFICE OF THE PUNONG BARANGAY</header>
             <div class="line-break"></div>
         </div>
-        <div class="content">
-            
+        <div class="content">  
             <div class="information-detail">
-                <div class="background-logo">
-                    <img src="{{ public_path('storage/images/' . $barangay->logo) }}" style="width: 500px; height:auto" alt="">
-                </div>
                 <div class="info-heading">
                     <h2 class="info-title">Certificate of Residency</h2>
                 </div>
                 <br>
                 <br>
-                <p>TO WHOM IT MAY CONCERN:</p>
                 <br>
+                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->middle_name }} {{ $certificateRequest->resident->last_name }}</span>, {{ $certificateRequest->resident->citizenship }}, {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }} years old, {{ $certificateRequest->resident->gender }} is a</p>
+                <p>bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}, {{ $barangay->barangay_name }}, Tubigon, Bohol.  
+                    @if($certificateRequest->resident->gender == 'male')
+                    He
+                 @elseif($certificateRequest->resident->gender == 'female')
+                    She
+                 @endif is the @if($certificateRequest->resident->gender == 'male')
+                 Son
+              @elseif($certificateRequest->resident->gender == 'female')
+                 Daugther
+              @endif of <span class="name">{{ $certificateRequest->resident->father->first_name}} {{ $certificateRequest->resident->father->middle_name}}</span></p>
+              <p> <span class="name">{{ $certificateRequest->resident->father->last_name}}</span> <span class="and">and</span> <span class="name">{{ $certificateRequest->resident->mother->first_name}} {{ $certificateRequest->resident->mother->middle_name}} {{ $certificateRequest->resident->mother->last_name}}</span>. Both are residents of the afore-mentioned barangay.</p>
                 <br>
-                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ $certificateRequest->resident->citizenship }} ,  {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
-                <p>years old, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }} is a bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}} {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
-                <p>
-                    She is the daughter of 
-                    <b>
-                      @if($certificateRequest->resident->father_id && $certificateRequest->resident->mother_id)
-                        {{ $certificateRequest->resident->father->first_name }} {{ $certificateRequest->resident->father->last_name }} 
-                        @if($certificateRequest->resident->father->suffix) 
-                          {{ $certificateRequest->resident->father->suffix }} 
-                        @endif
-                        and 
-                        {{ $certificateRequest->resident->mother->first_name }} {{ $certificateRequest->resident->mother->last_name }} 
-                        @if($certificateRequest->resident->mother->suffix) 
-                          {{ $certificateRequest->resident->mother->suffix }} 
-                        @endif</b>
-                        .Both are residents of the afore-mentioned barangay.
-                        <b>
-                      @elseif($certificateRequest->resident->father_id)
-                        {{ $certificateRequest->resident->father->first_name }} {{ $certificateRequest->resident->father->last_name }} 
-                        @if($certificateRequest->resident->father->suffix) 
-                          {{ $certificateRequest->resident->father->suffix }} 
-                        @endif</b>
-                        , resident of the afore-mentioned barangay.
-                        <b>
-                      @elseif($certificateRequest->resident->mother_id)
-                        {{ $certificateRequest->resident->mother->first_name }} {{ $certificateRequest->resident->mother->last_name }} 
-                        @if($certificateRequest->resident->mother->suffix) 
-                          {{ $certificateRequest->resident->mother->suffix }} 
-                        @endif</b>
-                        , resident of the afore-mentioned barangay.
-                      @else
-                        The parents are not available.
-                      @endif
-
-                  </p>
-                  
-
+                <p class="text">This certification is issued upon the request of <span class="name">{{ $certificateRequest->requester_name}}</span> for <span class="and">UNIFAST</span></p>
+                <p> <span class="and">APPLICATION</span> and for whatever any legal purpose this may serve
+                    @if($certificateRequest->resident->gender == 'male')
+                    him
+                  @elseif($certificateRequest->resident->gender == 'female')
+                    her
+                  @endif best.  
+                </p>
                 <br>
-                <p class="text">This certification is being issued upon request of {{ $certificateRequest->requester_name }} </p>
-                <p> for <span class="purpose">{{ $certificateRequest->purpose }}</span>  and for whatever purpose this may serve her </p>
-                <br>
-                <p class="text">Given this day of {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
-                    at Barangay {{ $barangay->barangay_name }},</p>    
-                <p class="text-last">Tubigon, Bohol, Philippines.</p>
+                <p class="text">Given this <span class="and">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('j') }}
+                    @php
+                        $day = \Carbon\Carbon::parse($certificateRequest->date_needed)->format('j');
+                    @endphp
+                    @if(in_array($day, [1, 21, 31]))
+                    st
+                    @elseif(in_array($day, [2, 22]))
+                    nd
+                    @elseif(in_array($day, [3, 23]))
+                    rd
+                    @else
+                    th
+                    @endif </span>
+                    day of
+                     <span class="and">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F, Y') }}</span>
+                    at Barangay {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
                 <br>
                 <br>
                 <br>
@@ -190,15 +185,18 @@
                     @endif
                 @endforeach
                 <div class="line-break-last"></div>
-                <p class="last-info2">PUNONG BARANGAY</p>
+                <p class="last-info2">punong barangay</p>
+                <br>
+                <br>
+                <p>Paid under O.R No: <span class="footer">{{$certificateRequest->or_number}}</span>  </p>
+                <p>Amount: <span class="footer-5">P{{ $certType->price }}</span> </p>
+                <p>Date: <span class="footer-2">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</span> </p>
+                <p>Doc. Stamp Tax: <span class="footer-4">P30.00</span> </p>
+                <p>COR No.</p>
                 <br>
                 <br>
                 <br>
-                <br>
-                <br>
-                <p>Receipt No: {{$certificateRequest->or_number}} </p>
-                <p>Date: {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</p>
-                <p>Place Issued: {{ $barangay->barangay_name }}, Tubigon, Bohol</p>
+                <p class="and">Not valid without official seal.</p>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Certificate Request ( Business Certificate )</title>
+    <title>Certificate Request ( Business Permit )</title>
     <style>
 
         * {
@@ -14,22 +14,7 @@
 
         .heading {
             text-align: center;
-            margin-top: -100px;
-            font-weight: bold;
-        }
-
-        .line-break {
-            border-top: 2px solid black;
-            margin: 15px 70px;
-        }
-
-        .line-break2 {
-            border-top: 2px solid black;
-        }
-
-        .line {
-            border-top: 5px solid rgb(22, 92, 150);
-            margin: 10px 10px;
+            margin-top: -95px;
         }
 
         .last-title {
@@ -40,28 +25,19 @@
             margin: 15px;
         }
 
-        .content {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row; 
-            align-items: flex-start; 
-        }
-         
-        .information-detail {
-            width: 500px;    
-            margin-left: 300px;
-            margin-top: -750px;
-        }
-
         .info-heading {
-            text-align: center;
-            width: 140px;    
-            margin-top: 250px;
-            margin-left: 130px;
+            width: 100%;   
+            font-size: 13px; 
+            margin-top: 25px;
+            margin-left: 150px;
         }
 
         .info-title {
             font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            width: 500px;
+            text-transform: uppercase;
         }
 
         .name, .purpose {
@@ -70,7 +46,7 @@
         }
         
         .text {
-            margin-left: 50px;
+            margin-left: 120px;
         }
 
         .text-last {
@@ -80,34 +56,68 @@
             font-weight: bold;
             text-align: right;
             text-transform: uppercase;
-            margin-right: 45px;
+            margin-right: 90px;
         }
 
         .last-info2 {
-            font-weight: bold;
             text-align: right;
-            margin-right: 60px;
-        }
-
-        .line-break-last {
-            border-top: 2px solid black;
-            margin-left: 230px;
-            margin-right: 45px;
+            font-size: 18px;
+            text-transform: capitalize;
+            margin-right: 130px;
         }
 
         .logo {
-            margin-left: 150px;
-            margin-top: 30px;
+            margin-left: 130px;
+            margin-top: 90px;
         }
 
-        .background-logo {
-            margin-top: 10px;
-            margin-left: -150px;
-            opacity: 0.1;
-        }
-
-        .barangay-name , .captain-name {
+        .barangay-office {
+            font-weight: bold;
             text-transform: uppercase;
+        }
+
+        .barangay-name {
+            text-transform: uppercase;
+        }
+
+        .purok {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        p {
+            margin-left: 70px;
+        }
+        .footer {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 2px;
+        }
+        .footer-2 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 95px;
+        }
+        .footer-3 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 45px;
+        }
+        .footer-4 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 20px;
+        }
+        .footer-5 {
+            font-weight: bold;
+            text-transform: capitalize;
+            margin-left: 73px;
+        }
+        .name2 {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .date {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -120,38 +130,57 @@
             <header>Republic of the Philippines</header>
             <header>Province of Bohol</header>
             <header>Municipality of Tubigon</header>
-            <header class="barangay-name">BARANGAY OF {{ $barangay->barangay_name }}</header>
+            <header class="barangay-name">OFFICE OF THE BARANGAY CAPTAIN</header>
             <br>
-            <header>OFFICE OF THE PUNONG BARANGAY</header>
-            <div class="line-break"></div>
         </div>
-        <div class="content">
-            
+        <div class="content">  
             <div class="information-detail">
-                <div class="background-logo">
-                    <img src="{{ public_path('storage/images/' . $barangay->logo) }}" style="width: 500px; height:auto" alt="">
-                </div>
                 <div class="info-heading">
                     <h2 class="info-title">Business Permit</h2>
                 </div>
                 <br>
                 <br>
-                <p>TO WHOM IT MAY CONCERN:</p>
                 <br>
+                <p class="text">Permit is hereby granted to <span class="name">{{ $certificateRequest->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $certificateRequest->resident->last_name }}</span>, {{ $certificateRequest->resident->citizenship }} , of legal age, is a resident of</p>
+                <p>{{ $barangay->barangay_name }}, Tubigon, Bohol to open/operate "A {{ $certificateRequest->business_name}} located at <span class="purok">Purok {{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}, {{ $barangay->barangay_name }},</span></p>
+                <p class="purok">Tubigon, Bohol.</p>
                 <br>
-                <p class="text">Permit is hereby granted to <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ $certificateRequest->resident->citizenship }} , of legal age,</p>
-                <p> is a resident of {{ $barangay->barangay_name }}, Tubigon, Bohol to open/operate "A <b>{{ $certificateRequest->business_name}}</b></p> 
-                <p> located at <b>Purok-{{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}of{{ $barangay->barangay_name }}, Tubigon, Bohol.  </b> </p>
                 <br>
                 <p class="text">Provided that peace and order should be maintained always.</p>
                 <br>
-                <p class="text">This certification is being issued upon request of <b>{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</b></p>
-                <p>for whatever any legal purposes thhis may serve</span>.</p>
                 <br>
-
-                <p class="text">Issued this day of {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
-                    at Barangay {{ $barangay->barangay_name }},</p>
-                <p class="text-last">Tubigon, Bohol, Philippines.</p>
+                <p>This certification is issued upon request of 
+                    <span class="name2">
+                    @if($certificateRequest->resident->gender == 'male')
+                       Mr.
+                    @elseif($certificateRequest->resident->gender == 'female')
+                       Ms.
+                    @endif
+                    {{ $certificateRequest->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $certificateRequest->resident->last_name }}</span>, for whatever any legal purpose
+                </p>
+                <p>this may serve @if($certificateRequest->resident->gender == 'male')
+                    him
+                 @elseif($certificateRequest->resident->gender == 'female')
+                    her
+                 @endif best.</p>
+                <br>
+                <p class="text">Given this <span class="date">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('j') }}
+                   @php
+                        $day = \Carbon\Carbon::parse($certificateRequest->date_needed)->format('j');
+                    @endphp
+                    @if(in_array($day, [1, 21, 31]))
+                    st
+                    @elseif(in_array($day, [2, 22]))
+                    nd
+                    @elseif(in_array($day, [3, 23]))
+                    rd
+                    @else
+                    th
+                    @endif
+                    day of
+                     {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F, Y') }}
+                    </span>
+                    at Barangay {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
                 <br>
                 <br>
                 <br>
@@ -164,15 +193,20 @@
                     @endif
                 @endforeach
                 <div class="line-break-last"></div>
-                <p class="last-info2">PUNONG BARANGAY</p>
+                <p class="last-info2">barangay captain</p>
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
-                <p>Receipt No: {{$certificateRequest->or_number}}</p>
-                <p>Date: {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</p>
-                <p>Place Issued: {{ $barangay->barangay_name }}, Tubigon, Bohol</p>
+                <p>Paid under O.R No: <span class="footer">{{$certificateRequest->or_number}}</span>  </p>
+                <p>Date: <span class="footer-2">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</span> </p>
+                <p>Amount: <span class="footer-5">P{{ $certType->price }}</span> </p>
+                <p>Doc. Stamp Tax: <span class="footer-4">P30.00</span> </p>
+                <br>
+                <br>
+                <br>
+                <p class="barangay-office ">Not valid without an official seal.</p>
             </div>
         </div>
     </div>
