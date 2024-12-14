@@ -56,14 +56,14 @@
             font-weight: bold;
             text-align: right;
             text-transform: uppercase;
-            margin-right: 90px;
+            margin-right: 150px;
         }
 
         .last-info2 {
             text-align: right;
-            font-size: 18px;
+            font-size: 16px;
             text-transform: capitalize;
-            margin-right: 130px;
+            margin-right: 150px;
         }
 
         .logo {
@@ -132,7 +132,7 @@
                 <br>
                 <br>
                 <br>
-                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }} years old, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }} is a bona fide </p>
+                <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $certificateRequest->resident->last_name }}</span> , {{ $certificateRequest->resident->citizenship }}, {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }} years old, {{ $certificateRequest->resident->gender }}, is a bona fide </p>
                 <p>resident of <span class="purok">Purok {{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}, {{ $barangay->barangay_name }}, Tubigon, Bohol.</span></p>
                 <br>
                 <p class="text">This certification is being issued upon the request of the above-named person in
@@ -176,10 +176,9 @@
                 <br>
                 @foreach ($barangayOfficials as $official)
                     @if ($official->position === 'Barangay Captain')
-                        <p class="last-info">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
+                        <p class="last-info">{{ $official->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $official->resident->last_name }}</p>
                     @endif
                 @endforeach
-                <div class="line-break-last"></div>
                 <p class="last-info2">punong barangay</p>
                 <br>
                 <br>

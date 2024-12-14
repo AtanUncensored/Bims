@@ -125,8 +125,7 @@ class CertificateController extends Controller
     $barangay = Barangay::findOrFail($certificateRequest->barangay_id);
     $barangayOfficials = BarangayOfficial::where('barangay_id', $barangay->id)->get();
 
-    $certificateRequest = CertificateRequest::with('certificateType')
-    ->findOrFail($certificateId);
+    $certType = $certificateType;
 
     // Prepare the data to pass to the view
     $pdfData = [

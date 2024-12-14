@@ -63,14 +63,14 @@
             font-weight: bold;
             text-align: right;
             text-transform: uppercase;
-            margin-right: 90px;
+            margin-right: 170px;
         }
 
         .last-info2 {
             text-align: right;
-            font-size: 17px;
+            font-size: 16px;
             text-transform: capitalize;
-            margin-right: 125px;
+            margin-right: 170px;
         }
 
         .logo {
@@ -121,11 +121,11 @@
         }
         .last-date {
             text-align: right;
-            margin-right: 170px;
+            margin-right: 220px;
         }
         .last-witness {
             text-align: right;
-            margin-right: 140px;
+            margin-right: 180px;
         }
     </style>
 </head>
@@ -188,10 +188,9 @@
                 <br>
                 @foreach ($barangayOfficials as $official)
                     @if ($official->position === 'Barangay Captain')
-                        <p class="last-info">{{ $official->resident->first_name }} {{ $official->resident->middle_name }} {{ $official->resident->last_name }}</p>
+                        <p class="last-info">{{ $official->resident->first_name }} {{ strtoupper(substr($official->resident->middle_name, 0, 1)) }}. {{ $official->resident->last_name }}</p>
                     @endif
                 @endforeach
-                <div class="line-break-last"></div>
                 <p class="last-info2">punong barangay</p>
                 <br>
                 <p class="last-info2">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</p>
