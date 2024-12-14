@@ -5,58 +5,58 @@
 @section('content')
 
 <div class="flex justify-center items-center">
-    <div class="py-2 px-4 bg-white rounded-lg shadow-lg mr-4 w-[500px] ml-4">
-    <h2 class="text-xl font-bold text-blue-500 mb-4 text-center uppercase">Request Certificate</h2>
-    <hr class="border-t-2 mt-3 mb-6 border-gray-300">
+    <div class="py-2 px-4 bg-white rounded-lg shadow-lg mr-4 w-[500px] ml-4 max-h-[530px] overflow-y-auto">
+        <h2 class="text-xl font-bold text-blue-500 mb-4 text-center uppercase">Request Certificate</h2>
+        <hr class="border-t-2 mt-3 mb-6 border-gray-300">
 
-    <form id="requestForm" action="{{ route('certificates.store') }}" method="POST">
-        @csrf
+        <form id="requestForm" action="{{ route('certificates.store') }}" method="POST">
+            @csrf
 
-        <div class="mb-4">
-            <label for="certificate_type_id" class="block text-gray-700">Certificate Type</label>
-            <select name="certificate_type_id" id="certificate_type_id" class="w-full border py-1 px-2 border-gray-400 rounded-lg" required>
-                @foreach ($certificateTypes as $certificateType)
-                    <option value="{{ $certificateType->id }}" data-price="{{ $certificateType->price }}">
-                        {{ $certificateType->certificate_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+            <div class="mb-4">
+                <label for="certificate_type_id" class="block text-gray-700">Certificate Type</label>
+                <select name="certificate_type_id" id="certificate_type_id" class="w-full border py-1 px-2 border-gray-400 rounded-lg" required>
+                    @foreach ($certificateTypes as $certificateType)
+                        <option value="{{ $certificateType->id }}" data-price="{{ $certificateType->price }}">
+                            {{ $certificateType->certificate_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="mb-4">
-            <label for="resident_id" class="block text-gray-700">Select Resident</label>
-            <select id="resident_id" name="resident_id" class="w-full border py-1 px-2 border-gray-400 rounded-lg" required>
-                @foreach($residents as $resident)
-                    <option value="{{ $resident->id }}">{{ $resident->first_name }}</option>
-                @endforeach
-            </select>
-        </div>
+            <div class="mb-4">
+                <label for="resident_id" class="block text-gray-700">Select Resident</label>
+                <select id="resident_id" name="resident_id" class="w-full border py-1 px-2 border-gray-400 rounded-lg" required>
+                    @foreach($residents as $resident)
+                        <option value="{{ $resident->id }}">{{ $resident->first_name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="mb-4">
-            <label for="requester_name" class="block text-gray-700">Requester Name</label>
-            <input type="text" id="requester_name" name="requester_name" class="w-full border py-1 px-2 border-gray-400 rounded-lg" required>
-        </div>
+            <div class="mb-4">
+                <label for="requester_name" class="block text-gray-700">Requester Name</label>
+                <input type="text" id="requester_name" name="requester_name" class="w-full border py-1 px-2 border-gray-400 rounded-lg" required>
+            </div>
 
-        <div class="mb-4">
-            <label for="purpose" class="block text-gray-700">Purpose</label>
-            <input type="text" id="purpose" name="purpose" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
-        </div>
-        <div class="mb-4 hidden" id="businessNameField">
-            <label for="business_name" class="block text-gray-700">Business Name</label>
-            <input type="text" id="business_name" name="business_name" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
-        </div>
-        
+            <div class="mb-4">
+                <label for="purpose" class="block text-gray-700">Purpose</label>
+                <input type="text" id="purpose" name="purpose" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
+            </div>
+            <div class="mb-4 hidden" id="businessNameField">
+                <label for="business_name" class="block text-gray-700">Business Name</label>
+                <input type="text" id="business_name" name="business_name" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
+            </div>
+            
 
-        <div class="mb-6">
-            <label for="date_needed" class="block text-gray-700">Date Needed</label>
-            <input type="datetime-local" id="date_needed" name="date_needed" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
-        </div>
+            <div class="mb-6">
+                <label for="date_needed" class="block text-gray-700">Date Needed</label>
+                <input type="datetime-local" id="date_needed" name="date_needed" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
+            </div>
 
-        <div class="mb-4 flex justify-center items-center">
-            <button type="button" id="submitRequest" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Submit Request</button>
-        </div>
-    </form>
-</div>
+            <div class="mb-4 flex justify-center items-center">
+                <button type="button" id="submitRequest" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Submit Request</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 
