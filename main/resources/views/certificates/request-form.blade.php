@@ -41,6 +41,11 @@
             <label for="purpose" class="block text-gray-700">Purpose</label>
             <input type="text" id="purpose" name="purpose" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
         </div>
+        <div class="mb-4 hidden" id="businessNameField">
+            <label for="business_name" class="block text-gray-700">Business Name</label>
+            <input type="text" id="business_name" name="business_name" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
+        </div>
+        
 
         <div class="mb-6">
             <label for="date_needed" class="block text-gray-700">Date Needed</label>
@@ -93,7 +98,8 @@
             </div>
             <p class="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
                 {{ $successData['message'] }}<br>
-                You can get it on: <strong>{{ $adjustedDate }}</strong>
+                You can get it on: <strong>{{ $adjustedDate }}</strong><br>
+                User ID: <strong>{{ $successData['user_id'] }}</strong>
             </p>
             <div class="flex justify-center mt-6">
                 <button id="closeSuccessModal" 
@@ -106,60 +112,74 @@
 @endif
 
 
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const confirmationModal = document.getElementById('confirmationModal');
-        const successModal = document.getElementById('successModal');
 
-        // Helper: Show Modal
-        const showModal = (modal) => modal.classList.remove('hidden');
-        // Helper: Hide Modal
-        const hideModal = (modal) => modal.classList.add('hidden');
+document.addEventListener('DOMContentLoaded', function () {
+    const confirmationModal = document.getElementById('confirmationModal');
+    const successModal = document.getElementById('successModal');
+    const certificateSelect = document.getElementById('certificate_type_id');
+    const businessNameField = document.querySelector('.mb-4.hidden');
 
-        // Format time to 12-hour format
-        const formatTo12Hour = (time) => {
-            const [hour, minute] = time.split(':');
-            const hours = (hour % 12) || 12;
-            const ampm = hour >= 12 ? 'PM' : 'AM';
-            return `${hours}:${minute} ${ampm}`;
-        };
+    // Helper: Show Modal
+    const showModal = (modal) => modal.classList.remove('hidden');
+    // Helper: Hide Modal
+    const hideModal = (modal) => modal.classList.add('hidden');
 
-        // Handle Submit Button Click
-        document.getElementById('submitRequest').addEventListener('click', function () {
-            const certificateSelect = document.getElementById('certificate_type_id');
-            const dateNeeded = document.getElementById('date_needed').value;
-            const [datePart, timePart] = dateNeeded ? dateNeeded.split('T') : ['Not Specified', ''];
+    // Format time to 12-hour format
+    const formatTo12Hour = (time) => {
+        const [hour, minute] = time.split(':');
+        const hours = (hour % 12) || 12;
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        return `${hours}:${minute} ${ampm}`;
+    };
 
-            if (!certificateSelect.value || !dateNeeded) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            // Update modal details
-            const selected = certificateSelect.options[certificateSelect.selectedIndex];
-            document.getElementById('modalDetails').innerHTML = `
-                You are about to request <strong>${selected.text}</strong>.<br>
-                Price: <strong>${selected.dataset.price ? '₱' + selected.dataset.price : 'Free'}</strong><br>
-                Date Needed: <strong>${datePart}</strong><br>
-                Time: <strong>${timePart ? formatTo12Hour(timePart) : 'Not Specified'}</strong>
-            `;
-            showModal(confirmationModal);
-        });
-
-        // Cancel Request
-        document.getElementById('cancelRequest').addEventListener('click', () => hideModal(confirmationModal));
-
-        // Confirm Request
-        document.getElementById('confirmRequest').addEventListener('click', () => {
-            hideModal(confirmationModal);
-            document.getElementById('requestForm').submit();
-        });
-
-        // Close Success Modal
-        if (successModal) {
-            document.getElementById('closeSuccessModal').addEventListener('click', () => hideModal(successModal));
+    // Toggle Business Name Field
+    certificateSelect.addEventListener('change', function () {
+        const selectedOption = certificateSelect.options[certificateSelect.selectedIndex].text.toLowerCase();
+        if (selectedOption.includes('business')) {
+            businessNameField.classList.remove('hidden');
+        } else {
+            businessNameField.classList.add('hidden');
         }
     });
+
+    // Handle Submit Button Click
+    document.getElementById('submitRequest').addEventListener('click', function () {
+        const dateNeeded = document.getElementById('date_needed').value;
+        const [datePart, timePart] = dateNeeded ? dateNeeded.split('T') : ['Not Specified', ''];
+
+        if (!certificateSelect.value || !dateNeeded) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        // Update modal details
+        const selected = certificateSelect.options[certificateSelect.selectedIndex];
+        document.getElementById('modalDetails').innerHTML = `
+            You are about to request <strong>${selected.text}</strong>.<br>
+            Price: <strong>${selected.dataset.price ? '₱' + selected.dataset.price : 'Free'}</strong><br>
+            Date Needed: <strong>${datePart}</strong><br>
+            Time: <strong>${timePart ? formatTo12Hour(timePart) : 'Not Specified'}</strong>
+        `;
+        showModal(confirmationModal);
+    });
+
+    // Cancel Request
+    document.getElementById('cancelRequest').addEventListener('click', () => hideModal(confirmationModal));
+
+    // Confirm Request
+    document.getElementById('confirmRequest').addEventListener('click', () => {
+        hideModal(confirmationModal);
+        document.getElementById('requestForm').submit();
+    });
+
+    // Close Success Modal
+    if (successModal) {
+        document.getElementById('closeSuccessModal').addEventListener('click', () => hideModal(successModal));
+    }
+});
+
 </script>
 
 

@@ -182,22 +182,31 @@
                     <img src="{{ public_path('storage/images/' . $barangay->logo) }}" style="width: 500px; height:auto" alt="">
                 </div>
                 <div class="info-heading">
-                    <header class="info-title">CERTIFICATION</header>
-                    <div class="line-break2"></div>
-                    <p>(Residency Certificate)</p>
+                    <h2 class="info-title">Certificate of Residency</h2>
                 </div>
                 <br>
-                <br>
-                <p>TO WHOM IT MAY CONCERN:</p>
                 <br>
                 <br>
                 <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->last_name }} {{ $certificateRequest->resident->suffix }}</span> , {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }}</p>
                 <p>years old, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }} is a bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}} {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
                 <br>
-                <p class="text">This certification is being issued upon her request for her</p>
-                <p>application for <span class="purpose">{{ $certificateRequest->purpose }} purposes</span>.</p>
+                <p class="text">This certification is being issued upon the request of the above-named person in
+                    @if($certificateRequest->resident->gender == 'male')
+                      his
+                    @elseif($certificateRequest->resident->gender == 'female')
+                      her
+                    @endif
+                    desire to {{ $certificateRequest->purpose }} 
+                </p>
+                <p>and for whatever any legal purposes this may serve
+                    @if($certificateRequest->resident->gender == 'male')
+                    him
+                  @elseif($certificateRequest->resident->gender == 'female')
+                    her
+                  @endif best  
+                </p>
                 <br>
-                <p class="text">Issued this day of {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
+                <p class="text">Given this {{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}
                     at Barangay {{ $barangay->barangay_name }},</p>
                 <p class="text-last">Tubigon, Bohol, Philippines.</p>
                 <br>
