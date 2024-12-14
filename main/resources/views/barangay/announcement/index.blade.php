@@ -5,7 +5,10 @@
 @section('content')
 <div class="px-4">
     <div class="bg-white py-2 px-4 rounded-lg shadow-lg mb-1">
-        <h2 class="text-xl font-bold text-blue-500 mb-3">IMPORTANT ANNOUNCEMENTS:</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold text-blue-500 mb-3">IMPORTANT ANNOUNCEMENTS:</h2>
+            <a href="/barangay/announcement/archived" class="py-2 px-4 text-[10px] lg:text-[15px] text-green-600 font-bold rounded hover:text-green-500"><i class="fa-solid fa-file-invoice"></i> Archive</a>
+        </div>
 
         <hr class="border-t-2 mb-4 border-gray-300">
 
@@ -145,12 +148,6 @@
                         </div>
 
                         <div class="image-area relative shadow-xl">
-
-                            @if($announcement->expiration_date && $announcement->expiration_date < now())
-                                <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
-                                    This announcement is expired and will disappear after 3 months
-                                </div>
-                            @endif
                             
                             @if($announcement->imgUrl)
                             <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">

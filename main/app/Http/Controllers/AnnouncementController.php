@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\Userlog;
 use Illuminate\Http\Request;
 use App\Models\Announcement;
+use App\Models\ArchivedAnnouncement;
 use App\Models\Barangay;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,25 +13,73 @@ class AnnouncementController extends Controller
 {
     public function index()
 {
-    // Delete expired announcements
-    $announcements = Announcement::where(function($query) {
-        $query->where('barangay_id', Auth::user()->barangay_id)
-              ->where(function($query) {
-                  
-                  $query->where('expiration_date', '>=', now())
-                        ->orWhereNull('expiration_date');
-              });
-    })
-    ->orWhere('is_global', true) 
-    ->orderByRaw('is_global DESC')  
-    ->orderBy('created_at', 'desc') 
-    ->paginate(10);
+    // Ma move ang expired nga announcement didto sa archive ug ma abot nag 3 months
+    $expiredAnnouncements = Announcement::where('barangay_id', Auth::user()->barangay_id)
+        ->where('expiration_date', '<', now()->subMonths(3)) 
+        ->get();
+
+    foreach ($expiredAnnouncements as $announcement) {
+        // Padung sa archive ni
+        ArchivedAnnouncement::create([
+            'user_id' => $announcement->user_id,
+            'barangay_id' => $announcement->barangay_id,
+            'title' => $announcement->title,
+            'announcement_date' => $announcement->announcement_date,
+            'expiration_date' => $announcement->expiration_date,
+            'content' => $announcement->content,
+            'imgUrl' => $announcement->imgUrl,
+            'is_global' => $announcement->is_global,
+        ]);
+
+        // E delete tung naa sa original nga gi display
+        $announcement->delete();
+    }
+
+    // Mau ni nga part ang mo kuha sa active pa nga announcement
+    $announcements = Announcement::where('barangay_id', Auth::user()->barangay_id)
+        ->where(function ($query) {
+            $query->where('expiration_date', '>=', now()) // active pa
+                  ->orWhereNull('expiration_date');   
+        })
+        ->orWhere('is_global', true) // Apil ang global announcements
+        ->orderByRaw('is_global DESC')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
     return view('barangay.announcement.index', compact('announcements'));
 }
 
 
-    
+    public function archived()
+    {
+        $archivedAnnouncements = ArchivedAnnouncement::where('barangay_id', Auth::user()->barangay_id)
+                                                    ->orderBy('created_at', 'desc')
+                                                    ->paginate(10);
+
+        return view('barangay.announcement.archived.index', compact('archivedAnnouncements'));
+    }
+
+    public function restore(Request $request, $id)
+    {
+        $archivedAnnouncement = ArchivedAnnouncement::findOrFail($id);
+
+        $announcement = Announcement::create([
+            'user_id' => $archivedAnnouncement->user_id,
+            'barangay_id' => $archivedAnnouncement->barangay_id,
+            'title' => $archivedAnnouncement->title,
+            'announcement_date' => $archivedAnnouncement->announcement_date,
+            'expiration_date' => $request->expiration_date ?? $archivedAnnouncement->expiration_date,
+            'content' => $archivedAnnouncement->content,
+            'imgUrl' => $archivedAnnouncement->imgUrl,
+            'is_global' => $archivedAnnouncement->is_global,
+        ]);
+
+        $archivedAnnouncement->delete();
+
+        return redirect()->route('barangay.announcement.archived')->with('success', 'Announcement restored successfully!');
+    }
+
+
 
     public function userIndex()
     {

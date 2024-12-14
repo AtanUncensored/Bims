@@ -20,6 +20,11 @@
                 @foreach($announcements as $announcement)
                     <div class="bg-white border border-[2px] border-gray-200 rounded-lg overflow-hidden w-full mt-4 w-full">
                         <div class="image-area relative shadow-xl">
+                            @if($announcement->expiration_date && $announcement->expiration_date < now())
+                            <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
+                                This announcement is expired and will be moved to the archive after 3 months
+                            </div>
+                        @endif  
                             @if($announcement->imgUrl)
                             <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
                             <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>

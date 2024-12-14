@@ -173,6 +173,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/announcements/store', [AnnouncementController::class, 'store'])->name('announcements.store');
         Route::put('/announcements/{announcement}', [AnnouncementController::class, 'updateAnnouncement'])->name('barangay.announcement.update');
         Route::get('/announcements/previous', [AnnouncementController::class, 'previousView'])->name('announcements.previous');
+        Route::get('/barangay/announcement/archived', [AnnouncementController::class, 'archived'])->name('barangay.announcement.archived');
+        Route::post('/barangay/announcement/restore/{id}', [AnnouncementController::class, 'restore'])->name('barangay.announcement.restore');
+
 
     //Complaints
         Route::get('/complaints', [ComplaintController::class, 'barangayComplaints'])->name('barangay.complaints.index');

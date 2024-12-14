@@ -4,11 +4,17 @@
 
 @section('content')
 
-<div class="py-6 px-4 max-h-[72vh] overflow-y-auto mx-auto">
+<div class="flex justify-end mr-3">
+    <a href="{{ url('/announcements/show') }}" class="inline-block font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 text-lg">
+        <i class="fa-solid fa-arrow-left"></i> Return to Announcements
+    </a>
+</div>
+
+<div class="py-6 px-4 max-h-[70vh] overflow-y-auto mx-auto">
     <div class="image-area relative shadow-xl">    
         @if($announcement->expiration_date && $announcement->expiration_date < now())
             <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
-                This announcement is expired and will disappear after 3 months
+                This announcement is expired and will be moved to the archive after 3 months
             </div>
         @endif                        
         @if($announcement->imgUrl)
@@ -143,12 +149,14 @@
         </article>
     </div>
 </div>
+@if (\Carbon\Carbon::now()->greaterThanOrEqualTo($announcement->expiration_date))
+    <div class="flex justify-end mr-4">
+        <a href="{{ url('/announcements/previous') }}" class="inline-block font-semibold text-red-600 hover:text-red-800 transition-all duration-300 text-lg">
+            Back to Previous <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+@endif
 
-<div class="flex justify-end mt-3 mr-8">
-    <a href="{{ url('/announcements/show') }}" class="inline-block font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 text-lg">
-        Return to Announcements
-    </a>
-</div>
 
 <script>
     function toggleEditModal(announcementId) {

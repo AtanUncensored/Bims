@@ -25,11 +25,6 @@
                     @endif
 
                     <div class="image-area relative shadow-xl">
-                        @if($announcement->expiration_date && $announcement->expiration_date < now())
-                            <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold py-2 px-4 rounded shadow-md">
-                                This announcement is expired and will disappear after 3 months
-                            </div>
-                        @endif
                         @if($announcement->imgUrl)
                         <img src="{{ asset('storage/' . $announcement->imgUrl) }}" alt="Announcement Image" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-black opacity-25 rounded-lg"></div>
@@ -43,7 +38,7 @@
                         <div>
                             <h3 class="lg:text-2xl text-[15px] font-semibold mb-2 text-blue-600">{{ $announcement->title }}</h3>
                         </div>
-                        <a href="{{ route('user.announcement.show', $announcement->id) }}" class="ml-auto bg-blue-500 text-white text-center py-2 px-4 rounded hover:bg-blue-600">View details</a>
+                        <a href="{{ route('user.announcement.show', $announcement->id) }}" class="py-2 px-4 text-[10px] lg:text-[15px] bg-blue-600 text-white font-bold rounded hover:bg-blue-500 ml-auto">View details</a>
                     </div>
                 </div>
             @endforeach        

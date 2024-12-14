@@ -4,6 +4,12 @@
 
 @section('content')
 
+<div class="flex justify-end mr-3">
+    <a href="{{ url('/lgu-announcement') }}" class="inline-block font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 text-lg">
+        <i class="fa-solid fa-arrow-left"></i> Return to Announcements
+    </a>
+</div>
+
 <div class="py-6 px-4 max-h-[72vh] overflow-y-auto mx-auto">
     <div class="image-area relative shadow-xl">
         @if($announcement->imgUrl)
@@ -145,11 +151,6 @@
         </article>
         
     </div>
-</div>
-<div class="flex justify-end mt-3 mr-8">
-    <a href="{{ url('/lgu-announcement') }}" class="inline-block font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 text-lg">
-        Return to Announcements
-    </a>
 </div>
 
 <script>
