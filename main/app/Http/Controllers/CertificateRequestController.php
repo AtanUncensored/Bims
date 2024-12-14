@@ -94,7 +94,7 @@ class CertificateRequestController extends Controller
     ];
 
     // Insert into specific tables based on certificate type
-    if (in_array($tableName, ['cert_indigencies', 'cert_job_seekers', 'cert_unifast', 'cert_unemployment', 'cert_business'])) {
+    if (in_array($tableName, ['cert_indigencies', 'cert_job_seekers', 'cert_unifast', 'cert_low_income', 'cert_business'])) {
         $businessSpecificData = $tableName == 'cert_business'
             ? ['business_name' => $validated['business_name']]
             : [];
