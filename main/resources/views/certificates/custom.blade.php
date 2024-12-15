@@ -29,7 +29,7 @@
                                 <td class="px-4 py-2">{{ $cusCert->certificate_name }}</td>
                                 <td class="px-4 py-2">{{ $cusCert->resident->first_name }}</td>
                                 <td class="px-4 py-2">{{ $cusCert->resident->gender }}</td>
-                                <td class="px-4 py-2">{{ $cusCert->purpose }}</td>
+                                <td class="px-4 py-2">{{ Str::limit($cusCert->purpose, 10, '....') }}</td>
                                 <td class="px-4 py-2">{{ \Carbon\Carbon::parse($cusCert->date_needed)->format('F j, Y') }}</td>
                                 <td class="px-4 py-2 text-center">
                                     <div class="flex items-center justify-center gap-2">
@@ -126,7 +126,7 @@
                                 <td class="px-4 py-2">{{ $cusCert->certificate_name }}</td>
                                 <td class="px-4 py-2">{{ $cusCert->resident->first_name }}</td>
                                 <td class="px-4 py-2">{{ $cusCert->resident->gender }}</td>
-                                <td class="px-4 py-2">{{ $cusCert->purpose }}</td>
+                                <td class="px-4 py-2">{{ Str::limit($cusCert->purpose, 10, '....') }}</td>
                                 <td class="px-4 py-2">{{ \Carbon\Carbon::parse($cusCert->date_needed)->format('F j, Y') }}</td>
                                 <td class="px-4 py-2">{{ \Carbon\Carbon::parse($cusCert->downloaded_at)->format('F j, Y') }}</td>
                                 <td class="px-4 py-2 text-center">

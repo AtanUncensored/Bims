@@ -40,7 +40,7 @@ class CustomCertificateController extends Controller
     public function submit(Request $request)
     {
         $barangayId = Auth::user()->barangay_id;
-
+    
         $validated = $request->validate([
             'certificate_name' => 'required|string|max:255',
             'purpose' => 'required|string',
@@ -48,18 +48,24 @@ class CustomCertificateController extends Controller
             'date_needed' => 'required|date',
             'resident_id' => 'required|exists:residents,id',
         ]);
-
-        CertificateRequest::create([
+    
+        $certificateRequest = CertificateRequest::create([
             'user_id' => auth()->id(),
             'resident_id' => $validated['resident_id'],
             'certificate_name' => $validated['certificate_name'],
             'purpose' => $validated['purpose'],
-            'secondpurpose' => 'required|string',
+            'secondpurpose' => $validated['secondpurpose'], // Corrected to use secondpurpose
             'date_needed' => $validated['date_needed'],
         ]);
-
-        return redirect()->back()->with('success', 'Certificate request submitted successfully.');
+    
+        // Passing the data to the session for confirmation
+        return redirect()->back()->with('success', 'Certificate request submitted successfully.')
+                                 ->with('certificate', [
+                                     'certificate_name' => $validated['certificate_name'],
+                                     'date_needed' => $validated['date_needed'],
+                                 ]);
     }
+    
     
     public function indexCustom()
     {
