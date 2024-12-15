@@ -142,8 +142,7 @@
                 <br>
                 <br>
                 <p class="text">Permit is hereby granted to <span class="name">{{ $certificateRequest->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $certificateRequest->resident->last_name }}</span>, {{ $certificateRequest->resident->citizenship }} , of legal age, is a resident of</p>
-                <p>{{ $barangay->barangay_name }}, Tubigon, Bohol to open/operate "A {{ $certificateRequest->business_name}} located at <span class="purok">Purok {{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}, {{ $barangay->barangay_name }},</span></p>
-                <p class="purok">Tubigon, Bohol.</p>
+                <p>{{ $barangay->barangay_name }}, Tubigon, Bohol to open/operate "A {{ $certificateRequest->business_name}} located at <span class="purok">Purok {{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}, {{ $barangay->barangay_name }},Tubigon, Bohol.</span></p>
                 <br>
                 <br>
                 <p class="text">Provided that peace and order should be maintained always.</p>

@@ -44,6 +44,7 @@ class CustomCertificateController extends Controller
         $validated = $request->validate([
             'certificate_name' => 'required|string|max:255',
             'purpose' => 'required|string',
+            'secondpurpose' => 'nullable|string',
             'date_needed' => 'required|date',
             'resident_id' => 'required|exists:residents,id',
         ]);
@@ -53,6 +54,7 @@ class CustomCertificateController extends Controller
             'resident_id' => $validated['resident_id'],
             'certificate_name' => $validated['certificate_name'],
             'purpose' => $validated['purpose'],
+            'secondpurpose' => 'required|string',
             'date_needed' => $validated['date_needed'],
         ]);
 
@@ -92,13 +94,15 @@ class CustomCertificateController extends Controller
     
         // Ensure the certificate has the required details
         $certificateName = $customCert->certificate_name ?? 'Custom Certificate';
-        $purpose = $customCert->purpose ?? 'Not specified';
+        $purpose = $customCert->purpose ?? null;
+        $secondpurpose = $customCert->secondpurpose ?? null; // Default to null if not set
         $or_number = $customCert->or_number ?? 'None';
     
         // Data to pass to the view
         $pdfData = [
             'certificateName' => $certificateName,
             'purpose' => $purpose,
+            'secondpurpose' => $secondpurpose,
             'or_number' => $or_number,
             'resident' => $customCert->resident, // Resident data
             'barangay' => $barangay, // Barangay details

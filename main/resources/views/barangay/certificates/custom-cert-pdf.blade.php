@@ -139,11 +139,14 @@
                 <p>a bona fide resident of 
                     Purok {{ $resident->purok->purok_number }}, Barangay {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
                 <br>
+
+
+
+                <p>{{ $purpose ?? null }}.</p>
+                <br>
                 <p class="text">
-                    This certification is being issued upon their request for their
-                    application for 
+                    {{ $secondpurpose ?? null }}
                 </p>
-                <p><strong>{{ $purpose ?? 'Purpose not specified' }}</strong>.</p>
                 <br>
                 <p class="text">Issued this {{ \Carbon\Carbon::now()->format('d') }}
                     @php

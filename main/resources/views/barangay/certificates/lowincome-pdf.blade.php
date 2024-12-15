@@ -168,7 +168,7 @@
                     is earning a
                 </p>
                 <p> @if(isset($monthly_ave_income))
-                    Monthly Average Income of {{ number_format($monthly_ave_income, 2) }} pesos
+                    Monthly Average Income of {{ number_format($monthly_ave_income, 2) }} pesos.
                 @else
                     No income data available.
                 @endif</p>

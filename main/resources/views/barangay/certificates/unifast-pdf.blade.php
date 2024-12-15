@@ -56,14 +56,15 @@
             font-weight: bold;
             text-align: right;
             text-transform: uppercase;
-            margin-right: 200px;
+            margin-top: 40px;
+            margin-right: 115px;
         }
 
         .last-info2 {
             text-align: right;
             font-size: 16px;
             text-transform: capitalize;
-            margin-right: 200px;
+            margin-right: 130px;
         }
 
         .logo {
@@ -137,16 +138,53 @@
                 <br>
                 <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ $certificateRequest->resident->middle_name }} {{ $certificateRequest->resident->last_name }}</span>, {{ $certificateRequest->resident->citizenship }}, {{ \Carbon\Carbon::parse($certificateRequest->resident->birth_date)->age }} years old, {{ $certificateRequest->resident->gender }} is a</p>
                 <p>bona fide resident of Purok {{ $certificateRequest->resident->purok->purok_number}}, {{ $certificateRequest->resident->purok->purok_name}}, {{ $barangay->barangay_name }}, Tubigon, Bohol.  
-                    @if($certificateRequest->resident->gender == 'male')
-                    He
-                 @elseif($certificateRequest->resident->gender == 'female')
-                    She
-                 @endif is the @if($certificateRequest->resident->gender == 'male')
-                 Son
-              @elseif($certificateRequest->resident->gender == 'female')
-                 Daugther
-              @endif of <span class="name">{{ $certificateRequest->resident->father->first_name}} {{ $certificateRequest->resident->father->middle_name}}</span></p>
-              <p> <span class="name">{{ $certificateRequest->resident->father->last_name}}</span> <span class="and">and</span> <span class="name">{{ $certificateRequest->resident->mother->first_name}} {{ $certificateRequest->resident->mother->middle_name}} {{ $certificateRequest->resident->mother->last_name}}</span>. Both are residents of the afore-mentioned barangay.</p>
+                        @if($certificateRequest->resident->gender == 'male')
+                            He
+                        @elseif($certificateRequest->resident->gender == 'female')
+                            She
+                        @else
+                            They
+                        @endif 
+                        is the 
+                        @if($certificateRequest->resident->gender == 'male')
+                            Son
+                        @elseif($certificateRequest->resident->gender == 'female')
+                            Daughter
+                        @else
+                            Child
+                        @endif 
+                        of
+                    </p>
+                    <p>
+                        @if($certificateRequest->resident->father && $certificateRequest->resident->mother)
+                        <span class="name">
+                            Mr. {{ $certificateRequest->resident->father->first_name }} 
+                            {{ $certificateRequest->resident->father->middle_name ?? '' }} 
+                            {{ $certificateRequest->resident->father->last_name ?? '' }}
+                        </span> 
+                        <span class="and">and</span> 
+                        <span class="name">
+                            Mrs. {{ $certificateRequest->resident->mother->first_name }} 
+                            {{ $certificateRequest->resident->mother->middle_name ?? '' }} 
+                            {{ $certificateRequest->resident->mother->last_name ?? '' }}
+                        </span>. Both are residents of the afore-mentioned barangay.
+                    @elseif($certificateRequest->resident->father)
+                        <span class="name">
+                            Mr. {{ $certificateRequest->resident->father->first_name }} 
+                            {{ $certificateRequest->resident->father->middle_name ?? '' }} 
+                            {{ $certificateRequest->resident->father->last_name ?? '' }}
+                        </span>, who is a resident of the afore-mentioned barangay.
+                    @elseif($certificateRequest->resident->mother)
+                        <span class="name">
+                            Mrs. {{ $certificateRequest->resident->mother->first_name }} 
+                            {{ $certificateRequest->resident->mother->middle_name ?? '' }} 
+                            {{ $certificateRequest->resident->mother->last_name ?? '' }}
+                        </span>, who is a resident of the afore-mentioned barangay.
+                    @else
+                        no parent information provided.
+                    @endif
+                    </p>
+                    
                 <br>
                 <p class="text">This certification is issued upon the request of <span class="name">{{ $certificateRequest->requester_name}}</span> for <span class="and">UNIFAST</span></p>
                 <p> <span class="and">APPLICATION</span> and for whatever any legal purpose this may serve

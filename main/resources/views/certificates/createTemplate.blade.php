@@ -55,22 +55,17 @@
         
                 <!-- Purpose -->
                 <div>
-                    <p class="text-gray-800">
-                        This certification is being issued upon 
-                        <span class="font-semibold">
-                            @if($resident->gender == 'male') his @else her @endif
-                        </span> 
-                        request for 
-                        <span class="font-semibold">
-                            @if($resident->gender == 'male') his @else her @endif
-                        </span> 
-                        application for:
-                    </p>
-                    <input type="text" 
-                           name="purpose" 
-                           placeholder="Purpose" 
-                           class="border border-gray-300 rounded-md py-2 px-4 w-full max-w-md mt-2" 
-                           required>
+                    <textarea name="purpose" 
+                    placeholder="Enter the purpose of the request here..." 
+                    class="border border-gray-300 rounded-md py-2 px-4 w-full mt-2 h-48 resize-none" 
+                                required></textarea>
+      
+                    <!-- Second input field for 2nd Purpose -->
+                    <textarea name="secondpurpose" 
+                    placeholder="Enter the purpose of the request here..." 
+                    class="border border-gray-300 rounded-md py-2 px-4 w-full mt-4 h-48 resize-none" 
+                    ></textarea>
+            
                 </div>
         
                 <!-- Date -->

@@ -155,10 +155,30 @@
                 <p class="text">This is to certify that <span class="name">{{ $certificateRequest->resident->first_name }} {{ strtoupper(substr($certificateRequest->resident->middle_name, 0, 1)) }}. {{ $certificateRequest->resident->last_name }}</span>, {{ $certificateRequest->resident->citizenship }}, {{ $certificateRequest->resident->gender }}, {{ $certificateRequest->resident->civil_status }}, of legal age, is a</p>
                 <p>bona fide resident of {{ $barangay->barangay_name }}, Tubigon, Bohol.</p>
                 <br>
-                <p class="text">She is qualified avilee of RA11261 or the First Time Jobseekers Act of 2019</p>
+                <p class="text">
+                  @if($certificateRequest->resident->gender == 'male')
+                    He
+                  @elseif($certificateRequest->resident->gender == 'female')
+                    She
+                  @endif
+                     is qualified avilee of RA11261 or the First Time Jobseekers Act of 2019
+                </p>
                 <br>
-                <p class="text">I further certify that the holder/bearer was informed of her rights, including the duties</p>
-                <p>and responsibilities accorded by RA 11261 through the oath of undertaking she has signed and</p>
+                <p class="text">I further certify that the holder/bearer was informed of 
+                  @if($certificateRequest->resident->gender == 'male')
+                    his
+                  @elseif($certificateRequest->resident->gender == 'female')
+                    her
+                  @endif
+                    rights, including the duties
+                </p>
+                <p>and responsibilities accorded by RA 11261 through the oath of undertaking
+                    @if($certificateRequest->resident->gender == 'male')
+                    he
+                  @elseif($certificateRequest->resident->gender == 'female')
+                    she
+                  @endif
+                    has signed and</p>
                 <p>executed in the presence  of our Barangay Official.</p>
                 <br>
                 <p class="text">Signed this <span class="date">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('j') }}

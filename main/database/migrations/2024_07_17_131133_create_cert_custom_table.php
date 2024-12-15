@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('resident_id')->constrained()->onDelete('cascade');
             $table->string('certificate_name');
-            $table->text('purpose');
+            $table->text('purpose')->nullable();
+            $table->text('secondpurpose')->nullable();
             $table->string('or_number')->nullable();
             $table->timestamp('downloaded_at')->nullable();
             $table->date('date_needed');
