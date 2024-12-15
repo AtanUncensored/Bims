@@ -236,8 +236,7 @@
                                                     <div class="form-group">
                                                         <label for="civil_status" class="block text-sm font-medium text-gray-700 text-left">Civil Status:</label>
                                                         <select name="civil_status" id="civil_status" class="form-control mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-                                                            <option value="">Select Civil Status</option>
-                                                            <option value="Single." {{ old('civil_status', $resident->civil_status) === 'Single' ? 'selected' : '' }}>Single</option>
+                                                            <option value="Single" {{ old('civil_status', $resident->civil_status) === 'Single' ? 'selected' : '' }}>Single</option>
                                                             <option value="Married" {{ old('civil_status', $resident->civil_status) === 'Married' ? 'selected' : '' }}>Married</option>
                                                             <option value="Widowed" {{ old('civil_status', $resident->civil_status) === 'Widowed' ? 'selected' : '' }}>Widowed</option>
                                                             <option value="Separated" {{ old('civil_status', $resident->civil_status) === 'Separated' ? 'selected' : '' }}>Separated</option>

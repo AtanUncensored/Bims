@@ -52,46 +52,50 @@
             </h1>
         </div>
 
-            <nav id="main-nav">  
-                <div class="mt-[15px]">
-                    <a href="{{ url('/barangay-dashboard') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangay-dashboard*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-house fa-lg text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Dashboard</span>
-                    </a>
-                    <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements/show') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-bullhorn text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Announcements</span>
-                    </a>
-                    <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residents') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-users fa-lg text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Residents</span>
-                    </a>
-                    <a href="{{ url('/residentUser') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residentUser') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-user fa-lg text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Users</span>
-                    </a>
-                    <a href="{{ url('/complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('complaints') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-regular fa-newspaper text-blue-800 font-bold"></i>
-                        <span class="text-[13px] lg:text-[15px]">Complaints</span>
-                    </a>
-                    <a href="{{ url('/logs') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('logs') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-list text-blue-800 font-bold"></i>
-                        <span class="text-[13px] lg:text-[15px]">Logs</span>
-                    </a>
-                    <a href="{{ url('/reports') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('reports') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-file-lines text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Budget Reports</span>
-                    </a>
-                    <a href="{{ url('/certificates') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fa-solid fa-certificate text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Certificates</span>
-                    </a>
-                    <a href="{{ url('/puroks') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('puroks') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
-                        <i class="fas fa-house fa-lg text-blue-800"></i>
-                        <span class="text-[13px] lg:text-[15px]">Puroks</span>
-                    </a>
-                </div>
-            </nav>
+        <nav id="main-nav">  
+            <div class="mt-[15px]">
+                <a href="{{ url('/barangay-dashboard') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('barangay-dashboard*') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fas fa-house fa-lg text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Dashboard</span>
+                </a>
+                <a href="{{ url('/announcements/show') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('announcements/show', 'announcements/previous', 'barangay/announcement/archived') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-solid fa-bullhorn text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Announcements</span>
+                </a>
+                <a href="{{ url('/residents') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residents', 'barangay/create-user') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fas fa-users fa-lg text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Residents</span>
+                </a>
+                <a href="{{ url('/residentUser') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('residentUser') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fas fa-user fa-lg text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Users</span>
+                </a>
+                <a href="{{ url('/complaints') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('complaints') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-regular fa-newspaper text-blue-800 font-bold"></i>
+                    <span class="text-[13px] lg:text-[15px]">Complaints</span>
+                </a>
+                <a href="{{ url('/logs') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('logs') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-solid fa-list text-blue-800 font-bold"></i>
+                    <span class="text-[13px] lg:text-[15px]">Logs</span>
+                </a>
+                <a href="{{ url('/reports') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('reports') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-solid fa-file-lines text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Budget Reports</span>
+                </a>
+                <a href="{{ url('/certificates') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-solid fa-certificate text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Certificates</span>
+                </a>
+                <a href="{{ url('/certificates/custom/template') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('certificates/custom/template') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fa-solid fa-certificate text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Custom Certificates</span>
+                </a>
+                <a href="{{ url('/puroks') }}" class="flex items-center space-x-2 px-4 py-3 {{ Request::is('puroks') ? 'bg-blue-300 text-blue-900' : 'text-white' }} hover:bg-blue-300 hover:text-blue-900">
+                    <i class="fas fa-house fa-lg text-blue-800"></i>
+                    <span class="text-[13px] lg:text-[15px]">Puroks</span>
+                </a>
+            </div>
+        </nav>
         </div>
     </div>
 
