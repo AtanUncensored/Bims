@@ -43,6 +43,8 @@ class CertificateRequestController extends Controller
         'date_needed' => 'nullable|date',
         'business_name' => 'nullable|required_if:certificate_type_id,6|string|max:255',
         'monthly_ave_income' => 'nullable|required_if:certificate_type_id,5|numeric',
+        'witness_by' => 'nullable|required_if:certificate_type_id,2|string|max:255',
+
 
     ]);
 
@@ -78,6 +80,9 @@ class CertificateRequestController extends Controller
     if ($validated['certificate_type_id'] ==  5 && isset($validated['monthly_ave_income'])) {
         $certificateRequestData['monthly_ave_income'] = $validated['monthly_ave_income'];
     }
+    if ($validated['certificate_type_id'] ==  2 && isset($validated['witness_by'])) {
+        $certificateRequestData['witness_by'] = $validated['witness_by'];
+    }
 
     // Save Certificate Request
     $certificateRequest = CertificateRequest::create($certificateRequestData);
@@ -107,7 +112,10 @@ class CertificateRequestController extends Controller
         $lowIncomeSpecificData = $tableName == 'cert_low_income'
         ? ['monthly_ave_income' => $validated['monthly_ave_income']]
         : [];
-        DB::table($tableName)->insert(array_merge($commonData, $businessSpecificData, $lowIncomeSpecificData));
+        $jobseekerSpecificData = $tableName == 'cert_job_seekers'
+        ? ['witness_by' => $validated['witness_by']]
+        : [];
+        DB::table($tableName)->insert(array_merge($commonData, $businessSpecificData, $lowIncomeSpecificData, $jobseekerSpecificData));
     } elseif ($tableName == 'cert_residences') {
         DB::table($tableName)->insert(array_merge($commonData, [
             'date' => now(),

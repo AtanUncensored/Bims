@@ -218,10 +218,9 @@
                 <br>
                 <p class="last-witness">Witnessed by:</p>
                 <br>
-                <br>
+                <p  class="last-witness">{{$certificateRequest->witness_by}}</p>
                 <p>Not Valid Without Official Seal</p>
-                <br>
-                <br>
+       
                 <p class="last-info2">{{ \Carbon\Carbon::parse($certificateRequest->date_needed)->format('F j, Y') }}</p>
                 <p class="last-date">Date</p>
             </div>

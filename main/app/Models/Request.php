@@ -19,6 +19,7 @@ class Request extends Model
         'business_name',
         'date_needed',
         'or_number',
+        'witness_by',
         'reference_number',
         'monthly_ave_income'
     ];

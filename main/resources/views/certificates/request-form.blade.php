@@ -52,6 +52,12 @@
                 <label for="monthly_ave_income" class="block text-gray-700">Monthly Average Income</label>
                 <input type="text" id="monthly_ave_income" name="monthly_ave_income" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
             </div>
+
+            <div class="mb-4 hidden" id="witness_by">
+                <label for="witness_by" class="block text-gray-700">Witness By:</label>
+                <input type="text" id="witness_by" name="witness_by" class="w-full border py-1 px-2 border-gray-400 rounded-lg">
+            </div>
+
             <!-- Mga hidden textfield -->
 
             <div class="mb-6">
@@ -138,6 +144,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const certificateSelect = document.getElementById('certificate_type_id');
     const businessNameField = document.querySelector('.mb-4.hidden');
     const lowIncomeField = document.getElementById('lowIncomeField');
+    const witness_by = document.getElementById('witness_by');
+
 
 
     // Helper: Show Modal
@@ -169,6 +177,15 @@ document.addEventListener('DOMContentLoaded', function () {
             lowIncomeField.classList.remove('hidden');
         } else {
             lowIncomeField.classList.add('hidden');
+        }
+    });
+
+    certificateSelect.addEventListener('change', function () {
+        const selectedOption = certificateSelect.options[certificateSelect.selectedIndex].text.toLowerCase();
+        if (selectedOption.includes('job seeker')) {
+            witness_by.classList.remove('hidden');
+        } else {
+            witness_by.classList.add('hidden');
         }
     });
 
